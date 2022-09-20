@@ -1,9 +1,6 @@
-// Express
-const express = require('express');
-const app = express(express.json());
-
-// Import
+const app = require('./app');
 const http = require('http');
+require('./app');
 require('dotenv').config({path:'./config/.env'});
 require('./config/db');
 
