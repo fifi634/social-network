@@ -4,7 +4,8 @@ const app = express(express.json());
 
 // Import
 const http = require('http');
-require('dotenv').config();
+require('dotenv').config({path:'./config/.env'});
+require('./config/db');
 
 // Port declaration
 const normalizePort = val => {
