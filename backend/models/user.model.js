@@ -1,17 +1,13 @@
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 const { isEmail } = require('validator');
-<<<<<<< HEAD
 // const bcrypt = require('bcrypt');
-=======
->>>>>>> f0e7ef2c6207c3b98fa225ebb46adbe5160caea6
 
 const userSchema = mongoose.Schema({
     email: { 
         type: String, 
         required: true,
         unique: true ,
-<<<<<<< HEAD
         validate: [isEmail],
         minLength: 5,
         trim: true
@@ -34,32 +30,11 @@ const userSchema = mongoose.Schema({
     },
     likes: {
         type: [String]
-=======
-        validate: [isEmail]
-    },
-    password: { 
-        type: String, 
-        required: true 
-    },
-    pseudo: { 
-        type: String, 
-        required: true 
-    },
-    avatar_slug: { 
-        type: String, 
-        required: false 
-    },
-    updated_at: { 
-        type: Date, 
-        required: true, 
-        default: Date.now 
->>>>>>> f0e7ef2c6207c3b98fa225ebb46adbe5160caea6
     },
     admin_role: { 
         type: Boolean, 
         required: true, 
         default: false 
-<<<<<<< HEAD
     },
 }, { timestamps: true })
 
@@ -71,12 +46,6 @@ const userSchema = mongoose.Schema({
 //     next();
 // });
 // Mongoose unique validator
-=======
-    }
-})
-
-// Mongoose Unique Validator config
->>>>>>> f0e7ef2c6207c3b98fa225ebb46adbe5160caea6
 userSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model('user.model', userSchema);
