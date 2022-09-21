@@ -77,8 +77,8 @@ So that this appication work correctly, your mysql account must have this privil
 ## API specification
 |      | Access Point | Request body | Expected answer | Function |
 | :--: | :----------: | :----------: | :-------------: | :------- |
-| POST | /api/auth/signup | {email: string, password: string, avatar_slug: string, nickname: string} | {message: string} | password chopped, add user in database |
-| POST | /api/auth/login | {email: string, password: string} | {userId: integer, token: string} | user id check, send userId from database and a token web JSON signed (with userId) |
+| POST | /api/user/signup | {email: string, password: string, avatar_slug: string, nickname: string} | {message: string} | password chopped, add user in database |
+| POST | /api/user/login | {email: string, password: string} | {userId: integer, token: string} | user id check, send userId from database and a token web JSON signed (with userId) |
 | GET | /api/posts | - | array of posts | return an array of all posts from database |
 | GET | /api/posts/:id | - | single post | return a post with post id |
 | POST | /api/posts | {post: string, image: File} | {message: string} | Capture and save the image, analyze the post transformed into a string characters and save it in the database in correctly defining its imageUrl. Initialize the likes and dislikes of the post to 0 and usersLiked and usersDisliked with empty tables. Notice than the request body initial is empty; when multer is added, it returns a chain for the body of demand dedpending on data submitted with the file. |
