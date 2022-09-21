@@ -14,12 +14,17 @@ const commentarySchema = mongoose.Schema({
     user_id: { 
         type: String, 
         required: true,
+<<<<<<< HEAD
         unique: true,
         trim: true 
+=======
+        unique: true 
+>>>>>>> f0e7ef2c6207c3b98fa225ebb46adbe5160caea6
     },
     post_id: { 
         type: String, 
         required: true,
+<<<<<<< HEAD
         unique: true,
         trim: true
     }
@@ -30,3 +35,13 @@ const commentarySchema = mongoose.Schema({
 userSchema.plugin(uniqueValidator);
 
 exports = mongoose.model('commentary.model', commentarySchema);
+=======
+        unique: true 
+    }
+});
+
+// Mongoose Unique Validator config
+userSchema.plugin(uniqueValidator);
+
+module.exports = mongoose.model('commentary.model', commentarySchema);
+>>>>>>> f0e7ef2c6207c3b98fa225ebb46adbe5160caea6

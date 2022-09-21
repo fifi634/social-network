@@ -9,8 +9,12 @@ const postSchema = mongoose.Schema({
     picture_slug: { 
         type: String, 
         required: false,
+<<<<<<< HEAD
         unique: true,
         trim: true
+=======
+        unique: true
+>>>>>>> f0e7ef2c6207c3b98fa225ebb46adbe5160caea6
     },
     like_statut: { 
         type: Number, 
@@ -20,6 +24,7 @@ const postSchema = mongoose.Schema({
     user_id: { 
         type: String, 
         required: true,
+<<<<<<< HEAD
         unique: true,
         trim: true
     }
@@ -30,3 +35,13 @@ const postSchema = mongoose.Schema({
 postSchema.plugin(uniqueValidator);
 
 exports = mongoose.model('post.model', postSchema);
+=======
+        unique: true
+    }
+});
+
+// Mongoose Unique Validator config
+userSchema.plugin(uniqueValidator);
+
+module.exports = mongoose.model('post.model', postSchema);
+>>>>>>> f0e7ef2c6207c3b98fa225ebb46adbe5160caea6
