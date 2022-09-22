@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
-const commentarySchema = mongoose.Schema({ 
+const commentSchema = mongoose.Schema({ 
     commentary: { 
         type: String, 
         required: true 
@@ -29,4 +29,4 @@ const commentarySchema = mongoose.Schema({
 // Mongoose Unique Validator config
 userSchema.plugin(uniqueValidator);
 
-module.exports = mongoose.model('commentary.model', commentarySchema);
+module.exports = mongoose.model('comment', commentSchema);

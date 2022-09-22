@@ -29,4 +29,4 @@ const postSchema = mongoose.Schema({
 // Mongoose Unique Validator config
 postSchema.plugin(uniqueValidator);
 
-module.exports = mongoose.model('post.model', postSchema);
+module.exports = mongoose.model('post', postSchema);

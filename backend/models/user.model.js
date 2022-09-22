@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 const { isEmail } = require('validator');
-// const bcrypt = require('bcrypt');
 
-const userSchema = mongoose.Schema({
+const userSchema = mongoose.Schema({    
     email: { 
         type: String, 
         required: true,
@@ -19,7 +18,7 @@ const userSchema = mongoose.Schema({
     },
     pseudo: { 
         type: String, 
-        required: true,
+        required: false,
         trim: true 
     },
     avatar_slug: { 
@@ -32,20 +31,13 @@ const userSchema = mongoose.Schema({
         type: [String]
     },
     admin_role: { 
-        type: Boolean, 
-        required: true, 
-        default: false 
-    },
-}, { timestamps: true })
+        type: Boolean,
+        default: false
+    }
+}, { timestamps: true });
 
 /* Play function before save into display: 'block' */
-// Bcrypt
-// userSchema.pre("save", async function(next){
-//     const salt = await bcrypt.genSalt();
-//     this.password = await bcrypt.hash(this.password, salt);
-//     next();
-// });
 // Mongoose unique validator
 userSchema.plugin(uniqueValidator);
 
-module.exports = mongoose.model('user.model', userSchema);
+module.exports = mongoose.model('user', userSchema);

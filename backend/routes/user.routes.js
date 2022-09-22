@@ -9,7 +9,7 @@ router.post('/login', authController.login);
 // user display: 'block'
 router.get('/', userController.getAllUsers);
 router.get('/:id', userController.userInfo);
-router.put('/:id', userController.updateUser);
+router.post('/:id', userController.updateUser);
 router.delete('/:id', userController.deleteUser);
 
 
