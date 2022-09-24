@@ -2,8 +2,6 @@ const UserModel = require('../models/user.model');
 const ObjectID = require('mongoose').Types.ObjectId;
 
 
-
-
 /* Find all users and return it */
 exports.getAllUsers = async (req, res) => {
     const users = await UserModel.find().select('-password');
@@ -14,8 +12,8 @@ exports.getAllUsers = async (req, res) => {
 exports.userInfo = (req, res) => {
     console.log('user info : ', req.params);
     // // Verification if 'id user requete' correspond with 'id user database'
-    // if (!ObjectID.isValid(req.params.id))
-    // return res.status(400).send('ID unknown : ' + req.params.id);
+    if (!ObjectID.isValid(req.params.id))
+    return res.status(400).send('ID unknown : ' + req.params.id);
     
     UserModel.findById(req.params.id, (err, data) => {
         if (!err) res.status(200).json(data);
@@ -26,8 +24,8 @@ exports.userInfo = (req, res) => {
 /* Find user by id and modify it */
 exports.updateUser = async (req, res) => {
     // // Verification if 'id user requete' correspond with 'id user database'
-    // if (!ObjectID.isValid(req.params.id)) 
-    // return res.status(400).send('ID unknown : ' + req.params.id);
+    if (!ObjectID.isValid(req.params.id)) 
+    return res.status(400).send('ID unknown : ' + req.params.id);
     
     try {
         UserModel.findOneAndUpdate( 

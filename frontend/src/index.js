@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Header from './components/Header';
 import Error from './components/Error';
+import Profil from './pages/Profil';
 
 // Style import
 import './normalize.css';
@@ -32,9 +33,10 @@ root.render(
       <Header />
       <StyledMain>
         <Routes>
+          <Route path='*' element={ <Error /> } />
           <Route path='/' element={ <Home /> } />
           <Route path='/signup' element={ <Signup /> } />
-          <Route path='*' element={ <Error /> } />
+          <Route path='/profil' element={ <Profil /> } />
         </Routes>
       </StyledMain>
     </StyledLayout>

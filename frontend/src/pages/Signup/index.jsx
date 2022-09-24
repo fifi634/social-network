@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useFetch } from '../../utils/hooks';
+import { useState, useEffect } from 'react';
+import useFetch from '../../utils/hooks';
 
 // Import images
 import male_avatar from '../../assets/image/male_avatar.svg';
@@ -49,25 +49,12 @@ function Signup() {
         avatar: inputAvatar,
     }
 
- 
+    // Create user object
     function submit() {
-        // Create user object
         const currentFile = document.getElementById('download-files').files[0];
         user.push(JSON.parse(currentFile));
         setSelectedFile(user);
-
-        // Send user oject to server
-        // useEffect(() => {
-        //     useFetch('http://localhost:3000/api/auth/signup');
-        // });
-        console.log('user : ', user);
-
     }
-
-
-
-
-
 
     // Form generation
     return (

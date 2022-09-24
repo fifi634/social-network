@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import colors from '../../utils/style/colors';
+import colors from '../../config/colors';
 
 export const StyledHeader = styled.header`
     display: flex;

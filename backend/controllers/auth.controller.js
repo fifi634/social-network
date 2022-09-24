@@ -1,8 +1,9 @@
 const UserModel = require('../models/user.model');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 require('dotenv').config({path:'../config/.env'});
 
-
+// Password hash, create user object and save it in serveur 
 exports.signup = (req, res) => {
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
@@ -21,29 +22,49 @@ exports.signup = (req, res) => {
     ;
 }
 
+
 exports.login = async (req, res, next) => {
+    // Authentification token generation
+    const maxAge = 3* 24 * 60 * 60* 1000;
+    const token = (id) =>  {
+        jwt.sign({id}, process.env.RANDOM_TOKEN_SECRET, { expiresIn: maxAge })
+    };
+    res.cookie('jwt', token, { httpOnly: true, maxAge });
+
     try {
+        // User check
         const user = await UserModel.findOne({ email: req.body.email });
-        // If user not found
         if (!user) {
-            return res.status(401).json( {message: 'Login failed'} );
-        }
-        //Decrypt Password
-        const passwordHash = await bcrypt.hash(req.body.password, user.password);
-        if (passwordHash === user.password) {
-            res.status(200).json( {
+            return res.status(401).json({ message: 'Login failed' });
+        };
+
+        // Password check
+        const comparePassword = await bcrypt.compare(req.body.password, user.password);
+
+        // Login
+        if (comparePassword && user) {
+            res.status(200).json({
                 message: 'You are logged in!',
-                userId: user._id,
-                token: process.env.TOKEN
-            } );
+                userId: user._id
+            });
+            return user;            
         } else {
-            res.status(401).json( {message: 'Login failed'} );
-        }
+            res.status(401).json({ message: 'Login failed' });
+        };
     } catch(error) {
         return res.status(500).send({
             error: true,
-            reason: err.message
-        })
-    }
+            reason: error.message
+        });
+    };
 
+}
+
+// Erase jwt cookie
+exports.logout = async (req, res) => {
+    res
+        .cookie('jwt', '', { maxAge: 1 })
+        .status(200)
+        .redirect('/login')
+    ;
 }
