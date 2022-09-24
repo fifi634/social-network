@@ -25,11 +25,10 @@ exports.signup = (req, res) => {
 
 exports.login = async (req, res, next) => {
     // Authentification token generation
-    const maxAge = 3* 24 * 60 * 60* 1000;
-    const token = (id) =>  {
-        jwt.sign({id}, process.env.RANDOM_TOKEN_SECRET, { expiresIn: maxAge })
+    const maxAge = 3* 24 * 60 * 60 * 1000;
+    const createToken = (id) => {
+        return jwt.sign({id}, process.env.RANDOM_TOKEN_SECRET, { expiresIn: maxAge })
     };
-    res.cookie('jwt', token, { httpOnly: true, maxAge });
 
     try {
         // User check
@@ -41,8 +40,10 @@ exports.login = async (req, res, next) => {
         // Password check
         const comparePassword = await bcrypt.compare(req.body.password, user.password);
 
-        // Login
+        // Login and input token in cookie
         if (comparePassword && user) {
+            const token = createToken(user._id);
+            res.cookie('jwt', token, { httpOnly: true, maxAge });
             res.status(200).json({
                 message: 'You are logged in!',
                 userId: user._id
@@ -64,7 +65,7 @@ exports.login = async (req, res, next) => {
 exports.logout = async (req, res) => {
     res
         .cookie('jwt', '', { maxAge: 1 })
-        .status(200)
+        .status(200) 
         .redirect('/login')
     ;
 }
