@@ -19,6 +19,7 @@ const userSchema = mongoose.Schema({
     pseudo: { 
         type: String, 
         required: false,
+        unique: true,
         trim: true 
     },
     avatar_slug: { 

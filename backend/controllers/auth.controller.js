@@ -24,7 +24,7 @@ exports.signup = (req, res) => {
 
 
 exports.login = async (req, res, next) => {
-    // Authentification token generation
+    // Token generation
     const maxAge = 3* 24 * 60 * 60 * 1000;
     const createToken = (id) => {
         return jwt.sign({id}, process.env.RANDOM_TOKEN_SECRET, { expiresIn: maxAge })
@@ -58,7 +58,6 @@ exports.login = async (req, res, next) => {
             reason: error.message
         });
     };
-
 }
 
 // Erase jwt cookie

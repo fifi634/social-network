@@ -1,15 +1,49 @@
 const jwt = require('jsonwebtoken');
 const UserModel = require('../models/user.model');
-require('dotenv').config({path: '../config/.env'});
+require('dotenv').config({path:'../config/.env'});
 
-module.exports = (req, res, next) => {
-    try {
-        const token = req.headers.authorization.split(' ')[1];
-        const decodedToken = jwt.verify(token, env.process.RANDOM_TOKEN_SECRET);
-        const userId = decodedToken.userId;
-        req.auth = { userId: userId };
+// Check if user is connected and return it in 'locals'
+module.exports.checkUser = (req, res, next) => {
+    const token = req.cookies.jwt;
+    if(token) {
+        jwt.verify(
+            token, 
+            process.env.RANDOM_TOKEN_SECRET, 
+            async (err, decodedToken) => {
+                if (err) {
+                    res.locals.user = null;
+                    res.cookie('jwt', '', { maxAge: 1 });
+                    next();
+                } else {
+                    let user = await UserModel.findById(decodedToken.id);
+                    res.locals.user = user;
+                    next();
+                }
+            }
+        )            
+    } else {
+        res.locals.user = null;
         next();
-    } catch (error) {
-        res.status(401).json({ message: 'Authentification token not authorized', error });
+    }
+}
+
+// Check if token is known in database
+module.exports.requireAuth = (req, res, next) => {
+    const token = req.cookies.jwt;
+    if (token) {
+        jwt.verify(
+            token, 
+            process.env.RANDOM_TOKEN_SECRET, 
+            async (err, decodedToken) => {
+                if (err) {
+                    console.log('Authentification failed. ', err);
+                } else {
+                    console.log('User connected : ' + decodedToken.id);
+                    next();
+                }
+            }
+        )
+    } else {
+        console.log('Authentification failed');
     }
 }
