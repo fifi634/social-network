@@ -1,29 +1,30 @@
 const UserModel = require('../models/user.model');
 const ObjectID = require('mongoose').Types.ObjectId;
 
-
 /* Find all users and return it */
 exports.getAllUsers = async (req, res) => {
     const users = await UserModel.find().select('-password');
     res.status(200).json(users);
 }
 
+
 /* Find one user by id and return it sin password */
 exports.userInfo = (req, res) => {
     console.log('user info : ', req.params);
-    // Verification if 'id user requete' correspond with 'id user database'
+    // Params id check (url)
     if (!ObjectID.isValid(req.params.id))
     return res.status(400).send('ID unknown : ' + req.params.id);
     
     UserModel.findById(req.params.id, (err, data) => {
         if (!err) res.status(200).json(data);
-        else res.status(404).json({ message:'Id unknown :', err });
+        else res.status(404).json({ message:'User not found :', err });
     }).select('-password');
 }
 
+
 /* Find user by id and modify it */
 exports.updateUser = async (req, res) => {
-    // Verification if 'id user requete' correspond with 'id user database'
+    // Params id check (url)
     if (!ObjectID.isValid(req.params.id)) 
     return res.status(400).send('ID unknown : ' + req.params.id);
     
@@ -46,6 +47,7 @@ exports.updateUser = async (req, res) => {
         return res.status(500).json({ message: err })
     };
 }
+
 
 /* Erase user */
 exports.deleteUser = async (req, res) => {

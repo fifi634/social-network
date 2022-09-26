@@ -1,6 +1,5 @@
 const UserModel = require('../models/user.model');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
 const {signupErrors, loginErrors} = require('../utils/errors.utils');
 require('dotenv').config({path:'../config/.env'});
 
@@ -21,16 +20,14 @@ exports.signup = async (req, res) => {
 
 // Check ids, genearate and insert token in cookie, return user Id 
 exports.login = async (req, res, next) => {
-    const { email, password } = req.body;
-
     // Token generation
     const maxAge = 3* 24 * 60 * 60 * 1000;
     const createToken = (id) => {
-        return jwt.sign({id}, process.env.RANDOM_TOKEN_SECRET, { expiresIn: maxAge })
+        return jwt.sign({id}, process.env.RANDOM_TOKEN_SECRET, { expiresIn: maxAge });
     };
 
     try {
-        const user = await UserModel.login(email, password);
+        const user = await UserModel.login(req.body.email, req.body.password);
         const token = createToken(user._id);
         res.cookie('jwt', token, { httpOnly: true, maxAge });
         res.status(200).json({
@@ -43,13 +40,9 @@ exports.login = async (req, res, next) => {
             errors
         });
     };
-}
+};
 
 // Erase jwt cookie
 exports.logout = async (req, res) => {
-    res
-        .cookie('jwt', '', { maxAge: 1 })
-        .status(200) 
-        .redirect('/login')
-    ;
-}
+    res.cookie('jwt', '', { maxAge: 1 }).status(200).redirect('/login');
+};

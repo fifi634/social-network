@@ -1,17 +1,14 @@
 const router = require('express').Router();
-// Midlewares
-// const auth = require('../middleware/auth.middleware');
-// Controllers
 const authController = require('../controllers/auth.controller');
 const userController = require('../controllers/user.controller');
 
 
-// auth
+// Authentifiaction end point
 router.post('/signup', authController.signup);
 router.post('/login', authController.login);
 router.get('/logout', authController.logout);
 
-// user display: 'block'
+// CRUD end-point
 router.get('/', userController.getAllUsers);
 router.get('/:id', userController.userInfo);
 router.post('/:id', userController.updateUser);

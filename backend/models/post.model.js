@@ -1,32 +1,36 @@
 const mongoose = require('mongoose');
-const uniqueValidator = require('mongoose-unique-validator');
 
 const postSchema = mongoose.Schema({
-    post: { 
-        type: String, 
-        required: true 
+    posterId: {
+        type: String,
+        required: true
     },
-    picture_slug: { 
-        type: String, 
-        required: false,
-        unique: true,
-        trim: true
+    message: {
+        type: String,
+        trime: true,
+        maxlength: 500
     },
-    like_statut: { 
-        type: Number, 
-        required: true, 
-        default: 0 
+    picture: {
+        type: String
     },
-    user_id: { 
-        type: String, 
+    video: {
+        type: String
+    },
+    likers: {
+        type: [String],
+        require: true,
+        default: []
+    },
+    comments: {
+        type: [{
+            commenterId: String,
+            commenterPseudo: String,
+            text: String,
+            timestamp: Number
+        }],
         required: true,
-        unique: true,
-        trim: true
-    }
-});
-
-/* Play function before save into display: 'block' */
-// Mongoose Unique Validator config
-postSchema.plugin(uniqueValidator);
+        default: []
+    },
+}, { timestamps: true });
 
 module.exports = mongoose.model('post', postSchema);

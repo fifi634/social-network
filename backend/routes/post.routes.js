@@ -1,10 +1,10 @@
 const router = require('express').Router();
-// Midlewares
-const auth = require('../middleware/auth.middleware');
-// Models
-const Post = require('../models/post.model');
+const postController = require('../controllers/post.controller');
 
-router.post('/', auth, (req ,res, next) => {
-    console.log(req.body);
-    res.status(201).json({ message: 'Post created :)'});
-});
+// CRUD end-Point
+router.get('/', postController.readPost);
+router.post('/', postController.createPost);
+router.post('/:id', postController.updatePost);
+router.delete('/:id', postController.deletePost);
+
+module.exports = router;
