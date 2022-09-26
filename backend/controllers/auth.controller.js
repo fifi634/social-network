@@ -1,53 +1,28 @@
 const UserModel = require('../models/user.model');
-// const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const {signUpErrors} = require('../utils/errors.utils');
+const bcrypt = require('bcrypt');
+const {signupErrors, loginErrors} = require('../utils/errors.utils');
 require('dotenv').config({path:'../config/.env'});
 
 
-// Password hash, create user object and save it in serveur 
+// Password hash, create user object and save it into serveur 
 exports.signup = async (req, res) => {
     const {pseudo, email, password} = req.body;
 
     try {
         const user = await UserModel.create({pseudo, email, password});
         res.status(201).json({ user: user._id});
-    } catch (error) {
-        const errors = signUpErrors(error);
+    } catch (err) {
+        const errors = signupErrors(err);
         res.status(200).json({ message: 'Login failed', errors });
     }
 };
 
 
-
-
-
-
-
-
-// exports.signup = (req, res) => {
-//     bcrypt.hash(req.body.password, 10)
-//         .then(hash => {
-//             const user = new UserModel({
-//                 email: req.body.email,
-//                 password: hash,
-//                 pseudo: req.body.pseudo,
-//                 avatar_slug: req.body.avatar_slug,
-//             });
-//             user.save()
-//                 .then ((user) => res.status(201).json({ message: 'User created !', user}))
-//                 .catch ((error) => {
-//                     const errors = signUpErrors(error);
-//                     res.status(200).json({ message: 'Login failed', error });
-//                 })
-//             ;
-//         })
-//         .catch( error => res.status(500).json({ message: 'Login failed', error }))
-//     ;
-// }
-
-
+// Check ids, genearate and insert token in cookie, return user Id 
 exports.login = async (req, res, next) => {
+    const { email, password } = req.body;
+
     // Token generation
     const maxAge = 3* 24 * 60 * 60 * 1000;
     const createToken = (id) => {
@@ -55,31 +30,17 @@ exports.login = async (req, res, next) => {
     };
 
     try {
-        // User check
-        const user = await UserModel.findOne({ email: req.body.email });
-        if (!user) {
-            return res.status(401).json({ message: 'Login failed' });
-        };
-
-        // Password check
-        const comparePassword = await bcrypt.compare(req.body.password, user.password);
-
-        // Login and input token in cookie
-        if (comparePassword && user) {
-            const token = createToken(user._id);
-            res.cookie('jwt', token, { httpOnly: true, maxAge });
-            res.status(200).json({
-                message: 'You are logged in!',
-                userId: user._id
-            });
-            return user;            
-        } else {
-            res.status(401).json({ message: 'Login failed' });
-        };
+        const user = await UserModel.login(email, password);
+        const token = createToken(user._id);
+        res.cookie('jwt', token, { httpOnly: true, maxAge });
+        res.status(200).json({
+            message: "You are logged in !", 
+            user: user._id 
+        });
     } catch(error) {
-        return res.status(500).send({
-            error: true,
-            reason: error.message
+        const errors = loginErrors(error);
+        return res.status(401).json({
+            errors
         });
     };
 }

@@ -39,8 +39,8 @@ const userSchema = mongoose.Schema({
     }
 }, { timestamps: true });
 
-/* Play function before save into display: 'block' */
 
+/* Play function before save into display: 'block' */
 // Mongoose unique validator
 userSchema.plugin(uniqueValidator);
 
@@ -50,6 +50,17 @@ userSchema.pre('save', async function(next) {
     this.password = await bcrypt.hash(this.password, salt);
     next();
 });
+
+// Bcrypt uncrypting password
+userSchema.statics.login = async function(email, password) {
+    const user = await this.findOne({ email });
+    if(user) {
+        const auth = await bcrypt.compare(password, user.password);
+        if (auth) return user;
+        throw Error('La connection a échoué');
+    }
+    throw Error('La connection a échoué');
+};
 
 
 module.exports = mongoose.model('user', userSchema);

@@ -11,7 +11,7 @@ exports.getAllUsers = async (req, res) => {
 /* Find one user by id and return it sin password */
 exports.userInfo = (req, res) => {
     console.log('user info : ', req.params);
-    // // Verification if 'id user requete' correspond with 'id user database'
+    // Verification if 'id user requete' correspond with 'id user database'
     if (!ObjectID.isValid(req.params.id))
     return res.status(400).send('ID unknown : ' + req.params.id);
     
@@ -23,7 +23,7 @@ exports.userInfo = (req, res) => {
 
 /* Find user by id and modify it */
 exports.updateUser = async (req, res) => {
-    // // Verification if 'id user requete' correspond with 'id user database'
+    // Verification if 'id user requete' correspond with 'id user database'
     if (!ObjectID.isValid(req.params.id)) 
     return res.status(400).send('ID unknown : ' + req.params.id);
     
