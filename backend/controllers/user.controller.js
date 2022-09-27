@@ -10,21 +10,22 @@ exports.getAllUsers = async (req, res) => {
 
 /* Find one user by id and return it sin password */
 exports.userInfo = (req, res) => {
-    console.log('user info : ', req.params);
-    // Params id check (url)
+    // Check if uri is known into database
     if (!ObjectID.isValid(req.params.id))
-    return res.status(400).send('ID unknown : ' + req.params.id);
+    return res.status(400).json({ message: 'ID unknown : ' + req.params.id });
+
+    console.log('user info : ', req.params);
     
     UserModel.findById(req.params.id, (err, data) => {
         if (!err) res.status(200).json(data);
-        else res.status(404).json({ message:'User not found :', err });
+        else res.status(404).send('User not found :', err);
     }).select('-password');
 }
 
 
 /* Find user by id and modify it */
 exports.updateUser = async (req, res) => {
-    // Params id check (url)
+    // Check if uri is known into database
     if (!ObjectID.isValid(req.params.id)) 
     return res.status(400).send('ID unknown : ' + req.params.id);
     
@@ -39,8 +40,8 @@ exports.updateUser = async (req, res) => {
             } }, 
             { new: true, upsert: true, setDefaultsOnInsert: true },
             (err, data) => {
-                if (!err) return res.send(data);
-                if (err) return res(500).send({ message: 'Update error: ', err });
+                if (!err) return res.json({message: "User updated !", data});
+                if (err) return res(500).send('User update error : ' + err );
             }
         );
     } catch (err) {
@@ -52,7 +53,7 @@ exports.updateUser = async (req, res) => {
 /* Erase user */
 exports.deleteUser = async (req, res) => {
     UserModel.deleteOne({  _id: req.params.id })
-        .then(user => res.status(200).json({ message: 'Successfully deleted', user }))
-        .catch(error => res.status(400).json({ message: 'Delete failed', error }))
+        .then(user => res.status(200).json({ message: 'User successfully deleted', user }))
+        .catch(error => res.status(400).json({ message: 'User delete error', error }))
     ;
 }

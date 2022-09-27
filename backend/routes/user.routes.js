@@ -11,7 +11,7 @@ router.get('/logout', authController.logout);
 // CRUD end-point
 router.get('/', userController.getAllUsers);
 router.get('/:id', userController.userInfo);
-router.post('/:id', userController.updateUser);
+router.put('/:id', userController.updateUser);
 router.delete('/:id', userController.deleteUser);
 
 

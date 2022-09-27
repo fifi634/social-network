@@ -1,5 +1,4 @@
 const PostModel = require('../models/post.model');
-const UserModel = require('../models/user.model');
 const ObjectID = require('mongoose').Types.ObjectId;
 
 
@@ -22,7 +21,7 @@ module.exports.createPost = async (req, res) => {
 
     try {
         const post = await newPost.save();
-        return res.status(201).json({ message: 'Posted !', post });
+        return res.status(201).json({ message: 'Post created !', post });
     } catch (err) {
         return res.status(400).json({ message: 'Created post failed', err });
     }
@@ -31,7 +30,7 @@ module.exports.createPost = async (req, res) => {
 
 // Update post 
 module.exports.updatePost = (req, res) => {
-    // Params id check (url)
+    // Check if uri is known into database
     if (!ObjectID.isValid(req.params.id))
     return res.status(400).send('ID unknown : ' + req.params.id);
 
@@ -44,7 +43,7 @@ module.exports.updatePost = (req, res) => {
         { $set: updatedRecord },
         { new: true },
         (err, data) => {
-            if (!err) res.json({ message: 'Updated !', data });
+            if (!err) res.json({ message: 'Post updated !', data });
             else console.log('Update failed : ' + err);
         }
     )
@@ -53,12 +52,12 @@ module.exports.updatePost = (req, res) => {
 
 // Delete post
 module.exports.deletePost = (req, res) => {
-    // Params id check (url)
+    // Check if uri is known into database
     if (!ObjectID.isValid(req.params.id))
     return res.status(400).send('ID unknown : ' + req.params.id);
 
     PostModel.findByIdAndDelete(req.params.id, (err, data) => {
-        if (!err) res.send(data);
+        if (!err) res.json({ message: 'Post succesfully deleted !', data });
         else console.log('Delete failed : ' + err);
     });
 };
