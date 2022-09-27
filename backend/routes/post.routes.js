@@ -16,7 +16,7 @@ router.patch('/unlike/:id', likeController.unlikePost);
 // Comments end-points
 router.patch('/comment/:id', commentController.commentPost);
 router.patch('/edit-comment/:id', commentController.editCommentPost);
-router.patch('/delete-comment::id', commentController.deleteCommentPost);
+router.patch('/delete-comment/:id', commentController.deleteCommentPost);
 
 
 module.exports = router;

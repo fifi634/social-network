@@ -4,7 +4,7 @@ const ObjectID = require('mongoose').Types.ObjectId;
 
 
 // Like post : add user's id in post's like array into user, and add post's id in user's id like array into post
-exports.likePost = async (req, res) => {
+exports.likePost = (req, res) => {
     // Check if uri is known into database
     if (!ObjectID.isValid(req.params.id))
     return res.status(400).json({ message: 'ID unknown : ' + req.params.id });
@@ -39,7 +39,7 @@ exports.likePost = async (req, res) => {
 
 
 // Unlike post : delete user's id in post's like array into user, and delete post's id in user's id like array into post
-exports.unlikePost = async (req, res) => {
+exports.unlikePost = (req, res) => {
     // Check if uri is known into database
     if (!ObjectID.isValid(req.params.id))
     return res.status(400).json({ message: 'ID unknown : ' + req.params.id });

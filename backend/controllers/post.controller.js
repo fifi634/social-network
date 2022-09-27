@@ -7,7 +7,7 @@ module.exports.readPost = (req, res) => {
     PostModel.find((err, data) => {
         if (!err) res.json(data);
         else console.log('Error to get data : ' + err);
-    });
+    }).sort({ createdAt: -1 });
 };
 
 
