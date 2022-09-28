@@ -12,7 +12,7 @@ exports.likePost = (req, res) => {
     try {
         PostModel.findByIdAndUpdate(
             req.params.id,
-            { $addToSet: { likers: req.body.id }},
+            { $addToSet: { likers: req.body.likerId }},
             { new: true },
             (err, data) => { 
                 if (err) return res.status(400).json({ 
@@ -21,7 +21,7 @@ exports.likePost = (req, res) => {
             }
         );
         UserModel.findByIdAndUpdate(
-            req.body.id,
+            req.body.likerId,
             { $addToSet: { likes: req.params.id }},
             { new: true },
             (err, data) => {
@@ -47,7 +47,7 @@ exports.unlikePost = (req, res) => {
     try {
         PostModel.findByIdAndUpdate(
             req.params.id,
-            { $pull: { likers: req.body.id }},
+            { $pull: { likers: req.body.likerId }},
             { new: true },
             (err, data) => { 
                 if (err) return res.status(400).json({ 
@@ -56,7 +56,7 @@ exports.unlikePost = (req, res) => {
             }
         );
         UserModel.findByIdAndUpdate(
-            req.body.id,
+            req.body.likerId,
             { $pull: { likes: req.params.id }},
             { new: true },
             (err, data) => {

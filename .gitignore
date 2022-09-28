@@ -2,9 +2,9 @@
 /resources
 
 # dependencies
-/backend/node_modules
-/frontend/node_modules
-/frontend/.pnp
+/api/node_modules
+/client/node_modules
+/client/.pnp
 .pnp.js
 
 # testing
@@ -23,3 +23,5 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+node_modules

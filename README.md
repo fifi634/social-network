@@ -18,23 +18,18 @@ Fictif mission for OpenClassRooms studies. This app is an internal social networ
   `git clone https://github.com/fifi634/Groupomania.git`
 
 ## Running database (MySQL - Windows)
-Since the project directory in cmd :
-* go to database directory : `cd backend/database`
-* import database in mysql : `mysql -u root -p groupomania < dump.sql`
-* You must create .env files in backend directory with inside :
-`MYSQL_USER = "your mysql user id"`  
-`MYSQL_PASSWORD = "your mysql password"`  
-`SEQUELIZE_HOST = "your database host"`  
+* You must create .env files in api/config/ directory with inside :
+Server config :
+`PORT = '5000'`
 
-So that this appication work correctly, your mysql account must have this privilege:
-- DELETE
-- INSERT
-- SELECT
-- UPDATE
+Mongo DB config :
+`MONGO_ID = 'fifi634'`
+`MONGO_PASSWORD = 'HQKuUSmQKuJvHTFg'`
+`MONGO_CLUSTER = 'cluster0.m5rfro8.mongodb.net'`
 
 ## Running backend
 * Since the project directory, in cli go to backend directory :
-  `cd backend`
+  `cd api`
 * Initialize your npm
   `npm install`
 * Launch backend server
@@ -42,48 +37,63 @@ So that this appication work correctly, your mysql account must have this privil
 
 ## Running frontend
 * Since the project directory, in cli go to frontend directory :
-  `cd frontend`
+  `cd client`
 * Install all instances
   `npm install`
 * Launch frontend server
   `npn run start`
 
 
-# API
+# Database
 
-## Data users
-* id : integer - unique identifier generate automaticaly
-* email : string (max 255 characters)
-* password_hash : string (max 255 characters) - chopped
-* avatar_slug : string (max 255 characters)
-* created_at : datetime - generate automaticaly
-* admin_role : boolean - by default : false
+## Users
+* _id : integer - required and unique, generate automaticaly
+* pseudo: string - required and unique
+* email : string - required and unique
+* password : string - chopped
+* avatar_slug : string, default : male avatar picture
+* likes : array - required, default [] 
+* admin_role : boolean - required, default : false
+* createdAt : datetime - generate automaticaly
+* updatedAt: datetime - generate automaticaly
 
-## Data posts
-* id : integer - unique identifier generate automaticaly
-* user_id : integer
-* post_content : string
-* picture_slug : string (max 255 characters)
-* like_statut : boolean - by default : false
-* updated_at : timestamp
+## Posts
+* _id : integer - required and unique, generate automaticaly
+* posterId : string - required
+* message : string - maxlength : 500
+* picture : string
+* video : string
+* likers : array - required, default []
+* createdAt : datetime - generate automaticaly
+* updatedAt: datetime - generate automaticaly
+### comments : sub database of Posts (array) with inside :
+- commenterId: string
+- commenterPseudo: string
+- text : string
+- timestamp : number
 
-## Data commentaries
-* id : integer - unique identifier generate automaticaly
-* post_id : integer
-* user_id : integer
-* commentary_content : string
-* created_at : timestamp
 
 ## API specification
 |      | Access Point | Request body | Expected answer | Function |
 | :--: | :----------: | :----------: | :-------------: | :------- |
-| POST | /api/user/signup | {email: string, password: string, avatar_slug: string, nickname: string} | {message: string} | password chopped, add user in database |
-| POST | /api/user/login | {email: string, password: string} | {userId: integer, token: string} | user id check, send userId from database and a token web JSON signed (with userId) |
-| GET | /api/posts | - | array of posts | return an array of all posts from database |
-| GET | /api/posts/:id | - | single post | return a post with post id |
-| POST | /api/posts | {post: string, image: File} | {message: string} | Capture and save the image, analyze the post transformed into a string characters and save it in the database in correctly defining its imageUrl. Initialize the likes and dislikes of the post to 0 and usersLiked and usersDisliked with empty tables. Notice than the request body initial is empty; when multer is added, it returns a chain for the body of demand dedpending on data submitted with the file. |
-| PUT | /api/posts/:id | Either post as JSON or {post: string, image: File} | {message: string} | Update post with the _id provided. if an image is downloaded, it is captured and the imageUrl of the post is updated. Whether no file is provided, the content of the post is located directly in the request body. If a file is provided, the post transformed into a string characters is in req.body.post. Note that the body of the request initial is empty; when multer is added, it returns a chain from the body of the request based on data submitted with the file. |
-| DELETE | /api/posts/:id | - | {message: string} | Remove the post with the _id provided |
-| POST | /api/posts/:id/like | {userId: string, like: integer} | {message: string} | Define like statut for userId provided. If like = 1, user like the post (=like). If like = 0, user cancel his like or dislike. If like = -1, user don't like the post (=dislike). UserId must be added or removed from the board appropriate. This allows to keep track of their preferences and prevents them to like or not to dislike the same post several times: a user cannot have only one value for each post. The total number of "Likes" and "Dislike" are uptaded to each new rating. |
-| POST | /api/posts/:id/comment | {comment : string} | {message: string} | Analyze the comment transformed into a string and save it in database. |
-| GET | /api/posts/:id/comment | - | array of comment | return an array of comments from the post specified by id. |
+|  |  | USER |  |  |
+| POST | /api/user/signup | {email: string, password: string, pseudo: string, avatar_slug: string (optional)} | {message: string, userId: string} | password chopped, add user in database |
+| POST | /api/user/login | {email: string, password: string} | {message: string, userId: string} | Check user id and password, decrypt password, create authentification token and add it in cookie. |
+| GET | /api/user/logout | - | redirection to login page | Unset 'jwt' cookie (authentification token) |
+| GET | /api/user | - | Object of users | Return an object with all users of database |
+| GET | /api/user/:id | - | single object user | Return an object which contains a user searched by id |
+| PUT | /api/user/:id | {email: string (optional), password: string (optional), pseudo: string (optional), avatar_slug: string (optional)} | single object user | Return an object which contains a user searched by id |
+| DELETE | /api/user/:id | - | {message: string} | Erase user of database  |
+| POST | /api/user/upload |  |  |  |
+|  |  | POST |  |  |
+| GET | /api/post | - | Object of all posts | return an object with all posts of database and rank them in descending creation date order |
+| POST | /api/post | {posterId: string, message: string, video: string (optional), picture: string (optional)} | {message: string, post created object} | Create post in database |
+| PUT | /api/post/:id | {message: string (optional), video: string (optional), picture: string (optional)} | {message: string, post updated object} | Update post |
+| DELETE | /api/post/:id | - | {message: string, post deleted object} | Remove the post |
+|  |  | LIKE |  |  |
+| PATCH | /api/post/like/:id | {likerId: string} | {message: string, like user object} | Like post. Add likers id in likers array from post model and add post liked id in likes array from user model. |
+| PATCH | /api/post/unlike/:id | {likerId: string} | {message: string, unlike user object} | Unlike post. Delete likers id in likers array from post and delete post liked id in likes array from user. |
+|  |  | COMMENTARY |  |  |
+| PATCH | /api/post/comment/:id | {commenterId: string, commenterPseudo: string, text : string} | {message: string, post updated object} | Add comment in post sub database (comment array in post model). |
+| PATCH | /api/post/edit-comment/:id | {commentId: string, text: string} | {message: string, post updated object} | Update existing commentary in post sub database (comment array in post model). |
+| DELETE | /api/post/delete-comment/:id | {commentId: string} | {message : string, commentary deleted object} | Erase commentary in post sub database (comment array in post model). |

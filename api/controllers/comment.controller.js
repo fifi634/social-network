@@ -19,6 +19,12 @@ exports.commentPost = (req, res) => {
             }}},
             { new: true },
             (err, data) => {
+                // Check if all request body are completed
+                if (!req.body.text || !req.body.commentId || !req.body.commenterPseudo) 
+                return res.status(400).json({ 
+                    message: "You must set a 'text', 'commenterId' and 'commenterPseudo' in your JSON for add it" 
+                });
+
                 if (!err) return res.json({ message: 'Commentary add !', data });
                 else return res.status(400).json({ message: 'Create commentary failed', err });
             }
@@ -46,6 +52,12 @@ exports.editCommentPost = (req, res) => {
                 if (!theComment) return res.status(404).json({ message: 'Comment not found' });
                 theComment.text = req.body.text;
 
+                // Check if all request body are completed
+                if (!req.body.text || !req.body.commentId) 
+                return res.status(400).json({ 
+                    message: "You must set 'text' and 'commentId' in your JSON for edit it" 
+                });
+
                 // Save update comment
                 return data.save((err) => {
                     if (!err) return res.status(200).json({ message: 'Comment updated !', data });
@@ -63,6 +75,12 @@ exports.deleteCommentPost = (req, res) => {
     // Check if uri is known into database
     if (!ObjectID.isValid(req.params.id))
     return res.status(400).json({ message: 'ID unknown : ' + req.params.id });
+
+    // Check if all request body are completed
+    if (!req.body.commentId) 
+    return res.status(400).json({ 
+        message: "You must set 'commentId' in your json for delete it" 
+    });
 
     try {
         return PostModel.findByIdAndUpdate(
