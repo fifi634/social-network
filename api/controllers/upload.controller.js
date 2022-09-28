@@ -1,41 +1,37 @@
 const UserModel = require('../models/user.model');
 const fs = require('fs');
 const { promisify } = require('util');
+const { uploadErrors } = require('../utils/errors.utils');
 const pipeline = promisify(require('stream').pipeline);
 
-// Extension dictionnary
-const MIME_TYPES = {
-    'image/jpg': 'jpg',
-    'image/jpeg': 'jpg',
-    'image/png': 'png',
-    'image/webp': 'webp'
-};
 
-// Get avatar picture : save it into server, save picture link into database
+// Get avatar picture : save picture into server, save picture link into database
 exports.uploadProfil = async (req, res) => {
     try {
         // Check format
-        if (
-            req.file.detectedMimeType !== MIME_TYPES
-            // "image/jpg" &&
-            // req.file.detectedMimeType !== "image/png" &&
-            // req.file.detectedMimeType !== "image/jpeg" &&
-            // req.file.detectedMimeType !== "image/webp"
-        ) throw Error('Invalid file');
+        if ( 
+            req.file.detectedMimeType != "image/jpg" &&
+            req.file.detectedMimeType != "image/png" &&
+            req.file.detectedMimeType != "image/jpeg" &&
+            req.file.detectedMimeType != "image/webp"
+        ) throw Error('invalid file');
 
         // Check size
-        if (req.file.size > 500000) throw Errror ("Max size reached");
+        if (req.file.size > 10000000) throw Errror ("max size reached");
+
     } catch (err) {
-        return res.status(400).json({ message: 'Upload avatar picture failed', err });
+        const errors = uploadErrors(err);
+        return res.status(206).json({ message: 'Upload avatar picture failed', errors, err });
     }
 
+
+    // Filename construct
+    const fileName = req.body.pseudo + ".jpg";
+
+
     // Traitment of upload file
-    const extension = MIME_TYPES[file.mimetype];
-    const fileName = req.body.pseudo + extension;
-
-
-    // await pipeline(
-    //     req.file.stream,
-    //     fs.createWriteStream(`${__dirname}/../client/public/uploads/profil/${filename}`);
-    // )
+    await pipeline(
+        req.file.stream,
+        fs.createWriteStream(`${__dirname}/../../client/public/uploads/profil/${fileName}`)
+    )
 };

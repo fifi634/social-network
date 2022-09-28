@@ -7,30 +7,34 @@ Fictif mission for OpenClassRooms studies. This app is an internal social networ
 * Login : with secure data
 * Sign in : with secure data
 * Homepage : display post of all users
-* Post : with text and pictures / creation, modify and delete
+* Post : with text, video and pictures / creation, modify and delete
 * Like post system : with anti cheat
-* Commentary
+* Commentary / creation, modify and delete
 
 ## Requirement
 * Node.js : https://nodejs.org
-* MySQL : https://dev.mysql.com/downloads/installer/
 * Clone this project in your work directory
   `git clone https://github.com/fifi634/Groupomania.git`
 
-## Running database (MySQL - Windows)
-* You must create .env files in api/config/ directory with inside :
-Server config :
+## Running database (Atlas by MongoDB)
+You must create .env files in api/config/ directory with inside :
+
+`# Server config :`
+
 `PORT = '5000'`
 
-Mongo DB config :
+`# Mongo DB config :`
+
 `MONGO_ID = 'fifi634'`
+
 `MONGO_PASSWORD = 'HQKuUSmQKuJvHTFg'`
+
 `MONGO_CLUSTER = 'cluster0.m5rfro8.mongodb.net'`
 
 ## Running backend
 * Since the project directory, in cli go to backend directory :
   `cd api`
-* Initialize your npm
+* Install all instances
   `npm install`
 * Launch backend server
   `node server`
@@ -82,9 +86,9 @@ Mongo DB config :
 | GET | /api/user/logout | - | redirection to login page | Unset 'jwt' cookie (authentification token) |
 | GET | /api/user | - | Object of users | Return an object with all users of database |
 | GET | /api/user/:id | - | single object user | Return an object which contains a user searched by id |
-| PUT | /api/user/:id | {email: string (optional), password: string (optional), pseudo: string (optional), avatar_slug: string (optional)} | single object user | Return an object which contains a user searched by id |
-| DELETE | /api/user/:id | - | {message: string} | Erase user of database  |
-| POST | /api/user/upload |  |  |  |
+| PUT | /api/user/:id | {email: string (optional), password: string (optional), pseudo: string (optional), avatar_slug: string (optional)} | single object user | Update user info |
+| DELETE | /api/user/:id | - | {message: string, user deleted object} | Erase user of database  |
+| POST | /api/user/upload |  |  | for avatar upload |
 |  |  | POST |  |  |
 | GET | /api/post | - | Object of all posts | return an object with all posts of database and rank them in descending creation date order |
 | POST | /api/post | {posterId: string, message: string, video: string (optional), picture: string (optional)} | {message: string, post created object} | Create post in database |

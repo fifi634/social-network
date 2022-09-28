@@ -3,6 +3,7 @@ const postController = require('../controllers/post.controller');
 const likeController = require('../controllers/like.controller');
 const commentController = require('../controllers/comment.controller.js');
 
+
 // CRUD post end-points
 router.get('/', postController.readPost);
 router.post('/', postController.createPost);
