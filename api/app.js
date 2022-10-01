@@ -17,11 +17,11 @@ const {checkUser, requireAuth} = require('./middleware/auth.middleware');
 // Json Web Token
 app.get('*', checkUser);
 app.get('/jwtid', requireAuth, (req, res) => {
-    res.status(200).send(res.locals.user._id);
+    res.status(200).json(res.locals.user._id);
 });
 
 // Routes
-app.use('/api/post', postRoutes);
+app.use('/api/post', requireAuth, postRoutes);
 app.use('/api/user', userRoutes);
 
 module.exports = app;

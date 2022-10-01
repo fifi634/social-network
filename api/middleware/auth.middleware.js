@@ -3,7 +3,7 @@ const UserModel = require('../models/user.model');
 require('dotenv').config({path:'../config/.env'});
 
 // Check if user is connected and return it in 'locals'
-module.exports.checkUser = (req, res, next) => {
+exports.checkUser = (req, res, next) => {
     const token = req.cookies.jwt;
     if(token) {
         jwt.verify(
@@ -28,7 +28,7 @@ module.exports.checkUser = (req, res, next) => {
 }
 
 // Check if token is known in database
-module.exports.requireAuth = (req, res, next) => {
+exports.requireAuth = (req, res, next) => {
     const token = req.cookies.jwt;
     if (token) {
         jwt.verify(
@@ -38,11 +38,13 @@ module.exports.requireAuth = (req, res, next) => {
                 if (err) {
                     console.log('Authentification failed. ', err);
                 } else {
+                    const userId = decodedToken.id;
+                    req.auth = { userId: userId };
                     console.log('User connected : ' + decodedToken.id);
                     next();
                 }
             }
-        )
+        );
     } else {
         console.log('Authentification failed');
     }

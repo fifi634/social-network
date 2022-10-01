@@ -1,64 +1,36 @@
 const UserModel = require('../models/user.model');
 const fs = require('fs');
 const { uploadErrors } = require('../utils/errors.utils');
-const { promisify } = require('util');
-const pipeline = promisify(require('stream').pipeline);
 
 
-// Dictionnary of extension
-const MIME_TYPES = {
-    'image/jpg': 'jpg',
-    'image/jpeg': 'jpg',
-    'image/png': 'png',
-    'image/webp': 'webp'
-};
+exports.uploadProfil = (req, res, next) => {    
+    UserModel.findOne({ _id: req.auth.userId })
+        .then( async (user) => {
 
+            // Check if it's the original user want to delete file
+            if (user._id != req.auth.userId) {
+                res.status(401).json({ message: 'Not authorized'});
+            } else {
 
-// Get avatar picture : save picture into server, save picture link into database
-exports.uploadProfil = async (req, res) => {
+                // Erase old avatar files from server  
+                fs.unlink(
+                    `../client/public/${user.avatar_slug}`,
+                    (err => err ? console.log('Avatar delete error : ', err) : console.log('Old avatar deleted'))
+                );
 
-    console.log(req.file.mimetype);
-    try {
-        // Check format
-        if ( 
-            req.file.mimetype !== "image/jpg" &&
-            req.file.mimetype !== "image/png" &&
-            req.file.mimetype !== "image/jpeg" &&
-            req.file.mimetype !== "image/webp" 
-        ) throw Error('invalid file');
-
-        // Check size
-        if (req.file.size > 83886080) throw Error ("max size reached");
-    } catch (err) {
-        const errors = uploadErrors(err);
-        return res.status(206).json({ message: 'Upload profil picture failed', errors, err });
-    }
-
-
-    // Filename construct
-    const extension = MIME_TYPES[req.file.mimetype];
-    const name = req.file.originalname.split(' ').join('_')
-    const fileName = name + Date.now() + '.' + extension;
-
-
-    // Save file into server
-    await pipeline(
-        req.file.stream,
-        fs.createWriteStream(`${__dirname}/../../client/public/uploads/profil/${fileName}`)
-    );
-
-    
-    // Save url files into database
-    try {
-        await UserModel.findByIdAndUpdate(
-            { $set: {avatar_slug: './uploads/profil/' + filename} },
-            { new: true, upsert: true, setDefaultsOnInsert: true },
-            (err, data) => {
-                if (!err) return res.json({ message: "Avatar uploaded !", data });
-                else return res.status(500).json({ message: "Avatar upload failed", err });
+                // Link a new avatar in database
+                UserModel.updateOne(
+                    { _id: req.auth.userId}, 
+                    { $set: {avatar_slug: './uploads/profil/' + req.file.filename}}
+                )
+                    .then(() => {
+                        res.json({ message: 'New avatar updated !' });
+                        console.log(user.pseudo + ' has a new avatar')
+                    })
+                    .catch((err => res.status(401).json({ message: 'Upload new avatar failed'})))
+                ;
             }
-        );
-    } catch (err) {
-        res.status(500).json({ message: "Avatar upload error", err });
-    }
+        })
+        .catch(err => res.status(500).json({ message: 'Change avatar failed', err}))
+    ;
 };

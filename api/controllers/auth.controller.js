@@ -34,8 +34,8 @@ exports.login = async (req, res, next) => {
             message: "You are logged in !", 
             userId: user._id 
         });
-    } catch(error) {
-        const errors = loginErrors(error);
+    } catch(err) {
+        const errors = loginErrors(err);
         return res.status(401).json({
             errors
         });
