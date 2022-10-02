@@ -6,12 +6,13 @@ const uploadController = require('../controllers/upload.controller');
 
 const multerProfile = require('../middleware/multerProfil.middleware');
 const password = require('../middleware/password.middleware');
+const limiter = require('../middleware/limiter.middleware');
 const { requireAuth } = require('../middleware/auth.middleware');
 
 
 // Authentifiaction end point
-router.post('/signup',password, authController.signup);
-router.post('/login', authController.login);
+router.post('/signup', password, authController.signup);
+router.post('/login', limiter, authController.login);
 router.get('/logout', authController.logout);
 
 

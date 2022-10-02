@@ -16,8 +16,11 @@ passwordSchema
 
 // Check quality of password and export it
 module.exports = (req, res, next) => {
-    if (passwordSchema.validate(req.body.password)) next();
-    else return res.status(400).json({ 
-        error: `Your password must have : 8 characters, 2 digits, with upper and lowercase. Space is not authorize. This is problematic in your password : ${(passwordSchema.validate(req.body.password, {list: true}))}`
-    });
+    if (passwordSchema.validate(req.body.password)) {
+        next();
+    } else {
+        return res.status(400).json({ 
+            error: `Your password must have : 8 characters, 2 digits, with upper and lowercase. Space is not authorize. This is problematic in your password : ${(passwordSchema.validate(req.body.password, {list: true}))}`
+        });
+    } 
 };
