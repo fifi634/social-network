@@ -1,3 +1,5 @@
+const { MulterError } = require("multer");
+
 const errorSamePseudo = ['pseudo', 'unique'];
 
 // Sign up errors message
@@ -32,7 +34,7 @@ exports.uploadErrors = (err) => {
         errors.format = "Format incompatible"
     ;
 
-    if (err.message.includes('max size reached'))
+    if (err.message.includes('file too large'))
         errors.maxSize = "Le fichier dépasse 10Mo"
     ;
 

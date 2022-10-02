@@ -12,7 +12,10 @@ exports.signup = async (req, res) => {
 
     try {
         const user = await UserModel.create({pseudo, email, password});
+        const userId = user._id;
         res.status(201).json({ message: 'User created !', userId: user._id});
+        console.log(userId + ' created !');
+  
     } catch (err) {
         const errors = signupErrors(err);
         res.status(200).json({ message: 'Create user failed', errors });
@@ -20,7 +23,7 @@ exports.signup = async (req, res) => {
 };
 
 
-// Check ids, genearate and insert token in cookie, return user Id 
+// Check ids, genearate and insert token in cookie, return user Id and user object by auth middleware
 exports.login = async (req, res, next) => {
     // Token generation
     const maxAge = 3* 24 * 60 * 60 * 1000;
@@ -31,20 +34,19 @@ exports.login = async (req, res, next) => {
     try {
         const user = await UserModel.login(req.body.email, req.body.password);
         const token = createToken(user._id);
-        res.cookie('jwt', token, { httpOnly: true, maxAge });
+        await res.cookie('jwt', token, { httpOnly: true, maxAge });
         res.status(200).json({
             message: "You are logged in !", 
             userId: user._id 
         });
     } catch(err) {
         const errors = loginErrors(err);
-        return res.status(401).json({
-            errors
-        });
+        res.status(401).json({ errors });
     };
 };
 
 // Erase jwt cookie
-exports.logout = async (req, res) => {
+exports.logout = (req, res) => {
+    req.auth = null;
     res.cookie('jwt', '', { maxAge: 1 }).status(200).redirect('/login');
 };

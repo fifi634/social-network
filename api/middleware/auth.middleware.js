@@ -12,6 +12,7 @@ exports.checkUser = (req, res, next) => {
             async (err, decodedToken) => {
                 if (err) {
                     res.locals.user = null;
+                    req.auth = null;
                     res.cookie('jwt', '', { maxAge: 1 });
                     next();
                 } else {
@@ -36,16 +37,21 @@ exports.requireAuth = (req, res, next) => {
             process.env.RANDOM_TOKEN_SECRET, 
             async (err, decodedToken) => {
                 if (err) {
-                    console.log('Authentification failed. ', err);
+                    req.auth = null;
+                    res.cookie('jwt', '', { maxAge: 1 });
+                    console.log('Authentification error : ', err);
                 } else {
                     const userId = decodedToken.id;
                     req.auth = { userId: userId };
-                    console.log('User connected : ' + decodedToken.id);
+                    let user = await UserModel.findById(decodedToken.id);
+                    res.locals.user = user;
+                    console.log(decodedToken.id + ' authenticated !' );
                     next();
                 }
             }
         );
     } else {
         console.log('Authentification failed');
+        res.status(401).json({ message : 'Unauthorized'})
     }
 }

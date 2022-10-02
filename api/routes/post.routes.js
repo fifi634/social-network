@@ -2,12 +2,13 @@ const router = require('express').Router();
 const postController = require('../controllers/post.controller');
 const likeController = require('../controllers/like.controller');
 const commentController = require('../controllers/comment.controller.js');
+const multerPost = require('../middleware/multerPost.middleware');
 
 
 // CRUD post end-points
 router.get('/', postController.readPost);
-router.post('/', postController.createPost);
-router.put('/:id', postController.updatePost);
+router.post('/', multerPost, postController.createPost);
+router.patch('/:id', postController.updatePost);
 router.delete('/:id', postController.deletePost);
 
 // Like end-points
