@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import useFetch from '../../utils/hooks';
+import useFetch from '../../utils/hooks/index.hook';
 
 // Import images
 import male_avatar from '../../assets/image/male_avatar.svg';
@@ -15,7 +15,7 @@ import {
     AvatarRadioContainer,
     AvatarInput,
     CreateButtonContainer,
-} from './style';
+} from './style.signup';
 import {
     FormContainer,
     InputContainer,

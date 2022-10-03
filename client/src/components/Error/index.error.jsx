@@ -1,7 +1,7 @@
 import ErrorImage from '../../assets/image/404.svg';
 
 // Style import
-import { ErrorWrapper, ErrorTitle, Illustration, ErrorSubtitle } from './style';
+import { ErrorWrapper, ErrorTitle, Illustration, ErrorSubtitle } from './style.error';
 
 function Error() {
     return (

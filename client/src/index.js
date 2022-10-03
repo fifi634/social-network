@@ -6,11 +6,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 
 // Page and component import
-import Home from './pages/Home';
-import Signup from './pages/Signup';
-import Header from './components/Header';
-import Error from './components/Error';
-import Profil from './pages/Profil';
+import Home from './pages/Home/index.home';
+import Signup from './pages/Signup/index.signup';
+import Header from './components/Header/index.header';
+import Error from './components/Error/index.error';
+import Profil from './pages/Profil/index.profil';
 
 // Style import
 import './normalize.css';

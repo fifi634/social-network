@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import completLogo from '../../assets/image/icon-left-font-monochrome-white.png';
 
 // Style
-import { StyledHeader, HeaderLogo } from './style.jsx';
+import { StyledHeader, HeaderLogo } from './style.header.jsx';
 import { StyledPinkButton } from '../../utils/style/StyledGlobalButton';
 
 function Header() {

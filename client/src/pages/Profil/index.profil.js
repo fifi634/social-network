@@ -1,6 +1,6 @@
 // import { useEffect } from 'react';
 import { useState } from 'react';
-import { useGetRequest } from '../../utils/hooks';
+import { useGetRequest } from '../../utils/hooks/index.hook';
 import Loader from '../../utils/style/Atom';
 // require('dotenv').config({path:'../../config/.env'});
 
