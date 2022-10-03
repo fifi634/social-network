@@ -27,7 +27,7 @@ export const StyledSubLabel = styled.label`
     margin-bottom: 3px;
 `;
 
-export const TextInput = styled.input`
+export const StyledInput = styled.input`
     width: 568px;
     height: 24px;
     border-radius: 10px;

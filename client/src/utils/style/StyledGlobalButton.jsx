@@ -3,6 +3,7 @@ import colors from '../../config/colors';
 
 export const StyledPinkButton = styled.button`
     background: ${colors.secondary};
+    margin: 20px;
     width: 266px;
     height: 60px;
     box-shadow: 0px 4px 4px ${colors.boxShadow};
@@ -21,6 +22,7 @@ export const StyledPinkButton = styled.button`
 
 export const StyledGreyButton = styled.button`
     background: ${colors.tertiary};
+    margin: 20px;
     width: 266px;
     height: 60px;
     box-shadow: 0px 4px 4px ${colors.boxShadow};

@@ -22,7 +22,7 @@ import {
     StyledLabel,
     StyledH1,
     StyledSubLabel,
-    TextInput,
+    StyledInput,
 } from '../../utils/style/StyledGlobalForm';
 
 
@@ -64,7 +64,7 @@ function Signup() {
                 <StyledLabel htmlFor="email">
                     Quel est votre e-mail ?
                 </StyledLabel>
-                <TextInput
+                <StyledInput
                     type="text"
                     id="email"
                     value={inputEmail}
@@ -78,13 +78,13 @@ function Signup() {
                 <StyledSubLabel htmlFor="password">
                     (minimum 8 caractères avec majuscule, minuscule et chiffre)
                 </StyledSubLabel>
-                <TextInput type="password" id="password" />
+                <StyledInput type="password" id="password" />
             </InputContainer>
             <InputContainer>
                 <StyledLabel htmlFor="confirm-password">
                     Confirmez votre mot de passe :
                 </StyledLabel>
-                <TextInput
+                <StyledInput
                     type="password"
                     id="confirm-password"
                     value={inputPassword}
@@ -95,7 +95,7 @@ function Signup() {
                 <StyledLabel htmlFor="pseudo">
                     Choisissez un pseudo :
                 </StyledLabel>
-                <TextInput
+                <StyledInput
                     type="text"
                     id="pseudo"
                     value={inputPseudo}

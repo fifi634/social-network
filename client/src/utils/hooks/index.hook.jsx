@@ -1,57 +1,66 @@
 import { useState, useEffect } from 'react';
+require('dotenv').config({ path: '../../config/.env' });
 
 
-// Data send to server
-export function useGetRequest(url) {
-    const [getData, setGetData] = useState([]);
-    const [isLoading, setLoading] = useState(true);
+// Data send to server 
+export function useGetFetch(url) {
+    const [data, setData] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         if (!url) return;
 
         async function fetchGetData() {
-            const response = await fetch(url);
-            const data = await response.json();
-
-            setGetData(data);
-            setLoading(false);
-        }
-        
-        setLoading(true);
+            setIsLoading(true);
+            try {
+                const response = await fetch(process.env.FETCH_URL + url);
+                const resData = await response.json();
+                setData(resData);
+            } catch (err) {
+                console.log('fetch get failed : ', err);
+                setError(true);
+            } finally {
+                setIsLoading(false);
+            };
+        };     
         fetchGetData();
     }, [url]);
 
-    return { isLoading, getData };
+    return { isLoading, data, error };
 }
 
 
 // Data received from server
-export function usePostRequest(url) {
-    const [postData, setPostData] = useState();
-    const [postReceptionData, setPostReceptionData] = useState(null);
-    const [isLoading, setLoading] = useState(true);
-    const [getPostError, setPostError] = useState(null);
+export function usePostFetch(url) {
+    const [data, setData] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         if (!url) return;
 
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-type': 'application/json',
-            body: JSON.stringify({ postData })}
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({ data })
         };
 
-        async function fetchPostData() {
-            const response = fetch(url, requestOptions);
-            const data = await response.json();
-            setPostReceptionData(data);
-            setLoading(false);
-        };
-
-        setLoading(true);
+        async function fetchPostData() {            
+            setIsLoading(true);
+            try {
+                const response = await fetch(process.env.FETCH_URL + url, requestOptions);
+                const data = await response.json();
+                setData(data);
+            } catch (err) {
+                console.log('fetch post failed : ', err);
+                setError(true);
+            } finally {
+                setIsLoading(false);
+            };
+        };     
         fetchPostData();
     }, [url]);
 
-    return { isLoading, postReceptionData }
+    return { isLoading, data, error };
 }

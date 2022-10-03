@@ -11,6 +11,7 @@ import Signup from './pages/Signup/index.signup';
 import Header from './components/Header/index.header';
 import Error from './components/Error/index.error';
 import Profil from './pages/Profil/index.profil';
+import Login from './pages/Login/index.login';
 
 // Style import
 import './normalize.css';
@@ -37,6 +38,7 @@ root.render(
           <Route path='/' element={ <Home /> } />
           <Route path='/signup' element={ <Signup /> } />
           <Route path='/profil' element={ <Profil /> } />
+          <Route path='/login' element={ <Login /> } />
         </Routes>
       </StyledMain>
     </StyledLayout>

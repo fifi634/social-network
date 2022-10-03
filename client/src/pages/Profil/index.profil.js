@@ -1,6 +1,6 @@
 // import { useEffect } from 'react';
 import { useState } from 'react';
-import { useGetRequest } from '../../utils/hooks/index.hook';
+import { useGetFetch } from '../../utils/hooks/index.hook';
 import Loader from '../../utils/style/Atom';
 // require('dotenv').config({path:'../../config/.env'});
 
@@ -11,9 +11,9 @@ const Profil = () => {
     const [error, setError] = useState(false);
 
     // Receveid data from server
-    const { datas, isLoading } = useGetRequest(process.env.FETCH_USERS);
+    const { datas, isLoading } = useGetFetch(process.env.FETCH_USERS);
 
-
+    
     // Get users from server
     // useEffect(() => {
     //     async function fetchUsers() {
