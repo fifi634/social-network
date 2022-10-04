@@ -59,3 +59,8 @@ export const StyledContainer = styled.div`
         max-width: 800px;
     }    
 `;
+
+export const StyledSignupSuccessH2 = styled.h2`
+    color: #008000;
+    text-align: center;
+`;

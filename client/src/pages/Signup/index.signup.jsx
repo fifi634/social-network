@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { fetchUrl } from '../../config';
+import Login from '../Login/index.login';
 
 // Import images
 import male_avatar from '../../assets/image/Homme.svg';
@@ -17,6 +18,7 @@ import {
     AvatarInput,
     CreateButtonContainer,
     StyledContainer,
+    StyledSignupSuccessH2
 } from './style.signup';
 import {
     FormContainer,
@@ -38,6 +40,7 @@ function Signup() {
     };
 
     // Form data storage
+    const [formSubmit, setFormSubmit] = useState(false);
     const [inputEmail, setInputEmail] = useState('');
     const [inputPassword, setInputPassword] = useState('');
     const [controlPassword, setControlPassword] = useState('');
@@ -53,6 +56,9 @@ function Signup() {
     //     setSelectedFile(user);
     // }
 
+    const handleAvatar = (e) => {
+         setInputAvatar(URL.createObjectURL(e.target.files[0]))
+    };
 
     // When form is submit
     const handleSignup = async (e) => {
@@ -101,16 +107,22 @@ function Signup() {
             })
                 .then((res) => {
                     // Sgnup errors 
-                    if (res.data.message === 'Password not accepted') {                   
-                        passwordError.innerHTML = res.data.errors;
-                        // avatarError.innerHTML = res.data.error.avatar;
+                    if (res.data.errors) {
+                        if (res.data.message === 'Password not accepted') {                   
+                            passwordError.innerHTML = res.data.errors;
+                            // avatarError.innerHTML = res.data.error.avatar;
+                        }
+                        if (res.data.errors.email) {
+                            emailError.innerHTML = res.data.errors.email;
+                        }
+                        if (res.data.errors.pseudo) {
+                            pseudoError.innerHTML = res.data.errors.pseudo;
+                        }
+
+                    } else {
+                        setFormSubmit(true);
                     }
-                    if (res.data.errors.email) {
-                        emailError.innerHTML = res.data.errors.email;
-                    }
-                    if (res.data.errors.pseudo) {
-                        pseudoError.innerHTML = res.data.errors.pseudo;
-                    }
+
                         // window.location = '/';
                         console.log(res.data)
               
@@ -126,136 +138,145 @@ function Signup() {
 
     // Form generation
     return (
-        <StyledContainer>
-            <FormContainer action="" onSubmit={handleSignup}>
-                <StyledH1>Créer votre compte</StyledH1>
-                <InputContainer>
-                    <StyledLabel htmlFor="email">
-                        Quel est votre e-mail ?
-                    </StyledLabel>
-                    <StyledInput
-                        type="email"
-                        id="email"
-                        value={inputEmail}
-                        onChange={(e) => setInputEmail(e.target.value)}
-                    />
-                    <StyledError className='email error'></StyledError>
-                </InputContainer>
-                <InputContainer>
-                    <StyledLabel htmlFor="password">
-                        Choisissez un mot de passe :
-                    </StyledLabel>
-                    <StyledSubLabel htmlFor="password">
-                        (minimum 8 caractères avec majuscule, minuscule et chiffre)
-                    </StyledSubLabel>
-                    <StyledInput 
-                        type="password" 
-                        id="password" 
-                        value={inputPassword}
-                        onChange={(e) => setInputPassword(e.target.value)}
-                    /> 
-                    <StyledError className='password error'></StyledError>
-                </InputContainer>
-                <InputContainer>
-                    <StyledLabel htmlFor="confirm-password">
-                        Confirmez votre mot de passe :
-                    </StyledLabel>
-                    <StyledInput
-                        type="password"
-                        id="confirm-password"
-                        value={controlPassword}
-                        onChange={(e) => setControlPassword(e.target.value)}
-                    />
-                    <StyledError className='check-password error'></StyledError>
-                </InputContainer>
-                <InputContainer>
-                    <StyledLabel htmlFor="pseudo">
-                        Choisissez un pseudo :
-                    </StyledLabel>
-                    <StyledInput
-                        type="text"
-                        id="pseudo"
-                        value={inputPseudo}
-                        onChange={(e) => setInputPseudo(e.target.value)}
-                    />
-                    <StyledError className='pseudo error'></StyledError>
-                </InputContainer>
-                <InputContainer>
-                    <AvatarText>
-                        <StyledLabel htmlFor="avatar">
-                            Choisissez votre avatar :
-                        </StyledLabel>
-                        <StyledFilesName>{inputAvatar}</StyledFilesName>
-                    </AvatarText>
-                    <AvatarChoiceContainer id="avatar">
-                        <AvatarRadioContainer>
-                            <AvatarInput
-                                type="radio"
-                                id="avatar-male"
-                                name="avatar"
-                                defaultChecked={true}
-                                onClick={() => setInputAvatar('Homme.svg')}
+        <>
+            {formSubmit ? (
+                <>
+                    <Login />
+                    <StyledSignupSuccessH2>Enregistrement réussi, veuillez-vous connecter.</StyledSignupSuccessH2>
+                </>
+            ) : (
+                <StyledContainer>
+                    <FormContainer action="" onSubmit={handleSignup}>
+                        <StyledH1>Créer votre compte</StyledH1>
+                        <InputContainer>
+                            <StyledLabel htmlFor="email">
+                                Quel est votre e-mail ?
+                            </StyledLabel>
+                            <StyledInput
+                                type="text"
+                                id="email"
+                                value={inputEmail}
+                                onChange={(e) => setInputEmail(e.target.value)}
                             />
-                            <label htmlFor="avatar-male">
-                                <StyledAvatarImage
-                                    src={male_avatar}
-                                    alt="avatar homme"
-                                />
-                            </label>
-                        </AvatarRadioContainer>
-                        <AvatarRadioContainer>
-                            <AvatarInput
-                                type="radio"
-                                id="avatar-female"
-                                name="avatar"
-                                onClick={() => setInputAvatar('Femme.svg')}
+                            <StyledError className='email error'></StyledError>
+                        </InputContainer>
+                        <InputContainer>
+                            <StyledLabel htmlFor="password">
+                                Choisissez un mot de passe :
+                            </StyledLabel>
+                            <StyledSubLabel htmlFor="password">
+                                (minimum 8 caractères avec majuscule, minuscule et chiffre)
+                            </StyledSubLabel>
+                            <StyledInput 
+                                type="password" 
+                                id="password" 
+                                value={inputPassword}
+                                onChange={(e) => setInputPassword(e.target.value)}
+                            /> 
+                            <StyledError className='password error'></StyledError>
+                        </InputContainer>
+                        <InputContainer>
+                            <StyledLabel htmlFor="confirm-password">
+                                Confirmez votre mot de passe :
+                            </StyledLabel>
+                            <StyledInput
+                                type="password"
+                                id="confirm-password"
+                                value={controlPassword}
+                                onChange={(e) => setControlPassword(e.target.value)}
                             />
-                            <label htmlFor="avatar-female">
-                                <StyledAvatarImage
-                                    src={female_avatar}
-                                    alt="avatar femme"
-                                />
-                            </label>
-                        </AvatarRadioContainer>
-                        <AvatarRadioContainer>
-                            <AvatarInput
-                                type="radio"
-                                id="download-files"
-                                name="avatar"
-                                value={inputAvatar}
+                            <StyledError className='check-password error'></StyledError>
+                        </InputContainer>
+                        <InputContainer>
+                            <StyledLabel htmlFor="pseudo">
+                                Choisissez un pseudo :
+                            </StyledLabel>
+                            <StyledInput
+                                type="text"
+                                id="pseudo"
+                                value={inputPseudo}
+                                onChange={(e) => setInputPseudo(e.target.value)}
                             />
-                            <label htmlFor="download-files">
-                            <input
-                                type="file"
-                                id="download-files"
-                                name="avatar"
-                                // onChange={setSelectedFile(files[0])}
-                                onClick={ () => {
-                                    setInputAvatar('Image utilisateur');
-                                    selectRadio();
-                                }}
-                            />
-                            </label>
-                            <StyledError className='avatar error'></StyledError>
-                        </AvatarRadioContainer>
-                    </AvatarChoiceContainer>
-                    <CreateButtonContainer> 
-                        <div>
-                            <input type="checkbox" id="terms" />
-                            <StyledTermsLabel htmlFor="terms">
-                                J'accepte les
-                                    <a href="/terms" target="_blank" rel="noopener noreferrer">
-                                        {' '}conditions générales
-                                    </a>
-                            </StyledTermsLabel>
-                            <StyledError className='terms error'></StyledError>
-                        </div>                    
-                        <StyledGreyButton type="submit">Création du compte</StyledGreyButton>
-                    </CreateButtonContainer>
-                </InputContainer>
-            </FormContainer>
-        </StyledContainer>
-        
+                            <StyledError className='pseudo error'></StyledError>
+                        </InputContainer>
+                        <InputContainer>
+                            <AvatarText>
+                                <StyledLabel htmlFor="avatar">
+                                    Choisissez votre avatar :
+                                </StyledLabel>
+                                <StyledFilesName>{inputAvatar}</StyledFilesName>
+                            </AvatarText>
+                            <AvatarChoiceContainer id="avatar">
+                                <AvatarRadioContainer>
+                                    <AvatarInput
+                                        type="radio"
+                                        id="avatar-male"
+                                        name="avatar"
+                                        defaultChecked={true}
+                                        onClick={() => setInputAvatar('Homme.svg')}
+                                    />
+                                    <label htmlFor="avatar-male">
+                                        <StyledAvatarImage
+                                            src={male_avatar}
+                                            alt="avatar homme"
+                                        />
+                                    </label>
+                                </AvatarRadioContainer>
+                                <AvatarRadioContainer>
+                                    <AvatarInput
+                                        type="radio"
+                                        id="avatar-female"
+                                        name="avatar"
+                                        onClick={() => setInputAvatar('Femme.svg')}
+                                    />
+                                    <label htmlFor="avatar-female">
+                                        <StyledAvatarImage
+                                            src={female_avatar}
+                                            alt="avatar femme"
+                                        />
+                                    </label>
+                                </AvatarRadioContainer>
+                                <AvatarRadioContainer>
+                                    <AvatarInput
+                                        type="radio"
+                                        id="download-files"
+                                        name="avatar"
+                                        value={inputAvatar}
+                                    />
+                                    <label htmlFor="download-files">
+                                    <input
+                                        type="file"
+                                        id="download-files"
+                                        name="avatar"
+                                        accept=".jpg, .jpeg, .png, .webp"
+                                        onChange={(e) => handleAvatar(e)}
+                                        onClick={ () => {
+                                            setInputAvatar('Image utilisateur');
+                                            selectRadio();
+                                        }}
+                                    />
+                                    </label>
+                                    <StyledError className='avatar error'></StyledError>
+                                </AvatarRadioContainer>
+                            </AvatarChoiceContainer>
+                            <CreateButtonContainer> 
+                                <div>
+                                    <input type="checkbox" id="terms" />
+                                    <StyledTermsLabel htmlFor="terms">
+                                        J'accepte les
+                                            <a href="/terms" target="_blank" rel="noopener noreferrer">
+                                                {' '}conditions générales
+                                            </a>
+                                    </StyledTermsLabel>
+                                    <StyledError className='terms error'></StyledError>
+                                </div>                    
+                                <StyledGreyButton type="submit">Création du compte</StyledGreyButton>
+                            </CreateButtonContainer>
+                        </InputContainer>
+                    </FormContainer>
+                </StyledContainer>
+            )}
+        </>     
     );
 }
 
