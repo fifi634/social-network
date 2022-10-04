@@ -13,8 +13,7 @@ exports.signup = async (req, res) => {
         const user = await UserModel.create({pseudo, email, password});
         const userId = user._id;
         res.status(201).json({ message: 'User created !', userId: user._id});
-        console.log(userId + ' created !');
-  
+        console.log(userId + ' created !');  
     } catch (err) {
         const errors = signupErrors(err);
         res.status(200).json({ message: 'Create user failed', errors });

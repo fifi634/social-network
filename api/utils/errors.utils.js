@@ -40,3 +40,12 @@ exports.uploadErrors = (err) => {
 
     return errors;
 };
+
+
+// Validation password error
+exports.passwordErrors = (err) => {
+    let allErrors = [];
+    err.forEach(element => { allErrors.push(element.message) });
+    let errors = 'Votre mot de passe ' + allErrors.join(', ') + '.';
+    return errors;    
+}

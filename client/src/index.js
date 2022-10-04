@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import styled from 'styled-components';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { colors } from './config';
 
 
 // Page and component import
@@ -21,6 +22,10 @@ import './style.css';
 const StyledLayout = styled.div`
     max-width: 1440px;
     margin: auto;
+    @media screen and (min-width: 1440px) {
+      box-shadow: 2px 4px 8px ${colors.boxShadow};
+      border-radius: 0 0 10px 10px;
+    }
 `;
 const StyledMain = styled.div`
   padding: 15px;

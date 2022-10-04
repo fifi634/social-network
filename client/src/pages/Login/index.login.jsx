@@ -5,7 +5,6 @@ import { fetchUrl } from '../../config';
 
 // Import Style
 import { StyledGreyButton } from '../../utils/style/StyledGlobalButton';
-import { StyledError } from '../../utils/style/StyledGlobalError'; 
 import {
     FormContainer,
     InputContainer,
@@ -37,16 +36,16 @@ function LoginForm () {
             })
             .catch((err) => {
                 console.log('fetch login error', err);
-                alert('La connection à échoué');
+                alert('La connection à échoué. Avez-vous entré le bon email et/ou le bon mot de passe ?');
             })
         ;
     };
 
     return (
-        <FormContainer action="" onSubmit={handleLogin} id={"signup-form"}>
+        <FormContainer action="" onSubmit={handleLogin}>
             <StyledH1>Connectez-vous !</StyledH1>
             <InputContainer>
-                <StyledLabel htmlFor="email">Inscrivez votre email :</StyledLabel>
+                <StyledLabel htmlFor="email">Entrez votre email :</StyledLabel>
                 <StyledInput type="text" name="email" id="email" onChange={(e) => setEmail(e.target.value)} value={email} />
             </InputContainer>
             <InputContainer>

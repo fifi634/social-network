@@ -46,7 +46,9 @@ export const AvatarInput = styled.input`
 `;
 
 export const CreateButtonContainer = styled.div`
-    margin: 48px auto 0 auto;
+    display: flex;
+    flex-direction: column;
+    margin: 48px auto 10px auto;
 `;
 
 export const StyledContainer = styled.div`

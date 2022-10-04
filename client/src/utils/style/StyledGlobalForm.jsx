@@ -53,3 +53,19 @@ export const StyledInput = styled.input`
         width: 350px;
     }
 `;
+
+export const StyledError = styled.div`
+    color: ${colors.primary};
+    font-weight: 700;
+    max-width: 568px;
+    @media screen and (max-width: 800px) {
+        max-width: 450px;
+    }
+    @media screen and (max-width: 500px) {
+        max-width: 350px;
+    }
+`;
+
+export const StyledTermsLabel = styled.label`
+    margin: 0 0 0 5px;
+`;

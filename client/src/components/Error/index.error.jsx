@@ -6,7 +6,7 @@ import { ErrorWrapper, ErrorTitle, Illustration, ErrorSubtitle } from './style.e
 function Error() {
     return (
         <ErrorWrapper>
-            <ErrorTitle>Oups ! Cette page n'existe pas</ErrorTitle>
+            <ErrorTitle>Oups !</ErrorTitle>
             <Illustration src={ErrorImage} alt="Erreur 404" />
             <ErrorSubtitle>
                 Il semblerait que la page que vous cherchez n'existe pas.

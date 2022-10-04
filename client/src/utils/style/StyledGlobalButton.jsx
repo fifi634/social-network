@@ -31,7 +31,7 @@ export const StyledPinkButton = styled.button`
 
 export const StyledGreyButton = styled.button`
     background: ${colors.tertiary};
-    margin: 20px;
+    margin: 20px 0;
     width: 266px;
     height: 60px;
     box-shadow: 0px 4px 4px ${colors.boxShadow};
@@ -54,7 +54,7 @@ export const StyledGreyButton = styled.button`
         margin: 5px;
     }
     @media screen and (max-device-width: 480px) {
-        width: 150px;
+        width: 160px;
     } 
 
 `;
