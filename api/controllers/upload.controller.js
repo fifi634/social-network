@@ -1,6 +1,5 @@
 const UserModel = require('../models/user.model');
 const fs = require('fs');
-// const { existsSync } = require('fs');
 const { uploadErrors } = require('../utils/errors.utils');
 
 

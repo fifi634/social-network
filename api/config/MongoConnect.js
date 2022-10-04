@@ -7,6 +7,6 @@ mongoose
         `mongodb+srv://${process.env.MONGO_ID}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_CLUSTER}/groupomania`
     )
     .then(console.log('MongoDB connected :)'))
-    .catch(err => console.log('Connection to MongoDB failed: ' + err))
+    .catch(err => console.log('Connection to MongoDB failed. ' + err))
 ;
 

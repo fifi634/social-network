@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import colors from '../../config/colors';
+import { colors } from '../../config';
 
 export const FormContainer = styled.form`
     display: flex;

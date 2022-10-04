@@ -31,3 +31,12 @@ export const AvatarInput = styled.input`
 export const CreateButtonContainer = styled.div`
     margin: 48px auto 0 auto;
 `;
+
+export const StyledContainer = styled.div`
+    @media screen and (min-width: 800px)
+    {
+        display: flex;
+        max-width: 800px;
+    }    
+
+`;

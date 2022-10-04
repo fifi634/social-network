@@ -1,6 +1,5 @@
 const multer = require('multer');
 const { uploadErrors } = require('../utils/errors.utils');
-const UserModel = require('../models/user.model');
 
 
 // Extension dictionary

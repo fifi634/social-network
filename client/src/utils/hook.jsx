@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-require('dotenv').config({ path: '../../config/.env' });
-
+import { fetchUrl } from '../config';
 
 // Data send to server 
 export function useGetFetch(url) {
@@ -14,7 +13,7 @@ export function useGetFetch(url) {
         async function fetchGetData() {
             setIsLoading(true);
             try {
-                const response = await fetch(process.env.FETCH_URL + url);
+                const response = await fetch(fetchUrl + url);
                 const resData = await response.json();
                 setData(resData);
             } catch (err) {
@@ -50,8 +49,8 @@ export function usePostFetch(url) {
             setIsLoading(true);
             try {
                 const response = await fetch(process.env.FETCH_URL + url, requestOptions);
-                const data = await response.json();
-                setData(data);
+                const resData = await response.json();
+                setData(resData);
             } catch (err) {
                 console.log('fetch post failed : ', err);
                 setError(true);

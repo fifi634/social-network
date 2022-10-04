@@ -1,5 +1,6 @@
+import axios from 'axios';
 import { useState, useEffect } from 'react';
-import useFetch from '../../utils/hooks/index.hook';
+import { fetchUrl } from '../../config';
 
 // Import images
 import male_avatar from '../../assets/image/male_avatar.svg';
@@ -15,6 +16,7 @@ import {
     AvatarRadioContainer,
     AvatarInput,
     CreateButtonContainer,
+    StyledContainer,
 } from './style.signup';
 import {
     FormContainer,
@@ -46,7 +48,7 @@ function Signup() {
         email: inputEmail,
         password: inputPassword,
         pseudo: inputPseudo,
-        avatar: inputAvatar,
+        avatar_slug: inputAvatar,
     }
 
     // Create user object
@@ -56,9 +58,38 @@ function Signup() {
         setSelectedFile(user);
     }
 
+    const handleSignup = (e) => {
+        e.preventDefault();
+        const emailError = document.querySelector('.email.error');
+        const passwordError = document.querySelector('.password.error');
+        axios({
+            method: 'post',
+            url: `${fetchUrl}api/user/signup`,
+            withCredentials: true,
+            data: {
+                email: inputEmail,
+                password: inputPassword,
+                pseudo: inputPseudo,
+                avatar_slug: inputAvatar,
+            }
+        })
+            .then((res) => {
+                if (res.data.errors) {
+                    emailError.innerHTML = res.data.errors.email;
+                    passwordError.innerHTML = res.data.errors.password;
+                } else {
+                    console.log('reponse : ', res)
+                    window.location = '/';
+                }
+            })
+            .catch(err => console.log('fetch login error', err))
+        ;
+    };
+
     // Form generation
     return (
-        <FormContainer>
+        <StyledContainer>
+            <FormContainer action="" onSubmit={handleSignup} id={"login-form"}>
             <StyledH1>Créer votre compte</StyledH1>
             <InputContainer>
                 <StyledLabel htmlFor="email">
@@ -161,15 +192,12 @@ function Signup() {
                     </AvatarRadioContainer>
                 </AvatarChoiceContainer>
                 <CreateButtonContainer>
-                    <StyledGreyButton
-                        // type="submit"
-                        onClick={submit}
-                    >
-                        Création du compte
-                    </StyledGreyButton>
+                    <StyledGreyButton type="submit">Création du compte</StyledGreyButton>
                 </CreateButtonContainer>
             </InputContainer>
         </FormContainer>
+        </StyledContainer>
+        
     );
 }
 

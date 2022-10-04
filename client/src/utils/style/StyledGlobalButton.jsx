@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import colors from '../../config/colors';
+import { colors } from '../../config';
 
-export const StyledPinkButton = styled.button`
+export const StyledPinkButton = styled.button`     
     background: ${colors.secondary};
     margin: 20px;
     width: 266px;
@@ -17,6 +17,12 @@ export const StyledPinkButton = styled.button`
     }
     &:hover {
         cursor: pointer;
+    }
+    @ media screen and (max-width: 800px) {
+        display: flex;
+        width: auto;
+        height: auto;
+        margin: 5px;
     }
 `;
 

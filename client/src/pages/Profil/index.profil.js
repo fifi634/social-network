@@ -1,8 +1,7 @@
 // import { useEffect } from 'react';
 import { useState } from 'react';
-import { useGetFetch } from '../../utils/hooks/index.hook';
+import { useGetFetch } from '../../utils/hook';
 import Loader from '../../utils/style/Atom';
-// require('dotenv').config({path:'../../config/.env'});
 
 
 const Profil = () => {

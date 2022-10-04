@@ -1,7 +1,6 @@
 const UserModel = require('../models/user.model');
 const jwt = require('jsonwebtoken');
 const {signupErrors, loginErrors} = require('../utils/errors.utils');
-const { requireAuth } = require('../middleware/auth.middleware');
 require('dotenv').config({path:'../config/.env'});
 
 

@@ -2,7 +2,7 @@ const app = require('./app');
 const http = require('http');
 require('./app');
 require('dotenv').config({path:'./config/.env'});
-require('./config/db');
+require('./config/MongoConnect');
 
 // Port declaration
 const normalizePort = val => {

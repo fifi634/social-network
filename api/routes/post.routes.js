@@ -1,7 +1,9 @@
 const router = require('express').Router();
+
 const postController = require('../controllers/post.controller');
 const likeController = require('../controllers/like.controller');
 const commentController = require('../controllers/comment.controller.js');
+
 const multerPost = require('../middleware/multerPost.middleware');
 
 
