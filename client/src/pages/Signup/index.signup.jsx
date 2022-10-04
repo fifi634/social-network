@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import { fetchUrl } from '../../config';
 
 // Import images
-import male_avatar from '../../assets/image/male_avatar.svg';
-import female_avatar from '../../assets/image/female_avatar.svg';
+import male_avatar from '../../assets/image/Homme.svg';
+import female_avatar from '../../assets/image/Femme.svg';
 
 // Import style
 import { StyledGreyButton } from '../../utils/style/StyledGlobalButton';
@@ -39,7 +39,7 @@ function Signup() {
     const [inputEmail, setInputEmail] = useState('');
     const [inputPassword, setInputPassword] = useState('');
     const [inputPseudo, setInputPseudo] = useState('');
-    const [inputAvatar, setInputAvatar] = useState('male_avatar.svg');
+    const [inputAvatar, setInputAvatar] = useState('Homme.svg');
     const [selectedFile, setSelectedFile] = useState({});
     const [userObject, setUserObject] = useState(null);
 
@@ -147,7 +147,7 @@ function Signup() {
                             id="avatar-male"
                             name="avatar"
                             defaultChecked={true}
-                            onClick={() => setInputAvatar('male_avatar.svg')}
+                            onClick={() => setInputAvatar('Homme.svg')}
                         />
                         <label htmlFor="avatar-male">
                             <StyledAvatarImage
@@ -161,7 +161,7 @@ function Signup() {
                             type="radio"
                             id="avatar-female"
                             name="avatar"
-                            onClick={() => setInputAvatar('female_avatar.svg')}
+                            onClick={() => setInputAvatar('Femme.svg')}
                         />
                         <label htmlFor="avatar-female">
                             <StyledAvatarImage

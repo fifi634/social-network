@@ -10,9 +10,9 @@ export const StyledHeader = styled.header`
     background: ${colors.tertiary};
     box-shadow: 0px 4px 4px ${colors.boxShadow};
     padding: 0 24px;
-    @media screen and (max-width: 800px) {
-        max-width: 800px;
-        height: 140px;
+    @media screen and (max-width: 500px) {
+        flex-direction: column;
+        height: auto;
     }
 `;
 

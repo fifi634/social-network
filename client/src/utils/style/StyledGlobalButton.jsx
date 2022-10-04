@@ -24,6 +24,9 @@ export const StyledPinkButton = styled.button`
         height: auto;
         margin: 5px;
     }
+    @media screen and (max-device-width: 480px) {
+        width: 160px;
+    } 
 `;
 
 export const StyledGreyButton = styled.button`
@@ -44,4 +47,14 @@ export const StyledGreyButton = styled.button`
     &:hover {
         cursor: pointer;
     }
+    @ media screen and (max-width: 800px) {
+        display: flex;
+        width: auto;
+        height: auto;
+        margin: 5px;
+    }
+    @media screen and (max-device-width: 480px) {
+        width: 150px;
+    } 
+
 `;

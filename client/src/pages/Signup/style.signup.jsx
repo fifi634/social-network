@@ -3,6 +3,13 @@ import styled from 'styled-components';
 
 export const AvatarText = styled.div`
     display: flex;
+    @media screen and (max-width: 800px) {
+        justify-content: center;
+    }
+    @media screen and (max-width: 500px) {
+        flex-direction: column;
+        margin: auto;
+    }
 `;
 
 export const StyledFilesName = styled.div`
@@ -16,12 +23,22 @@ export const StyledAvatarImage = styled.img`
 
 export const AvatarChoiceContainer = styled.div`
     display: flex;
+    @media screen and (max-width: 800px) {
+        flex-wrap: wrap;
+        justify-content: center;;
+    }
+    @media screen and (max-width: 500px) {
+        flex-direction: column;
+    }
 `;
 
 export const AvatarRadioContainer = styled.div`
     display: flex;
     margin: 24px;
     align-items: center;
+    @media screen and (max-width: 500px) {
+        justify-content: center;
+    }
 `;
 
 export const AvatarInput = styled.input`
@@ -33,10 +50,10 @@ export const CreateButtonContainer = styled.div`
 `;
 
 export const StyledContainer = styled.div`
+    display: flex;
+    margin: auto;
     @media screen and (min-width: 800px)
     {
-        display: flex;
         max-width: 800px;
     }    
-
 `;

@@ -16,6 +16,12 @@ export const InputContainer = styled.div`
     margin: 24px 0 0px 0;
     display: flex;
     flex-direction: column;
+    @media screen and (max-width: 800px) {
+        width: 500px;
+    }
+    @media screen and (max-width: 480px) {
+        width: 350px;
+    } 
 `;
 
 export const StyledLabel = styled.label`
@@ -39,5 +45,11 @@ export const StyledInput = styled.input`
         background: ${colors.tertiary};
         font-weight: 800;
         box-shadow: 0px 4px 4px ${colors.boxShadow};
+    }
+    @media screen and (max-width: 800px) {
+        width: 450px;
+    }
+    @media screen and (max-width: 500px) {
+        width: 350px;
     }
 `;
