@@ -69,3 +69,7 @@ export const StyledError = styled.div`
 export const StyledTermsLabel = styled.label`
     margin: 0 0 0 5px;
 `;
+
+export const StyledTermsContainer = styled.div`
+    text-align: center;
+`; 

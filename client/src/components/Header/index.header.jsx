@@ -1,11 +1,25 @@
+import React, { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { UidContext } from '../../utils/context';
 import completLogo from '../../assets/image/icon-left-font-monochrome-white.png';
+import Logout from './logout.header';
+//test avatar
+import avatarTest from "../../assets/uploads/profil/Aven_d'Armand_(13).jpg1664657136384.jpg";
 
 // Style
-import { StyledHeader, HeaderLogo } from './style.header.jsx';
-import { StyledPinkButton } from '../../utils/style/StyledGlobalButton';
+import { StyledPinkButton, StyledLittlePinkButton } from '../../utils/style/StyledGlobalButton';
+import { 
+    StyledHeader, 
+    HeaderLogo, 
+    StyledAvatarMenuContainer,
+    StyledAvatarPcture,
+    StyledUserMenuContainer,
+    StyledPseudo
+} from './style.header.jsx';
 
 function Header() {
+    const uid = useContext(UidContext);
+
     // Get path of url
     const pathname = useLocation().pathname;
     return (
@@ -16,25 +30,42 @@ function Header() {
                     alt="Aller à la page d'accueil de Groupomania"
                 />
             </Link>
-            {pathname === '/login' ? (
-                <Link to="/signup">
-                    <StyledPinkButton type="button">
-                        Vous n'avez pas de compte ?
-                    </StyledPinkButton>
-                </Link>
-            ) : pathname === '/signup' ? (
-                <Link to="/login">
-                    <StyledPinkButton type="button">
-                        Vous avez un compte ?
-                    </StyledPinkButton>
-                </Link>
-            ) : (
-                <Link to="/signup">
-                    <StyledPinkButton type="button">
-                        Connecté !
-                    </StyledPinkButton>
-                </Link>
-            )}
+            { pathname === '/login' ? (
+                    <Link to="/signup">
+                        <StyledPinkButton>
+                            Vous n'avez pas de compte ?
+                        </StyledPinkButton>
+                    </Link>
+                ) : pathname === '/signup' ? (
+                    <Link to="/login">
+                        <StyledPinkButton>
+                            Vous avez un compte ?
+                        </StyledPinkButton>
+                    </Link>
+                ) : uid ? (
+                    <StyledAvatarMenuContainer>
+                        <Link to="/profil">
+                            <StyledAvatarPcture src={avatarTest} alt="avatar utilisateur"/>
+                        </Link>
+                        <StyledUserMenuContainer>
+                            <StyledPseudo> 'Pseudo' </StyledPseudo>
+                            <Link to="/profil">
+                                <StyledLittlePinkButton>Compte</StyledLittlePinkButton>
+                            </Link>
+                            <Logout />
+                        </StyledUserMenuContainer>
+                    </StyledAvatarMenuContainer>
+
+
+                ) : (
+                    <Link to="/login">
+                        <StyledPinkButton>
+                            Vous avez un compte ?
+                        </StyledPinkButton>
+                    </Link>
+                )
+            }
+            
         </StyledHeader>
     );
 }

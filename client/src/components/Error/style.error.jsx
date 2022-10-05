@@ -14,6 +14,12 @@ export const ErrorTitle = styled.h1`
 
 export const Illustration = styled.img`
     max-width: 800px;
+    @media screen and (max-width: 800px) {
+        max-width: 500px;
+    }
+    @media screen and (max-width: 500px) {
+        max-width: 350px;
+    }
 `;
 
 export const ErrorSubtitle = styled.h2`

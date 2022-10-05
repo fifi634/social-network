@@ -28,7 +28,7 @@ import {
     StyledSubLabel,
     StyledInput,
     StyledError,
-    StyledTermsLabel,
+    StyledTermsContainer
 } from '../../utils/style/StyledGlobalForm';
 
 
@@ -90,7 +90,7 @@ function Signup() {
                 checkPasswordError.innerHTML = "Les mots de passe ne correspondent pas.";
             }
             if (!terms.checked) {
-                termsError.innerHTML = "Vous avez besoin de lire et de valider les conditions générales pour utiliser ce service.";
+                termsError.innerHTML = "Vous avez besoin de lire et de valider<br>les conditions générales pour utiliser ce service.";
             }
         } else {
             // Fetch 
@@ -260,16 +260,16 @@ function Signup() {
                                 </AvatarRadioContainer>
                             </AvatarChoiceContainer>
                             <CreateButtonContainer> 
-                                <div>
+                                <StyledTermsContainer>
                                     <input type="checkbox" id="terms" />
-                                    <StyledTermsLabel htmlFor="terms">
+                                    <StyledSubLabel htmlFor="terms">
                                         J'accepte les
                                             <a href="/terms" target="_blank" rel="noopener noreferrer">
                                                 {' '}conditions générales
                                             </a>
-                                    </StyledTermsLabel>
+                                    </StyledSubLabel>
                                     <StyledError className='terms error'></StyledError>
-                                </div>                    
+                                </StyledTermsContainer>                    
                                 <StyledGreyButton type="submit">Création du compte</StyledGreyButton>
                             </CreateButtonContainer>
                         </InputContainer>
@@ -278,6 +278,6 @@ function Signup() {
             )}
         </>     
     );
-}
+};;
 
 export default Signup;

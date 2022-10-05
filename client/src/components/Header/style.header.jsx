@@ -14,7 +14,6 @@ export const StyledHeader = styled.header`
         box-shadow: unset;
     }
     @media screen and (max-width: 500px) {
-        flex-direction: column;
         height: auto;
     }
 `;
@@ -25,4 +24,33 @@ export const HeaderLogo = styled.img`
     @media screen and (max-width: 800px) {
         max-width: 200px;
     }
+    @media screen and (max-width: 550px) {
+        display: none;
+    }
+`;
+
+export const StyledAvatarMenuContainer = styled.div`
+    display: flex;
+    @media screen and (max-width: 550px) {
+        margin: auto;
+    }
+`;
+
+export const StyledAvatarPcture = styled.img`
+    border-radius: 50%;
+    margin: 10px;
+    width: 120px;
+    height: 120px;
+`;
+
+export const StyledUserMenuContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
+
+export const StyledPseudo = styled.div`
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 24px;
+    margin: 10px;
 `;

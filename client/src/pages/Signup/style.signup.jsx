@@ -49,6 +49,7 @@ export const CreateButtonContainer = styled.div`
     display: flex;
     flex-direction: column;
     margin: 48px auto 10px auto;
+    align-items: center;
 `;
 
 export const StyledContainer = styled.div`

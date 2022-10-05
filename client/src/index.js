@@ -13,6 +13,7 @@ import Header from './components/Header/index.header';
 import Error from './components/Error/index.error';
 import Profil from './pages/Profil/index.profil';
 import Login from './pages/Login/index.login';
+import { UidProvider } from './utils/context';
 
 // Style import
 import './normalize.css';
@@ -31,24 +32,30 @@ const StyledMain = styled.div`
   padding: 15px;
 `;
 
+
 // React Router DOM
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>   
-    <StyledLayout>
-      <Header />
-      <StyledMain>
-        <Routes>
-          <Route path='*' element={ <Error /> } />
-          <Route path='/' element={ <Home /> } />
-          <Route path='/signup' element={ <Signup /> } />
-          <Route path='/profil' element={ <Profil /> } />
-          <Route path='/login' element={ <Login /> } />
-        </Routes>
-      </StyledMain>
-    </StyledLayout>
-  </BrowserRouter>
+  <UidProvider>
+    <BrowserRouter>   
+      <StyledLayout>
+        <Header />
+        <StyledMain>
+          <Routes>
+            <Route path='*' element={ <Error /> } />
+            <Route path='/' element={ <Home /> } />
+            <Route path='/signup' element={ <Signup /> } />
+            <Route path='/profil' element={ <Profil /> } />
+            <Route path='/login' element={ <Login /> } />
+          </Routes>
+        </StyledMain>
+      </StyledLayout>
+    </BrowserRouter>
+  </UidProvider>
 );
+
+
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
