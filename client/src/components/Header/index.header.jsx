@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { UidContext } from '../../utils/context';
 import completLogo from '../../assets/image/icon-left-font-monochrome-white.png';
 import Logout from './logout.header';
+import { useSelector } from 'react-redux';
 //test avatar
 import avatarTest from "../../assets/uploads/profil/Aven_d'Armand_(13).jpg1664657136384.jpg";
 
@@ -17,8 +18,10 @@ import {
     StyledPseudo
 } from './style.header.jsx';
 
+
 function Header() {
     const uid = useContext(UidContext);
+    const userData = useSelector(state => state.userReducer);
 
     // Get path of url
     const pathname = useLocation().pathname;
@@ -48,15 +51,13 @@ function Header() {
                             <StyledAvatarPcture src={avatarTest} alt="avatar utilisateur"/>
                         </Link>
                         <StyledUserMenuContainer>
-                            <StyledPseudo> 'Pseudo' </StyledPseudo>
+                            <StyledPseudo> {userData.pseudo} </StyledPseudo>
                             <Link to="/profil">
                                 <StyledLittlePinkButton>Compte</StyledLittlePinkButton>
                             </Link>
                             <Logout />
                         </StyledUserMenuContainer>
                     </StyledAvatarMenuContainer>
-
-
                 ) : (
                     <Link to="/login">
                         <StyledPinkButton>

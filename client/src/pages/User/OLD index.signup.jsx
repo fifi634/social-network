@@ -19,7 +19,7 @@ import {
     CreateButtonContainer,
     StyledContainer,
     StyledSignupSuccessH2
-} from './style.signup';
+} from './style.user';
 import {
     FormContainer,
     InputContainer,

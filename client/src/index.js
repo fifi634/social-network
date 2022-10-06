@@ -4,20 +4,36 @@ import ReactDOM from 'react-dom/client';
 import styled from 'styled-components';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { colors } from './config';
-
-
 // Page and component import
 import Home from './pages/Home/index.home';
-import Signup from './pages/Signup/index.signup';
+import Signup from './pages/User/OLD index.signup';
 import Header from './components/Header/index.header';
 import Error from './components/Error/index.error';
 import Profil from './pages/Profil/index.profil';
 import Login from './pages/Login/index.login';
 import { UidProvider } from './utils/context';
-
 // Style import
 import './normalize.css';
 import './style.css';
+
+
+/** Redux */
+/******** */
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import { applyMiddleware, legacy_createStore as createStore } from 'redux';
+import rootReducer from './reducers/index.reducer';
+
+// Dev Tools
+import { composeWithDevTools } from 'redux-devtools-extension';
+import logger from 'redux-logger';
+
+const store = createStore(
+  rootReducer, composeWithDevTools(applyMiddleware(thunk, logger))
+);
+
+/****** */
+
 
 // Layout style
 const StyledLayout = styled.div`
@@ -36,22 +52,24 @@ const StyledMain = styled.div`
 // React Router DOM
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <UidProvider>
-    <BrowserRouter>   
-      <StyledLayout>
-        <Header />
-        <StyledMain>
-          <Routes>
-            <Route path='*' element={ <Error /> } />
-            <Route path='/' element={ <Home /> } />
-            <Route path='/signup' element={ <Signup /> } />
-            <Route path='/profil' element={ <Profil /> } />
-            <Route path='/login' element={ <Login /> } />
-          </Routes>
-        </StyledMain>
-      </StyledLayout>
-    </BrowserRouter>
-  </UidProvider>
+  <Provider store={store}>
+    <UidProvider>
+      <BrowserRouter>   
+        <StyledLayout>
+          <Header />
+          <StyledMain>
+            <Routes>
+              <Route path='*' element={ <Error /> } />
+              <Route path='/' element={ <Home /> } />
+              <Route path='/signup' element={ <Signup /> } />
+              <Route path='/profil' element={ <Profil /> } />
+              <Route path='/login' element={ <Login /> } />
+            </Routes>
+          </StyledMain>
+        </StyledLayout>
+      </BrowserRouter>
+    </UidProvider>
+  </Provider>,
 );
 
 
