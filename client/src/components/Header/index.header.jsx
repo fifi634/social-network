@@ -8,7 +8,8 @@ import { useSelector } from 'react-redux';
 // Style
 import { StyledPinkButton, StyledLittlePinkButton } from '../../utils/style/StyledGlobalButton';
 import { 
-    StyledHeader, 
+    StyledHeader,
+    HeaderLogoDisconnect,
     HeaderLogo, 
     StyledAvatarMenuContainer,
     StyledAvatarPcture,
@@ -25,25 +26,43 @@ function Header() {
     const pathname = useLocation().pathname;
     return (
         <StyledHeader>
-            <Link to="/">
-                <HeaderLogo
-                    src={completLogo}
-                    alt="Aller à la page d'accueil de Groupomania"
-                />
-            </Link>
+
             { pathname === '/login' ? (
+                    <>
+                    <Link to="/">
+                        <HeaderLogoDisconnect
+                            src={completLogo}
+                            alt="Aller à la page d'accueil de Groupomania"
+                        />
+                    </Link>
                     <Link to="/signup">
                         <StyledPinkButton>
                             Vous n'avez pas de compte ?
                         </StyledPinkButton>
                     </Link>
+                    </>
                 ) : pathname === '/signup' ? (
+                    <>
+                    <Link to="/">
+                        <HeaderLogoDisconnect
+                            src={completLogo}
+                            alt="Aller à la page d'accueil de Groupomania"
+                        />
+                    </Link>
                     <Link to="/login">
                         <StyledPinkButton>
                             Vous avez un compte ?
                         </StyledPinkButton>
                     </Link>
+                    </>
                 ) : uid ? (
+                    <>
+                    <Link to="/">
+                        <HeaderLogo
+                            src={completLogo}
+                            alt="Aller à la page d'accueil de Groupomania"
+                        />
+                    </Link>
                     <StyledAvatarMenuContainer>
                         <Link to="/profil">
                             <StyledAvatarPcture src={userData.avatar_slug} alt="avatar utilisateur"/>
@@ -56,6 +75,7 @@ function Header() {
                             <Logout />
                         </StyledUserMenuContainer>
                     </StyledAvatarMenuContainer>
+                    </>
                 ) : (
                     <Link to="/login">
                         <StyledPinkButton>

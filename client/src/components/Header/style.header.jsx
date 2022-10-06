@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { colors } from '../../config';
+import logoAlone from '../../assets/image/icon-monochrome-white.png';
 
 export const StyledHeader = styled.header`
     display: flex;
@@ -53,4 +54,13 @@ export const StyledPseudo = styled.div`
     font-weight: 700;
     font-size: 24px;
     margin: 10px;
+`;
+
+export const HeaderLogoDisconnect = styled.img`
+    display: flex;
+    width: 333px;
+    @media screen and (max-width: 650px) {
+        content: url(${logoAlone});
+        max-width: 80px;
+    }
 `;
