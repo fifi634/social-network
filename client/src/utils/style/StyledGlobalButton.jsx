@@ -79,7 +79,7 @@ export const StyledLittlePinkButton = styled.button`
 
 export const StyledLittleGreyButton = styled.button`
     background: ${colors.tertiary};
-    margin: 5px;
+    margin: 20px 0;
     width: 160px;
     height: 30px;
     box-shadow: 0px 4px 4px ${colors.boxShadow};

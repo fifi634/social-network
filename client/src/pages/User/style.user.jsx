@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colors } from '../../config';
 // import colors from '../../utils/style/colors';
 
 export const AvatarText = styled.div`
@@ -64,4 +65,30 @@ export const StyledContainer = styled.div`
 export const StyledSignupSuccessH2 = styled.h2`
     color: #008000;
     text-align: center;
+`;
+
+export const StyledProfilControlContainer = styled.div`
+    display: flex;
+    width: 700px;
+    justify-content: space-between;
+    @media screen and (max-width: 800px) {
+        flex-direction: column-reverse;
+        width: auto;
+        align-items: center;
+    }
+`;
+
+export const StyledProfilLinkContainer = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
+export const StyledDisconnectLink = styled.a`
+    margin: 0 20px;
+    color: ${colors.tertiary};
+`;
+
+export const StyledDeleteLink = styled.a`
+    margin: 0 20px;
+    color: ${colors.primary};
 `;

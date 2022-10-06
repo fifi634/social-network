@@ -46,19 +46,12 @@ function Signup() {
     const [controlPassword, setControlPassword] = useState('');
     const [inputPseudo, setInputPseudo] = useState('');
     const [inputAvatar, setInputAvatar] = useState('Homme.svg');
-    // const [selectedFile, setSelectedFile] = useState({});
-    // const [userObject, setUserObject] = useState(null);
 
-    // // Create user object
-    // function submit() {
-    //     const currentFile = document.getElementById('download-files').files[0];
-    //     user.push(JSON.parse(currentFile));
-    //     setSelectedFile(user);
-    // }
-
+    // Get avatar file
     const handleAvatar = (e) => {
          setInputAvatar(URL.createObjectURL(e.target.files[0]))
     };
+    
 
     // When form is submit
     const handleSignup = async (e) => {
@@ -118,14 +111,9 @@ function Signup() {
                         if (res.data.errors.pseudo) {
                             pseudoError.innerHTML = res.data.errors.pseudo;
                         }
-
                     } else {
                         setFormSubmit(true);
-                    }
-
-                        // window.location = '/';
-                        console.log(res.data)
-              
+                    }              
                 })
                 .catch(err => {
                     console.log('fetch login error', err);
@@ -133,7 +121,6 @@ function Signup() {
             ;
         }      
     };
-
 
 
     // Form generation
@@ -147,9 +134,7 @@ function Signup() {
             ) : (
                 <StyledContainer>
                     <FormContainer action="" onSubmit={handleSignup}>
-                        
-
-                    <StyledH1>Créer votre compte</StyledH1>
+                        <StyledH1>Créer votre compte</StyledH1>
                         <InputContainer>
                             <StyledLabel htmlFor="email">
                                 Quel est votre e-mail ?
@@ -193,6 +178,9 @@ function Signup() {
                             <StyledLabel htmlFor="pseudo">
                                 Choisissez un pseudo :
                             </StyledLabel>
+                            <StyledSubLabel htmlFor="password">
+                                (maximum 15 caractères)
+                            </StyledSubLabel>
                             <StyledInput
                                 type="text"
                                 id="pseudo"
@@ -275,8 +263,6 @@ function Signup() {
                                 <StyledGreyButton type="submit">Création du compte</StyledGreyButton>
                             </CreateButtonContainer>
                         </InputContainer>
-
-                        
                     </FormContainer>
                 </StyledContainer>
             )}

@@ -7,7 +7,7 @@ exports.signupErrors = (err) => {
     let errors = { pseudo: '', email: '', password: '' };
     
     if (err.message.includes('pseudo'))
-    errors.pseudo = "Pseudo déjà pris";
+    errors.pseudo = "Trop de caractère ou déjà pris";
     
     if (err.message.includes('email'))
     errors.email = 'Email incorrect ou déjà pris';

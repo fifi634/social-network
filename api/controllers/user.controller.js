@@ -26,11 +26,7 @@ exports.userInfo = (req, res) => {
 
 
 /* Find user by id and modify it */
-exports.updateUser = async (req, res) => {
-    // Check if uri is known into database
-    // if (!ObjectID.isValid(req.params.id)) 
-    // return res.status(400).send('ID unknown : ' + req.params.id);
-    
+exports.updateUser = async (req, res) => {   
     // Upload information user
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
@@ -46,7 +42,7 @@ exports.updateUser = async (req, res) => {
                 (err, data) => {
                     if (!err) {
                         console.log(req.auth.userId + ' has updated his profil');
-                        return res.json({message: "User updated !", data})
+                        return res.json({ message: "User updated !", data })
                     };
                     if (err) return res.status(500).send('User update error : ' + err );
                 }

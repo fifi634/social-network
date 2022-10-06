@@ -6,10 +6,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { colors } from './config';
 // Page and component import
 import Home from './pages/Home/index.home';
-import Signup from './pages/User/OLD index.signup';
+import Signup from './pages/User/signup.user';
 import Header from './components/Header/index.header';
 import Error from './components/Error/index.error';
-import Profil from './pages/Profil/index.profil';
+import Profil from './pages/User/profil.user';
 import Login from './pages/Login/index.login';
 import { UidProvider } from './utils/context';
 // Style import

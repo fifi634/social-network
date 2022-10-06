@@ -4,8 +4,6 @@ import { UidContext } from '../../utils/context';
 import completLogo from '../../assets/image/icon-left-font-monochrome-white.png';
 import Logout from './logout.header';
 import { useSelector } from 'react-redux';
-//test avatar
-import avatarTest from "../../assets/uploads/profil/Aven_d'Armand_(13).jpg1664657136384.jpg";
 
 // Style
 import { StyledPinkButton, StyledLittlePinkButton } from '../../utils/style/StyledGlobalButton';
@@ -48,7 +46,7 @@ function Header() {
                 ) : uid ? (
                     <StyledAvatarMenuContainer>
                         <Link to="/profil">
-                            <StyledAvatarPcture src={avatarTest} alt="avatar utilisateur"/>
+                            <StyledAvatarPcture src={userData.avatar_slug} alt="avatar utilisateur"/>
                         </Link>
                         <StyledUserMenuContainer>
                             <StyledPseudo> {userData.pseudo} </StyledPseudo>

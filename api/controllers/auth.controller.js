@@ -16,7 +16,7 @@ exports.signup = async (req, res) => {
         console.log(userId + ' created !');  
     } catch (err) {
         const errors = signupErrors(err);
-        res.status(200).json({ message: 'Create user failed', errors });
+        res.status(200).json({ message: 'Create user failed', errors, err });
     }
 };
 
