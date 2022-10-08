@@ -7,7 +7,7 @@ exports.signupErrors = (err) => {
     let errors = { pseudo: '', email: '', password: '' };
     
     if (err.message.includes('pseudo'))
-    errors.pseudo = "Trop de caractère ou déjà pris";
+    errors.pseudo = "Votre pseudo doit comporter au maximum 15 caractères.";
     
     if (err.message.includes('email'))
     errors.email = 'Email incorrect ou déjà pris';

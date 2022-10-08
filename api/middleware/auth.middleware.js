@@ -45,7 +45,7 @@ exports.requireAuth = (req, res, next) => {
                     req.auth = { userId: userId };
                     let user = await UserModel.findById(decodedToken.id);
                     res.locals.user = user;
-                    console.log(decodedToken.id + ' authenticated !' );
+                    console.log(decodedToken.id + ' authenticated' );
                     next();
                 }
             }

@@ -19,7 +19,7 @@ function LoginForm () {
 
 
     // When form is submit
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
         axios({
             method: 'post',
@@ -35,7 +35,7 @@ function LoginForm () {
                 window.location = '/';
             })
             .catch((err) => {
-                console.log('fetch login error', err);
+                console.log('fetch login error. ' + err);
                 alert('La connection à échoué. Avez-vous entré le bon email et/ou le bon mot de passe ?');
             })
         ;
@@ -55,6 +55,6 @@ function LoginForm () {
             <StyledGreyButton type="submit">Connexion</StyledGreyButton>
         </FormContainer>
     );
-}
+};
 
 export default LoginForm;

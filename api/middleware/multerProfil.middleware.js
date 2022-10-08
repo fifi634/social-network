@@ -14,10 +14,9 @@ const MIME_TYPES = {
 // Save files configuration
 const storage = multer.diskStorage({    
     destination: (req, file, callback) => {
-        callback(null, '../client/src/assets/uploads/profil/');
+        callback(null, '../client/public/uploads/profil/');
     },
     filename: (req, file, callback) => {
-        const name = file.originalname.split(' ').join('_');
         const extension = MIME_TYPES[file.mimetype];
         callback(null, req.auth.userId + Date.now() + '.' + extension);
     }
@@ -38,7 +37,7 @@ const upload = multer({
             callback(new Error('invalid file'), false);
         } else {
             callback(null, true);
-        }    
+        }; 
     }
 });
 

@@ -10,27 +10,42 @@ export const FormContainer = styled.form`
 
 export const StyledH1 = styled.h1`
     margin: 48px 0 24px 0;
+    @media screen and (max-width: 330px) {
+        display: flex;
+        margin: unset;
+        justify-content: center;
+        width: 200px;
+    }
 `;
 
 export const InputContainer = styled.div`
     margin: 24px 0 0px 0;
-    display: flex;
+    display: flex;    
     flex-direction: column;
     @media screen and (max-width: 800px) {
         width: 500px;
     }
     @media screen and (max-width: 480px) {
         width: 350px;
-    } 
+    }
+    @media screen and (max-width: 370px) {
+        width: 200px;
+    }
 `;
 
 export const StyledLabel = styled.label`
     margin: 3px 0 3px 0;
     font-weight: 600;
+    @media screen and (max-width: 370px) {
+        width: 200px;
+    }
 `;
 
 export const StyledSubLabel = styled.label`
     margin-bottom: 3px;
+    @media screen and (max-width: 370px) {
+        width: 200px;
+    }
 `;
 
 export const StyledInput = styled.input`
@@ -51,6 +66,10 @@ export const StyledInput = styled.input`
     }
     @media screen and (max-width: 500px) {
         width: 350px;
+    }
+    @media screen and (max-width: 370px) {
+        width: 200px;
+        display: flex;
     }
 `;
 
@@ -73,3 +92,10 @@ export const StyledTermsLabel = styled.label`
 export const StyledTermsContainer = styled.div`
     text-align: center;
 `; 
+
+export const StyledInputFile = styled.input`
+    max-width: 300px;
+    @media screen and (max-width: 370px) {
+        width: 200px;
+    }
+`;

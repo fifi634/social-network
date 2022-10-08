@@ -6,13 +6,19 @@ import Logout from './logout.header';
 import { useSelector } from 'react-redux';
 
 // Style
-import { StyledPinkButton, StyledLittlePinkButton } from '../../utils/style/StyledGlobalButton';
+import { 
+    StyledPinkButton, 
+    StyledLittlePinkButton, 
+    StyledLittleGreyButton 
+} from '../../utils/style/StyledGlobalButton';
+
 import { 
     StyledHeader,
     HeaderLogoDisconnect,
     HeaderLogo, 
     StyledAvatarMenuContainer,
-    StyledAvatarPcture,
+    StyledLinkAvatarContainer,
+    StyledAvatarPicture,
     StyledUserMenuContainer,
     StyledPseudo
 } from './style.header.jsx';
@@ -26,7 +32,6 @@ function Header() {
     const pathname = useLocation().pathname;
     return (
         <StyledHeader>
-
             { pathname === '/login' ? (
                     <>
                     <Link to="/">
@@ -64,24 +69,36 @@ function Header() {
                         />
                     </Link>
                     <StyledAvatarMenuContainer>
-                        <Link to="/profil">
-                            <StyledAvatarPcture src={userData.avatar_slug} alt="avatar utilisateur"/>
-                        </Link>
+                        <StyledLinkAvatarContainer to="/profil">
+                            <StyledAvatarPicture src={userData.avatar_slug} alt="avatar utilisateur"/>
+                        </StyledLinkAvatarContainer>
                         <StyledUserMenuContainer>
-                            <StyledPseudo> {userData.pseudo} </StyledPseudo>
+                            <StyledPseudo> {userData.pseudo} </StyledPseudo>                            
                             <Link to="/profil">
-                                <StyledLittlePinkButton>Compte</StyledLittlePinkButton>
+                                { pathname === '/profil' ? (
+                                    <StyledLittleGreyButton>Compte</StyledLittleGreyButton>
+                                ) : (
+                                    <StyledLittlePinkButton>Compte</StyledLittlePinkButton>
+                                )}                                
                             </Link>
                             <Logout />
                         </StyledUserMenuContainer>
                     </StyledAvatarMenuContainer>
                     </>
                 ) : (
+                    <>
+                    <Link to="/">
+                        <HeaderLogoDisconnect
+                            src={completLogo}
+                            alt="Aller à la page d'accueil de Groupomania"
+                        />
+                    </Link>
                     <Link to="/login">
                         <StyledPinkButton>
                             Vous avez un compte ?
                         </StyledPinkButton>
                     </Link>
+                    </>
                 )
             }
             

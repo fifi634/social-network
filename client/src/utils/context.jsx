@@ -19,7 +19,7 @@ export const UidProvider = ({ children }) => {
         withCredentials: true
       })
         .then((res) => { setUid(res.data) })
-        .catch((err) => console.log('No token'))
+        .catch((err) => console.log('userId useContext : No token. ' + err))
       ;
     };
     fetchToken();

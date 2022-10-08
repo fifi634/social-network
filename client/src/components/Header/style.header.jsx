@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { colors } from '../../config';
 import logoAlone from '../../assets/image/icon-monochrome-white.png';
+import { Link } from 'react-router-dom';
 
 export const StyledHeader = styled.header`
     display: flex;
@@ -37,11 +38,30 @@ export const StyledAvatarMenuContainer = styled.div`
     }
 `;
 
-export const StyledAvatarPcture = styled.img`
-    border-radius: 50%;
+export const StyledLinkAvatarContainer = styled(Link)`
     margin: 10px;
     width: 120px;
-    height: 120px;
+    height: 120px;    
+`;
+
+
+export const StyledAvatarPicture = styled.img`
+    position: relative;
+    height: 100%;
+    width: 100%;
+    margin: auto;
+    object-fit: cover;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    &[alt] {
+        display: flex;
+        color: #ffffff;
+    }
+    @media screen and (max-width: 330px) {
+        display: none;
+    }
 `;
 
 export const StyledUserMenuContainer = styled.div`
@@ -54,6 +74,9 @@ export const StyledPseudo = styled.div`
     font-weight: 700;
     font-size: 24px;
     margin: 10px;
+    @media screen and (max-width: 330px) {
+        text-align: center;
+    } 
 `;
 
 export const HeaderLogoDisconnect = styled.img`

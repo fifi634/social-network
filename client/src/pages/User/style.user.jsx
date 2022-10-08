@@ -1,6 +1,24 @@
 import styled from 'styled-components';
 import { colors } from '../../config';
-// import colors from '../../utils/style/colors';
+
+
+
+export const StyledEmailTitle = styled.div`
+    width: 568px;
+    margin: 3px 0 3px 0;
+    font-weight: 600;
+    @media screen and (max-width: 370px) {
+        width: 200px;
+    }
+`;
+
+export const StyledEmailDisplay = styled.div`
+    width: 568px;
+    margin-bottom: 3px;
+    @media screen and (max-width: 370px) {
+        width: 200px;
+    }
+`;
 
 export const AvatarText = styled.div`
     display: flex;
@@ -20,6 +38,9 @@ export const StyledFilesName = styled.div`
 export const StyledAvatarImage = styled.img`
     width: 102px;
     height: 102px;
+    &:hover {
+        cursor: pointer;
+    }
 `;
 
 export const AvatarChoiceContainer = styled.div`
@@ -31,6 +52,9 @@ export const AvatarChoiceContainer = styled.div`
     @media screen and (max-width: 500px) {
         flex-direction: column;
     }
+    @media screen and (max-width: 370px) {
+        width: 200px;
+    }
 `;
 
 export const AvatarRadioContainer = styled.div`
@@ -40,10 +64,16 @@ export const AvatarRadioContainer = styled.div`
     @media screen and (max-width: 500px) {
         justify-content: center;
     }
+    @media screen and (max-width: 370px) {
+        width: 160px;
+    }
 `;
 
 export const AvatarInput = styled.input`
     margin-right: 10px;
+    &:hover {
+        cursor: pointer;
+    }
 `;
 
 export const CreateButtonContainer = styled.div`
@@ -76,19 +106,41 @@ export const StyledProfilControlContainer = styled.div`
         width: auto;
         align-items: center;
     }
+    @media screen and (max-width: 370px) {
+        width: 200px;
+    }
 `;
 
 export const StyledProfilLinkContainer = styled.div`
     display: flex;
     align-items: center;
+    @media screen and (max-width: 800px) {
+        margin: 20px 0;
+    }
+    @media screen and (max-width: 370px) {
+        flex-direction: column;        
+    }
 `;
 
 export const StyledDisconnectLink = styled.a`
     margin: 0 20px;
     color: ${colors.tertiary};
+    &:hover {
+        cursor: pointer;
+        letter-spacing: 1px;
+        transition: 0.3s
+    }
 `;
 
 export const StyledDeleteLink = styled.a`
     margin: 0 20px;
     color: ${colors.primary};
+    &:hover {
+        cursor: pointer;
+        letter-spacing: 1px;
+        transition: 0.3s
+    }
+    @media screen and (max-width: 370px) {
+        margin: 40px 0;
+    }
 `;
