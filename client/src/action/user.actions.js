@@ -56,7 +56,7 @@ export const uploadDefaultAvatar = (avatarSlug, userId) => {
             data: { avatar_slug: avatarSlug },
             withCredentials: true
         })
-            .then(res => { console.log('envoi avatar-slug sans fichier: ', avatarSlug); dispatch({ type: UPLOAD_DEFAULT_AVATAR, playload: avatarSlug }) })
+            .then(res =>  dispatch({ type: UPLOAD_DEFAULT_AVATAR, playload: avatarSlug }))
             .catch(err => console.log('Update default avatar failed. ' + err))
         ;
     }

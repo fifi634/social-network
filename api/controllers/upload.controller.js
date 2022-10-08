@@ -14,7 +14,7 @@ exports.uploadProfil = (req, res, next) => {
             } else {
 
                 // If not default avatar and if it's file exist, erase it
-                if (fs.existsSync(oldFilePath) && oldFilePath.includes('avatar') == false) {
+                if (oldFilePath.includes('avatar') === false && fs.existsSync(oldFilePath)) {
                     fs.unlink(
                         oldFilePath,
                         (err => err ? console.log('Avatar delete error (from upload controller). ', err) : console.log('Old avatar deleted (from upload controller)'))

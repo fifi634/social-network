@@ -28,6 +28,7 @@ function Header() {
     const uid = useContext(UidContext);
     const userData = useSelector(state => state.userReducer);
 
+
     // Get path of url
     const pathname = useLocation().pathname;
     return (

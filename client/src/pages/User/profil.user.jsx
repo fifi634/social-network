@@ -102,41 +102,41 @@ function Profil() {
             checkPasswordError.innerHTML = "Les mots de passe ne correspondent pas.";
         } else {
 
-            // // If picture file is in upload, send it to server by Redux
-            // if (file !== null) await uploadFile(file);
+            // If picture file is in upload, send it to server by Redux
+            if (file !== null) uploadFile(file);
 
             // If no picture file in upload, send default avatar to server by Redux
-            if (file === null) await defaultAvatar(inputAvatar);
+            if (file === null) defaultAvatar(inputAvatar);
 
-            // //Fetch 
-            // await axios({
-            //     method: 'patch',
-            //     url: `${fetchUrl}api/user/${uid}`,
-            //     withCredentials: true,
-            //     data: {
-            //         password: inputPassword,
-            //         pseudo: inputPseudo,
-            //         // avatar_slug: 'uploads/profil/' + inputAvatar + '-avatar.svg',
-            //     }
-            // })
-            //     .then((res) => {                    
-            //         // Sgnup errors 
-            //         if (res.data.errors) {
-            //             if (res.data.message === 'Password not accepted') {                   
-            //                 passwordError.innerHTML = res.data.errors;
-            //             }
-            //             // avatarError.innerHTML = res.data.error.avatar;
-            //             if (res.data.errors.pseudo) {
-            //                 pseudoError.innerHTML = res.data.errors.pseudo;
-            //             }                        
-            //         } else {
-            //             setFormSubmit(true);
-            //         }           
-            //     })
-            //     .catch(err => {
-            //         console.log('fetch login error', err);
-            //     })
-            // ;            
+            //Fetch 
+            axios({
+                method: 'patch',
+                url: `${fetchUrl}api/user/${uid}`,
+                withCredentials: true,
+                data: {
+                    password: inputPassword,
+                    pseudo: inputPseudo,
+                    // avatar_slug: userData.avatar_slug,
+                }
+            })
+                .then((res) => {                    
+                    // Sgnup errors 
+                    if (res.data.errors) {
+                        if (res.data.message === 'Password not accepted') {                   
+                            passwordError.innerHTML = res.data.errors;
+                        }
+                        // avatarError.innerHTML = res.data.error.avatar;
+                        if (res.data.errors.pseudo) {
+                            pseudoError.innerHTML = res.data.errors.pseudo;
+                        }                        
+                    } else {
+                        setFormSubmit(true);
+                    }           
+                })
+                .catch(err => {
+                    console.log('fetch login error', err);
+                })
+            ;            
         }      
     };
 
@@ -248,7 +248,7 @@ function Profil() {
                                         name="file"
                                         accept=".jpg, .jpeg, .png, .webp"
                                         onChange={(e) => {
-                                            uploadFile(e.target.files[0]);
+                                            // uploadFile(e.target.files[0]);
                                             setFile(e.target.files[0]);
                                         }}
                                         onClick={() => {

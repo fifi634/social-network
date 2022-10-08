@@ -247,7 +247,6 @@ function Signup() {
                                     <label htmlFor="download-files">
                                         <StyledInputFile
                                             type="file"
-                                            id="download-files"
                                             name="file"
                                             accept=".jpg, .jpeg, .png, .webp"
                                             onChange={(e) => setFile(e.target.files[0])}
