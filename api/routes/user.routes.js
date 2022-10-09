@@ -19,8 +19,8 @@ router.get('/logout', authController.logout);
 // CRUD end-point
 router.get('/', requireAuth, userController.getAllUsers);
 router.get('/:id', requireAuth, userController.userInfo);
-router.patch('/:id', requireAuth, userController.updateUser);
-// router.patch('/', requireAuth, userController.updateUser);
+// router.patch('/:id', requireAuth, userController.updateUser);
+router.patch('/', requireAuth, userController.updateUser);
 // router.delete('/:id', requireAuth, userController.deleteUser);
 router.delete('/', requireAuth, userController.deleteUser);
 

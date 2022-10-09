@@ -7,6 +7,7 @@ const UserModel = require('../models/user.model');
 const MIME_TYPES = {
     'image/jpg': 'jpg',
     'image/jpeg': 'jpg',
+    'image/JPG' : 'jpg',
     'image/png': 'png',
     'image/webp': 'webp',
     'image/gif': 'gif'
@@ -33,6 +34,7 @@ const upload = multer({
         if (
             file.mimetype !== 'image/png' &&
             file.mimetype !== 'image/jpg' &&
+            file.mimetype !== 'image/JPG' &&
             file.mimetype !== 'image/jpeg' &&
             file.mimetype !== 'image/webp' &&
             file.mimetype !== 'image/gif'

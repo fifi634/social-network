@@ -6,6 +6,7 @@ const { uploadErrors } = require('../utils/errors.utils');
 const MIME_TYPES = {
     'image/jpg': 'jpg',
     'image/jpeg': 'jpg',
+    'image/JPG' : 'jpg',
     'image/png': 'png',
     'image/webp': 'webp'
 };
@@ -31,6 +32,7 @@ const upload = multer({
         if (
             file.mimetype !== 'image/png' &&
             file.mimetype !== 'image/jpg' &&
+            file.mimetype !== 'image/JPG' &&
             file.mimetype !== 'image/jpeg' &&
             file.mimetype !== 'image/webp'
         ) {

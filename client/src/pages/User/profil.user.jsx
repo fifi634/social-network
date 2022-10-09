@@ -50,18 +50,18 @@ function Profil() {
     };
 
 
-    // Form data storage
-    const [formSubmit, setFormSubmit] = useState(false);
-    const [inputPassword, setInputPassword] = useState('');
-    const [controlPassword, setControlPassword] = useState('');
-    const [inputPseudo, setInputPseudo] = useState('');
-    const [inputAvatar, setInputAvatar] = useState('Homme');
     // Get user id(uid) by useContext
     const uid = useContext(UidContext);
     // Redux upload file
     const [file, setFile] = useState(null);
     const dispatch = useDispatch();
     const userData = useSelector(state => state.userReducer);
+    // Form data storage
+    const [formSubmit, setFormSubmit] = useState(false);
+    const [inputPassword, setInputPassword] = useState();
+    const [controlPassword, setControlPassword] = useState();
+    const [inputPseudo, setInputPseudo] = useState(userData.pseudo);
+    const [inputAvatar, setInputAvatar] = useState('Homme');
 
 
     // Upload avatar file by Redux
@@ -70,14 +70,14 @@ function Profil() {
         data.append('name', userData._id);
         data.append('userId', userData._id);
         data.append('file', file);
-        await dispatch(uploadPicture(data, userData._id));    // uploadPicture : Redux function in src/action/user.action.js
+        dispatch(uploadPicture(data, userData._id));    // uploadPicture : Redux function in src/action/user.action.js
     };
 
 
     // Upload default avatar by Redux
     function defaultAvatar(inputAvatar) {
         const avatarSlug = `uploads/profil/${inputAvatar}-avatar.svg`;
-        dispatch(uploadDefaultAvatar(avatarSlug, userData._id));
+        dispatch(uploadDefaultAvatar(avatarSlug));
     };
 
 
@@ -108,15 +108,14 @@ function Profil() {
             // If no picture file in upload, send default avatar to server by Redux
             if (file === null) defaultAvatar(inputAvatar);
 
-            //Fetch 
+            // Upload user information 
             axios({
                 method: 'patch',
-                url: `${fetchUrl}api/user/${uid}`,
+                url: `${fetchUrl}api/user/`,
                 withCredentials: true,
                 data: {
-                    password: inputPassword,
-                    pseudo: inputPseudo,
-                    // avatar_slug: userData.avatar_slug,
+                    // password: inputPassword,
+                    // pseudo: inputPseudo,
                 }
             })
                 .then((res) => {                    

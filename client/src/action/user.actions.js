@@ -48,11 +48,11 @@ export const uploadPicture = (data, userId) => {
 
 
 // Change avatar to default image
-export const uploadDefaultAvatar = (avatarSlug, userId) => {
+export const uploadDefaultAvatar = (avatarSlug) => {
     return(dispatch) => {
         return axios({
             method: 'patch',
-            url: fetchUrl + 'api/user/' + userId,
+            url: fetchUrl + 'api/user/',
             data: { avatar_slug: avatarSlug },
             withCredentials: true
         })
