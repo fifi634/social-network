@@ -3,7 +3,7 @@ import axios from 'axios';
 import { fetchUrl } from '../../config';
 import Login from '../Login/index.login';
 import { useDispatch, useSelector } from 'react-redux';
-import { uploadPicture } from '../../action/user.actions';
+import { uploadDefaultAvatar, uploadPicture } from '../../action/user.actions';
 
 // Import images
 import male_avatar from '../../assets/image/Homme-avatar.svg';
@@ -52,7 +52,7 @@ function Signup() {
     const [inputPseudo, setInputPseudo] = useState('');
     const [inputAvatar, setInputAvatar] = useState('Homme');
     // Redux upload file
-    const [file, setFile] = useState();
+    const [file, setFile] = useState(null);
     const dispatch = useDispatch();
     const userData = useSelector(state => state.userReducer);
 
@@ -62,11 +62,17 @@ function Signup() {
         e.preventDefault();
 
         // Upload file by Redux
-        const data = new FormData();
-        data.append('name', userData._id);
-        data.append('userId', userData._id);
-        data.append('file', file);
-        dispatch(uploadPicture(data, userData._id));    // uploadPicture : Redux function in src/action/user.action.js
+        if (file !== null) {
+            const data = new FormData();
+            data.append('name', userData._id);
+            data.append('userId', userData._id);
+            data.append('file', file);
+            dispatch(uploadPicture(data, userData._id));    // uploadPicture : Redux function in src/action/user.action.js
+        } else {
+            const avatarSlug = `uploads/profil/${inputAvatar}-avatar.svg`;
+            dispatch(uploadDefaultAvatar(avatarSlug));
+        };
+
 
         // Link for display errors
         const emailError = document.querySelector('.email.error');
@@ -106,7 +112,6 @@ function Signup() {
                     email: inputEmail,
                     password: inputPassword,
                     pseudo: inputPseudo,
-                    // avatar_slug: inputAvatar,
                 }
             })
                 .then((res) => {
