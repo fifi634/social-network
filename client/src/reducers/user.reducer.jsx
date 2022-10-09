@@ -12,13 +12,13 @@ export default function userReducer(state = initialState, action) {
         case UPLOAD_PICTURE:
             return { 
                 ...state,   // Send old state for not crush it
-                avatar_slug: action.playload, // update new element to state
+                avatar_slug: action.playload // update new element to state
             }
         ;
         case UPLOAD_DEFAULT_AVATAR:
                 return {
                     ...state,
-                    avatar_slug: action.playload,
+                    avatar_slug: action.playload
                 }
             ;
         default:

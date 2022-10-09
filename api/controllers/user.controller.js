@@ -28,7 +28,7 @@ exports.userInfo = (req, res) => {
 exports.updateUser = async (req, res) => {             
         UserModel.findOne({ _id: req.auth.userId })
             .then(async user => {
-                console.log('coucou from suser controller');
+                console.log('coucou from user controller');
                 if (user._id != req.auth.userId) {                    
                     return res.status(401).json({ message: 'Not authorized'});
                 } else {
@@ -49,26 +49,25 @@ exports.updateUser = async (req, res) => {
                             {_id: req.auth.userId}, 
                             {avatar_slug: req.body.avatar_slug},
                             (err, data) => {
-                                if (err) return res.status(500).send('Link avatar error : ' + err );                                
+                                if (err) return res.status(500).send('Link avatar error : ' + err );                              
                             }
                         )
                     ;
-                            
-                    // // Bcrypt hash password
-                    // let hashedPassword = '';
-                    
-                    // await bcrypt.hash(req.body.password, 10, (err, hash) => {
-                    //     if (err) console.log('hash password failed. ', err);
-                    //     else hashedPassword = hash;
-                    // });
-                    // console.log('hashed : ' + hashedPassword);
+                        
+                    // Bcrypt hash password
+                    if (req.body.password !== null ) {                        
+                        await bcrypt.hash(req.body.password, 10, (err, hash) => {
+                            if (err) console.log('hash password failed. ', err);
+                            else UserModel.updateOne({_id: req.auth.userId}, {password: hash});
+                        });
+                    };
+
                     // Upload user info
                     UserModel.updateOne(
                         {_id: req.auth.userId},
                         { 
-                            // email: req.body.email,
-                            // password: hashedPassword,
-                            // pseudo: req.body.pseudo,
+                            email: req.body.email,
+                            pseudo: req.body.pseudo,
                         },
                         (err, data) => {
                             if (!err) {

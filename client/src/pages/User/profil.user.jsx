@@ -4,7 +4,7 @@ import { fetchUrl } from '../../config';
 import Login from '../Login/index.login';
 import { UidContext } from '../../utils/context';
 import { useDispatch, useSelector } from 'react-redux';
-import { uploadPicture, uploadDefaultAvatar } from '../../action/user.actions';
+import { uploadPicture, uploadDefaultAvatar, updateProfil } from '../../action/user.actions';
 
 // Import images
 import male_avatar from '../../assets/image/Homme-avatar.svg';
@@ -24,7 +24,7 @@ import {
 } from '../../utils/style/StyledGlobalForm';
 import {
     StyledEmailDisplay,
-    StyledEmailTitle,
+    // StyledEmailTitle,
     AvatarText,
     StyledFilesName,
     StyledAvatarImage,
@@ -58,8 +58,9 @@ function Profil() {
     const userData = useSelector(state => state.userReducer);
     // Form data storage
     const [formSubmit, setFormSubmit] = useState(false);
-    const [inputPassword, setInputPassword] = useState();
-    const [controlPassword, setControlPassword] = useState();
+    const [inputEmail, setInputEmail] = useState(userData.email);
+    const [inputPassword, setInputPassword] = useState(null);
+    const [controlPassword, setControlPassword] = useState(null);
     const [inputPseudo, setInputPseudo] = useState(userData.pseudo);
     const [inputAvatar, setInputAvatar] = useState('Homme');
 
@@ -86,11 +87,13 @@ function Profil() {
         e.preventDefault();
 
         // Link for display errors
+        const emailError = document.querySelector('.email.error');
         const passwordError = document.querySelector('.password.error');
         const checkPasswordError = document.querySelector('.check-password.error');
         const pseudoError = document.querySelector('.pseudo.error');
         const avatarError = document.querySelector('.avatar.error');
         // Reset display errors
+        emailError.innerHTML = '';
         passwordError.innerHTML = '';
         checkPasswordError.innerHTML = '';
         pseudoError.innerHTML = '';
@@ -108,34 +111,50 @@ function Profil() {
             // If no picture file in upload, send default avatar to server by Redux
             if (file === null) defaultAvatar(inputAvatar);
 
-            // Upload user information 
-            axios({
-                method: 'patch',
-                url: `${fetchUrl}api/user/`,
-                withCredentials: true,
-                data: {
-                    // password: inputPassword,
-                    // pseudo: inputPseudo,
-                }
-            })
-                .then((res) => {                    
-                    // Sgnup errors 
-                    if (res.data.errors) {
-                        if (res.data.message === 'Password not accepted') {                   
-                            passwordError.innerHTML = res.data.errors;
-                        }
-                        // avatarError.innerHTML = res.data.error.avatar;
-                        if (res.data.errors.pseudo) {
-                            pseudoError.innerHTML = res.data.errors.pseudo;
-                        }                        
-                    } else {
-                        setFormSubmit(true);
-                    }           
-                })
-                .catch(err => {
-                    console.log('fetch login error', err);
-                })
-            ;            
+
+            // Update user info
+            dispatch(updateProfil(inputEmail, inputPassword, inputPseudo, uid));
+            // if (Retour de fetch : res.data.errors) {
+            //     if (res.data.message === 'Password not accepted') {                   
+            //         passwordError.innerHTML = res.data.errors;
+            //     }
+            //     // avatarError.innerHTML = res.data.error.avatar;
+            //     if (res.data.errors.pseudo) {
+            //         pseudoError.innerHTML = res.data.errors.pseudo;
+            //     }                 
+            // }
+            setFormSubmit(true);
+
+
+
+            // // Upload user information 
+            // axios({
+            //     method: 'patch',
+            //     url: `${fetchUrl}api/user/`,
+            //     withCredentials: true,
+            //     data: {
+            //         // password: inputPassword,
+            //         // pseudo: inputPseudo,
+            //     }
+            // })
+            //     .then((res) => {                    
+            //         // Sgnup errors 
+            //         if (res.data.errors) {
+            //             if (res.data.message === 'Password not accepted') {                   
+            //                 passwordError.innerHTML = res.data.errors;
+            //             }
+            //             // avatarError.innerHTML = res.data.error.avatar;
+            //             if (res.data.errors.pseudo) {
+            //                 pseudoError.innerHTML = res.data.errors.pseudo;
+            //             }                        
+            //         } else {
+            //             setFormSubmit(true);
+            //         }           
+            //     })
+            //     .catch(err => {
+            //         console.log('fetch login error', err);
+            //     })
+            // ;            
         }      
     };
 
@@ -146,16 +165,22 @@ function Profil() {
         {uid ? (
             formSubmit ? (
                 <> 
-                <Login />
-                <StyledSignupSuccessH2>Votre compte a été mis à jour, veuillez vous reconnecter.</StyledSignupSuccessH2>
+                    <Login />
+                    <StyledSignupSuccessH2>Votre compte a été mis à jour, veuillez vous reconnecter.</StyledSignupSuccessH2>
                 </>
             ) : (
                 <StyledContainer>
                     <FormContainer action="" onSubmit={handleProfil}>
                         <StyledH1>Compte</StyledH1>
                         <InputContainer>
-                            <StyledEmailTitle htmlFor="email">Votre e-mail :</StyledEmailTitle>
-                            <StyledEmailDisplay>{userData.email}</StyledEmailDisplay>                                
+                            <StyledLabel htmlFor="email">Votre e-mail :</StyledLabel>                             
+                            <StyledInput
+                                type="text"
+                                id="email"
+                                defaultValue={inputEmail}
+                                onChange={(e) => setInputEmail(e.target.value)}
+                            />
+                            <StyledError className='email error'></StyledError>                              
                         </InputContainer>
                         <InputContainer>
                             <StyledLabel htmlFor="password">Nouveau mot de passe :</StyledLabel>
@@ -165,7 +190,7 @@ function Profil() {
                             <StyledInput 
                                 type="password" 
                                 id="password" 
-                                value={inputPassword}
+                                defaultValue={inputPassword}
                                 onChange={(e) => setInputPassword(e.target.value)}
                             /> 
                             <StyledError className='password error'></StyledError>
@@ -177,7 +202,7 @@ function Profil() {
                             <StyledInput
                                 type="password"
                                 id="confirm-password"
-                                value={controlPassword}
+                                defaultValue={controlPassword}
                                 onChange={(e) => setControlPassword(e.target.value)}
                             />
                             <StyledError className='check-password error'></StyledError>
@@ -192,7 +217,7 @@ function Profil() {
                             <StyledInput
                                 type="text"
                                 id="pseudo"
-                                value={inputPseudo}
+                                defaultValue={inputPseudo}
                                 onChange={(e) => setInputPseudo(e.target.value)}
                             />
                             <StyledError className='pseudo error'></StyledError>
@@ -246,10 +271,7 @@ function Profil() {
                                         type="file"
                                         name="file"
                                         accept=".jpg, .jpeg, .png, .webp"
-                                        onChange={(e) => {
-                                            // uploadFile(e.target.files[0]);
-                                            setFile(e.target.files[0]);
-                                        }}
+                                        onChange={(e) => setFile(e.target.files[0])}
                                         onClick={() => {
                                             setInputAvatar('Image utilisateur');
                                             selectRadio();

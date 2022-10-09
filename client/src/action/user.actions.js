@@ -6,6 +6,8 @@ import { fetchUrl } from "../config";
 export const GET_USER = 'GET_USER';
 export const UPLOAD_PICTURE = 'UPLOAD_PICTURE';
 export const UPLOAD_DEFAULT_AVATAR = 'UPLOAD_DEFAULT_AVATAR';
+// export const UPDATE_PROFIL = 'UPDATE_PROFIL';
+
 
 // Get userobject
 export const getUser = (uid) => {
@@ -23,7 +25,8 @@ export const getUser = (uid) => {
 
 // Upload File
 export const uploadPicture = (data, userId) => {
-    return async (dispatch) => {  
+    console.log('dispatch picture');
+    return (dispatch) => {  
         return axios({
             method: 'post',
             url: fetchUrl + 'api/user/upload',
@@ -32,7 +35,7 @@ export const uploadPicture = (data, userId) => {
         })
             .then (async (res) => {          
                 // Get server file uploaded
-                return await axios
+                return axios
                     .get(fetchUrl + `api/user/${userId}`, {withCredentials: true})
                     .then(res => {
                         // To upload picture slug in Redux store
@@ -49,6 +52,7 @@ export const uploadPicture = (data, userId) => {
 
 // Change avatar to default image
 export const uploadDefaultAvatar = (avatarSlug) => {
+    console.log('dispatch avatar');
     return(dispatch) => {
         return axios({
             method: 'patch',
@@ -61,3 +65,39 @@ export const uploadDefaultAvatar = (avatarSlug) => {
         ;
     }
 };
+
+
+// Update user info
+export const updateProfil = (inputEmail, inputPassword, inputPseudo, uid) => {
+    console.log('dispatch profil');
+    return (dispatch) => {
+        return axios({
+            method: 'patch',
+            url: `${fetchUrl}api/user/`,
+            withCredentials: true,
+            data: {
+                email: inputEmail,
+                password: inputPassword,
+                pseudo: inputPseudo,
+            }
+        })
+            .then((res) => {   
+                console.log(res.data.message);
+                return axios
+                    .get(`${fetchUrl}api/user/${uid}`, {withCredentials: true})
+                    .then((res) => {
+                        dispatch({ type: GET_USER, playload: res.data });
+                    })
+                    .catch((err) => console.log('Fetch Redux getUser failed. ' + err))
+
+
+                // // Sgnup errors 
+                // if (res.data.errors) return res.data.errors;
+         
+            })
+            .catch(err => {
+                console.log('Update user info failed. ', err);
+            })
+        ;            
+    }
+}
