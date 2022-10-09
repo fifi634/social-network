@@ -6,7 +6,6 @@ import { fetchUrl } from "../config";
 export const GET_USER = 'GET_USER';
 export const UPLOAD_PICTURE = 'UPLOAD_PICTURE';
 export const UPLOAD_DEFAULT_AVATAR = 'UPLOAD_DEFAULT_AVATAR';
-// export const UPDATE_PROFIL = 'UPDATE_PROFIL';
 
 
 // Get userobject
@@ -25,7 +24,6 @@ export const getUser = (uid) => {
 
 // Upload File
 export const uploadPicture = (data, userId) => {
-    console.log('dispatch picture');
     return (dispatch) => {  
         return axios({
             method: 'post',
@@ -52,7 +50,6 @@ export const uploadPicture = (data, userId) => {
 
 // Change avatar to default image
 export const uploadDefaultAvatar = (avatarSlug) => {
-    console.log('dispatch avatar');
     return(dispatch) => {
         return axios({
             method: 'patch',
@@ -69,7 +66,6 @@ export const uploadDefaultAvatar = (avatarSlug) => {
 
 // Update user info
 export const updateProfil = (inputEmail, inputPassword, inputPseudo, uid) => {
-    console.log('dispatch profil');
     return (dispatch) => {
         return axios({
             method: 'patch',

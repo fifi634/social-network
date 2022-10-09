@@ -1,6 +1,4 @@
 import React, { useState, useContext } from 'react';
-import axios from 'axios';
-import { fetchUrl } from '../../config';
 import Login from '../Login/index.login';
 import { UidContext } from '../../utils/context';
 import { useDispatch, useSelector } from 'react-redux';
@@ -23,8 +21,6 @@ import {
     StyledInputFile
 } from '../../utils/style/StyledGlobalForm';
 import {
-    StyledEmailDisplay,
-    // StyledEmailTitle,
     AvatarText,
     StyledFilesName,
     StyledAvatarImage,
@@ -66,7 +62,7 @@ function Profil() {
 
 
     // Upload avatar file by Redux
-    async function uploadFile(file) {        
+    function uploadFile(file) {        
         const data = new FormData();
         data.append('name', userData._id);
         data.append('userId', userData._id);
@@ -83,7 +79,7 @@ function Profil() {
 
 
     // When form is submit
-    const handleProfil = async (e) => {
+    const handleProfil = (e) => {
         e.preventDefault();
 
         // Link for display errors
@@ -111,50 +107,9 @@ function Profil() {
             // If no picture file in upload, send default avatar to server by Redux
             if (file === null) defaultAvatar(inputAvatar);
 
-
             // Update user info
             dispatch(updateProfil(inputEmail, inputPassword, inputPseudo, uid));
-            // if (Retour de fetch : res.data.errors) {
-            //     if (res.data.message === 'Password not accepted') {                   
-            //         passwordError.innerHTML = res.data.errors;
-            //     }
-            //     // avatarError.innerHTML = res.data.error.avatar;
-            //     if (res.data.errors.pseudo) {
-            //         pseudoError.innerHTML = res.data.errors.pseudo;
-            //     }                 
-            // }
-            setFormSubmit(true);
-
-
-
-            // // Upload user information 
-            // axios({
-            //     method: 'patch',
-            //     url: `${fetchUrl}api/user/`,
-            //     withCredentials: true,
-            //     data: {
-            //         // password: inputPassword,
-            //         // pseudo: inputPseudo,
-            //     }
-            // })
-            //     .then((res) => {                    
-            //         // Sgnup errors 
-            //         if (res.data.errors) {
-            //             if (res.data.message === 'Password not accepted') {                   
-            //                 passwordError.innerHTML = res.data.errors;
-            //             }
-            //             // avatarError.innerHTML = res.data.error.avatar;
-            //             if (res.data.errors.pseudo) {
-            //                 pseudoError.innerHTML = res.data.errors.pseudo;
-            //             }                        
-            //         } else {
-            //             setFormSubmit(true);
-            //         }           
-            //     })
-            //     .catch(err => {
-            //         console.log('fetch login error', err);
-            //     })
-            // ;            
+            setFormSubmit(true);                
         }      
     };
 

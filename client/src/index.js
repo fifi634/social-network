@@ -26,11 +26,7 @@ import rootReducer from './reducers/index.reducer';
 
 // Dev Tools
 import { composeWithDevTools } from 'redux-devtools-extension';
-import logger from 'redux-logger';
-
-const store = createStore(
-  rootReducer, composeWithDevTools(applyMiddleware(thunk, logger))
-);
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 /****** */
 

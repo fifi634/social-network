@@ -3,23 +3,6 @@ import { colors } from '../../config';
 
 
 
-// export const StyledEmailTitle = styled.div`
-//     width: 568px;
-//     margin: 3px 0 3px 0;
-//     font-weight: 600;
-//     @media screen and (max-width: 370px) {
-//         width: 200px;
-//     }
-// `;
-
-export const StyledEmailDisplay = styled.p`
-    width: 568px;
-    margin-bottom: 3px;
-    @media screen and (max-width: 370px) {
-        width: 200px;
-    }
-`;
-
 export const AvatarText = styled.div`
     display: flex;
     @media screen and (max-width: 800px) {
