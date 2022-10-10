@@ -7,17 +7,40 @@ require('dotenv').config({path:'../config/.env'});
 
 // Password hash, create user object and save it into serveur 
 exports.signup = async (req, res) => {
-    const {pseudo, email, password} = req.body;
+    
+    if (!req.file) {
+        const {pseudo, email, password, avatar_slug} = req.body;
 
-    try {
-        const user = await UserModel.create({pseudo, email, password});
-        const userId = user._id;
-        res.status(201).json({ message: 'User created !', userId: user._id});
-        console.log(userId + ' created !');  
-    } catch (err) {
-        const errors = signupErrors(err);
-        res.status(200).json({ message: 'Create user failed', errors, err });
+        try {
+            const user = await UserModel.create({pseudo, email, password, avatar_slug});
+            const userId = user._id;
+            res.status(201).json({ message: 'User created !', userId: user._id});
+            console.log(userId + ' created !');  
+        } catch (err) {
+            const errors = signupErrors(err);
+            res.status(200).json({ message: 'Create user failed', errors, err });
+        }
+    } else {
+        const newUser = JSON.parse(req.body.avatarFile);
+        
+
+        try {
+            const user = await UserModel.create({
+                pseudo: req.data.pseudo, 
+                email: req.data.email, 
+                password: req.data.password, 
+                // ...newUser,
+                avatar_slug: 'uploads/profil/' + req.file.filename
+            });
+            const userId = user._id;
+            res.status(201).json({ message: 'User created !', userId: user._id});
+            console.log(userId + ' created !');  
+        } catch (err) {
+            const errors = signupErrors(err);
+            res.status(200).json({ message: 'Create user failed', errors, err });
+        }
     }
+
 };
 
 
@@ -42,6 +65,7 @@ exports.login = async (req, res, next) => {
         res.status(401).json({ errors });
     };
 };
+
 
 // Erase jwt cookie
 exports.logout = (req, res) => {
