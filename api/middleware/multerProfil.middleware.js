@@ -6,7 +6,6 @@ const { uploadErrors } = require('../utils/errors.utils');
 const MIME_TYPES = {
     'image/jpg': 'jpg',
     'image/jpeg': 'jpg',
-    'image/JPG' : 'jpg',
     'image/png': 'png',
     'image/webp': 'webp'
 };
@@ -18,8 +17,9 @@ const storage = multer.diskStorage({
         callback(null, '../client/public/uploads/profil/');
     },
     filename: (req, file, callback) => {
+        const name = file.originalname.split(' ').join('_');
         const extension = MIME_TYPES[file.mimetype];
-        callback(null, req.auth.userId + Date.now() + '.' + extension);
+        callback(null, name + Date.now() + '.' + extension);
     }
 });
 
@@ -32,7 +32,6 @@ const upload = multer({
         if (
             file.mimetype !== 'image/png' &&
             file.mimetype !== 'image/jpg' &&
-            file.mimetype !== 'image/JPG' &&
             file.mimetype !== 'image/jpeg' &&
             file.mimetype !== 'image/webp'
         ) {
