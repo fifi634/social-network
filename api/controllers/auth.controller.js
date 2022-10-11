@@ -2,12 +2,14 @@ const UserModel = require('../models/user.model');
 const jwt = require('jsonwebtoken');
 const {signupErrors, loginErrors} = require('../utils/errors.utils');
 require('dotenv').config({path:'../config/.env'});
+const createAvatarSlug = require('./upload.controller');
 
 
 
 // Password hash, create user object and save it into serveur 
 exports.signup = async (req, res) => {
-    
+    console.log('controller ', req.file)
+    // If no avatar file sended
     if (!req.file) {
         const {pseudo, email, password, avatar_slug} = req.body;
 
@@ -18,26 +20,28 @@ exports.signup = async (req, res) => {
             console.log(userId + ' created !');  
         } catch (err) {
             const errors = signupErrors(err);
-            res.status(200).json({ message: 'Create user failed', errors, err });
+            res.status(200).json({ message: 'Create user with default avatar failed', errors });
         }
-    } else {
-        const newUser = JSON.parse(req.body.avatarFile);
-        
 
+    // If avatar file sended
+    } else {
+        // const newUser = JSON.parse(req.body.avatarFile);       
+        
         try {
             const user = await UserModel.create({
-                pseudo: req.data.pseudo, 
-                email: req.data.email, 
-                password: req.data.password, 
+                pseudo: req.body.pseudo, 
+                email: req.body.email, 
+                password: req.body.password, 
                 // ...newUser,
                 avatar_slug: 'uploads/profil/' + req.file.filename
             });
             const userId = user._id;
-            res.status(201).json({ message: 'User created !', userId: user._id});
-            console.log(userId + ' created !');  
+            console.log(userId + ' created !');
+            res.status(201).json({ message: 'User created !', userId: user._id});  
         } catch (err) {
             const errors = signupErrors(err);
-            res.status(200).json({ message: 'Create user failed', errors, err });
+            console.log('Create user with uploaded file failed. ', err);
+            res.status(200).json({ message: 'Create user with uploaded file failed', errors });
         }
     }
 

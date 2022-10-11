@@ -19,13 +19,13 @@ export const StyledH1 = styled.h1`
 `;
 
 export const InputContainer = styled.div`
-    margin: 24px 0 0px 0;
+    margin: 24px 0 0 0;
     display: flex;    
     flex-direction: column;
     @media screen and (max-width: 800px) {
-        width: 500px;
+        width: 450px;
     }
-    @media screen and (max-width: 480px) {
+    @media screen and (max-width: 500px) {
         width: 350px;
     }
     @media screen and (max-width: 370px) {

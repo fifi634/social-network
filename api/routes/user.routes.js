@@ -26,7 +26,8 @@ router.delete('/', requireAuth, userController.deleteUser);
 
 
 // files upload
-router.post('/upload', requireAuth, multerProfile , uploadController.uploadProfil),
+router.post('/upload-profil', requireAuth, multerProfile , uploadController.uploadProfil);
+// router.post('/upload-create-user', multerProfile , uploadController.createAvatarSlug);
 
 
 module.exports = router;

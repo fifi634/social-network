@@ -26,9 +26,9 @@ exports.userInfo = (req, res) => {
 
 
 /* Find user by id and modify it */
-exports.updateUser = async (req, res) => {             
+exports.updateUser = (req, res) => {             
     UserModel.findOne({ _id: req.auth.userId })
-        .then(async user => {
+        .then(user => {
             if (user._id != req.auth.userId) {                    
                 return res.status(401).json({ message: 'Not authorized'});
             } else {

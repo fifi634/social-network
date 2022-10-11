@@ -1,12 +1,10 @@
 import styled from 'styled-components';
 import { colors } from '../../config';
 import logoAlone from '../../assets/image/icon-monochrome-white.png';
+import completLogo from '../../assets/image/icon-left-font-monochrome-white-900x220.png';
 import { Link } from 'react-router-dom';
 
 export const StyledHeader = styled.header`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     max-width: 1440px;
     height: 152px;
     background: ${colors.tertiary};
@@ -15,25 +13,63 @@ export const StyledHeader = styled.header`
     @media screen and (min-width: 1440px) {
         box-shadow: unset;
     }
-    @media screen and (max-width: 500px) {
+    @media screen and (max-width: 560px) {
         height: auto;
     }
 `;
 
-export const HeaderLogo = styled.img`
+export const StyledDisconnectContainer = styled.div`
     display: flex;
-    width: 333px;
-    @media screen and (max-width: 800px) {
-        max-width: 200px;
+    justify-content: space-between;
+    height: 152px;
+    align-items: center;
+`;
+
+export const StyledLogoMenuContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    @media screen and (max-width: 920px) {
+        flex-direction: row;
     }
-    @media screen and (max-width: 550px) {
+`;
+
+export const StyledConnectContainer = styled.div `
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @media screen and (max-width: 560px) {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+`;
+
+export const HeaderLogo = styled.img`
+    max-width: 300px;
+    content: url(${completLogo});
+    @media screen and (max-width:920px) {
+        content: url(${logoAlone});
+        max-height: 80px;
+    }
+    @media screen and (max-width: 560px) {
         display: none;
+    }
+`;
+
+export const StyledMenuContainer = styled.div`
+    display: flex;
+    align-items: center;
+    @media screen and (max-width: 920px) {
+        flex-direction: column;   
+    }
+    @media screen and (max-width: 560px) {
+        display: flex;
+        flex-direction: row;
     }
 `;
 
 export const StyledAvatarMenuContainer = styled.div`
     display: flex;
-    @media screen and (max-width: 550px) {
+    @media screen and (max-width: 560px) {
         margin: auto;
     }
 `;

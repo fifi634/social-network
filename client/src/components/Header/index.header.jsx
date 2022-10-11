@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { UidContext } from '../../utils/context';
-import completLogo from '../../assets/image/icon-left-font-monochrome-white.png';
+import completLogo from '../../assets/image/icon-left-font-monochrome-white-900x220.png';
 import Logout from './logout.header';
+import logoAlone from '../../assets/image/icon-monochrome-white.png';
 import { useSelector } from 'react-redux';
 
 // Style
@@ -14,8 +15,12 @@ import {
 
 import { 
     StyledHeader,
+    StyledDisconnectContainer,
+    StyledLogoMenuContainer,
+    StyledConnectContainer,
     HeaderLogoDisconnect,
     HeaderLogo, 
+    StyledMenuContainer,
     StyledAvatarMenuContainer,
     StyledLinkAvatarContainer,
     StyledAvatarPicture,
@@ -34,72 +39,90 @@ function Header() {
     return (
         <StyledHeader>
             { pathname === '/login' ? (
-                    <>
-                    <Link to="/">
-                        <HeaderLogoDisconnect
-                            src={completLogo}
-                            alt="Aller à la page d'accueil de Groupomania"
-                        />
-                    </Link>
-                    <Link to="/signup">
-                        <StyledPinkButton>
-                            Vous n'avez pas de compte ?
-                        </StyledPinkButton>
-                    </Link>
-                    </>
+                    <StyledDisconnectContainer>
+                        <Link to="/">
+                            <HeaderLogoDisconnect
+                                src={completLogo}
+                                alt="Aller à la page d'accueil de Groupomania"
+                            />
+                        </Link>
+                        <Link to="/signup">
+                            <StyledPinkButton>
+                                Vous n'avez pas de compte ?
+                            </StyledPinkButton>
+                        </Link>
+                    </StyledDisconnectContainer>
                 ) : pathname === '/signup' ? (
-                    <>
-                    <Link to="/">
-                        <HeaderLogoDisconnect
-                            src={completLogo}
-                            alt="Aller à la page d'accueil de Groupomania"
-                        />
-                    </Link>
-                    <Link to="/login">
-                        <StyledPinkButton>
-                            Vous avez un compte ?
-                        </StyledPinkButton>
-                    </Link>
-                    </>
+                    <StyledDisconnectContainer>
+                        <Link to="/">
+                            <HeaderLogoDisconnect
+                                src={completLogo}
+                                alt="Aller à la page d'accueil de Groupomania"
+                            />
+                        </Link>
+                        <Link to="/login">
+                            <StyledPinkButton>
+                                Vous avez un compte ?
+                            </StyledPinkButton>
+                        </Link>
+                    </StyledDisconnectContainer>
                 ) : uid ? (
-                    <>
-                    <Link to="/">
-                        <HeaderLogo
-                            src={completLogo}
-                            alt="Aller à la page d'accueil de Groupomania"
-                        />
-                    </Link>
-                    <StyledAvatarMenuContainer>
-                        <StyledLinkAvatarContainer to="/profil">
-                            <StyledAvatarPicture src={userData.avatar_slug} alt="avatar utilisateur"/>
-                        </StyledLinkAvatarContainer>
-                        <StyledUserMenuContainer>
-                            <StyledPseudo> {userData.pseudo} </StyledPseudo>                            
-                            <Link to="/profil">
-                                { pathname === '/profil' ? (
-                                    <StyledLittleGreyButton>Compte</StyledLittleGreyButton>
-                                ) : (
-                                    <StyledLittlePinkButton>Compte</StyledLittlePinkButton>
-                                )}                                
-                            </Link>
-                            <Logout />
-                        </StyledUserMenuContainer>
-                    </StyledAvatarMenuContainer>
-                    </>
+                    <StyledConnectContainer>
+                        <StyledLogoMenuContainer>
+                            <Link to="/">
+                                <HeaderLogo
+                                    src={logoAlone}
+                                    alt="Aller à la page d'accueil de Groupomania"
+                                />
+                            </Link>         
+                            <StyledMenuContainer to="/">
+                                <Link to="/">
+                                    {pathname === '/' ? (
+                                        <StyledLittleGreyButton>Accueil</StyledLittleGreyButton>
+                                    ) : (
+                                        <StyledLittlePinkButton>Accueil</StyledLittlePinkButton>
+                                    )}
+                                </Link>
+                                <Link to="/create-post">
+                                {pathname === '/create-post' ? (
+                                        <StyledLittleGreyButton>Créer un post</StyledLittleGreyButton>
+                                    ) : (
+                                        <StyledLittlePinkButton>Créer un post</StyledLittlePinkButton>
+                                    )}
+                                </Link>
+                            </StyledMenuContainer>  
+                        </StyledLogoMenuContainer>
+                        <StyledAvatarMenuContainer>
+                            <StyledLinkAvatarContainer to="/profil">
+                                <StyledAvatarPicture src={userData.avatar_slug} alt="avatar utilisateur"/>
+                            </StyledLinkAvatarContainer>
+                            <StyledUserMenuContainer>
+                                <StyledPseudo> {userData.pseudo} </StyledPseudo>                            
+                                <Link to="/profil">
+                                    { pathname === '/profil' ? (
+                                        <StyledLittleGreyButton>Compte</StyledLittleGreyButton>
+                                    ) : (
+                                        <StyledLittlePinkButton>Compte</StyledLittlePinkButton>
+                                    )}                                
+                                </Link>
+                                <Logout />
+                            </StyledUserMenuContainer>
+                        </StyledAvatarMenuContainer>
+                    </StyledConnectContainer >
                 ) : (
-                    <>
-                    <Link to="/">
-                        <HeaderLogoDisconnect
-                            src={completLogo}
-                            alt="Aller à la page d'accueil de Groupomania"
-                        />
-                    </Link>
-                    <Link to="/login">
-                        <StyledPinkButton>
-                            Vous avez un compte ?
-                        </StyledPinkButton>
-                    </Link>
-                    </>
+                    <StyledDisconnectContainer>
+                        <Link to="/">
+                            <HeaderLogoDisconnect
+                                src={completLogo}
+                                alt="Aller à la page d'accueil de Groupomania"
+                            />
+                        </Link>
+                        <Link to="/signup">
+                            <StyledPinkButton>
+                                Vous n'avez pas de compte ?
+                            </StyledPinkButton>
+                        </Link>
+                    </StyledDisconnectContainer>
                 )
             }
             
