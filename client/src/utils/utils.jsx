@@ -7,3 +7,40 @@ export const isEmpty = (value) => {
         (typeof value === "string" && value.trim().length === 0)
     );
 };
+
+
+// Format Mongo style date in string client timezone date
+export const dateParser = (mongoDate) => {
+    let options = {
+        hours: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        weekday: "long",
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+    };
+
+    let timestamp = Date.parse(mongoDate);
+    let date = new Date(timestamp).toLocaleDateString("fr-FR", options);
+
+    return date.toString();
+};
+
+
+// Format timestamp in string client timezone date
+export const timestampParser = (timestamp) => {
+    let options = {
+        hours: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        weekday: "long",
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+    };
+
+    let date = new Date(timestamp).toLocaleDateString("fr-FR", options);
+
+    return date.toString();
+};
