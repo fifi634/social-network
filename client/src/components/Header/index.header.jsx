@@ -40,7 +40,7 @@ function Header() {
         <StyledHeader>
             { pathname === '/login' ? (
                     <StyledDisconnectContainer>
-                        <Link to="/">
+                        <Link to="/home">
                             <HeaderLogoDisconnect
                                 src={completLogo}
                                 alt="Aller à la page d'accueil de Groupomania"
@@ -54,13 +54,13 @@ function Header() {
                     </StyledDisconnectContainer>
                 ) : pathname === '/signup' ? (
                     <StyledDisconnectContainer>
-                        <Link to="/">
+                        <Link to="/home">
                             <HeaderLogoDisconnect
                                 src={completLogo}
                                 alt="Aller à la page d'accueil de Groupomania"
                             />
                         </Link>
-                        <Link to="/login">
+                        <Link to="/">
                             <StyledPinkButton>
                                 Vous avez un compte ?
                             </StyledPinkButton>
@@ -69,15 +69,15 @@ function Header() {
                 ) : uid ? (
                     <StyledConnectContainer>
                         <StyledLogoMenuContainer>
-                            <Link to="/">
+                            <Link to="/home">
                                 <HeaderLogo
                                     src={logoAlone}
                                     alt="Aller à la page d'accueil de Groupomania"
                                 />
                             </Link>         
                             <StyledMenuContainer to="/">
-                                <Link to="/">
-                                    {pathname === '/' ? (
+                                <Link to="/home">
+                                    {pathname === '/home' ? (
                                         <StyledLittleGreyButton>Accueil</StyledLittleGreyButton>
                                     ) : (
                                         <StyledLittlePinkButton>Accueil</StyledLittlePinkButton>
@@ -111,7 +111,7 @@ function Header() {
                     </StyledConnectContainer >
                 ) : (
                     <StyledDisconnectContainer>
-                        <Link to="/">
+                        <Link to="/home">
                             <HeaderLogoDisconnect
                                 src={completLogo}
                                 alt="Aller à la page d'accueil de Groupomania"

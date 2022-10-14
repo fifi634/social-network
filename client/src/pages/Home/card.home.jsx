@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import Loader from "../../utils/style/Atom";
 import { useSelector } from 'react-redux';  
 import { isEmpty } from "../../utils/utils";
+
+// Style
+import { avatarImg } from "./style.home";
  
 const Card = ({ post }) => {
     const [isLoading, setIsLoading] = useState(true);
@@ -18,14 +21,24 @@ const Card = ({ post }) => {
             {isLoading ? (
                 <Loader />
             ) : (
+                <>
                 <div>
-                    <img src={
+                    <avatarImg src={
                         !isEmpty(usersData[0]) && 
                         usersData.map((user) => {
-                            if(user.id === post.posterId) return user.avatar_slug;
+                            if(user._id === post.posterId) return user.avatar_slug;
                         }).join('')
-                    } alt="" />
-                </div> 
+                    } alt="Avatar du créateur du post" />
+                </div>
+                <div>
+                    <h2>
+                        {!isEmpty(usersData[0]) &&
+                        usersData.map((user) => {
+                            if(user._id === user.posterId) return user.pseudo;
+                        }).join('')}
+                    </h2>
+                </div>
+                </>
             )}
         </li>
     );

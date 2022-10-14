@@ -32,7 +32,7 @@ function LoginForm () {
         })
             .then((res) => {
                 console.log(res.data.message);
-                window.location = '/';
+                window.location = '/home';
             })
             .catch((err) => {
                 console.log('fetch login error. ' + err);

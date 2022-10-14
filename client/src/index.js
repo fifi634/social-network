@@ -55,10 +55,10 @@ root.render(
           <StyledMain>
             <Routes>
               <Route path='*' element={ <Error /> } />
-              <Route path='/' element={ <Home /> } />
+              <Route path='/' element={ <Login /> } />
               <Route path='/signup' element={ <Signup /> } />
               <Route path='/profil' element={ <Profil /> } />
-              <Route path='/login' element={ <Login /> } />
+              <Route path='/home' element={ <Home /> } />
             </Routes>
           </StyledMain>
         </StyledLayout>

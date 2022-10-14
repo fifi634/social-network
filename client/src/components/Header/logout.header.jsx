@@ -22,7 +22,7 @@ const Logout = () => {
             .then(() => removeCookie('jwt'))
             .catch(err => console.log('Logout failed. ' + err))
         ;
-        window.location = '/login';
+        window.location = '/';
     }
 
     return (
