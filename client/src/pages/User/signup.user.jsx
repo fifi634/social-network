@@ -21,7 +21,7 @@ import {
     StyledError,
     StyledTermsContainer,
     StyledTermsLabel,
-    StyledInputFile
+    // StyledInputFile
 } from '../../utils/style/StyledGlobalForm';
 import {
     AvatarText,
@@ -39,10 +39,10 @@ import {
 
 
 function Signup() {
-    // Selection a good radio choice when click on "Downloaded Files" button
-    function selectRadio() {
-        document.getElementById('download-files').checked = true;
-    };
+    // // Selection a good radio choice when click on "Downloaded Files" button
+    // function selectRadio() {
+    //     document.getElementById('download-files').checked = true;
+    // };
 
 
     // Form data storage

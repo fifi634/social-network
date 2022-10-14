@@ -78,6 +78,8 @@ function Profil() {
     };
 
 
+
+
     // When form is submit
     const handleProfil = (e) => {
         e.preventDefault();

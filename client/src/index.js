@@ -15,20 +15,19 @@ import { UidProvider } from './utils/context';
 // Style import
 import './normalize.css';
 import './style.css';
-
-
-/** Redux */
-/******** */
+// Redux
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { applyMiddleware, legacy_createStore as createStore } from 'redux';
 import rootReducer from './reducers/index.reducer';
-
+import { getUsers } from './action/users.action';
 // Dev Tools
 import { composeWithDevTools } from 'redux-devtools-extension';
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
-/****** */
+
+// Get all data by Redux
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+store.dispatch(getUsers());
 
 
 // Layout style
