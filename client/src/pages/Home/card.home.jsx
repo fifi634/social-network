@@ -4,12 +4,12 @@ import { useSelector } from 'react-redux';
 import { isEmpty } from "../../utils/utils";
 
 // Style
-import { avatarImg } from "./style.home";
+import { AvatarImg, AvatarContainer } from "./style.home";
  
 const Card = ({ post }) => {
     const [isLoading, setIsLoading] = useState(true);
     const usersData = useSelector((state) => state.usersReducer);
-    const userData = useSelector((state) => state.userReducer);
+    // const userData = useSelector((state) => state.userReducer);
 
     useEffect(() => {
         !isEmpty(usersData[0]) && setIsLoading(false);
@@ -22,14 +22,14 @@ const Card = ({ post }) => {
                 <Loader />
             ) : (
                 <>
-                <div>
-                    <avatarImg src={
+                <AvatarContainer>
+                    <AvatarImg src={
                         !isEmpty(usersData[0]) && 
                         usersData.map((user) => {
                             if(user._id === post.posterId) return user.avatar_slug;
                         }).join('')
                     } alt="Avatar du créateur du post" />
-                </div>
+                </AvatarContainer>
                 <div>
                     <h2>
                         {!isEmpty(usersData[0]) &&

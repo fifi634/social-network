@@ -1,7 +1,27 @@
 import styled from 'styled-components';
 import { colors } from '../../config';
 
-export const avatarImg = styled.img`
-    width: 100px;
+export const AvatarContainer = styled.div`
+    background-color:${colors.tertiary};
+    width: 70px;
+    height: 70px; 
     border-radius: 50%;
+`;
+
+export const AvatarImg = styled.img`
+    position: relative;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    &[alt] {
+        display: flex;
+        color: #ffffff;
+    }
+    @media screen and (max-width: 330px) {
+        display: none;
+    }
 `;
