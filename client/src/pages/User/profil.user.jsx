@@ -120,12 +120,8 @@ function Profil() {
     return (
         <>
             {uid ? (
-                formSubmit ? (
-                    <> 
-                        <Login />
-                        <StyledSignupSuccessH2>Votre compte a été mis à jour, veuillez vous reconnecter.</StyledSignupSuccessH2>
-                    </>
-                ) : (
+                <>
+                    { formSubmit && <StyledSignupSuccessH2>Votre compte a été mis à jour.</StyledSignupSuccessH2> }
                     <StyledContainer>
                         <FormContainer action="" onSubmit={handleProfil} enctype="multipart/form-data">
                             <StyledH1>Compte</StyledH1>
@@ -250,7 +246,7 @@ function Profil() {
                             </InputContainer>
                         </FormContainer>
                     </StyledContainer>
-                )
+                </>
             ) : (
                 <Login />
             )}

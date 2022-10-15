@@ -28,7 +28,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 // Get all data by Redux
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 store.dispatch(getUsers());
-
+console.log(store)
 
 // Layout style
 const StyledLayout = styled.div`
