@@ -70,6 +70,7 @@ export const StyledLittlePinkButton = styled.button`
     box-shadow: 0px 4px 4px ${colors.boxShadow};
     border-radius: 10px;
     border: 1px solid #000000;
+    font-weight: 700;
     &:active {
         box-shadow: 0 0 0;
         border: 1px solid #ffffff;
@@ -93,6 +94,7 @@ export const StyledLittleGreyButton = styled.button`
     border-radius: 10px;
     border: 1px solid #FFFFFF;
     color: #ffffff;
+    font-weight: 700;
     &:active {
         box-shadow: 0 0 0;
         border: 1px solid #000000;

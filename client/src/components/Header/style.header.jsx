@@ -13,7 +13,7 @@ export const StyledHeader = styled.header`
     @media screen and (min-width: 1440px) {
         box-shadow: unset;
     }
-    @media screen and (max-width: 560px) {
+    @media screen and (max-width: 610px) {
         height: auto;
     }
 `;
@@ -37,7 +37,7 @@ export const StyledConnectContainer = styled.div `
     display: flex;
     justify-content: space-between;
     align-items: center;
-    @media screen and (max-width: 560px) {
+    @media screen and (max-width: 610px) {
         display: flex;
         flex-direction: column-reverse;
     }
@@ -50,7 +50,7 @@ export const HeaderLogo = styled.img`
         content: url(${logoAlone});
         max-height: 80px;
     }
-    @media screen and (max-width: 560px) {
+    @media screen and (max-width: 610px) {
         display: none;
     }
 `;
@@ -61,15 +61,20 @@ export const StyledMenuContainer = styled.div`
     @media screen and (max-width: 920px) {
         flex-direction: column;   
     }
-    @media screen and (max-width: 560px) {
+    @media screen and (max-width: 610px) {
         display: flex;
         flex-direction: row;
+    }
+    @media screen and (max-width: 400px) {
+        display: flex;
+        flex-direction: column;
+        justify-context: center;
     }
 `;
 
 export const StyledAvatarMenuContainer = styled.div`
     display: flex;
-    @media screen and (max-width: 560px) {
+    @media screen and (max-width: 610px) {
         margin: auto;
     }
 `;
@@ -77,7 +82,10 @@ export const StyledAvatarMenuContainer = styled.div`
 export const StyledLinkAvatarContainer = styled(Link)`
     margin: 10px;
     width: 120px;
-    height: 120px;    
+    height: 120px;
+    @media screen and (max-width: 400px) {
+        display: none;
+    }
 `;
 
 
@@ -103,6 +111,9 @@ export const StyledAvatarPicture = styled.img`
 export const StyledUserMenuContainer = styled.div`
     display: flex;
     flex-direction: column;
+    @media screen and (max-width: 400px) {
+        align-items: center;
+    }
 `;
 
 export const StyledPseudo = styled.div`
@@ -118,7 +129,7 @@ export const StyledPseudo = styled.div`
 export const HeaderLogoDisconnect = styled.img`
     display: flex;
     width: 333px;
-    @media screen and (max-width: 650px) {
+    @media screen and (max-width: 610px) {
         content: url(${logoAlone});
         max-width: 80px;
     }

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { fetchUrl } from '../../config';
 import Login from '../Login/index.login';
+import { check } from '../../utils/utils';
 // import { createProfil } from '../../action/user.actions';
 // import { useDispatch } from 'react-redux';
 
@@ -34,6 +35,7 @@ import {
     StyledContainer,
     StyledSignupSuccessH2
 } from './style.user';
+
 
 
 

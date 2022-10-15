@@ -13,13 +13,17 @@ import {
     PostContainer,
     StyledPosterContainer,
     StyledUserInfoContainer,
+    StyledH2,
     AvatarImg, 
     AvatarContainer,
+    StyledCorpContainer,
     PostImageContainer,
-    PostImg
+    PostImg,
+    StyledMessageP,
+    StyledBottomCommandContainer
 } from "./style.home";
 
-import { StyledLittleGreyButton } from "../../utils/style/StyledGlobalButton";
+import { StyledLittlePinkButton } from "../../utils/style/StyledGlobalButton";
 
 
 
@@ -50,40 +54,42 @@ const Card = ({ post }) => {
                             } alt="Avatar du créateur du post" />
                         </AvatarContainer>
                         <StyledUserInfoContainer>
-                            <h2>
+                            <StyledH2>
                                 {!isEmpty(usersData[0]) &&
                                 usersData.map((user) => {
                                     if(user._id === post.posterId) return user.pseudo;
                                 }).join('')}
-                            </h2>
+                            </StyledH2>
                             <span>{dateParser(post.createdAt)}</span>
                         </StyledUserInfoContainer>
                     </StyledPosterContainer>
-                    {post.picture && 
-                    <PostImageContainer>
-                        <PostImg src={post.picture} alt="Illustration du post" />
-                    </PostImageContainer>}
-                    {post.video && (
-                        <iframe
-                            title={post._id}
-                            width="500"
-                            height="300"
-                            src={post.video}
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                        ></iframe>
-                    )}
-                    <p>{post.message}</p>
-                    <div>
-                        <StyledLittleGreyButton>
-                            {<span>{post.comments.length} commentaire{post.comments.length > 1 ? 's ' : ' '}</span>}
-                        </StyledLittleGreyButton>
-                        <StyledLittleGreyButton> J'aime </StyledLittleGreyButton>
-                    </div>
-                    <div>
+                    <StyledCorpContainer>
+                        {post.picture && 
+                        <PostImageContainer>
+                            <PostImg src={post.picture} alt="Illustration du post" />
+                        </PostImageContainer>}
+                        {/* {post.video && (
+                            <iframe
+                                title={post._id}
+                                width="320"
+                                height="350"
+                                src={post.video}
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                            ></iframe>
+                        )} */}
+                        <StyledMessageP>{post.message}</StyledMessageP>
+                    </StyledCorpContainer>
+                    <StyledBottomCommandContainer>
+                        <div>
+                            <StyledLittlePinkButton post={post}> J'aime </StyledLittlePinkButton>
+                            {/* <StyledLittlePinkButton>
+                                {<span>{post.comments.length} commentaire{post.comments.length > 1 ? 's ' : ' '}</span>}
+                            </StyledLittlePinkButton>   */}
+                        </div>
                         <Link to="#">Modifier</Link>
-                    </div>
+                    </StyledBottomCommandContainer>
                 </PostContainer>
             )}
         </StyledLi>
