@@ -68,7 +68,7 @@ export const PostImageContainer = styled.div`
     width: 550px;
     height: 350px;
     margin: 10px 0;
-    border: solid ${colors.tertiary} 1px;
+    // border: solid ${colors.tertiary} 1px;
     border-radius: 25px;
     @media screen and (max-width: 800px) {
         width: auto;
@@ -92,7 +92,7 @@ export const StyledMessageP = styled.p`
     border-radius: 20px;
     background-color: #ffffff;
     min-width: 350px;
-    border: solid ${colors.tertiary} 2px;
+    // border: solid ${colors.tertiary} 2px;
     @media screen and (max-width: 800px) {
         min-width : 200px;
         width: auto;

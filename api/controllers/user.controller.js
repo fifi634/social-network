@@ -78,7 +78,7 @@ exports.updateUser = (req, res) => {
                     (err, data) => {
                         if (!err) {
                             console.log(req.auth.userId + ' has updated his profil');
-                            return res.json({ message: "User updated !", data })
+                            return res.status(200).json({ message: "User updated !", data })
                         };
                         if (err) {                                
                             return res.status(500).send('User update error : ' + err );

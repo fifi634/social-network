@@ -10,7 +10,7 @@ export const getUsers = () => {
             .then((res) => {
                 dispatch({ type: GET_USERS, payload: res.data });
             })
-            .catch((err) => console.log('Axios getUsers failed. ', err))
+            .catch((err) => console.log('Redux axios getUsers failed. ' + err))
         ;
     };
 };

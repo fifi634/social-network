@@ -24,7 +24,7 @@ export const UidProvider = ({ children }) => {
     };
     fetchToken();
 
-    if (uid) dispatch(getUser(uid))
+    if (uid) dispatch(getUser(uid));
     
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[uid]);

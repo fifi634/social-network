@@ -4,6 +4,7 @@ import Loader from "../../utils/style/Atom";
 import { useSelector } from 'react-redux';  
 import { isEmpty } from "../../utils/utils";
 import { dateParser } from "../../utils/utils";
+import LikeButton from "./like.home";
 
 
 /* Style */
@@ -23,7 +24,8 @@ import {
     StyledBottomCommandContainer
 } from "./style.home";
 
-import { StyledLittlePinkButton } from "../../utils/style/StyledGlobalButton";
+// import { StyledLittlePinkButton } from "../../utils/style/StyledGlobalButton";
+
 
 
 
@@ -82,12 +84,15 @@ const Card = ({ post }) => {
                         <StyledMessageP>{post.message}</StyledMessageP>
                     </StyledCorpContainer>
                     <StyledBottomCommandContainer>
-                        <div>
-                            <StyledLittlePinkButton post={post}> J'aime </StyledLittlePinkButton>
-                            {/* <StyledLittlePinkButton>
+                        <LikeButton post={post}/>
+                        {post.likers.length >= 1 && 
+                        <p>Aimé par {post.likers.length} personne{post.likers.length > 1 && 's'}</p>}
+                        {/* <div>
+                            <StyledLittlePinkButton> J'aime </StyledLittlePinkButton>
+                            <StyledLittlePinkButton>
                                 {<span>{post.comments.length} commentaire{post.comments.length > 1 ? 's ' : ' '}</span>}
-                            </StyledLittlePinkButton>   */}
-                        </div>
+                            </StyledLittlePinkButton>  
+                        </div> */}
                         <Link to="#">Modifier</Link>
                     </StyledBottomCommandContainer>
                 </PostContainer>

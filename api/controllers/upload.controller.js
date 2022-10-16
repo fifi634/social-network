@@ -29,7 +29,10 @@ exports.uploadProfil = (req, res, next) => {
                         console.log(user._id + ' to a new avatar');
                         res.status(201).json({ message: 'New avatar uploaded complete.', data });                      
                     })
-                    .catch((err) => res.status(500).json({ message: 'New avatar link failed. ', err }))
+                    .catch((err) => {
+                        console.log('New avatar link failed. ', err);
+                        res.status(500).json({ message: 'New avatar link failed. ', err });
+                    })
                 ;
             }
         })

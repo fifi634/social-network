@@ -50,12 +50,11 @@ export const uploadPicture = (data, userId) => {
                     .then(res => {
                         // To upload picture slug in Redux store
                         dispatch({ type: UPLOAD_PICTURE, payload: res.data.avatar_slug});
-                        console.log('get avatar_slug ok');
                     })
-                    .catch(err => console.log('Redux Axios get uploadPicture failed. ', err))
+                    .catch(err => console.log('Redux Axios get uploadPicture failed. ' + err))
                 ;
             })
-            .catch(err => console.log('Redux Axios post uploadPicture failed. ', err))
+            .catch(err => console.log('Redux Axios post uploadPicture failed. ' + err))
         ;
     }
 };
@@ -91,7 +90,6 @@ export const updateProfil = (inputEmail, inputPassword, inputPseudo, uid) => {
             }
         })
             .then((res) => {   
-                console.log('reponse updateProfif ', res.data.message);
                 return axios
                     .get(`${fetchUrl}api/user/${uid}`, {withCredentials: true})
                     .then((res) => {
@@ -105,7 +103,7 @@ export const updateProfil = (inputEmail, inputPassword, inputPseudo, uid) => {
          
             })
             .catch(err => {
-                console.log('Update user info failed. ', err);
+                console.log('Update user info failed. ' + err);
             })
         ;
     }

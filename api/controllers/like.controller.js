@@ -6,8 +6,11 @@ const ObjectID = require('mongoose').Types.ObjectId;
 // Like post : add user's id in post's like array into user, and add post's id in user's id like array into post
 exports.likePost = (req, res) => {
     // Check if uri is known into database
-    if (!ObjectID.isValid(req.params.id))
-    return res.status(400).json({ message: 'ID unknown : ' + req.params.id });
+    if (!ObjectID.isValid(req.params.id)) {
+        console.log('ID unknown : ' + req.params.id);
+        return res.status(400).json({ message: 'ID unknown : ' + req.params.id });
+    }
+
 
     try {
         PostModel.findByIdAndUpdate(
@@ -15,9 +18,12 @@ exports.likePost = (req, res) => {
             { $addToSet: { likers: req.body.likerId }},
             { new: true },
             (err, data) => { 
-                if (err) return res.status(400).json({ 
-                    message : "Add user's like into like post array failed", err 
-                }); 
+                if (err) {
+                    console.log("Add user's like into like post array failed. ", err);
+                    return res.status(400).json({ 
+                        message : "Add user's like into like post array failed", err                        
+                    });
+                };
             }
         );
         UserModel.findByIdAndUpdate(
@@ -25,10 +31,13 @@ exports.likePost = (req, res) => {
             { $addToSet: { likes: req.params.id }},
             { new: true },
             (err, data) => {
-                if (!err) res.json({ message: 'Liked !', data });
-                else return res.status(400).json({ 
-                    message: "Add post's like into user like's array failed", err 
-                });
+                if (!err) res.status(200).json({ message: 'Liked !', data });
+                else {
+                    console.log("Add post's like into user like's array failed. ", err);
+                    return res.status(400).json({ 
+                        message: "Add post's like into user like's array failed", err 
+                    });
+                };
             }
         );
     } catch (err) {

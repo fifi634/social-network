@@ -38,14 +38,13 @@ exports.requireAuth = (req, res, next) => {
             async (err, decodedToken) => {
                 if (err) {
                     req.auth = null;
-                    res.cookie('jwt', '', { maxAge: 1 });
+                    res.status(200).cookie('jwt', '', { maxAge: 1 });
                     console.log('Authentification error : ', err);
                 } else {
                     const userId = decodedToken.id;
                     req.auth = { userId: userId };
                     let user = await UserModel.findById(decodedToken.id);
                     res.locals.user = user;
-                    console.log(decodedToken.id + ' authenticated' );
                     next();
                 }
             }
