@@ -27,10 +27,25 @@ export const likePost = (postId, userId) => {
             withCredentials: true
         })
             .then((res) => {
-                console.log('res ', res)
                 dispatch({ type: LIKE_POST, payload: {postId, userId} })
             })
             .catch((err) => console.log('Axios patch like failed. ' + err))
+        ;
+    };
+};
+
+export const unlikePost = (postId, userId) => {
+    return (dispatch) => {
+        return axios ({
+            method: 'patch',
+            url: fetchUrl + 'api/post/unlike/' + postId,
+            data: { likersId: userId },
+            withCredentials: true
+        })
+            .then((res) => {
+                dispatch({ type: UNLIKE_POST, payload: {postId, userId} })
+            })
+            .catch((err) => console.log('Axios patch unlike failed. ' + err))
         ;
     };
 };

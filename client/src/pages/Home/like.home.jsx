@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import { UidContext } from '../../utils/context';
-import { likePost } from "../../action/post.action";
+import { likePost, unlikePost } from "../../action/post.action";
 // Style
 import { StyledLittlePinkButton, StyledLittleGreyButton } from '../../utils/style/StyledGlobalButton';
 
@@ -11,15 +11,19 @@ const LikeButton = ({ post }) => {
     const dispatch = useDispatch();
     
     const like = () => {
-        dispatch(likePost(post._id, uid))
+        dispatch(likePost(post._id, uid));
         setLiked(true);
     };
     
-    const unlike = () => {};
+    const unlike = () => {
+        dispatch(unlikePost(post._id, uid));
+        setLiked(false);
+    };
 
-    // Check if userhas liked a post
+    // Check if user has liked a post
     useEffect(() => {
         if(post.likers.includes(uid)) setLiked(true);
+        else setLiked(false);
     }, [uid, post.likers, liked]);
 
     return (

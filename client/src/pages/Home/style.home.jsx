@@ -13,7 +13,7 @@ export const PostContainer = styled.div`
     border-radius: 10px;
     margin: 40px auto;
     padding: 20px;
-    background: rgba(78, 81, 102, 0.1);
+    background: rgba(78, 81, 102, 0.04);
     box-shadow: 4px 4px 8px ${colors.boxShadow};
 `;
 
