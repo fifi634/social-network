@@ -98,7 +98,7 @@ export const updateProfil = (inputEmail, inputPassword, inputPseudo, uid) => {
                     .catch((err) => console.log('Axios Redux getUser failed. ' + err))
 
 
-                // // Sgnup errors 
+                // // Signup errors 
                 // if (res.data.errors) return res.data.errors;
          
             })
