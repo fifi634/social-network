@@ -1,13 +1,23 @@
 require('dotenv').config({path:'./config/.env'});
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
-
+// // CORS options
+// const corsOptions = {
+//     origin: process.env.DOMAIN_CLIENT_APP,
+//     optionSuccessStatus: 200,
+//     methods: 'GET, POST, PATCH, DELETE',
+//     allowedHeaders: 'Origin, x-Requested-With, Accept, Content, Content-Type, Authorization',
+//     credentials: true,
+//     preflightContinue: true
+// }
 
 // App config
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
+// app.use(cors(corsOptions));
 
 
 // CORS headers
@@ -25,6 +35,8 @@ const userRoutes = require('./routes/user.routes');
 const postRoutes = require('./routes/post.routes');
 const {checkUser, requireAuth} = require('./middleware/auth.middleware');
 
+// // CORS pre-flight
+// app.options('*', cors(corsOptions));
 
 // Json Web Token
 app.get('*', checkUser);

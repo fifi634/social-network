@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
 import Loader from "../../utils/style/Atom";
 import { useSelector } from 'react-redux';  
 import { isEmpty } from "../../utils/utils";
@@ -21,7 +20,9 @@ import {
     PostImageContainer,
     PostImg,
     StyledMessageP,
-    StyledBottomCommandContainer
+    StyledBottomCommandContainer,
+    StyledLikeContainer,
+    StyledModifyLink
 } from "./style.home";
 
 // import { StyledLittlePinkButton } from "../../utils/style/StyledGlobalButton";
@@ -52,6 +53,7 @@ const Card = ({ post }) => {
                                 !isEmpty(usersData[0]) && 
                                 usersData.map((user) => {
                                     if(user._id === post.posterId) return user.avatar_slug;
+                                    else return null;
                                 }).join('')
                             } alt="Avatar du créateur du post" />
                         </AvatarContainer>
@@ -60,6 +62,7 @@ const Card = ({ post }) => {
                                 {!isEmpty(usersData[0]) &&
                                 usersData.map((user) => {
                                     if(user._id === post.posterId) return user.pseudo;
+                                    else return null;
                                 }).join('')}
                             </StyledH2>
                             <span>{dateParser(post.createdAt)}</span>
@@ -84,16 +87,19 @@ const Card = ({ post }) => {
                         <StyledMessageP>{post.message}</StyledMessageP>
                     </StyledCorpContainer>
                     <StyledBottomCommandContainer>
-                        <LikeButton post={post}/>
-                        {post.likers.length >= 1 && 
-                        <p>Aimé par {post.likers.length} personne{post.likers.length > 1 && 's'}</p>}
+                        <StyledLikeContainer>
+                            <LikeButton post={post}/>
+                            {post.likers.length >= 1 && 
+                            <span> Aimé par {post.likers.length} personne{post.likers.length > 1 && 's'}</span>}
+                        </StyledLikeContainer>
+
                         {/* <div>
                             <StyledLittlePinkButton> J'aime </StyledLittlePinkButton>
                             <StyledLittlePinkButton>
                                 {<span>{post.comments.length} commentaire{post.comments.length > 1 ? 's ' : ' '}</span>}
                             </StyledLittlePinkButton>  
                         </div> */}
-                        <Link to="#">Modifier</Link>
+                        <StyledModifyLink to="#">Modifier</StyledModifyLink>
                     </StyledBottomCommandContainer>
                 </PostContainer>
             )}

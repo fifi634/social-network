@@ -7,17 +7,42 @@ import Card from './card.home';
 
 function Thread() {
     const [loadPost, setLoadPost] = useState(true);
+    // const [countDisplay, setCountDisplay] = useState(5);
     const dispatch = useDispatch();
     const posts = useSelector((state) => state.postReducer);
 
+
+    // /* Infinity scroll */
+    // /***************** */
+    // // If window is in bottom, get 5 more post 
+    // // (if addition of mouse position more 1 pixel is taller than windows size)
+    // const loadMore = () => {
+    //     if(window.innerHeight + document.documentElement.scrollTop + 1 > document.scrollingElement.scrollHeight) {
+    //         setLoadPost(true);
+    //     };
+    // };
+
+    // // Display posts with inifinty scroll
+    // useEffect(() => {
+    //     if (loadPost) {
+    //         dispatch(getPosts(countDisplay));
+    //         setLoadPost(false);
+    //         setCountDisplay(countDisplay + 5);
+    //     };
+    //     window.addEventListener('scroll', loadMore);
+    //     return () => window.removeEventListener('scroll', loadMore);
+    // }, [loadPost, dispatch, countDisplay]);
+
+
+    // Display posts
     useEffect(() => {
         if (loadPost) {
-            dispatch(getPosts())
+            dispatch(getPosts());
             setLoadPost(false);
         };
     }, [loadPost, dispatch]);
 
-    
+
     return (
         <div>
             <ul>

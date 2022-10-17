@@ -9,23 +9,24 @@ exports.likePost = (req, res) => {
     if (!ObjectID.isValid(req.params.id)) {
         console.log('ID unknown : ' + req.params.id);
         return res.status(400).json({ message: 'ID unknown : ' + req.params.id });
-    }
-
+    };
 
     try {
+        // Add likers in post like array
         PostModel.findByIdAndUpdate(
             req.params.id,
             { $addToSet: { likers: req.body.likerId }},
             { new: true },
             (err, data) => { 
                 if (err) {
-                    console.log("Add user's like into like post array failed. ", err);
+                    console.log("Add user's like into post like array failed. ", err);
                     return res.status(400).json({ 
-                        message : "Add user's like into like post array failed", err                        
+                        message : "Add user's like into post like array failed", err                        
                     });
                 };
             }
         );
+        // Add post liked in likes user array
         UserModel.findByIdAndUpdate(
             req.body.likerId,
             { $addToSet: { likes: req.params.id }},
@@ -42,8 +43,7 @@ exports.likePost = (req, res) => {
         );
     } catch (err) {
         return res.status(500).json({ message: "Like failed", err });
-    }
-
+    };
 };
 
 

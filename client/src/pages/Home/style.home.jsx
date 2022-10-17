@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { colors } from '../../config';
 
@@ -107,7 +108,21 @@ export const StyledBottomCommandContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    @media screen and (max-width: 400px) {
+    @media screen and (max-width: 330px) {
         flex-direction: column;
+    }
+`;
+
+export const StyledLikeContainer = styled.div`
+    @media screen and (max-width: 550px) {
+        display: flex;
+        flex-direction: column;
+    }
+`;
+
+export const StyledModifyLink = styled(Link)`
+    color: ${colors.tertiary};
+    &:hover {
+        color: ${colors.primary};
     }
 `;
