@@ -126,3 +126,22 @@ export const StyledModifyLink = styled(Link)`
         color: ${colors.primary};
     }
 `;
+
+export const StyledIconsContainer = styled.div`
+    display: flex;
+`;
+
+export const StyledIconContainer = styled.div`
+    border-radius: 50%;
+    background-color: ${colors.secondary};
+    margin: 5px;
+    &:hover {
+        cursor: pointer;
+        background-color: ${colors.primary};
+        transition: 0.5s;
+    }
+`;
+
+export const StyledImg = styled.img`
+
+`;

@@ -18,6 +18,7 @@ export const StyledPinkButton = styled.button`
     &:hover {
         cursor: pointer;
         letter-spacing: 1px;
+        background-color: ${colors.primary};
         transition: 0.3s
     }
     @ media screen and (max-width: 800px) {
@@ -49,6 +50,7 @@ export const StyledGreyButton = styled.button`
     &:hover {
         cursor: pointer;
         letter-spacing: 1px;
+        background-color: ${colors.primary};
         transition: 0.3s
     }
     @ media screen and (max-width: 800px) {
@@ -80,7 +82,9 @@ export const StyledLittlePinkButton = styled.button`
     &:hover {
         cursor: pointer;
         letter-spacing: 1px;
+        background-color: ${colors.primary};
         transition: 0.3s
+        
     }
 `;
 
@@ -104,6 +108,7 @@ export const StyledLittleGreyButton = styled.button`
     &:hover {
         cursor: pointer;
         letter-spacing: 1px;
+        background-color: ${colors.primary};
         transition: 0.3s
     }
 `;

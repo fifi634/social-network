@@ -12,6 +12,7 @@ import Error from './components/Error/index.error';
 import Profil from './pages/User/profil.user';
 import Login from './pages/Login/index.login';
 import { UidProvider } from './utils/context';
+import  EditPost from './pages/Post/edit.post';
 // Style import
 import './normalize.css';
 import './style.css';
@@ -58,6 +59,7 @@ root.render(
               <Route path='/signup' element={ <Signup /> } />
               <Route path='/profil' element={ <Profil /> } />
               <Route path='/home' element={ <Home /> } />
+              <Route path='/edit-post' element={ <EditPost /> } />
             </Routes>
           </StyledMain>
         </StyledLayout>

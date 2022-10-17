@@ -4,6 +4,10 @@ import { useSelector } from 'react-redux';
 import { isEmpty } from "../../utils/utils";
 import { dateParser } from "../../utils/utils";
 import LikeButton from "./like.home";
+import { Link } from "react-router-dom";
+// Images import
+import edit from "../../assets/image/edit.svg";
+import trash from "../../assets/image/trash.svg";
 
 
 /* Style */
@@ -22,6 +26,9 @@ import {
     StyledMessageP,
     StyledBottomCommandContainer,
     StyledLikeContainer,
+    StyledIconsContainer,
+    StyledIconContainer,
+    StyledImg,
     StyledModifyLink
 } from "./style.home";
 
@@ -99,7 +106,16 @@ const Card = ({ post }) => {
                                 {<span>{post.comments.length} commentaire{post.comments.length > 1 ? 's ' : ' '}</span>}
                             </StyledLittlePinkButton>  
                         </div> */}
-                        <StyledModifyLink to="#">Modifier</StyledModifyLink>
+                        <StyledIconsContainer>
+                            <StyledIconContainer>
+                                <StyledImg src={edit} alt="Editer le post" />
+                            </StyledIconContainer>
+                            <StyledIconContainer>
+                                <StyledImg src={trash} alt="Supprimer le post" />
+                            </StyledIconContainer>                            
+                        </StyledIconsContainer>
+
+                        {/* <StyledModifyLink to="/edit-post">Modifier</StyledModifyLink> */}
                     </StyledBottomCommandContainer>
                 </PostContainer>
             )}

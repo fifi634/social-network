@@ -23,3 +23,7 @@ input[type="file"] {
   cursor: pointer;
 }
 
+ul {
+  margin-left: -40px;
+}
+
