@@ -1,4 +1,4 @@
-import Thread from './thread.home';
+import Thread from './thread.post';
 
 
 function Home() {

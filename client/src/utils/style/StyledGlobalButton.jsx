@@ -13,12 +13,11 @@ export const StyledPinkButton = styled.button`
         box-shadow: 0 0 0;
         border: 1px solid #ffffff;
         background: ${colors.tertiary};
-        color: white;
     }
     &:hover {
         cursor: pointer;
         letter-spacing: 1px;
-        background-color: ${colors.primary};
+        background-color: ${colors.secondary};
         transition: 0.3s
     }
     @ media screen and (max-width: 800px) {
@@ -45,12 +44,11 @@ export const StyledGreyButton = styled.button`
         box-shadow: 0 0 0;
         border: 1px solid #000000;
         background: ${colors.secondary};
-        color: #000000;
     }
     &:hover {
         cursor: pointer;
         letter-spacing: 1px;
-        background-color: ${colors.primary};
+        background-color: ${colors.tertiary};
         transition: 0.3s
     }
     @ media screen and (max-width: 800px) {
@@ -77,12 +75,11 @@ export const StyledLittlePinkButton = styled.button`
         box-shadow: 0 0 0;
         border: 1px solid #ffffff;
         background: ${colors.tertiary};
-        color: #ffffff;
     }
     &:hover {
         cursor: pointer;
         letter-spacing: 1px;
-        background-color: ${colors.primary};
+        background-color: ${colors.secondary};
         transition: 0.3s
         
     }
@@ -103,12 +100,11 @@ export const StyledLittleGreyButton = styled.button`
         box-shadow: 0 0 0;
         border: 1px solid #000000;
         background: ${colors.secondary};
-        color: #000000;
     }
     &:hover {
         cursor: pointer;
         letter-spacing: 1px;
-        background-color: ${colors.primary};
+        background-color: ${colors.tertiary};
         transition: 0.3s
     }
 `;

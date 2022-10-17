@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { fetchUrl } from '../../config';
 import { UidContext } from '../../utils/context';
-import Home from '../Home/index.home';
+import Home from '../Post/index.post';
 
 // Import Style
 import { StyledGreyButton } from '../../utils/style/StyledGlobalButton';

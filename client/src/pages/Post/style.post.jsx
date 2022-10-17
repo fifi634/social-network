@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { colors } from '../../config';
 
@@ -104,6 +103,48 @@ export const StyledMessageP = styled.p`
     }
 `;
 
+export const StyledEditMessageContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
+
+export const StyledMessageTextaera = styled.textarea`
+    margin: 15px 0 5px 0;
+    border-radius: 20px;
+    border: solid 1px ${colors.primary};
+    padding: 20px;
+`;
+
+export const StyledModifyButtonContainer = styled.div`
+    display: flex;
+    justify-content: end;
+    margin: 0 0 10px 0;
+`;
+
+export const StyledModifyButton = styled.button`
+    background: ${colors.primary};
+    color: #ffffff;
+    // margin: 0 0 5px 0;
+    width: 160px;
+    height: 30px;
+    box-shadow: 0px 4px 4px ${colors.boxShadow};
+    border-radius: 10px;
+    border: 1px solid #000000;
+    font-weight: 700;
+    &:active {
+        box-shadow: 0 0 0;
+        border: 1px solid #ffffff;
+        background: ${colors.tertiary};
+        color: #ffffff;
+    }
+    &:hover {
+        cursor: pointer;
+        letter-spacing: 1px;
+        background-color: ${colors.primary};
+        transition: 0.3s
+    }
+`;
+
 export const StyledBottomCommandContainer = styled.div`
     display: flex;
     align-items: center;
@@ -120,18 +161,13 @@ export const StyledLikeContainer = styled.div`
     }
 `;
 
-export const StyledModifyLink = styled(Link)`
-    color: ${colors.tertiary};
-    &:hover {
-        color: ${colors.primary};
-    }
-`;
-
 export const StyledIconsContainer = styled.div`
     display: flex;
 `;
 
 export const StyledIconContainer = styled.div`
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background-color: ${colors.secondary};
     margin: 5px;
@@ -140,8 +176,13 @@ export const StyledIconContainer = styled.div`
         background-color: ${colors.primary};
         transition: 0.5s;
     }
+    &.editing {
+        background-color: ${colors.primary};
+    }
 `;
 
-export const StyledImg = styled.img`
-
+export const StyledIconImg = styled.img`
+    width: 20px;
+    height: 20px;
+    transform: translate(50%, 50%);
 `;

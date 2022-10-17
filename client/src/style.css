@@ -27,3 +27,6 @@ ul {
   margin-left: -40px;
 }
 
+*:focus  {
+  outline: 2px solid #FD2D01;
+}

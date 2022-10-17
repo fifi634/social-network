@@ -58,16 +58,16 @@ export const HeaderLogo = styled.img`
 export const StyledMenuContainer = styled.div`
     display: flex;
     align-items: center;
-    @media screen and (max-width: 920px) {
-        flex-direction: column;   
-    }
-    @media screen and (max-width: 610px) {
-        display: flex;
-        flex-direction: row;
-    }
+    // @media screen and (max-width: 920px) {
+    //     flex-direction: column;   
+    // }
+    // @media screen and (max-width: 610px) {
+    //     display: flex;
+    //     flex-direction: row;
+    // }
     @media screen and (max-width: 400px) {
         display: flex;
-        flex-direction: column;
+        // flex-direction: column;
         justify-context: center;
     }
 `;

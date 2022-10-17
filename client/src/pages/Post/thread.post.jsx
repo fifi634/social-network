@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPosts } from '../../action/post.action';
 import { isEmpty } from '../../utils/utils';
-import Card from './card.home';
+import Card from './card.post';
+import CreatePost from './create.post';
 
 
 function Thread() {
@@ -46,6 +47,7 @@ function Thread() {
     return (
         <div>
             <ul>
+                <CreatePost />
                 {!isEmpty(posts[0]) &&
                     posts.map((post) => {
                         return <Card post={post} key={post._id} />;

@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import Loader from "../../utils/style/Atom";
-import { useSelector } from 'react-redux';  
+import { useDispatch, useSelector } from 'react-redux';  
 import { isEmpty } from "../../utils/utils";
 import { dateParser } from "../../utils/utils";
-import LikeButton from "./like.home";
-import { Link } from "react-router-dom";
+import LikeButton from "./like.post";
+import { updatePost } from "../../action/post.action";
+import DeleteCard from "./delete.post";
 // Images import
 import edit from "../../assets/image/edit.svg";
 import trash from "../../assets/image/trash.svg";
@@ -24,25 +25,36 @@ import {
     PostImageContainer,
     PostImg,
     StyledMessageP,
+    StyledEditMessageContainer,
+    StyledMessageTextaera,
+    StyledModifyButtonContainer,
+    StyledModifyButton,
     StyledBottomCommandContainer,
     StyledLikeContainer,
     StyledIconsContainer,
     StyledIconContainer,
-    StyledImg,
-    StyledModifyLink
-} from "./style.home";
+    StyledIconImg
+} from "./style.post";
 
-// import { StyledLittlePinkButton } from "../../utils/style/StyledGlobalButton";
-
-
-
+import { StyledLittlePinkButton } from "../../utils/style/StyledGlobalButton";
 
 /******* */
  
 const Card = ({ post }) => {
     const [isLoading, setIsLoading] = useState(true);
+    const [isUpdated, setIsUpdated] = useState(false);
+    const [textUpdate, setTextUpdate] = useState(null);
+    // Redux
     const usersData = useSelector((state) => state.usersReducer);
-    // const userData = useSelector((state) => state.userReducer);
+    const userData = useSelector((state) => state.userReducer);
+    const dispatch = useDispatch();
+
+    const updateItem = () => {
+        if(textUpdate) {
+            dispatch(updatePost(post._id, textUpdate))
+        }
+        setIsUpdated(false);
+    }
 
     useEffect(() => {
         !isEmpty(usersData[0]) && setIsLoading(false);
@@ -91,7 +103,18 @@ const Card = ({ post }) => {
                                 allowFullScreen
                             ></iframe>
                         )} */}
-                        <StyledMessageP>{post.message}</StyledMessageP>
+                        {isUpdated === false && (<StyledMessageP>{post.message}</StyledMessageP>)}
+                        {isUpdated === true && (
+                            <StyledEditMessageContainer>
+                                <StyledMessageTextaera 
+                                    defaultValue={post.message}
+                                    onChange={(e) => setTextUpdate(e.target.value)}
+                                />
+                                <StyledModifyButtonContainer>
+                                    <StyledModifyButton onClick={updateItem}>Modifier</StyledModifyButton>
+                                </StyledModifyButtonContainer>
+                            </StyledEditMessageContainer>
+                        )}
                     </StyledCorpContainer>
                     <StyledBottomCommandContainer>
                         <StyledLikeContainer>
@@ -107,12 +130,15 @@ const Card = ({ post }) => {
                             </StyledLittlePinkButton>  
                         </div> */}
                         <StyledIconsContainer>
-                            <StyledIconContainer>
-                                <StyledImg src={edit} alt="Editer le post" />
-                            </StyledIconContainer>
-                            <StyledIconContainer>
-                                <StyledImg src={trash} alt="Supprimer le post" />
-                            </StyledIconContainer>                            
+                            {userData._id === post.posterId && (
+                                <StyledIconContainer 
+                                    onClick={() => setIsUpdated(!isUpdated)}
+                                    className={isUpdated ? "editing" : '' }
+                                >
+                                    <StyledIconImg src={edit} alt="Editer le post" />
+                                </StyledIconContainer>
+                            )}
+                            <DeleteCard id={post._id} />
                         </StyledIconsContainer>
 
                         {/* <StyledModifyLink to="/edit-post">Modifier</StyledModifyLink> */}

@@ -5,14 +5,13 @@ import styled from 'styled-components';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { colors } from './config';
 // Page and component import
-import Home from './pages/Home/index.home';
+import Home from './pages/Post/index.post';
 import Signup from './pages/User/signup.user';
 import Header from './components/Header/index.header';
 import Error from './components/Error/index.error';
 import Profil from './pages/User/profil.user';
 import Login from './pages/Login/index.login';
 import { UidProvider } from './utils/context';
-import  EditPost from './pages/Post/edit.post';
 // Style import
 import './normalize.css';
 import './style.css';
@@ -24,6 +23,7 @@ import rootReducer from './reducers/index.reducer';
 import { getUsers } from './action/users.action';
 // Dev Tools
 import { composeWithDevTools } from 'redux-devtools-extension';
+import CreatePost from './pages/Post/create.post';
 
 
 // Get all data by Redux
@@ -59,7 +59,6 @@ root.render(
               <Route path='/signup' element={ <Signup /> } />
               <Route path='/profil' element={ <Profil /> } />
               <Route path='/home' element={ <Home /> } />
-              <Route path='/edit-post' element={ <EditPost /> } />
             </Routes>
           </StyledMain>
         </StyledLayout>

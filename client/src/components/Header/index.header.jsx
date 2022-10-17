@@ -78,18 +78,18 @@ function Header() {
                             <StyledMenuContainer to="/">
                                 <Link to="/home">
                                     {pathname === '/home' ? (
-                                        <StyledLittleGreyButton>Accueil</StyledLittleGreyButton>
+                                        <StyledLittleGreyButton>Fil d'actualité</StyledLittleGreyButton>
                                     ) : (
-                                        <StyledLittlePinkButton>Accueil</StyledLittlePinkButton>
+                                        <StyledLittlePinkButton>Fil d'actualité</StyledLittlePinkButton>
                                     )}
                                 </Link>
-                                <Link to="/create-post">
+                                {/* <Link to="/create-post">
                                 {pathname === '/create-post' ? (
                                         <StyledLittleGreyButton>Créer un post</StyledLittleGreyButton>
                                     ) : (
                                         <StyledLittlePinkButton>Créer un post</StyledLittlePinkButton>
                                     )}
-                                </Link>
+                                </Link> */}
                             </StyledMenuContainer>  
                         </StyledLogoMenuContainer>
                         <StyledAvatarMenuContainer>

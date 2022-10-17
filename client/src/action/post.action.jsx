@@ -5,6 +5,8 @@ import { fetchUrl } from '../config';
 export const GET_POSTS = "GET_POSTS";
 export const LIKE_POST = "LIKE_POST";
 export const UNLIKE_POST = "UNLIKE_POST";
+export const UPDATE_POST = "UPDATE_POST";
+export const DELETE_POST = "DELETE_POST";
 
 // // Get posts with infinity scroll
 // export const getPosts = (countDisplay) => {
@@ -61,6 +63,37 @@ export const unlikePost = (postId, userId) => {
                 dispatch({ type: UNLIKE_POST, payload: {postId, userId} })
             })
             .catch((err) => console.log('Axios patch unlike failed. ' + err))
+        ;
+    };
+};
+
+export const updatePost = (postId, message) => {
+    return(dispatch) => {
+        return axios ({
+            method: 'patch',
+            url: fetchUrl + 'api/post/' + postId,
+            data: { message },
+            withCredentials: true
+        })
+            .then((res) => {
+                dispatch({ type: UPDATE_POST, payload: { message, postId }});
+            })
+            .catch((err) => console.log('Axios patch update post failed. ' + err))
+        ;
+    };
+};
+
+export const deletePost = (postId) => {
+    return(dispatch) => {
+        return axios ({
+            method: 'delete',
+            url: fetchUrl + 'api/post/' + postId,
+            withCredentials: true
+        })
+            .then((res) => {
+                dispatch({ type: DELETE_POST, payload: { postId }});
+            })
+            .catch((err) => console.log('Axios delete post failed. ' + err))
         ;
     };
 };
