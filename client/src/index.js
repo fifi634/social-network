@@ -23,7 +23,6 @@ import rootReducer from './reducers/index.reducer';
 import { getUsers } from './action/users.action';
 // Dev Tools
 import { composeWithDevTools } from 'redux-devtools-extension';
-import CreatePost from './pages/Post/create.post';
 
 
 // Get all data by Redux

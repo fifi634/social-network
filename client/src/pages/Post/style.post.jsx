@@ -6,6 +6,11 @@ export const StyledLi = styled.li`
     list-style: none;
 `;
 
+export const StyledCreatePostContainer = styled.div`
+    // max-width: 1050px;
+    // margin: 0 auto;  
+`;
+
 export const PostContainer = styled.div`
     max-width: 1000px;
     max-height: 695px;
@@ -68,7 +73,6 @@ export const PostImageContainer = styled.div`
     width: 550px;
     height: 350px;
     margin: 10px 0;
-    // border: solid ${colors.tertiary} 1px;
     border-radius: 25px;
     @media screen and (max-width: 800px) {
         width: auto;
@@ -92,7 +96,6 @@ export const StyledMessageP = styled.p`
     border-radius: 20px 20px 20px 6px;
     background-color: #ffffff;
     min-width: 350px;
-    // border: solid ${colors.tertiary} 2px;
     @media screen and (max-width: 800px) {
         min-width : 200px;
         width: auto;
@@ -106,10 +109,19 @@ export const StyledMessageP = styled.p`
 export const StyledEditMessageContainer = styled.div`
     display: flex;
     flex-direction: column;
+    max-width: 400px;
     background-color: ${colors.editPost};
     padding: 10px;
-    margin: 20px 0;
     border-radius: 20px 6px 20px 20px;
+    &.createPost {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    @media screen and (min-width: 800px) {
+        margin: 0 10px;
+        max-width: 500px;
+    }
+
 `;
 
 export const StyledMessageTextaera = styled.textarea`
@@ -117,6 +129,11 @@ export const StyledMessageTextaera = styled.textarea`
     border-radius: 20px 20px 6px 20px;
     border: solid 1px ${colors.primary};
     padding: 20px;
+    max-width: auto;
+    @media screen and (max-width: 800px) {
+        max-width: 800px;
+    }
+
 `;
 
 export const StyledModifyButtonContainer = styled.div`

@@ -7,6 +7,7 @@ import { isEmpty } from "../../utils/utils";
 import picture from '../../assets/image/picture.svg';
 // Style
 import { 
+    StyledCreatePostContainer,
     StyledEditMessageContainer,
     StyledPostFileInput, 
     StyledIconContainer, 
@@ -38,12 +39,13 @@ const CreatePost = () => {
     }, [userData]);
 
     return (
-        <div>
+        <StyledCreatePostContainer>
             {isLoading ? (
                 <Loader />
             ) : (
-                <StyledEditMessageContainer>
+                <StyledEditMessageContainer className="createPost">
                     <StyledMessageTextaera 
+                        className="createPost"
                         name="message"
                         id="message"
                         placeholder="Quoi de neuf ?"
@@ -64,7 +66,7 @@ const CreatePost = () => {
                     </StyledModifyButtonContainer>
                 </StyledEditMessageContainer>
             )}
-        </div>
+        </StyledCreatePostContainer>
     );
 };
 
