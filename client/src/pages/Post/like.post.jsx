@@ -4,6 +4,10 @@ import { UidContext } from '../../utils/context';
 import { likePost, unlikePost } from "../../action/post.action";
 // Style
 import { StyledLittlePinkButton, StyledLittleGreyButton } from '../../utils/style/StyledGlobalButton';
+import { StyledIconImg, StyledIconContainer, StyledCountLikeContainer } from './style.post';
+// Icon
+import heart from '../../assets/image/heart.svg';
+import heartFilled from '../../assets/image/heart-filled.svg';
 
 const LikeButton = ({ post }) => {
     const [liked, setLiked] = useState(false);
@@ -27,15 +31,20 @@ const LikeButton = ({ post }) => {
     }, [uid, post.likers, liked]);
 
     return (
-        <>
+        <StyledCountLikeContainer>
             {uid && liked === false && (
-                <StyledLittlePinkButton post={post} onClick={like}> J'aime </StyledLittlePinkButton>
+                <StyledIconContainer onClick={like}>
+                    <StyledIconImg src={heart} alt="J'aime !" post={post}  />
+                </StyledIconContainer>
             )}
             {uid && liked && (
-                <StyledLittleGreyButton post={post} onClick={unlike}> J'aime </StyledLittleGreyButton>
+                <StyledIconContainer onClick={unlike}>
+                    <StyledIconImg src={heartFilled} alt="Je n'aime plus." post={post}  />
+                </StyledIconContainer>
             )}
-        </>
-        
+            {post.likers.length >= 1 && 
+            <span>{post.likers.length} J'aime</span>}
+        </StyledCountLikeContainer>        
     );
 };
 

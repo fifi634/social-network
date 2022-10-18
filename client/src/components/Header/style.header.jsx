@@ -46,28 +46,22 @@ export const StyledConnectContainer = styled.div `
 export const HeaderLogo = styled.img`
     max-width: 300px;
     content: url(${completLogo});
-    @media screen and (max-width:920px) {
+    @media screen and (max-width:950px) {
         content: url(${logoAlone});
         max-height: 80px;
     }
-    @media screen and (max-width: 610px) {
+    @media screen and (max-width: 700px) {
         display: none;
     }
 `;
 
 export const StyledMenuContainer = styled.div`
     display: flex;
-    align-items: center;
-    // @media screen and (max-width: 920px) {
-    //     flex-direction: column;   
-    // }
-    // @media screen and (max-width: 610px) {
-    //     display: flex;
-    //     flex-direction: row;
-    // }
+    @media screen and (max-width: 920px) {
+        align-items: center;
+    })
     @media screen and (max-width: 400px) {
         display: flex;
-        // flex-direction: column;
         justify-context: center;
     }
 `;

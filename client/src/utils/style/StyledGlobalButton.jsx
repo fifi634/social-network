@@ -25,10 +25,16 @@ export const StyledPinkButton = styled.button`
         width: auto;
         height: auto;
         margin: 5px;
+        &.home {
+            margin: 5px;
+            width: 160px;
+            height: 30px;
+        }
     }
     @media screen and (max-device-width: 480px) {
         width: 160px;
     } 
+
 `;
 
 export const StyledGreyButton = styled.button`
@@ -38,7 +44,7 @@ export const StyledGreyButton = styled.button`
     height: 60px;
     box-shadow: 0px 4px 4px ${colors.boxShadow};
     border-radius: 10px;
-    border: 1px solid #000000;
+    border: 1.5px solid #ffffff;
     color: #ffffff;
     &:active {
         box-shadow: 0 0 0;
@@ -57,9 +63,16 @@ export const StyledGreyButton = styled.button`
         height: auto;
         margin: 5px;
     }
+    @media screen and (max-width: 700px) {
+        &.home {
+            width: 160px;
+            height: 30px;
+        }
+    }
     @media screen and (max-device-width: 480px) {
         width: 160px;
-    } 
+    }
+
 `;
 
 export const StyledLittlePinkButton = styled.button`     
@@ -93,7 +106,7 @@ export const StyledLittleGreyButton = styled.button`
     height: 30px;
     box-shadow: 0px 4px 4px ${colors.boxShadow};
     border-radius: 10px;
-    border: 1px solid #FFFFFF;
+    border: 1.5px solid #FFFFFF;
     color: #ffffff;
     font-weight: 700;
     &:active {

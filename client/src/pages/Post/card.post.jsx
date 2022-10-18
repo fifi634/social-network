@@ -118,9 +118,7 @@ const Card = ({ post }) => {
                     </StyledCorpContainer>
                     <StyledBottomCommandContainer>
                         <StyledLikeContainer>
-                            <LikeButton post={post}/>
-                            {post.likers.length >= 1 && 
-                            <span> Aimé par {post.likers.length} personne{post.likers.length > 1 && 's'}</span>}
+                            <LikeButton post={post}/>                            
                         </StyledLikeContainer>
 
                         {/* <div>
@@ -129,18 +127,19 @@ const Card = ({ post }) => {
                                 {<span>{post.comments.length} commentaire{post.comments.length > 1 ? 's ' : ' '}</span>}
                             </StyledLittlePinkButton>  
                         </div> */}
-                        <StyledIconsContainer>
                             {userData._id === post.posterId && (
-                                <StyledIconContainer 
-                                    onClick={() => setIsUpdated(!isUpdated)}
-                                    className={isUpdated ? "editing" : '' }
-                                >
-                                    <StyledIconImg src={edit} alt="Editer le post" />
-                                </StyledIconContainer>
+                                <StyledIconsContainer>
+                                    <StyledIconContainer 
+                                        onClick={() => setIsUpdated(!isUpdated)}
+                                        className={isUpdated ? "editing" : '' }
+                                    >
+                                        <StyledIconImg src={edit} alt="Editer le post" />
+                                    </StyledIconContainer>
+                                    <StyledIconContainer>
+                                        <DeleteCard id={post._id} />
+                                    </StyledIconContainer>
+                                </StyledIconsContainer>
                             )}
-                            <DeleteCard id={post._id} />
-                        </StyledIconsContainer>
-
                         {/* <StyledModifyLink to="/edit-post">Modifier</StyledModifyLink> */}
                     </StyledBottomCommandContainer>
                 </PostContainer>

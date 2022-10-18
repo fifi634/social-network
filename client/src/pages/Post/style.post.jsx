@@ -13,7 +13,7 @@ export const PostContainer = styled.div`
     border-radius: 10px;
     margin: 40px auto;
     padding: 20px;
-    background: rgba(78, 81, 102, 0.04);
+    background: rgba(78, 81, 102, 0.1);
     box-shadow: 4px 4px 8px ${colors.boxShadow};
 `;
 
@@ -89,7 +89,7 @@ export const PostImg = styled.img`
 export const StyledMessageP = styled.p`
     margin: 10px 20px;
     padding: 20px;
-    border-radius: 20px;
+    border-radius: 20px 20px 20px 6px;
     background-color: #ffffff;
     min-width: 350px;
     // border: solid ${colors.tertiary} 2px;
@@ -106,11 +106,15 @@ export const StyledMessageP = styled.p`
 export const StyledEditMessageContainer = styled.div`
     display: flex;
     flex-direction: column;
+    background-color: ${colors.editPost};
+    padding: 10px;
+    margin: 20px 0;
+    border-radius: 20px 6px 20px 20px;
 `;
 
 export const StyledMessageTextaera = styled.textarea`
     margin: 15px 0 5px 0;
-    border-radius: 20px;
+    border-radius: 20px 20px 6px 20px;
     border: solid 1px ${colors.primary};
     padding: 20px;
 `;
@@ -124,11 +128,10 @@ export const StyledModifyButtonContainer = styled.div`
 export const StyledModifyButton = styled.button`
     background: ${colors.primary};
     color: #ffffff;
-    // margin: 0 0 5px 0;
     width: 160px;
     height: 30px;
     box-shadow: 0px 4px 4px ${colors.boxShadow};
-    border-radius: 10px;
+    border-radius: 6px 20px 20px 20px;
     border: 1px solid #000000;
     font-weight: 700;
     &:active {
@@ -169,6 +172,7 @@ export const StyledIconContainer = styled.div`
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    border: solid 1.5px #ffffff;
     background-color: ${colors.secondary};
     margin: 5px;
     &:hover {
@@ -185,4 +189,13 @@ export const StyledIconImg = styled.img`
     width: 20px;
     height: 20px;
     transform: translate(50%, 50%);
+`;
+
+export const StyledPostFileInput = styled.input`
+    opacity: 0;
+`;
+
+export const StyledCountLikeContainer = styled.div`
+    display: flex;
+    align-items: center;
 `;

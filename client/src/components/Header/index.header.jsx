@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 // Style
 import { 
     StyledPinkButton, 
+    StyledGreyButton,
     StyledLittlePinkButton, 
     StyledLittleGreyButton 
 } from '../../utils/style/StyledGlobalButton';
@@ -74,24 +75,17 @@ function Header() {
                                     src={logoAlone}
                                     alt="Aller à la page d'accueil de Groupomania"
                                 />
-                            </Link>         
-                            <StyledMenuContainer to="/">
-                                <Link to="/home">
-                                    {pathname === '/home' ? (
-                                        <StyledLittleGreyButton>Fil d'actualité</StyledLittleGreyButton>
-                                    ) : (
-                                        <StyledLittlePinkButton>Fil d'actualité</StyledLittlePinkButton>
-                                    )}
-                                </Link>
-                                {/* <Link to="/create-post">
-                                {pathname === '/create-post' ? (
-                                        <StyledLittleGreyButton>Créer un post</StyledLittleGreyButton>
-                                    ) : (
-                                        <StyledLittlePinkButton>Créer un post</StyledLittlePinkButton>
-                                    )}
-                                </Link> */}
-                            </StyledMenuContainer>  
+                            </Link>          
                         </StyledLogoMenuContainer>
+                        <StyledMenuContainer to="/">
+                            <Link to="/home">
+                                {pathname === '/home' ? (
+                                    <StyledGreyButton className='home'>Fil d'actualité</StyledGreyButton>
+                                ) : (
+                                    <StyledPinkButton className='home'>Fil d'actualité</StyledPinkButton>
+                                )}
+                            </Link>
+                        </StyledMenuContainer> 
                         <StyledAvatarMenuContainer>
                             <StyledLinkAvatarContainer to="/profil">
                                 <StyledAvatarPicture src={userData.avatar_slug} alt="avatar utilisateur"/>
