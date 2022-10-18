@@ -21,7 +21,7 @@ export const getUser = (uid) => {
             .then((res) => {
                 dispatch({ type: GET_USER, payload: res.data })
             })
-            .catch((err) => console.log('Axios Redux getUser failed. ' + err))
+            .catch((err) => console.log('Get user failed. ' + err))
         ;
     }
 };
@@ -51,7 +51,7 @@ export const uploadPicture = (data, userId) => {
                         // To upload picture slug in Redux store
                         dispatch({ type: UPLOAD_PICTURE, payload: res.data.avatar_slug});
                     })
-                    .catch(err => console.log('Redux Axios get uploadPicture failed. ' + err))
+                    .catch(err => console.log('Upload picture failed. ' + err))
                 ;
             })
             .catch(err => console.log('Redux Axios post uploadPicture failed. ' + err))
@@ -95,7 +95,7 @@ export const updateProfil = (inputEmail, inputPassword, inputPseudo, uid) => {
                     .then((res) => {
                         dispatch({ type: GET_USER, payload: res.data });
                     })
-                    .catch((err) => console.log('Axios Redux getUser failed. ' + err))
+                    .catch((err) => console.log('Get user failed. ' + err))
 
 
                 // // Signup errors 

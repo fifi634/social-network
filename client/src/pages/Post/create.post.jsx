@@ -1,21 +1,34 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../utils/style/Atom";
-import { isEmpty } from "../../utils/utils";
+import { isEmpty, timestampParser } from "../../utils/utils";
+import { addPost, getPosts } from "../../action/post.action";
 
 // Import icon
 import picture from '../../assets/image/picture.svg';
 // Style
 import { 
-    StyledCreatePostContainer,
     StyledEditMessageContainer,
     StyledPostFileInput, 
     StyledIconContainer, 
     StyledIconImg,
     StyledMessageTextaera,
     StyledModifyButtonContainer,
-    StyledModifyButton
+    StyledSpaceBetweenContainer,
+    StyledModifyButton,
+    AvatarContainer,
+    AvatarImg,
+
+    PostContainer,
+    StyledCenterContainer,
+    StyledUserInfoContainer,
+    StyledH2,
+    StyledCorpContainer,
+    PostImageContainer,
+    PostImg,
+    StyledMessageP    
 } from './style.post';
+
 
 
 
@@ -23,15 +36,44 @@ import {
 const CreatePost = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [message, setMessage] = useState('');
-    const [postPicture, setPostPicture] = useState(null);
+    // const [postPicture, setPostPicture] = useState(null);
     const [file, setFile] = useState();
 
-    // Redux
+    
+    // Get user by Redux
     const userData = useSelector((state) => state.userReducer);
+    const dispatch = useDispatch();
 
-    const handlePicture = () => {};
+    const cancelPost = () => {
+        setMessage('');
+        // setPostPicture('');
+        setFile('');
+    };
 
-    const trucPost = () => {};
+    const handlePost = async () => {
+        if(message) {
+            console.log(message);
+            const data = new FormData();
+            data.append('posterId', userData._id);
+            data.append('message', message);
+            if(file) data.append('file', file);
+
+            await dispatch(addPost(data));
+            dispatch(getPosts());
+            cancelPost();
+        } else {
+            alert("Veuillez entrer un message.")
+        };
+    };
+
+
+    const handlePicture = (e) => {
+        // setPostPicture(URL.createObjectURL(e.target.files[0]));
+        setFile(e.target.files[0]);
+        console.log(file);
+    };
+
+
 
     // Stop loading spinner
     useEffect(() => {
@@ -39,34 +81,60 @@ const CreatePost = () => {
     }, [userData]);
 
     return (
-        <StyledCreatePostContainer>
+        <div>
             {isLoading ? (
                 <Loader />
             ) : (
                 <StyledEditMessageContainer className="createPost">
-                    <StyledMessageTextaera 
+                    <StyledMessageTextaera
                         className="createPost"
                         name="message"
                         id="message"
                         placeholder="Quoi de neuf ?"
                         onChange={(e) => setMessage(e.target.value)}
+                        value={message}
                     />
-                    <StyledIconContainer>
-                        <StyledIconImg src={picture} alt="illustration du post" />
+                    {/* {message || postPicture ? (
+                        <PostContainer className="createPostOverview">
+                            <StyledCenterContainer>
+                                <AvatarContainer>
+                                    <AvatarImg src={userData.avatar_slug} alt="Avatar du créateur du post" />
+                                </AvatarContainer>
+                                <StyledUserInfoContainer>
+                                    <StyledH2>
+                                        {userData.pseudo}
+                                    </StyledH2>
+                                    <span>{timestampParser(Date.now())}</span>
+                                </StyledUserInfoContainer>
+                            </StyledCenterContainer>
+                            <StyledCorpContainer>
+                            {file && 
+                                <PostImageContainer>
+                                    <PostImg src={file} alt="Illustration du post" />
+                                </PostImageContainer>
+                            }
+                            <StyledMessageP>{message}</StyledMessageP>
+                        </StyledCorpContainer>
+                        </PostContainer>
+                    ) : null} */}
+                    <StyledSpaceBetweenContainer>
                         <StyledPostFileInput
                             type="file" 
                             id="file-upload" 
                             name="file" 
                             accept=".jpg, .jpeg, .png, .gif, .webp" 
-                            oneChange={(e) => handlePicture(e)} 
+                            onChange={(e) => handlePicture(e)} 
                         />
-                    </StyledIconContainer>
-                    <StyledModifyButtonContainer>
-                        <StyledModifyButton onClick={trucPost}>Poster</StyledModifyButton>
-                    </StyledModifyButtonContainer>
+                        <StyledModifyButtonContainer>
+                            {message ? (
+                                <StyledModifyButton onClick={cancelPost} className="cancelButton">Annuler</StyledModifyButton>
+                            ): null }
+                                <StyledModifyButton onClick={handlePost}>Poster</StyledModifyButton>
+                        </StyledModifyButtonContainer>
+                    </StyledSpaceBetweenContainer>                    
                 </StyledEditMessageContainer>
             )}
-        </StyledCreatePostContainer>
+        </div>
     );
 };
 

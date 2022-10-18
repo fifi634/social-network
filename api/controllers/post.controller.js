@@ -13,10 +13,11 @@ module.exports.readPost = (req, res) => {
 
 // Create post
 module.exports.createPost = async (req, res) => {
+    console.log(req.body)
     const newPost = new PostModel({
         posterId: req.auth.userId,
         message: req.body.message,
-        video: req.body.video,
+        // video: req.body.video,
         picture: req.file !== null ? './uploads/post/' + req.file.filename : ''
     });
 

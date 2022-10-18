@@ -4,7 +4,7 @@ import { UidContext } from '../../utils/context';
 import { likePost, unlikePost } from "../../action/post.action";
 // Style
 import { StyledLittlePinkButton, StyledLittleGreyButton } from '../../utils/style/StyledGlobalButton';
-import { StyledIconImg, StyledIconContainer, StyledCountLikeContainer } from './style.post';
+import { StyledIconImg, StyledIconContainer, StyledCenterContainer } from './style.post';
 // Icon
 import heart from '../../assets/image/heart.svg';
 import heartFilled from '../../assets/image/heart-filled.svg';
@@ -31,7 +31,7 @@ const LikeButton = ({ post }) => {
     }, [uid, post.likers, liked]);
 
     return (
-        <StyledCountLikeContainer>
+        <StyledCenterContainer>
             {uid && liked === false && (
                 <StyledIconContainer onClick={like}>
                     <StyledIconImg src={heart} alt="J'aime !" post={post}  />
@@ -44,7 +44,7 @@ const LikeButton = ({ post }) => {
             )}
             {post.likers.length >= 1 && 
             <span>{post.likers.length} J'aime</span>}
-        </StyledCountLikeContainer>        
+        </StyledCenterContainer>        
     );
 };
 

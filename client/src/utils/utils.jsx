@@ -11,7 +11,9 @@ export const isEmpty = (value) => {
 
 // Format Mongo style date in string client timezone date
 export const dateParser = (mongoDate) => {
-    let options = {
+    let dateOptions = {
+        timeZone: "Europe/Paris",
+        hour12: false,
         hours: "2-digit",
         minute: "2-digit",
         second: "2-digit",
@@ -21,26 +23,39 @@ export const dateParser = (mongoDate) => {
         day: "numeric"
     };
 
+    let hourOptions = {
+        timeZone: "Europe/Paris",
+        hour12: false,
+        hours: "2-digit",
+        minutes: "2-digit"
+    };
+    
     let timestamp = Date.parse(mongoDate);
-    let date = new Date(timestamp).toLocaleDateString("fr-FR", options);
+    let date = new Date(timestamp).toLocaleDateString("fr-FR", dateOptions);
+    let hour = new Date(timestamp).toLocaleTimeString("fr-FT", hourOptions);
 
-    return date.toString();
+    return date.toString() + ', ' + hour.toString();
 };
 
 
 // Format timestamp in string client timezone date
 export const timestampParser = (timestamp) => {
-    let options = {
-        hours: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
+    let dateOptions = {
         weekday: "long",
         year: "numeric",
         month: "short",
         day: "numeric"
     };
 
-    let date = new Date(timestamp).toLocaleDateString("fr-FR", options);
+    let hourOptions = {
+        timeZone: "Europe/Paris",
+        hour12: false,
+        hours: "2-digit",
+        minutes: "2-digit"
+    }
 
-    return date.toString();
+    let date = new Date(timestamp).toLocaleDateString("fr-FR", dateOptions);
+    let hour = new Date(timestamp).toLocaleTimeString("fr-FT", hourOptions);
+
+    return date.toString() + ', ' + hour.toString();
 };

@@ -1,14 +1,9 @@
 import styled from 'styled-components';
 import { colors } from '../../config';
-
+import picture from '../../assets/image/picture.svg';
 
 export const StyledLi = styled.li`
     list-style: none;
-`;
-
-export const StyledCreatePostContainer = styled.div`
-    // max-width: 1050px;
-    // margin: 0 auto;  
 `;
 
 export const PostContainer = styled.div`
@@ -20,10 +15,21 @@ export const PostContainer = styled.div`
     padding: 20px;
     background: rgba(78, 81, 102, 0.1);
     box-shadow: 4px 4px 8px ${colors.boxShadow};
+    &.createPostOverview {
+        margin: unset;
+        background: #ededef;
+        box-shadow: none;
+    }
 `;
 
-export const StyledPosterContainer = styled.div`
+export const StyledCenterContainer = styled.div`
     display: flex;
+    align-items: center;
+`;
+
+export const StyledSpaceBetweenContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
     align-items: center;
 `;
 
@@ -98,7 +104,7 @@ export const StyledMessageP = styled.p`
     min-width: 350px;
     @media screen and (max-width: 800px) {
         min-width : 200px;
-        width: auto;
+        width: auto;        
         margin: 10px 0;
     }
     @media screen and (max-width: 400px) {
@@ -109,19 +115,22 @@ export const StyledMessageP = styled.p`
 export const StyledEditMessageContainer = styled.div`
     display: flex;
     flex-direction: column;
-    max-width: 400px;
     background-color: ${colors.editPost};
     padding: 10px;
     border-radius: 20px 6px 20px 20px;
     &.createPost {
-        max-width: 1000px;
-        margin: 0 auto;
+        margin: 0px auto;
+        box-shadow: 0px 2px 2px ${colors.boxShadow};
     }
     @media screen and (min-width: 800px) {
         margin: 0 10px;
-        max-width: 500px;
+        &.createPost {
+            max-width: 1000px;
+        }
+        &.editPost {
+            width: 400px;            
+        }
     }
-
 `;
 
 export const StyledMessageTextaera = styled.textarea`
@@ -129,11 +138,9 @@ export const StyledMessageTextaera = styled.textarea`
     border-radius: 20px 20px 6px 20px;
     border: solid 1px ${colors.primary};
     padding: 20px;
-    max-width: auto;
     @media screen and (max-width: 800px) {
         max-width: 800px;
     }
-
 `;
 
 export const StyledModifyButtonContainer = styled.div`
@@ -147,6 +154,7 @@ export const StyledModifyButton = styled.button`
     color: #ffffff;
     width: 160px;
     height: 30px;
+    margin: 0 0 0 10px;
     box-shadow: 0px 4px 4px ${colors.boxShadow};
     border-radius: 6px 20px 20px 20px;
     border: 1px solid #000000;
@@ -162,6 +170,9 @@ export const StyledModifyButton = styled.button`
         letter-spacing: 1px;
         background-color: ${colors.primary};
         transition: 0.3s
+    }
+    &.cancelButton {
+        background: ${colors.tertiary};
     }
 `;
 
@@ -192,6 +203,7 @@ export const StyledIconContainer = styled.div`
     border: solid 1.5px #ffffff;
     background-color: ${colors.secondary};
     margin: 5px;
+    cursor: pointer;
     &:hover {
         cursor: pointer;
         background-color: ${colors.primary};
@@ -209,10 +221,5 @@ export const StyledIconImg = styled.img`
 `;
 
 export const StyledPostFileInput = styled.input`
-    opacity: 0;
-`;
-
-export const StyledCountLikeContainer = styled.div`
-    display: flex;
-    align-items: center;
+    margin: 10px 0 0 20px;
 `;

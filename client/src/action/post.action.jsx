@@ -3,6 +3,7 @@ import { fetchUrl } from '../config';
 
 // Posts
 export const GET_POSTS = "GET_POSTS";
+export const ADD_POST = "ADD_POST";
 export const LIKE_POST = "LIKE_POST";
 export const UNLIKE_POST = "UNLIKE_POST";
 export const UPDATE_POST = "UPDATE_POST";
@@ -21,6 +22,23 @@ export const DELETE_POST = "DELETE_POST";
 //         ;
 //     }
 // };
+
+export const addPost = (data) => {
+    return (dispatch) => {
+        return axios({
+            method: 'post',
+            url: fetchUrl + 'api/post/', 
+            withCredentials: true,
+            data: data
+    })
+        .then(() => {})
+        .catch((err) => {
+            console.log('Send addPost failed. ' + err);
+            alert("Il y a un problème avec l'envoi du post au serveur.")
+        });
+        ;
+    };
+}
 
 // Getposts since inifinity scroll
 export const getPosts = () => {
@@ -46,7 +64,7 @@ export const likePost = (postId, userId) => {
             .then((res) => {
                 dispatch({ type: LIKE_POST, payload: {postId, userId} })
             })
-            .catch((err) => console.log('Axios patch like failed. ' + err))
+            .catch((err) => console.log('Send like failed. ' + err))
         ;
     };
 };
@@ -62,7 +80,7 @@ export const unlikePost = (postId, userId) => {
             .then((res) => {
                 dispatch({ type: UNLIKE_POST, payload: {postId, userId} })
             })
-            .catch((err) => console.log('Axios patch unlike failed. ' + err))
+            .catch((err) => console.log('Send unlike failed. ' + err))
         ;
     };
 };
@@ -78,7 +96,7 @@ export const updatePost = (postId, message) => {
             .then((res) => {
                 dispatch({ type: UPDATE_POST, payload: { message, postId }});
             })
-            .catch((err) => console.log('Axios patch update post failed. ' + err))
+            .catch((err) => console.log('Update post failed. ' + err))
         ;
     };
 };

@@ -16,7 +16,7 @@ import trash from "../../assets/image/trash.svg";
 import { 
     StyledLi,
     PostContainer,
-    StyledPosterContainer,
+    StyledCenterContainer,
     StyledUserInfoContainer,
     StyledH2,
     AvatarImg, 
@@ -66,7 +66,7 @@ const Card = ({ post }) => {
                 <Loader />
             ) : (
                 <PostContainer>
-                    <StyledPosterContainer>
+                    <StyledCenterContainer>
                         <AvatarContainer>
                             <AvatarImg src={
                                 !isEmpty(usersData[0]) && 
@@ -86,7 +86,7 @@ const Card = ({ post }) => {
                             </StyledH2>
                             <span>{dateParser(post.createdAt)}</span>
                         </StyledUserInfoContainer>
-                    </StyledPosterContainer>
+                    </StyledCenterContainer>
                     <StyledCorpContainer>
                         {post.picture && 
                         <PostImageContainer>
@@ -105,8 +105,9 @@ const Card = ({ post }) => {
                         )} */}
                         {isUpdated === false && (<StyledMessageP>{post.message}</StyledMessageP>)}
                         {isUpdated === true && (
-                            <StyledEditMessageContainer>
+                            <StyledEditMessageContainer className="editPost">
                                 <StyledMessageTextaera 
+                                    className="editPost"
                                     defaultValue={post.message}
                                     onChange={(e) => setTextUpdate(e.target.value)}
                                 />
