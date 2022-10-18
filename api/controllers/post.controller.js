@@ -13,12 +13,13 @@ module.exports.readPost = (req, res) => {
 
 // Create post
 module.exports.createPost = async (req, res) => {
-    console.log(req.body)
     const newPost = new PostModel({
         posterId: req.auth.userId,
         message: req.body.message,
         // video: req.body.video,
-        picture: req.file !== null ? './uploads/post/' + req.file.filename : ''
+        picture: req.file !== (null || undefined) ? './uploads/post/' + req.file.filename : ''
+    }, (err, data) => {
+        if(err) return res.status(500).json({message: 'File upload failed.', err});
     });
 
     try {

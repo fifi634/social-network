@@ -52,7 +52,6 @@ const CreatePost = () => {
 
     const handlePost = async () => {
         if(message) {
-            console.log(message);
             const data = new FormData();
             data.append('posterId', userData._id);
             data.append('message', message);
@@ -67,10 +66,9 @@ const CreatePost = () => {
     };
 
 
-    const handlePicture = (e) => {
+    const handlePicture = async (e) => {
         // setPostPicture(URL.createObjectURL(e.target.files[0]));
-        setFile(e.target.files[0]);
-        console.log(file);
+        await setFile(e.target.files[0]);
     };
 
 

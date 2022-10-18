@@ -13,6 +13,7 @@ const MIME_TYPES = {
 };
 
 
+
 // Save files configuration
 const storage = multer.diskStorage({  
     destination: (req, file, callback) => {
@@ -43,6 +44,42 @@ const upload = multer({
         }    
     }
 });
+
+
+
+
+
+
+// // Save files configuration
+// const storage = multer.diskStorage({  
+//     destination: (req, file, callback) => {
+//         callback(null, '../client/public/uploads/post/');
+//     },
+//     filename: (req, file, callback) => {
+//         const extension = MIME_TYPES[file.mimetype];
+//         callback(null, req.auth.userId + Date.now() + '.' + extension);
+//     }
+// });
+
+
+// // Check file
+// const upload = multer({
+//     storage : storage,
+//     limits: { fileSize: 83886080 },
+//     fileFilter: (req, file, callback) => {
+//         if (
+//             file.mimetype !== 'image/png' &&
+//             file.mimetype !== 'image/jpg' &&
+//             file.mimetype !== 'image/jpeg' &&
+//             file.mimetype !== 'image/webp' &&
+//             file.mimetype !== 'image/gif'
+//         ) {
+//             callback(new Error('invalid file'), false);
+//         } else {
+//             callback(null, true);
+//         }    
+//     }
+// });
 
 
 module.exports = upload.single('file');
