@@ -19,17 +19,6 @@ exports.signupErrors = (err) => {
 };
 
 
-// Update profil errors
-exports.updateProfilErrors = (err) => {
-    let errors = { pseudo: '', email: ''};
-
-    if (err.code === 11000 && Object.keys(err.keyValue)[0].includes("email"))
-    errors.email = "Email incorrect ou déjà pris";
-    
-    return errors;
-};
-
-
 // Login error message
 exports.loginErrors = (err) => {
     let errors = { login: '' };

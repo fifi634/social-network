@@ -2,7 +2,9 @@ import React, { useState, useContext } from 'react';
 import Login from '../Login/index.login';
 import { UidContext } from '../../utils/context';
 import { useDispatch, useSelector } from 'react-redux';
-import { uploadPicture, uploadDefaultAvatar, updateProfil } from '../../action/user.actions';
+import { uploadPicture, uploadDefaultAvatar, updateProfil, GET_USER } from '../../action/user.actions';
+import { fetchUrl } from '../../config';
+import axios from 'axios';
 
 // Import images
 import male_avatar from '../../assets/image/Homme-avatar.svg';
@@ -39,6 +41,7 @@ import {
 
 
 
+
 function Profil() {
     // // Selection a good radio choice when click on "Downloaded Files" button
     // function selectRadio() {
@@ -52,13 +55,15 @@ function Profil() {
     // const [file, setFile] = useState(null);
     const dispatch = useDispatch();
     const userData = useSelector(state => state.userReducer);
+    // const error = useSelector((state) => state.errorReducer.updateUserErrors);
     // Form data storage
     const [formSubmit, setFormSubmit] = useState(false);
-    const [inputEmail, setInputEmail] = useState(userData.email);
+    // const [inputEmail, setInputEmail] = useState(userData.email);
     const [inputPassword, setInputPassword] = useState(null);
     const [controlPassword, setControlPassword] = useState(null);
     const [inputPseudo, setInputPseudo] = useState(userData.pseudo);
     const [inputAvatar, setInputAvatar] = useState('Homme');
+    const [errorHandle, setErrorHandle] = useState(false);
 
 
     // // Upload avatar file by Redux
@@ -83,16 +88,17 @@ function Profil() {
     // When form is submit
     const handleProfil = (e) => {
         e.preventDefault();
+        setErrorHandle(false);
 
         // Link for display errors
-        const emailError = document.querySelector('.email.error');
+        // const emailError = document.querySelector('.email.error');
         const passwordError = document.querySelector('.password.error');
         const checkPasswordError = document.querySelector('.check-password.error');
         const pseudoError = document.querySelector('.pseudo.error');
         // const avatarError = document.querySelector('.avatar.error');
-        
+
         // Reset display errors
-        emailError.innerHTML = '';
+        // emailError.innerHTML = '';
         passwordError.innerHTML = '';
         checkPasswordError.innerHTML = '';
         pseudoError.innerHTML = '';
@@ -101,8 +107,10 @@ function Profil() {
 
         // If no errors, send new user to server        
         if (inputPassword !== controlPassword) {
+            setErrorHandle(true);
             checkPasswordError.innerHTML = "Les mots de passe ne correspondent pas.";
         } else if (inputPseudo.length > 15) {
+            setErrorHandle(true);
             pseudoError.innerHTML = 'Votre pseudo doit comporter au maximum 15 caractères';
         } else {
             // // If picture file is in upload, send it to server by Redux
@@ -110,10 +118,50 @@ function Profil() {
 
             // // If no picture file in upload, send default avatar to server by Redux
             // if (file === null) defaultAvatar(inputAvatar);
-
+            
             // Update user info
-            const avatarSlug = `uploads/profil/${inputAvatar}-avatar.svg`;
-            dispatch(updateProfil(inputEmail, inputPassword, inputPseudo, avatarSlug, uid));
+            // const avatarSlug = `uploads/profil/${inputAvatar}-avatar.svg`;
+            // dispatch(updateProfil(inputEmail, inputPassword, inputPseudo, avatarSlug, uid));
+
+            // Update user info on database
+            axios({
+                method: 'patch',
+                url: `${fetchUrl}api/user/`,
+                withCredentials: true,
+                data: {
+                    // email: inputEmail,
+                    password: inputPassword,
+                    pseudo: inputPseudo,
+                    avatar_slug: `uploads/profil/${inputAvatar}-avatar.svg`
+                }
+            })
+                .then((res) => {
+                    // Update profil errors 
+                    if (res.data.errors || res.data.err) {
+                        setErrorHandle(true);
+                        if (res.data.message === 'Password not accepted') {                   
+                            passwordError.innerHTML = res.data.errors;
+                            // avatarError.innerHTML = res.data.error.avatar;
+                        }
+                        if (res.data.errors.pseudo) {
+                            pseudoError.innerHTML = res.data.errors.pseudo;
+                        }
+                    }
+                    // Get new user for display modification
+                    axios
+                        .get(`${fetchUrl}api/user/${uid}`, {withCredentials: true})
+                        .then((res) => {
+                            dispatch({ type: GET_USER, payload: res.data });
+                        })
+                        .catch((err) => console.log('Get user failed. ' + err))
+                    ;
+                })
+                .catch(err => {
+                    setErrorHandle(true);
+                    console.log("err ", err.code)
+                    console.log('Update user info failed. ' + err);
+                })
+            ;
             setFormSubmit(true);   
         };   
     };
@@ -125,25 +173,28 @@ function Profil() {
         <>
             {uid ? (
                 <>
-                    { formSubmit && <StyledSignupSuccessH2>Votre compte a été mis à jour.</StyledSignupSuccessH2> }
+                    { (formSubmit && errorHandle === false ) && <StyledSignupSuccessH2>Votre compte a été mis à jour.</StyledSignupSuccessH2> }
                     <StyledContainer>
                         <FormContainer action="" onSubmit={handleProfil} enctype="multipart/form-data">
                             <StyledH1>Compte</StyledH1>
                             <InputContainer>
                                 <StyledLabel htmlFor="email">Votre e-mail :</StyledLabel>
-
-                                <StyledInput
+                                <p id="email">{userData.email}</p>
+                                {/* <StyledInput
                                     type="email"
                                     id="email"
                                     defaultValue={inputEmail}
                                     onChange={(e) => setInputEmail(e.target.value)}
                                 />
-                                <StyledError className='email error'></StyledError>                              
+                                <StyledError className='email error'></StyledError>                               */}
                             </InputContainer>
                             <InputContainer>
-                                <StyledLabel htmlFor="password">Nouveau mot de passe ou mot de passe actuel (requis) : </StyledLabel>
+                                <StyledLabel htmlFor="password">
+                                    Nouveau mot de passe ou mot de passe actuel :
+                                </StyledLabel>
                                 <StyledSubLabel htmlFor="password">
-                                    (minimum 8 caractères avec majuscule, minuscule et chiffre)
+                                    minimum 8 caractères avec majuscule, minuscule et chiffre 
+                                    <br/> (obligatoire pour tout changements)
                                 </StyledSubLabel>
                                 <StyledInput 
                                     type="password" 
@@ -151,11 +202,14 @@ function Profil() {
                                     defaultValue={inputPassword}
                                     onChange={(e) => setInputPassword(e.target.value)}
                                 /> 
-                                <StyledError className='password error'></StyledError>
+                                <StyledError className='password error'>
+                                    {/* {!isEmpty(error) && error} */}
+                                </StyledError>
+                                
                             </InputContainer>
                             <InputContainer>
                                 <StyledLabel htmlFor="confirm-password">
-                                    Confirmez le mot de passe saisie ci-dessus (requis) :
+                                    Confirmez le mot de passe saisie :
                                 </StyledLabel>
                                 <StyledInput
                                     type="password"
@@ -170,7 +224,7 @@ function Profil() {
                                     Pseudo :
                                 </StyledLabel>
                                 <StyledSubLabel htmlFor="password">
-                                    (maximum 15 caractères)
+                                    maximum 15 caractères
                                 </StyledSubLabel>
                                 <StyledInput
                                     type="text"

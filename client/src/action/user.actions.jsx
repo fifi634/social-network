@@ -78,39 +78,39 @@ export const getUser = (uid) => {
 // };
 
 
-// Update user info for update profil
-export const updateProfil = (inputEmail, inputPassword, inputPseudo, avatarSlug, uid) => {
-    return (dispatch) => {
-        return axios({
-            method: 'patch',
-            url: `${fetchUrl}api/user/`,
-            withCredentials: true,
-            data: {
-                email: inputEmail,
-                password: inputPassword,
-                pseudo: inputPseudo,
-                avatar_slug: avatarSlug
-            }
-        })
-            .then((res) => {   
-                return axios
-                    .get(`${fetchUrl}api/user/${uid}`, {withCredentials: true})
-                    .then((res) => {
-                        // Signup errors 
-                        if (res.data.errors) {
-                            dispatch({ type: UPDATE_USER_ERRORS, payload: res.data.errors })
-                        } 
-                        dispatch({ type: GET_USER, payload: res.data });
-                    })
-                    .catch((err) => console.log('Get user failed. ' + err))
-                ;         
-            })
-            .catch(err => {
-                console.log('Update user info failed. ' + err);
-            })
-        ;
-    }
-};
+// // Update user info for update profil
+// export const updateProfil = (inputEmail, inputPassword, inputPseudo, avatarSlug, uid) => {
+//     return (dispatch) => {
+//         return axios({
+//             method: 'patch',
+//             url: `${fetchUrl}api/user/`,
+//             withCredentials: true,
+//             data: {
+//                 email: inputEmail,
+//                 password: inputPassword,
+//                 pseudo: inputPseudo,
+//                 avatar_slug: avatarSlug
+//             }
+//         })
+//             .then((res) => {
+//                 // Signup errors 
+//                 if (res.data.errors) {
+//                     dispatch({ type: UPDATE_USER_ERRORS, payload: res.data.errors });
+//                 }
+//                 return axios
+//                     .get(`${fetchUrl}api/user/${uid}`, {withCredentials: true})
+//                     .then((res) => {
+//                         dispatch({ type: GET_USER, payload: res.data });
+//                     })
+//                     .catch((err) => console.log('Get user failed. ' + err))
+//                 ;
+//             })
+//             .catch(err => {
+//                 console.log('Update user info failed. ' + err);
+//             })
+//         ;
+//     }
+// };
 
     /*************** */
 
