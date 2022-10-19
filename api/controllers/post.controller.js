@@ -1,4 +1,5 @@
 const PostModel = require('../models/post.model');
+const UserModel = require('../models/user.model');
 const ObjectID = require('mongoose').Types.ObjectId;
 const fs = require('fs');
 
@@ -60,21 +61,27 @@ module.exports.updatePost = (req, res) => {
 
 
 // Delete post
-module.exports.deletePost = (req, res) => {
+module.exports.deletePost = async (req, res) => {
     // Check if uri is known into database
     if (!ObjectID.isValid(req.params.id))
     return res.status(400).send('Post not found : ' + req.params.id);
 
+    // Check if it's an admin
+    let admin = false;
+    let user = await UserModel.findOne({_id: req.auth.userId})
+    if (user.admin_role === true) admin = true;
+    console.log('admin: ', admin)
+
+
     PostModel.findOne({_id: req.params.id})
         .then((post) => {
-            if (post.posterId != req.auth.userId) {
+            if (post.posterId != req.auth.userId && admin === false) {
                 res.status(403).json({ message: 'Unauthorized user for del post'});
             } else if (post.picture !==  undefined) {
 
                 // If picture in post, erase it
                 const fileSlug = post.picture.split('./')[1];
-                console.log(fileSlug);
-                fs.unlink(`../../client/public/${fileSlug}`, () => {
+                fs.unlink(`../client/public/${fileSlug}`, () => {
 
                     // Erase post from database
                     PostModel.findByIdAndDelete(req.params.id, (err, data) => {
@@ -83,11 +90,14 @@ module.exports.deletePost = (req, res) => {
                             res.status(200).json({ message: 'Post succesfully deleted !', data });
                         } else {
                             console.log('Delete failed : ' + err);
-                        } 
+                        };
                     });
-                })
-            }  
+                });
+            };
         })
-
-
+        .catch((err) => {
+            console.log('Del post failed. ', err);
+            res.status(500).json({ message: 'Del post failed. ', err });
+        })
+    ;
 };

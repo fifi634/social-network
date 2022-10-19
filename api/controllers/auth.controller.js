@@ -8,9 +8,8 @@ const createAvatarSlug = require('./upload.controller');
 
 // Password hash, create user object and save it into serveur 
 exports.signup = async (req, res) => {
-    console.log('controller ', req.file)
     // If no avatar file sended
-    if (!req.file) {
+    // if (!req.file) {
         const {pseudo, email, password, avatar_slug} = req.body;
 
         try {
@@ -20,30 +19,30 @@ exports.signup = async (req, res) => {
             console.log(userId + ' created !');  
         } catch (err) {
             const errors = signupErrors(err);
-            res.status(200).json({ message: 'Create user with default avatar failed', errors });
-        }
+            res.status(200).json({ message: 'Create user failed', errors });
+        };
 
-    // If avatar file sended
-    } else {
-        // const newUser = JSON.parse(req.body.avatarFile);       
+    // // If avatar file sended
+    // } else {
+    //     // const newUser = JSON.parse(req.body.avatarFile);       
         
-        try {
-            const user = await UserModel.create({
-                pseudo: req.body.pseudo, 
-                email: req.body.email, 
-                password: req.body.password, 
-                // ...newUser,
-                avatar_slug: 'uploads/profil/' + req.file.filename
-            });
-            const userId = user._id;
-            console.log(userId + ' created !');
-            res.status(201).json({ message: 'User created !', userId: user._id});  
-        } catch (err) {
-            const errors = signupErrors(err);
-            console.log('Create user with uploaded file failed. ', err);
-            res.status(200).json({ message: 'Create user with uploaded file failed', errors });
-        }
-    }
+    //     try {
+    //         const user = await UserModel.create({
+    //             pseudo: req.body.pseudo, 
+    //             email: req.body.email, 
+    //             password: req.body.password, 
+    //             // ...newUser,
+    //             avatar_slug: 'uploads/profil/' + req.file.filename
+    //         });
+    //         const userId = user._id;
+    //         console.log(userId + ' created !');
+    //         res.status(201).json({ message: 'User created !', userId: user._id});  
+    //     } catch (err) {
+    //         const errors = signupErrors(err);
+    //         console.log('Create user with uploaded file failed. ', err);
+    //         res.status(200).json({ message: 'Create user with uploaded file failed', errors });
+    //     }
+    // }
 
 };
 

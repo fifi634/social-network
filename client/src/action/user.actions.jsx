@@ -1,4 +1,5 @@
 import axios from "axios";
+// import { passwordErrors } from "../../../api/utils/errors.utils";
 import { fetchUrl } from "../config";
 
 
@@ -6,6 +7,7 @@ import { fetchUrl } from "../config";
 export const GET_USER = 'GET_USER';
 export const UPLOAD_PICTURE = 'UPLOAD_PICTURE';
 export const UPLOAD_DEFAULT_AVATAR = 'UPLOAD_DEFAULT_AVATAR';
+export const UPDATE_USER_ERRORS = 'UPDATE_USER_ERRORS';
 
 
 
@@ -33,51 +35,51 @@ export const getUser = (uid) => {
     /*************** */
 
 
-// Upload avatar file for update profil
-export const uploadPicture = (data, userId) => {
-    return (dispatch) => {  
-        return axios({
-            method: 'post',
-            url: fetchUrl + 'api/user/upload-profil',
-            data: data,
-            withCredentials: true,
-            headers: { "Content-Type": "multipart/form-data" }
-        })
-            .then ((res) => {          
-                // Get server file uploaded
-                return axios
-                    .get(fetchUrl + `api/user/${userId}`, {withCredentials: true})
-                    .then(res => {
-                        // To upload picture slug in Redux store
-                        dispatch({ type: UPLOAD_PICTURE, payload: res.data.avatar_slug});
-                    })
-                    .catch(err => console.log('Upload picture failed. ' + err))
-                ;
-            })
-            .catch(err => console.log('Redux Axios post uploadPicture failed. ' + err))
-        ;
-    }
-};
+// // Upload avatar file for update profil
+// export const uploadPicture = (data, userId) => {
+//     return (dispatch) => {  
+//         return axios({
+//             method: 'post',
+//             url: fetchUrl + 'api/user/upload-profil',
+//             data: data,
+//             withCredentials: true,
+//             headers: { "Content-Type": "multipart/form-data" }
+//         })
+//             .then ((res) => {          
+//                 // Get server file uploaded
+//                 return axios
+//                     .get(fetchUrl + `api/user/${userId}`, {withCredentials: true})
+//                     .then(res => {
+//                         // To upload picture slug in Redux store
+//                         dispatch({ type: UPLOAD_PICTURE, payload: res.data.avatar_slug});
+//                     })
+//                     .catch(err => console.log('Upload picture failed. ' + err))
+//                 ;
+//             })
+//             .catch(err => console.log('Redux Axios post uploadPicture failed. ' + err))
+//         ;
+//     }
+// };
 
 
-// Change avatar to default image for update profil
-export const uploadDefaultAvatar = (avatarSlug) => {
-    return(dispatch) => {
-        return axios({
-            method: 'patch',
-            url: fetchUrl + 'api/user/',
-            data: { avatar_slug: avatarSlug },
-            withCredentials: true
-        })
-            .then(res =>  dispatch({ type: UPLOAD_DEFAULT_AVATAR, payload: avatarSlug }))
-            .catch(err => console.log('Update default avatar failed. ' + err))
-        ;
-    }
-};
+// // Change avatar to default image for update profil
+// export const uploadDefaultAvatar = (avatarSlug) => {
+//     return(dispatch) => {
+//         return axios({
+//             method: 'patch',
+//             url: fetchUrl + 'api/user/',
+//             data: { avatar_slug: avatarSlug },
+//             withCredentials: true
+//         })
+//             .then(res =>  dispatch({ type: UPLOAD_DEFAULT_AVATAR, payload: avatarSlug }))
+//             .catch(err => console.log('Update default avatar failed. ' + err))
+//         ;
+//     }
+// };
 
 
 // Update user info for update profil
-export const updateProfil = (inputEmail, inputPassword, inputPseudo, uid) => {
+export const updateProfil = (inputEmail, inputPassword, inputPseudo, avatarSlug, uid) => {
     return (dispatch) => {
         return axios({
             method: 'patch',
@@ -87,20 +89,21 @@ export const updateProfil = (inputEmail, inputPassword, inputPseudo, uid) => {
                 email: inputEmail,
                 password: inputPassword,
                 pseudo: inputPseudo,
+                avatar_slug: avatarSlug
             }
         })
             .then((res) => {   
                 return axios
                     .get(`${fetchUrl}api/user/${uid}`, {withCredentials: true})
                     .then((res) => {
+                        // Signup errors 
+                        if (res.data.errors) {
+                            dispatch({ type: UPDATE_USER_ERRORS, payload: res.data.errors })
+                        } 
                         dispatch({ type: GET_USER, payload: res.data });
                     })
                     .catch((err) => console.log('Get user failed. ' + err))
-
-
-                // // Signup errors 
-                // if (res.data.errors) return res.data.errors;
-         
+                ;         
             })
             .catch(err => {
                 console.log('Update user info failed. ' + err);

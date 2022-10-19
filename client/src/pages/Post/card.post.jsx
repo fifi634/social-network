@@ -6,7 +6,7 @@ import { dateParser } from "../../utils/utils";
 import LikeButton from "./like.post";
 import { updatePost } from "../../action/post.action";
 import DeleteCard from "./delete.post";
-import { uploadPicture } from "../../action/user.actions";
+// import { uploadPicture } from "../../action/user.actions";
 
 
 /* Style */
@@ -34,15 +34,13 @@ import {
     StyledIconImg
 } from "./style.post";
 
-import { StyledLittlePinkButton } from "../../utils/style/StyledGlobalButton";
+// import { StyledLittlePinkButton } from "../../utils/style/StyledGlobalButton";
 import { StyledInputFile } from '../../utils/style/StyledGlobalForm';
 import edit from "../../assets/image/edit.svg";
 
 
 /******* */
  
-
-
 
 const Card = ({ post }) => {
     const [isLoading, setIsLoading] = useState(true);
@@ -58,12 +56,12 @@ const Card = ({ post }) => {
 
     // When clicking on 'Modifier'
     const updateItem = async () => {
-        if(file !== (null || undefined)) {
-            const data = new FormData();
-            data.append('file', file);
-            data.append('message', textUpdate);
-            await dispatch(uploadPicture(post._id, data));
-        }
+        // if(file !== (null || undefined)) {
+        //     const data = new FormData();
+        //     data.append('file', file);
+        //     data.append('message', textUpdate);
+        //     await dispatch(uploadPicture(post._id, data));
+        // }
         if(textUpdate) {
             dispatch(updatePost(post._id, textUpdate))
         };
@@ -150,9 +148,9 @@ const Card = ({ post }) => {
                             </StyledLittlePinkButton>  
                         </div> */}
 
-                            {userData._id === post.posterId || userData.admin_role === true && (
+                            {(userData._id === post.posterId || userData.admin_role === true) && (
                                 <StyledIconsContainer>
-                                    <StyledIconContainer 
+                                    <StyledIconContainer
                                         onClick={() => setIsUpdated(!isUpdated)}
                                         className={isUpdated ? "editing" : '' }
                                     >

@@ -8,7 +8,7 @@ const postSchema = mongoose.Schema({
     message: {
         type: String,
         trime: true,
-        maxlength: 500
+        // maxlength: 500
     },
     picture: {
         type: String

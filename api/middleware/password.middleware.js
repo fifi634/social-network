@@ -17,13 +17,10 @@ passwordSchema
 
 // Check quality of password and export it
 module.exports = (req, res, next) => {
-    // const reception = req.password;
-    // res.status(400).json({ reception })
-    // console.log(reception);
     if (passwordSchema.validate(req.body.password)) {
         next();
     } else {
         const errors = passwordErrors((passwordSchema.validate(req.body.password, {details: true})));
         return res.status(200).json({ message: 'Password not accepted', errors });
-    } 
+    };
 };

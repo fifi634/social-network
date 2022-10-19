@@ -163,7 +163,7 @@ export const StyledModifyButton = styled.button`
     height: 30px;
     margin: 0 0 0 10px;
     box-shadow: 0px 4px 4px ${colors.boxShadow};
-    border-radius: 6px 20px 20px 20px;
+    border-radius: 20px 6px 20px 20px;
     border: 1px solid #000000;
     font-weight: 700;
     &:active {

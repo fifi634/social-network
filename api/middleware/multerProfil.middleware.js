@@ -24,26 +24,26 @@ const storage = multer.diskStorage({
 });
 
 
-// Check file
-const upload = multer({
-    storage : storage,
-    limits: { fileSize: 83886080 },
-    fileFilter: (req, file, callback) => {
-        if (
-            file.mimetype !== 'image/png' &&
-            file.mimetype !== 'image/jpg' &&
-            file.mimetype !== 'image/jpeg' &&
-            file.mimetype !== 'image/webp'
-        ) {
-            callback(new Error('invalid file'), false);
-        } else {
-            callback(null, true);
-        }; 
-    }
-});
+// // Check file
+// const upload = multer({
+//     storage : storage,
+//     limits: { fileSize: 83886080 },
+//     fileFilter: (req, file, callback) => {
+//         if (
+//             file.mimetype !== 'image/png' &&
+//             file.mimetype !== 'image/jpg' &&
+//             file.mimetype !== 'image/jpeg' &&
+//             file.mimetype !== 'image/webp'
+//         ) {
+//             callback(new Error('invalid file'), false);
+//         } else {
+//             callback(null, true);
+//         }; 
+//     }
+// });
 
-
-module.exports = upload.single('file');
+module.exports = multer({storage: storage}).single('file');
+// module.exports = upload.single('file');
 
 
 

@@ -1,8 +1,8 @@
-const { MulterError } = require("multer");
+// const { MulterError } = require("multer");
+// const errorSamePseudo = ['pseudo', 'unique'];
 
-const errorSamePseudo = ['pseudo', 'unique'];
 
-// Sign up errors message
+// Signup errors
 exports.signupErrors = (err) => {
     let errors = { pseudo: '', email: '', password: '' };
     
@@ -12,11 +12,23 @@ exports.signupErrors = (err) => {
     if (err.message.includes('email'))
     errors.email = 'Email incorrect ou déjà pris';
 
-    if (err.message.includes('password'))
-    errors.password = 'Le mot de passe doit faire 6 caractères minimum';
+    // if (err.message.includes('password'))
+    // errors.password = 'Le mot de passe doit faire 6 caractères minimum';
     
     return errors;
 };
+
+
+// Update profil errors
+exports.updateProfilErrors = (err) => {
+    let errors = { pseudo: '', email: ''};
+
+    if (err.code === 11000 && Object.keys(err.keyValue)[0].includes("email"))
+    errors.email = "Email incorrect ou déjà pris";
+    
+    return errors;
+};
+
 
 // Login error message
 exports.loginErrors = (err) => {
@@ -26,20 +38,20 @@ exports.loginErrors = (err) => {
     return errors = { login: "La connection a échoué" };
 };
 
-// Upload error message
-exports.uploadErrors = (err) => {
-    let errors = { format: "", maxSize: "" };
+// // Upload error message
+// exports.uploadErrors = (err) => {
+//     let errors = { format: "", maxSize: "" };
 
-    if (err.message.includes('invalid file'))
-        errors.format = "Format incompatible"
-    ;
+//     if (err.message.includes('invalid file'))
+//         errors.format = "Format incompatible"
+//     ;
 
-    if (err.message.includes('file too large'))
-        errors.maxSize = "Le fichier dépasse 10Mo"
-    ;
+//     if (err.message.includes('file too large'))
+//         errors.maxSize = "Le fichier dépasse 10Mo"
+//     ;
 
-    return errors;
-};
+//     return errors;
+// };
 
 
 // Validation password error

@@ -38,8 +38,6 @@ import {
 
 
 
-
-
 function Signup() {
     // // Selection a good radio choice when click on "Downloaded Files" button
     // function selectRadio() {
@@ -186,7 +184,7 @@ function Signup() {
                         }              
                     })
                     .catch(err => {
-                        console.log('Create user with default avatar failed. ', err);
+                        console.log('Create user failed. ' + err);
                     })
                 ;
             // };

@@ -58,7 +58,7 @@ exports.uploadPost = (req, res, next) => {
             const oldFilePath = `../client/public/${post.picture}`; 
             
             // Check if it's the original user want to update file avatar
-            if (post.posterId != req.auth.userId) {
+            if (post.posterId != req.auth.userId) { // ajouter admin
                 return res.status(401).json({ message: 'Not authorized'});
             } else {
 
@@ -69,23 +69,22 @@ exports.uploadPost = (req, res, next) => {
                         (err => err ? console.log('Avatar delete error (from upload controller). ', err) : console.log('Old avatar deleted (from upload controller)'))
                     );
                 }
-            }
-        })
-        .then((post) => {
-            // Link a new avatar in database
-            PostModel.findByIdAndUpdate({ 
-                _id: req.params.id, 
-                $set: { picture: 'uploads/post/' + req.file.filename }
-            })
-                .then((data) => {
-                    console.log(post._id + ' have new picture');
-                    res.status(201).json({ message: 'New post picture uploaded.', data });                      
+
+                // Link a new avatar in database
+                PostModel.findByIdAndUpdate({ 
+                    _id: req.params.id, 
+                    $set: { picture: 'uploads/post/' + req.file.filename }
                 })
-                .catch((err) => {
-                    console.log('New post picture link failed. ', err);
-                    res.status(500).json({ message: 'New post picture link failed. ', err });
-                })
-            ;
+                    .then((data) => {
+                        console.log(post._id + ' have new picture');
+                        res.status(201).json({ message: 'New post picture uploaded.', data });                      
+                    })
+                    .catch((err) => {
+                        console.log('New post picture link failed. ', err);
+                        res.status(500).json({ message: 'New post picture link failed. ', err });
+                    })
+                ;
+            };
         })
         .catch((err) => {
             console.log('Change avatar failed. ', err);

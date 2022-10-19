@@ -18,7 +18,7 @@ import {
     StyledSubLabel,
     StyledInput,
     StyledError,
-    StyledInputFile
+    // StyledInputFile
 } from '../../utils/style/StyledGlobalForm';
 import {
     AvatarText,
@@ -40,16 +40,16 @@ import {
 
 
 function Profil() {
-    // Selection a good radio choice when click on "Downloaded Files" button
-    function selectRadio() {
-        document.getElementById('download-files').checked = true;
-    };
+    // // Selection a good radio choice when click on "Downloaded Files" button
+    // function selectRadio() {
+    //     document.getElementById('download-files').checked = true;
+    // };
 
 
     // Get user id(uid) by useContext
     const uid = useContext(UidContext);
     // Redux upload file
-    const [file, setFile] = useState(null);
+    // const [file, setFile] = useState(null);
     const dispatch = useDispatch();
     const userData = useSelector(state => state.userReducer);
     // Form data storage
@@ -61,23 +61,22 @@ function Profil() {
     const [inputAvatar, setInputAvatar] = useState('Homme');
 
 
-    // Upload avatar file by Redux
-    function uploadFile(file) {        
-        const data = new FormData();
-        data.append('name', userData._id);
-        data.append('userId', userData._id);
-        data.append('file', file);
-        dispatch(uploadPicture(data, userData._id));    // uploadPicture : Redux function in src/action/user.action.js
-        console.log(data, userData._id);
-    };
+    // // Upload avatar file by Redux
+    // function uploadFile(file) {        
+    //     const data = new FormData();
+    //     data.append('name', userData._id);
+    //     data.append('userId', userData._id);
+    //     data.append('file', file);
+    //     dispatch(uploadPicture(data, userData._id));    // uploadPicture : Redux function in src/action/user.action.js
+    //     console.log(data, userData._id);
+    // };
 
 
-    // Upload default avatar by Redux
-    function defaultAvatar(inputAvatar) {
-        const avatarSlug = `uploads/profil/${inputAvatar}-avatar.svg`;
-        dispatch(uploadDefaultAvatar(avatarSlug));
-    };
-
+    // // Upload default avatar by Redux
+    // function defaultAvatar(inputAvatar) {
+    //     const avatarSlug = `uploads/profil/${inputAvatar}-avatar.svg`;
+    //     dispatch(uploadDefaultAvatar(avatarSlug));
+    // };
 
 
 
@@ -90,28 +89,31 @@ function Profil() {
         const passwordError = document.querySelector('.password.error');
         const checkPasswordError = document.querySelector('.check-password.error');
         const pseudoError = document.querySelector('.pseudo.error');
-        const avatarError = document.querySelector('.avatar.error');
+        // const avatarError = document.querySelector('.avatar.error');
+        
         // Reset display errors
         emailError.innerHTML = '';
         passwordError.innerHTML = '';
         checkPasswordError.innerHTML = '';
         pseudoError.innerHTML = '';
-        avatarError.innerHTML = '';
+        // avatarError.innerHTML = '';
         
 
-        // If no errors, send new user to server
-        
+        // If no errors, send new user to server        
         if (inputPassword !== controlPassword) {
             checkPasswordError.innerHTML = "Les mots de passe ne correspondent pas.";
+        } else if (inputPseudo.length > 15) {
+            pseudoError.innerHTML = 'Votre pseudo doit comporter au maximum 15 caractères';
         } else {
-            // If picture file is in upload, send it to server by Redux
-            if (file !== null) uploadFile(file);
+            // // If picture file is in upload, send it to server by Redux
+            // if (file !== null) uploadFile(file);
 
-            // If no picture file in upload, send default avatar to server by Redux
-            if (file === null) defaultAvatar(inputAvatar);
+            // // If no picture file in upload, send default avatar to server by Redux
+            // if (file === null) defaultAvatar(inputAvatar);
 
             // Update user info
-            dispatch(updateProfil(inputEmail, inputPassword, inputPseudo, uid));
+            const avatarSlug = `uploads/profil/${inputAvatar}-avatar.svg`;
+            dispatch(updateProfil(inputEmail, inputPassword, inputPseudo, avatarSlug, uid));
             setFormSubmit(true);   
         };   
     };
@@ -128,9 +130,10 @@ function Profil() {
                         <FormContainer action="" onSubmit={handleProfil} enctype="multipart/form-data">
                             <StyledH1>Compte</StyledH1>
                             <InputContainer>
-                                <StyledLabel htmlFor="email">Votre e-mail :</StyledLabel>                             
+                                <StyledLabel htmlFor="email">Votre e-mail :</StyledLabel>
+
                                 <StyledInput
-                                    type="text"
+                                    type="email"
                                     id="email"
                                     defaultValue={inputEmail}
                                     onChange={(e) => setInputEmail(e.target.value)}
@@ -138,7 +141,7 @@ function Profil() {
                                 <StyledError className='email error'></StyledError>                              
                             </InputContainer>
                             <InputContainer>
-                                <StyledLabel htmlFor="password">Nouveau mot de passe :</StyledLabel>
+                                <StyledLabel htmlFor="password">Nouveau mot de passe ou mot de passe actuel (requis) : </StyledLabel>
                                 <StyledSubLabel htmlFor="password">
                                     (minimum 8 caractères avec majuscule, minuscule et chiffre)
                                 </StyledSubLabel>
@@ -152,7 +155,7 @@ function Profil() {
                             </InputContainer>
                             <InputContainer>
                                 <StyledLabel htmlFor="confirm-password">
-                                    Confirmez votre nouveau mot de passe :
+                                    Confirmez le mot de passe saisie ci-dessus (requis) :
                                 </StyledLabel>
                                 <StyledInput
                                     type="password"
@@ -214,7 +217,7 @@ function Profil() {
                                             />
                                         </label>
                                     </AvatarRadioContainer>
-                                    <AvatarRadioContainer>
+                                    {/* <AvatarRadioContainer>
                                         <AvatarInput
                                             type="radio"
                                             id="download-files"
@@ -234,16 +237,16 @@ function Profil() {
                                         />
                                         </label>
                                         <StyledError className='avatar error'></StyledError>
-                                    </AvatarRadioContainer>
+                                    </AvatarRadioContainer> */}
                                 </AvatarChoiceContainer>
                                 <CreateButtonContainer>  
-                                <StyledProfilControlContainer>
-                                    <StyledProfilLinkContainer>
-                                        <StyledDisconnectLink href="/login">Déconnexion</StyledDisconnectLink>
-                                        <StyledDeleteLink href='/delete-compte'>Supprimer le compte</StyledDeleteLink>
-                                    </StyledProfilLinkContainer>
-                                    <StyledLittleGreyButton type="submit">Modifier</StyledLittleGreyButton>
-                                </StyledProfilControlContainer>        
+                                    <StyledProfilControlContainer>
+                                        <StyledProfilLinkContainer>
+                                            <StyledDisconnectLink href="/login">Déconnexion</StyledDisconnectLink>
+                                            <StyledDeleteLink href='/delete-compte'>Supprimer le compte</StyledDeleteLink>
+                                        </StyledProfilLinkContainer>
+                                        <StyledLittleGreyButton type="submit">Modifier</StyledLittleGreyButton>
+                                    </StyledProfilControlContainer>        
                                 </CreateButtonContainer>
                             </InputContainer>
                         </FormContainer>
