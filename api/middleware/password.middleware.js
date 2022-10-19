@@ -9,7 +9,7 @@ passwordSchema
     .is().max(100, 'ne doit pas dépasser 100 caractères')    
     .has().uppercase(1, ' doit contenir au moins 1 majuscule')
     .has().lowercase(1, ' doit contenir au moins 1 minuscule') 
-    .has().digits(2, ' doit avoir au moins 2 chiffres')
+    .has().digits(1, ' doit avoir au moins 1 chiffre')
     .has().not().spaces(0, " ne doit pas contenir d'espace")
     .is().not().oneOf(['Passw0rd', 'Password123'], 'et est interdit')
 ;

@@ -50,7 +50,7 @@ export const HeaderLogo = styled.img`
         content: url(${logoAlone});
         max-height: 80px;
     }
-    @media screen and (max-width: 780px) {
+    @media screen and (max-width: 760px) {
         display: none;
     }
 `;

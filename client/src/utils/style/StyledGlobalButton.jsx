@@ -57,7 +57,7 @@ export const StyledGreyButton = styled.button`
         background-color: ${colors.tertiary};
         transition: 0.3s
     }
-    @media screen and (max-width: 850px) {
+    @media screen and (max-width: 610px) {
         &.home {
             width: 160px;
             height: 30px;

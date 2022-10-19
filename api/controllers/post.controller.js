@@ -15,22 +15,44 @@ module.exports.readPost = (req, res) => {
 
 // Create post
 module.exports.createPost = async (req, res) => {
-    const newPost = new PostModel({
+    const message = req.body.message;
+    const post = new PostModel ({
+        message: message,
         posterId: req.auth.userId,
-        message: req.body.message,
-        // video: req.body.video,
-        picture: req.file !== (null || undefined) ? './uploads/post/' + req.file.filename : ''
-    }, (err, data) => {
-        if(err) return res.status(500).json({message: 'File upload failed.', err});
+        picture: req.file !== (null || undefined) ? 'uploads/post/' + req.file.filename : ''
     });
 
-    try {
-        const post = await newPost.save();
-        console.log(req.auth.userId + ' has created a new post');
-        return res.status(201).json({ message: 'Post created !', post });
-    } catch (err) {
-        return res.status(400).json({ message: 'Created post failed', err });
-    }
+    post.save()
+        .then(() => {
+            console.log(req.auth.userId + ' has created a post.')
+            res.status(201).json({ message: 'Post created.'});
+        })
+        .catch((err) => {
+            console.log('Create post failed. ', err);
+            // res.status(400).json({message: 'Create post failed.', err});
+            res.status(500).json(msg.prototype.errorMsg(err));
+            
+        })
+    ;
+
+
+
+    // const newPost = new PostModel({
+    //     posterId: req.auth.userId,
+    //     message: req.body.message,
+    //     // video: req.body.video,
+    //     picture: req.file !== (null || undefined) ? './uploads/post/' + req.file.filename : ''
+    // }, (err, data) => {
+    //     if(err) return res.status(500).json({message: 'File upload failed.', err});
+    // });
+
+    // try {
+    //     const post = await newPost.save();
+    //     console.log(req.auth.userId + ' has created a new post');
+    //     return res.status(201).json({ message: 'Post created !', post });
+    // } catch (err) {
+    //     return res.status(400).json({ message: 'Created post failed', err });
+    // }
 };
 
 

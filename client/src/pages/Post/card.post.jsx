@@ -72,6 +72,9 @@ const Card = ({ post }) => {
         !isEmpty(usersData[0]) && setIsLoading(false);
     }, [usersData]);
 
+
+    
+
     return (
         <StyledLi key={post._id}>
             {isLoading ? (

@@ -27,9 +27,12 @@ export const DELETE_POST = "DELETE_POST";
 export const addPost = (data) => {
     return (dispatch) => {
         return axios({
-            method: 'post',
+            method: 'patch',
             url: fetchUrl + 'api/post/', 
             withCredentials: true,
+            headers: {
+                'enctype':'multipart/form-data'
+            },
             data: data
     })
         .then(() => {})

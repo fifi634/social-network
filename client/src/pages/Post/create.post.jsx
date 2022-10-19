@@ -38,7 +38,7 @@ const CreatePost = () => {
     const [message, setMessage] = useState('');
     // const [postPicture, setPostPicture] = useState(null);
     const [file, setFile] = useState();
-
+    
     
     // Get user by Redux
     const userData = useSelector((state) => state.userReducer);
@@ -47,6 +47,7 @@ const CreatePost = () => {
     const cancelPost = () => {
         setMessage('');
         // setPostPicture('');
+        document.getElementById("file-upload").value = "";
         setFile('');
     };
 

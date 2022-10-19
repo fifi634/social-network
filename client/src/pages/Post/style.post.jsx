@@ -102,6 +102,7 @@ export const StyledMessageP = styled.p`
     border-radius: 6px 20px 20px 20px;
     background-color: #ffffff;
     min-width: 300px;
+    max-width: 300px;
     @media screen and (max-width: 800px) {
         min-width : unset;
         width: auto;        

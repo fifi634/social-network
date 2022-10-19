@@ -10,7 +10,7 @@ const { requireAuth } = require('../middleware/auth.middleware');
 
 // CRUD post end-points
 router.get('/', requireAuth, postController.readPost);
-router.post('/', requireAuth, multerPost, postController.createPost);
+router.patch('/', requireAuth, multerPost, postController.createPost);
 router.patch('/:id', requireAuth, postController.updatePost);
 router.delete('/:id', requireAuth, postController.deletePost);
 
