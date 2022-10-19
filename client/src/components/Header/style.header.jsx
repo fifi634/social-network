@@ -9,7 +9,7 @@ export const StyledHeader = styled.header`
     height: 152px;
     background: ${colors.tertiary};
     box-shadow: 0px 4px 4px ${colors.boxShadow};
-    padding: 0 24px;
+    padding: 12px 12px;
     @media screen and (min-width: 1440px) {
         box-shadow: unset;
     }
@@ -46,11 +46,11 @@ export const StyledConnectContainer = styled.div `
 export const HeaderLogo = styled.img`
     max-width: 300px;
     content: url(${completLogo});
-    @media screen and (max-width:950px) {
+    @media screen and (max-width:1040px) {
         content: url(${logoAlone});
         max-height: 80px;
     }
-    @media screen and (max-width: 700px) {
+    @media screen and (max-width: 780px) {
         display: none;
     }
 `;

@@ -92,7 +92,7 @@ You must create .env files in api/config/ directory with inside :
 |  |  | POST |  |  |
 | GET | /api/post | - | Object of all posts | return an object with all posts of database and rank them in descending creation date order |
 | POST | /api/post | {posterId: string, message: string, video: string (optional), picture: string (optional)} | {message: string, post created object} | Create post in database |
-| PUT | /api/post/:id | {message: string (optional), video: string (optional), picture: string (optional)} | {message: string, post updated object} | Update post |
+| PATCH | /api/post/:id | {message: string (optional), video: string (optional), picture: string (optional)} | {message: string, post updated object} | Update post |
 | DELETE | /api/post/:id | - | {message: string, post deleted object} | Remove the post |
 |  |  | LIKE |  |  |
 | PATCH | /api/post/like/:id | {likerId: string} | {message: string, like user object} | Like post. Add likers id in likers array from post model and add post liked id in likes array from user model. |

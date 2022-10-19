@@ -1,5 +1,6 @@
 const PostModel = require('../models/post.model');
 const ObjectID = require('mongoose').Types.ObjectId;
+const fs = require('fs');
 
 
 // Get all posts
@@ -64,12 +65,29 @@ module.exports.deletePost = (req, res) => {
     if (!ObjectID.isValid(req.params.id))
     return res.status(400).send('Post not found : ' + req.params.id);
 
-    PostModel.findByIdAndDelete(req.params.id, (err, data) => {
-        if (!err) {
-            console.log(req.auth.userId + ' has deleted a post');
-            res.json({ message: 'Post succesfully deleted !', data });
-        } else {
-            console.log('Delete failed : ' + err);
-        } 
-    });
+    PostModel.findOne({_id: req.params.id})
+        .then((post) => {
+            if (post.posterId != req.auth.userId) {
+                res.status(403).json({ message: 'Unauthorized user for del post'});
+            } else if (post.picture !==  undefined) {
+
+                // If picture in post, erase it
+                const fileSlug = post.picture.split('./')[1];
+                console.log(fileSlug);
+                fs.unlink(`../../client/public/${fileSlug}`, () => {
+
+                    // Erase post from database
+                    PostModel.findByIdAndDelete(req.params.id, (err, data) => {
+                        if (!err) {
+                            console.log(req.auth.userId + ' has deleted a post');
+                            res.status(200).json({ message: 'Post succesfully deleted !', data });
+                        } else {
+                            console.log('Delete failed : ' + err);
+                        } 
+                    });
+                })
+            }  
+        })
+
+
 };

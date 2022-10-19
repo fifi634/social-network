@@ -7,6 +7,7 @@ export const ADD_POST = "ADD_POST";
 export const LIKE_POST = "LIKE_POST";
 export const UNLIKE_POST = "UNLIKE_POST";
 export const UPDATE_POST = "UPDATE_POST";
+export const UPLOAD_POST = "UPLOAD_POST";
 export const DELETE_POST = "DELETE_POST";
 
 // // Get posts with infinity scroll
@@ -34,7 +35,6 @@ export const addPost = (data) => {
         .then(() => {})
         .catch((err) => {
             console.log('Send addPost failed. ' + err);
-            alert("Il y a un problème avec l'envoi du post au serveur.")
         });
         ;
     };
@@ -87,7 +87,7 @@ export const unlikePost = (postId, userId) => {
 
 export const updatePost = (postId, message) => {
     return(dispatch) => {
-        return axios ({
+        return axios({
             method: 'patch',
             url: fetchUrl + 'api/post/' + postId,
             data: { message },
@@ -100,6 +100,20 @@ export const updatePost = (postId, message) => {
         ;
     };
 };
+
+export const uploadPost = (postId, data) => {
+    return(dispatch) => {
+        return axios({
+            method: 'post',
+            url: fetchUrl + 'api/post/upload' + postId,
+            data: data,
+            withCredentials: true
+        })
+            .then((res) => {})
+            .catch((err) => console.log('Send update post with picture failed. ' + err))
+        ;
+    }
+}
 
 export const deletePost = (postId) => {
     return(dispatch) => {

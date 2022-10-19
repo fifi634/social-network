@@ -3,6 +3,7 @@ const router = require('express').Router();
 const postController = require('../controllers/post.controller');
 const likeController = require('../controllers/like.controller');
 const commentController = require('../controllers/comment.controller.js');
+const uploadController = ('../controllers/upload.controller');
 
 const multerPost = require('../middleware/multerPost.middleware');
 const { requireAuth } = require('../middleware/auth.middleware');
@@ -22,5 +23,7 @@ router.patch('/comment/:id', requireAuth, commentController.commentPost);
 router.patch('/edit-comment/:id', requireAuth, commentController.editCommentPost);
 router.patch('/delete-comment/:id', requireAuth, commentController.deleteCommentPost);
 
+// file upload
+// router.post('/upload/:id', requireAuth, multerPost, uploadController.uploadPost);
 
 module.exports = router;

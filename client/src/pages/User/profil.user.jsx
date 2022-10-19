@@ -68,6 +68,7 @@ function Profil() {
         data.append('userId', userData._id);
         data.append('file', file);
         dispatch(uploadPicture(data, userData._id));    // uploadPicture : Redux function in src/action/user.action.js
+        console.log(data, userData._id);
     };
 
 
@@ -99,10 +100,10 @@ function Profil() {
         
 
         // If no errors, send new user to server
+        
         if (inputPassword !== controlPassword) {
             checkPasswordError.innerHTML = "Les mots de passe ne correspondent pas.";
         } else {
-
             // If picture file is in upload, send it to server by Redux
             if (file !== null) uploadFile(file);
 
@@ -111,9 +112,10 @@ function Profil() {
 
             // Update user info
             dispatch(updateProfil(inputEmail, inputPassword, inputPseudo, uid));
-            setFormSubmit(true);            
-        }      
+            setFormSubmit(true);   
+        };   
     };
+    
 
 
     // Form generation

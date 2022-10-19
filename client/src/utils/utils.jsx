@@ -12,11 +12,6 @@ export const isEmpty = (value) => {
 // Format Mongo style date in string client timezone date
 export const dateParser = (mongoDate) => {
     let dateOptions = {
-        timeZone: "Europe/Paris",
-        hour12: false,
-        hours: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
         weekday: "long",
         year: "numeric",
         month: "short",
@@ -26,15 +21,15 @@ export const dateParser = (mongoDate) => {
     let hourOptions = {
         timeZone: "Europe/Paris",
         hour12: false,
-        hours: "2-digit",
-        minutes: "2-digit"
+        hour: "2-digit",
+        minute: "2-digit"
     };
     
     let timestamp = Date.parse(mongoDate);
     let date = new Date(timestamp).toLocaleDateString("fr-FR", dateOptions);
     let hour = new Date(timestamp).toLocaleTimeString("fr-FT", hourOptions);
 
-    return date.toString() + ', ' + hour.toString();
+    return date.toString() + ' à ' + hour.toString();
 };
 
 

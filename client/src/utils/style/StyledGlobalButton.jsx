@@ -57,13 +57,7 @@ export const StyledGreyButton = styled.button`
         background-color: ${colors.tertiary};
         transition: 0.3s
     }
-    @ media screen and (max-width: 800px) {
-        display: flex;
-        width: auto;
-        height: auto;
-        margin: 5px;
-    }
-    @media screen and (max-width: 700px) {
+    @media screen and (max-width: 850px) {
         &.home {
             width: 160px;
             height: 30px;
@@ -100,7 +94,6 @@ export const StyledLittlePinkButton = styled.button`
 
 export const StyledLittleGreyButton = styled.button`
     background: ${colors.tertiary};
-    // margin: 20px 0;
     margin: 5px;
     width: 160px;
     height: 30px;

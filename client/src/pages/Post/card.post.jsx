@@ -6,9 +6,7 @@ import { dateParser } from "../../utils/utils";
 import LikeButton from "./like.post";
 import { updatePost } from "../../action/post.action";
 import DeleteCard from "./delete.post";
-// Images import
-import edit from "../../assets/image/edit.svg";
-import trash from "../../assets/image/trash.svg";
+import { uploadPicture } from "../../action/user.actions";
 
 
 /* Style */
@@ -37,24 +35,40 @@ import {
 } from "./style.post";
 
 import { StyledLittlePinkButton } from "../../utils/style/StyledGlobalButton";
+import { StyledInputFile } from '../../utils/style/StyledGlobalForm';
+import edit from "../../assets/image/edit.svg";
+
 
 /******* */
  
+
+
+
 const Card = ({ post }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [isUpdated, setIsUpdated] = useState(false);
     const [textUpdate, setTextUpdate] = useState(null);
+    const [file, setFile] = useState(null);
+
     // Redux
     const usersData = useSelector((state) => state.usersReducer);
     const userData = useSelector((state) => state.userReducer);
     const dispatch = useDispatch();
 
-    const updateItem = () => {
+
+    // When clicking on 'Modifier'
+    const updateItem = async () => {
+        if(file !== (null || undefined)) {
+            const data = new FormData();
+            data.append('file', file);
+            data.append('message', textUpdate);
+            await dispatch(uploadPicture(post._id, data));
+        }
         if(textUpdate) {
             dispatch(updatePost(post._id, textUpdate))
-        }
+        };
         setIsUpdated(false);
-    }
+    };
 
     useEffect(() => {
         !isEmpty(usersData[0]) && setIsLoading(false);
@@ -69,8 +83,7 @@ const Card = ({ post }) => {
                     <StyledCenterContainer>
                         <AvatarContainer>
                             <AvatarImg src={
-                                !isEmpty(usersData[0]) && 
-                                usersData.map((user) => {
+                                !isEmpty(usersData[0]) && usersData.map((user) => {
                                     if(user._id === post.posterId) return user.avatar_slug;
                                     else return null;
                                 }).join('')
@@ -79,19 +92,17 @@ const Card = ({ post }) => {
                         <StyledUserInfoContainer>
                             <StyledH2>
                                 {!isEmpty(usersData[0]) &&
-                                usersData.map((user) => {
-                                    if(user._id === post.posterId) return user.pseudo;
-                                    else return null;
-                                }).join('')}
+                                    usersData.map((user) => {
+                                        if(user._id === post.posterId) return user.pseudo;
+                                        else return null;
+                                    }).join('')
+                                }
                             </StyledH2>
                             <span>{dateParser(post.createdAt)}</span>
                         </StyledUserInfoContainer>
                     </StyledCenterContainer>
                     <StyledCorpContainer>
-                        {post.picture && 
-                        <PostImageContainer>
-                            <PostImg src={post.picture} alt="Illustration du post" />
-                        </PostImageContainer>}
+
                         {/* {post.video && (
                             <iframe
                                 title={post._id}
@@ -103,6 +114,7 @@ const Card = ({ post }) => {
                                 allowFullScreen
                             ></iframe>
                         )} */}
+
                         {isUpdated === false && (<StyledMessageP>{post.message}</StyledMessageP>)}
                         {isUpdated === true && (
                             <StyledEditMessageContainer className="editPost">
@@ -112,10 +124,20 @@ const Card = ({ post }) => {
                                     onChange={(e) => setTextUpdate(e.target.value)}
                                 />
                                 <StyledModifyButtonContainer>
+                                    <StyledInputFile
+                                        type="file"
+                                        accept=".jpg, .jpeg, .png, .webp .gif"
+                                        onChange={(e) => setFile(e.target.files[0])}
+                                    />
                                     <StyledModifyButton onClick={updateItem}>Modifier</StyledModifyButton>
                                 </StyledModifyButtonContainer>
                             </StyledEditMessageContainer>
                         )}
+                        {post.picture && 
+                            <PostImageContainer>
+                                <PostImg src={post.picture} alt="Illustration du post" />
+                            </PostImageContainer>
+                        }
                     </StyledCorpContainer>
                     <StyledBottomCommandContainer>
                         <StyledLikeContainer>
@@ -123,12 +145,12 @@ const Card = ({ post }) => {
                         </StyledLikeContainer>
 
                         {/* <div>
-                            <StyledLittlePinkButton> J'aime </StyledLittlePinkButton>
                             <StyledLittlePinkButton>
                                 {<span>{post.comments.length} commentaire{post.comments.length > 1 ? 's ' : ' '}</span>}
                             </StyledLittlePinkButton>  
                         </div> */}
-                            {userData._id === post.posterId && (
+
+                            {userData._id === post.posterId || userData.admin_role === true && (
                                 <StyledIconsContainer>
                                     <StyledIconContainer 
                                         onClick={() => setIsUpdated(!isUpdated)}
@@ -141,7 +163,6 @@ const Card = ({ post }) => {
                                     </StyledIconContainer>
                                 </StyledIconsContainer>
                             )}
-                        {/* <StyledModifyLink to="/edit-post">Modifier</StyledModifyLink> */}
                     </StyledBottomCommandContainer>
                 </PostContainer>
             )}

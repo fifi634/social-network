@@ -71,13 +71,13 @@ export const StyledCorpContainer = styled.div`
     display: flex;
     flex-direction: row;
     @media screen and (max-width: 800px) {
-        flex-direction: column-reverse;
+        flex-direction: column;
     }
 `;
 
 export const PostImageContainer = styled.div`
     width: 550px;
-    height: 350px;
+    max-height: 350px;
     margin: 10px 0;
     border-radius: 25px;
     @media screen and (max-width: 800px) {
@@ -97,18 +97,19 @@ export const PostImg = styled.img`
 `;
 
 export const StyledMessageP = styled.p`
-    margin: 10px 20px;
+    margin: 10px 20px 10px 50px;
     padding: 20px;
-    border-radius: 20px 20px 20px 6px;
+    border-radius: 6px 20px 20px 20px;
     background-color: #ffffff;
-    min-width: 350px;
+    min-width: 300px;
     @media screen and (max-width: 800px) {
-        min-width : 200px;
+        min-width : unset;
         width: auto;        
-        margin: 10px 0;
+        margin: 10px 20px 10px 30px;
     }
     @media screen and (max-width: 400px) {
         min-width: unset;
+        margin: 10px 0;
     }
 `;
 
@@ -122,13 +123,16 @@ export const StyledEditMessageContainer = styled.div`
         margin: 0px auto;
         box-shadow: 0px 2px 2px ${colors.boxShadow};
     }
+    &.editPost {
+        margin: 10px 10px 0 10px; 
+    }
     @media screen and (min-width: 800px) {
         margin: 0 10px;
         &.createPost {
             max-width: 1000px;
         }
         &.editPost {
-            width: 400px;            
+            width: 400px;     
         }
     }
 `;
@@ -145,8 +149,11 @@ export const StyledMessageTextaera = styled.textarea`
 
 export const StyledModifyButtonContainer = styled.div`
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
     margin: 0 0 10px 0;
+    @media screen and (max-width: 300px) {
+        flex-direction: column; 
+    }
 `;
 
 export const StyledModifyButton = styled.button`
@@ -173,6 +180,10 @@ export const StyledModifyButton = styled.button`
     }
     &.cancelButton {
         background: ${colors.tertiary};
+    }
+    @media screen and (max-width: 300px) {
+        margin-top: 5px;
+        width: 100px; 
     }
 `;
 
