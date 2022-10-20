@@ -27,6 +27,10 @@ export const StyledPinkButton = styled.button`
         margin: 5px;
         &.home {
             margin: 5px;
+        }
+    }
+    @media screen and (max-width: 610px) {
+        &.home {
             width: 160px;
             height: 30px;
         }
@@ -34,7 +38,6 @@ export const StyledPinkButton = styled.button`
     @media screen and (max-device-width: 480px) {
         width: 160px;
     } 
-
 `;
 
 export const StyledGreyButton = styled.button`

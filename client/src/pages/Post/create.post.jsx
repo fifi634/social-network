@@ -67,9 +67,11 @@ const CreatePost = () => {
     };
 
 
-    const handlePicture = async (e) => {
+    const handlePicture = (e) => {
+        // async 
         // setPostPicture(URL.createObjectURL(e.target.files[0]));
-        await setFile(e.target.files[0]);
+        // await setFile(e.target.files[0]);
+        setFile(e.target.files[0]);
     };
 
 

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { colors } from '../../config';
-import picture from '../../assets/image/picture.svg';
+// import picture from '../../assets/image/picture.svg';
 
 export const StyledLi = styled.li`
     list-style: none;
@@ -86,13 +86,14 @@ export const PostImageContainer = styled.div`
 `;
 
 export const PostImg = styled.img`
-    position: relative;
-    height: 100%;
+    // position: relative;
+    // height: 100%;
+    max-height: 350px;
     width: 100%;
     object-fit: cover;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(50%, 50%);
     border-radius: 25px;
 `;
 
@@ -101,12 +102,10 @@ export const StyledMessageP = styled.p`
     padding: 20px;
     border-radius: 6px 20px 20px 20px;
     background-color: #ffffff;
-    min-width: 300px;
-    max-width: 300px;
+    width: 300px;
     @media screen and (max-width: 800px) {
-        min-width : unset;
         width: auto;        
-        margin: 10px 20px 10px 30px;
+        // margin: 10px 20px 10px 50px;
     }
     @media screen and (max-width: 400px) {
         min-width: unset;

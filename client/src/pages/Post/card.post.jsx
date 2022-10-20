@@ -35,7 +35,7 @@ import {
 } from "./style.post";
 
 // import { StyledLittlePinkButton } from "../../utils/style/StyledGlobalButton";
-import { StyledInputFile } from '../../utils/style/StyledGlobalForm';
+// import { StyledInputFile } from '../../utils/style/StyledGlobalForm';
 import edit from "../../assets/image/edit.svg";
 
 
@@ -46,7 +46,7 @@ const Card = ({ post }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [isUpdated, setIsUpdated] = useState(false);
     const [textUpdate, setTextUpdate] = useState(null);
-    const [file, setFile] = useState(null);
+    // const [file, setFile] = useState(null);
 
     // Redux
     const usersData = useSelector((state) => state.usersReducer);
@@ -125,11 +125,11 @@ const Card = ({ post }) => {
                                     onChange={(e) => setTextUpdate(e.target.value)}
                                 />
                                 <StyledModifyButtonContainer>
-                                    <StyledInputFile
+                                    {/* <StyledInputFile
                                         type="file"
                                         accept=".jpg, .jpeg, .png, .webp .gif"
                                         onChange={(e) => setFile(e.target.files[0])}
-                                    />
+                                    /> */}
                                     <StyledModifyButton onClick={updateItem}>Modifier</StyledModifyButton>
                                 </StyledModifyButtonContainer>
                             </StyledEditMessageContainer>

@@ -2,6 +2,23 @@ import styled from 'styled-components';
 import { colors } from '../../config';
 
 
+export const StyledP = styled.p`
+    width: 568px;
+    height: 24px;
+    border-radius: 10px;
+    font-size: 18px;
+    padding: 10px 5px 10px 5px;
+    @media screen and (max-width: 800px) {
+        width: 450px;
+    }
+    @media screen and (max-width: 500px) {
+        width: 350px;
+    }
+    @media screen and (max-width: 370px) {
+        width: 200px;
+        display: flex;
+    }
+`;
 
 export const AvatarText = styled.div`
     display: flex;

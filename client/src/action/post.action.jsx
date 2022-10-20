@@ -30,9 +30,9 @@ export const addPost = (data) => {
             method: 'patch',
             url: fetchUrl + 'api/post/', 
             withCredentials: true,
-            headers: {
-                'enctype':'multipart/form-data'
-            },
+            // headers: {
+            //     'enctype':'multipart/form-data'
+            // },
             data: data
     })
         .then(() => {})

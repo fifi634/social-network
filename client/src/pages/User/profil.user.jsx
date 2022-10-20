@@ -23,6 +23,7 @@ import {
     // StyledInputFile
 } from '../../utils/style/StyledGlobalForm';
 import {
+    StyledP,
     AvatarText,
     StyledFilesName,
     StyledAvatarImage,
@@ -179,7 +180,7 @@ function Profil() {
                             <StyledH1>Compte</StyledH1>
                             <InputContainer>
                                 <StyledLabel htmlFor="email">Votre e-mail :</StyledLabel>
-                                <p id="email">{userData.email}</p>
+                                <StyledP id="email">{userData.email}</StyledP>
                                 {/* <StyledInput
                                     type="email"
                                     id="email"
