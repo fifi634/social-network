@@ -89,20 +89,17 @@ module.exports.deletePost = async (req, res) => {
 
     // Check if it's an admin
     let admin = false;
-    let user = await UserModel.findOne({_id: req.auth.userId})
+    let user = await UserModel.findOne({_id: req.auth.userId});
     if (user.admin_role === true) admin = true;
-    console.log('admin: ', admin)
 
 
     PostModel.findOne({_id: req.params.id})
         .then((post) => {
-            if (post.posterId != req.auth.userId && admin === false) {
+            if(post.posterId != req.auth.userId && admin === false) {
                 res.status(403).json({ message: 'Unauthorized user for del post'});
-            } else if (post.picture !==  undefined) {
-
-                // If picture in post, erase it
-                const fileSlug = post.picture.split('./')[1];
-                fs.unlink(`../client/public/${fileSlug}`, () => {
+            // If picture in post, erase it    
+            } else if(post.picture !==  undefined) {                
+                fs.unlink(`../client/public/${post.picture}`, () => {
 
                     // Erase post from database
                     PostModel.findByIdAndDelete(req.params.id, (err, data) => {

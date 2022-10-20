@@ -119,7 +119,6 @@ function Header() {
                     </StyledDisconnectContainer>
                 )
             }
-            
         </StyledHeader>
     );
 }

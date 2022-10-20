@@ -10,6 +10,8 @@ export const UPDATE_POST = "UPDATE_POST";
 export const UPLOAD_POST = "UPLOAD_POST";
 export const DELETE_POST = "DELETE_POST";
 
+
+
 // // Get posts with infinity scroll
 // export const getPosts = (countDisplay) => {
 //     return (dispatch) => {
@@ -23,6 +25,7 @@ export const DELETE_POST = "DELETE_POST";
 //         ;
 //     }
 // };
+
 
 export const addPost = (data) => {
     return (dispatch) => {
@@ -43,6 +46,7 @@ export const addPost = (data) => {
     };
 }
 
+
 // Getposts since inifinity scroll
 export const getPosts = () => {
     return (dispatch) => {
@@ -55,6 +59,7 @@ export const getPosts = () => {
         ;
     }
 };
+
 
 export const likePost = (postId, userId) => {
     return (dispatch) => {
@@ -72,6 +77,7 @@ export const likePost = (postId, userId) => {
     };
 };
 
+
 export const unlikePost = (postId, userId) => {
     return (dispatch) => {
         return axios ({
@@ -87,6 +93,7 @@ export const unlikePost = (postId, userId) => {
         ;
     };
 };
+
 
 export const updatePost = (postId, message) => {
     return(dispatch) => {
@@ -104,6 +111,7 @@ export const updatePost = (postId, message) => {
     };
 };
 
+
 export const uploadPost = (postId, data) => {
     return(dispatch) => {
         return axios({
@@ -117,6 +125,7 @@ export const uploadPost = (postId, data) => {
         ;
     }
 }
+
 
 export const deletePost = (postId) => {
     return(dispatch) => {

@@ -86,26 +86,21 @@ export const PostImageContainer = styled.div`
 `;
 
 export const PostImg = styled.img`
-    // position: relative;
-    // height: 100%;
     max-height: 350px;
     width: 100%;
     object-fit: cover;
-    // top: 50%;
-    // left: 50%;
-    // transform: translate(50%, 50%);
     border-radius: 25px;
 `;
 
 export const StyledMessageP = styled.p`
+    overflow-wrap: anywhere;
     margin: 10px 20px 10px 50px;
     padding: 20px;
     border-radius: 6px 20px 20px 20px;
     background-color: #ffffff;
     width: 300px;
     @media screen and (max-width: 800px) {
-        width: auto;        
-        // margin: 10px 20px 10px 50px;
+        width: auto;
     }
     @media screen and (max-width: 400px) {
         min-width: unset;

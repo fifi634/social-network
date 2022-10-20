@@ -16,9 +16,7 @@ function DeleteCard(props) {
                 src={trash} 
                 alt="Supprimer le post" 
                 onClick={() => {
-                    if(window.confirm('Voulez-vous supprimer ce post ?')) {
-                        deleteQuote();
-                    };
+                    if(window.confirm('Voulez-vous supprimer ce post ?')) deleteQuote();
                 }}
             />
         </>

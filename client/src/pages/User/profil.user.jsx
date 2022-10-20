@@ -1,15 +1,16 @@
 import React, { useState, useContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import cookie from 'js-cookie';
+// Components
 import Login from '../Login/index.login';
 import { UidContext } from '../../utils/context';
-import { useDispatch, useSelector } from 'react-redux';
+import { deleteUser } from '../../action/users.action';
 import { uploadPicture, uploadDefaultAvatar, updateProfil, GET_USER } from '../../action/user.actions';
 import { fetchUrl } from '../../config';
-import axios from 'axios';
-
 // Import images
 import male_avatar from '../../assets/image/Homme-avatar.svg';
 import female_avatar from '../../assets/image/Femme-avatar.svg';
-
 // Import style
 import { StyledLittleGreyButton } from '../../utils/style/StyledGlobalButton';
 import {
@@ -65,6 +66,7 @@ function Profil() {
     const [inputPseudo, setInputPseudo] = useState(userData.pseudo);
     const [inputAvatar, setInputAvatar] = useState('Homme');
     const [errorHandle, setErrorHandle] = useState(false);
+    const [deleteAction, setDeleteAction] = useState(false); 
 
 
     // // Upload avatar file by Redux
@@ -84,6 +86,11 @@ function Profil() {
     //     dispatch(uploadDefaultAvatar(avatarSlug));
     // };
 
+    if(deleteAction === true) {
+        dispatch(deleteUser(userData._id));
+        setDeleteAction(false);
+        window.location = '/';
+    };
 
 
     // When form is submit
@@ -298,7 +305,13 @@ function Profil() {
                                     <StyledProfilControlContainer>
                                         <StyledProfilLinkContainer>
                                             <StyledDisconnectLink href="/login">Déconnexion</StyledDisconnectLink>
-                                            <StyledDeleteLink href='/delete-compte'>Supprimer le compte</StyledDeleteLink>
+                                            <StyledDeleteLink 
+                                                onClick={() => {
+                                                    if(window.confirm('Voulez-vous supprimer votre compte ?')) setDeleteAction(true);
+                                                }}
+                                            >
+                                                Supprimer le compte
+                                            </StyledDeleteLink>
                                         </StyledProfilLinkContainer>
                                         <StyledLittleGreyButton type="submit">Modifier</StyledLittleGreyButton>
                                     </StyledProfilControlContainer>        

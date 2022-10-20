@@ -1,8 +1,9 @@
 const UserModel = require('../models/user.model');
+const PostModel = require('../models/post.model');
 // const { uploadErrors } = require('../utils/errors.utils');
 const ObjectID = require('mongoose').Types.ObjectId;
 const bcrypt = require('bcrypt');
-// const fs = require('fs');
+const fs = require('fs');
 const { signupErrors, updateProfilErrors } = require('../utils/errors.utils');
 
 /* Find all users and return it */
@@ -129,11 +130,46 @@ exports.updateUser = (req, res) => {
 
 /* Erase user */
 exports.deleteUser = async (req, res) => {
+    // Check if it's an admin
+    let admin = false;
+    let user = await UserModel.findOne({_id: req.auth.userId});
+    if (user.admin_role === true) admin = true;
+    console.log('coucou')
+    // // Erase all post posted by user
+    // const existPost = true;
+
+    // PostModel.findOne({posterId: req.auth.userId})
+    //     .then((post) => {
+    //         if(post.posterId !== req.authuserId && admin === false) {
+    //             res.status(403).json({ message: 'Unauthorized for del posts user' });
+
+    //         // If picture in post, erase it
+    //         } else if(post.picture !== undefined) {                
+    //             fs.unlink(`../client/public/${postpicture}`, () => {
+
+    //                 // Erase post from database
+    //                 PostModel.deleteOne({posterId: req.auth.userId}, (err, num) => {
+    //                     if(!err) {
+    //                         console.log(req.auth.userId + ' has deleted a post');
+    //                     } else {
+    //                         console.log('Delete failed : ' + err);
+    //                     };
+    //                 });
+    //             });
+    //         };
+    //     })
+    //     .catch(() => {
+    //         existPost = false;
+    //     })
+    // ;
+
+
     UserModel.deleteOne({ _id: req.auth.userId })
-        .then(user => {
+        .then(() => {
             console.log(req.auth.userId + ' deleted');
-            res.status(200).json({ message: 'User successfully deleted', user });            
+            res.status(200).json({ message: 'User successfully deleted' });            
         })
         .catch(error => res.status(400).json({ message: 'User delete error', error }))
     ;
+
 };
