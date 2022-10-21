@@ -324,13 +324,15 @@ function Profil() {
                                     <StyledProfilControlContainer>
                                         <StyledProfilLinkContainer>
                                             <StyledDisconnectLink onClick={logout}>Déconnexion</StyledDisconnectLink>
-                                            <StyledDeleteLink 
-                                                onClick={() => {
-                                                    if(window.confirm('Voulez-vous supprimer votre compte ?')) deleteUser();
-                                                }}
-                                            >
-                                                Supprimer le compte
-                                            </StyledDeleteLink>
+                                            { userData.admin_role === true ? ('') : (
+                                                <StyledDeleteLink 
+                                                    onClick={() => {
+                                                        if(window.confirm('Voulez-vous supprimer votre compte ?')) deleteUser();
+                                                    }}
+                                                >
+                                                    Supprimer le compte
+                                                </StyledDeleteLink>
+                                            )}
                                         </StyledProfilLinkContainer>
                                         <StyledLittleGreyButton type="submit">Modifier</StyledLittleGreyButton>
                                     </StyledProfilControlContainer>        
