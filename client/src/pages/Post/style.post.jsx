@@ -103,8 +103,10 @@ export const StyledMessageP = styled.p`
         width: auto;
     }
     @media screen and (max-width: 400px) {
-        min-width: unset;
         margin: 10px 0;
+    }
+    &.textAlone {
+        width: auto;
     }
 `;
 
@@ -129,6 +131,9 @@ export const StyledEditMessageContainer = styled.div`
         &.editPost {
             width: 400px;     
         }
+        &.textAlone {
+            width: 960px;
+        }
     }
 `;
 
@@ -137,6 +142,11 @@ export const StyledMessageTextaera = styled.textarea`
     border-radius: 20px 20px 6px 20px;
     border: solid 1px ${colors.primary};
     padding: 20px;
+    @media screen and (min-width: 800px) {
+        &.withPicture {
+            height: 100px;
+        }
+    }
     @media screen and (max-width: 800px) {
         max-width: 800px;
     }
@@ -186,9 +196,6 @@ export const StyledBottomCommandContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    @media screen and (max-width: 330px) {
-        flex-direction: column;
-    }
 `;
 
 export const StyledLikeContainer = styled.div`
@@ -227,5 +234,5 @@ export const StyledIconImg = styled.img`
 `;
 
 export const StyledPostFileInput = styled.input`
-    margin: 10px 0 0 20px;
+    opacity: 0;
 `;

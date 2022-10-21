@@ -119,6 +119,11 @@ const CreatePost = () => {
                         </PostContainer>
                     ) : null} */}
                     <StyledSpaceBetweenContainer>
+                        <label htmlFor="file-upload">
+                            <StyledIconContainer>
+                                <StyledIconImg src={picture} alt="Editer le post" />
+                            </StyledIconContainer>
+                        </label>
                         <StyledPostFileInput
                             type="file" 
                             id="file-upload" 
@@ -132,7 +137,7 @@ const CreatePost = () => {
                             ): null }
                                 <StyledModifyButton onClick={handlePost}>Poster</StyledModifyButton>
                         </StyledModifyButtonContainer>
-                    </StyledSpaceBetweenContainer>                    
+                    </StyledSpaceBetweenContainer>                
                 </StyledEditMessageContainer>
             )}
         </div>

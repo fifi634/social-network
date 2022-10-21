@@ -103,7 +103,6 @@ const Card = ({ post }) => {
                         </StyledUserInfoContainer>
                     </StyledCenterContainer>
                     <StyledCorpContainer>
-
                         {/* {post.video && (
                             <iframe
                                 title={post._id}
@@ -115,12 +114,15 @@ const Card = ({ post }) => {
                                 allowFullScreen
                             ></iframe>
                         )} */}
-
-                        {isUpdated === false && (<StyledMessageP>{post.message}</StyledMessageP>)}
+                        {isUpdated === false && (
+                            <StyledMessageP className={post.picture ? '' : 'textAlone'}>
+                                {post.message}
+                            </StyledMessageP>
+                        )}
                         {isUpdated === true && (
-                            <StyledEditMessageContainer className="editPost">
+                            <StyledEditMessageContainer className={post.picture ? 'editPost withPicture' : 'textAlone editPost'}>
                                 <StyledMessageTextaera 
-                                    className="editPost"
+                                    className={post.picture ? 'withPicture' : ''}
                                     defaultValue={post.message}
                                     onChange={(e) => setTextUpdate(e.target.value)}
                                 />

@@ -7,7 +7,7 @@ export const ADD_POST = "ADD_POST";
 export const LIKE_POST = "LIKE_POST";
 export const UNLIKE_POST = "UNLIKE_POST";
 export const UPDATE_POST = "UPDATE_POST";
-export const UPLOAD_POST = "UPLOAD_POST";
+// export const UPLOAD_POST = "UPLOAD_POST";
 export const DELETE_POST = "DELETE_POST";
 
 
@@ -112,19 +112,19 @@ export const updatePost = (postId, message) => {
 };
 
 
-export const uploadPost = (postId, data) => {
-    return(dispatch) => {
-        return axios({
-            method: 'post',
-            url: fetchUrl + 'api/post/upload' + postId,
-            data: data,
-            withCredentials: true
-        })
-            .then((res) => {})
-            .catch((err) => console.log('Send update post with picture failed. ' + err))
-        ;
-    }
-}
+// export const uploadPost = (postId, data) => {
+//     return(dispatch) => {
+//         return axios({
+//             method: 'post',
+//             url: fetchUrl + 'api/post/upload' + postId,
+//             data: data,
+//             withCredentials: true
+//         })
+//             .then((res) => {})
+//             .catch((err) => console.log('Send update post with picture failed. ' + err))
+//         ;
+//     }
+// }
 
 
 export const deletePost = (postId) => {

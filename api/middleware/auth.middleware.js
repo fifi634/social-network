@@ -31,6 +31,7 @@ require('dotenv').config({path:'../config/.env'});
 // Check if token is known in database
 exports.requireAuth = (req, res, next) => {
     const token = req.cookies.jwt;
+    console.log(token);
     let user = '';
 
     if (token) {        
@@ -47,9 +48,9 @@ exports.requireAuth = (req, res, next) => {
                     req.auth = { userId: userId };
                     user = await UserModel.findById(decodedToken.id);
                     res.status(200).locals.user = user;
-                    // console.log(user._id + ' authentified')
+                    console.log(user._id + ' authentified')
                     next();
-                }
+                };
             }
         );
     } else {

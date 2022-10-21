@@ -7,8 +7,9 @@ export default function usersReducer(state = initialState, action) {
         case GET_USERS:
             return action.payload
         ;
-        case DELETE_USER:
-            return state.filter((users) => users._id !== action.payload.userId)
+        // case DELETE_USER:
+        //     return state.filter((users) => users._id !== action.payload.userId)
+        // ;
         default:
             return state
         ;

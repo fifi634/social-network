@@ -5,8 +5,9 @@ import cookie from 'js-cookie';
 // Components
 import Login from '../Login/index.login';
 import { UidContext } from '../../utils/context';
-import { deleteUser } from '../../action/users.action';
+// import { deleteUser } from '../../action/users.action';
 import { uploadPicture, uploadDefaultAvatar, updateProfil, GET_USER } from '../../action/user.actions';
+import { DELETE_USER } from '../../action/users.action';
 import { fetchUrl } from '../../config';
 // Import images
 import male_avatar from '../../assets/image/Homme-avatar.svg';
@@ -66,7 +67,6 @@ function Profil() {
     const [inputPseudo, setInputPseudo] = useState(userData.pseudo);
     const [inputAvatar, setInputAvatar] = useState('Homme');
     const [errorHandle, setErrorHandle] = useState(false);
-    const [deleteAction, setDeleteAction] = useState(false); 
 
 
     // // Upload avatar file by Redux
@@ -86,9 +86,29 @@ function Profil() {
     //     dispatch(uploadDefaultAvatar(avatarSlug));
     // };
 
-    if(deleteAction === true) {
-        dispatch(deleteUser(userData._id));
-        setDeleteAction(false);
+
+
+    const removeCookie = (key) => {
+        console.log('coucou');
+        if(window !== "underfined") cookie.remove(key, {expire: 1})
+        
+    };
+
+
+    const logout = async() => {
+        await axios.get(fetchUrl + 'api/user/logout', {withCredentials: true})
+            .then(() => removeCookie('jwt'))
+            .catch(err => console.log('Axios logout failed. ' + err))
+        ;
+        window.location = '/';
+    };
+
+
+    const deleteUser = async() => {
+        await axios.delete(fetchUrl + 'api/user/', {withCredentials: true})
+            .then((res) => removeCookie('jwt'))
+            .catch((err) => console.log('Axios delete user failed. ' + err))
+        ;
         window.location = '/';
     };
 
@@ -304,10 +324,10 @@ function Profil() {
                                 <CreateButtonContainer>  
                                     <StyledProfilControlContainer>
                                         <StyledProfilLinkContainer>
-                                            <StyledDisconnectLink href="/login">Déconnexion</StyledDisconnectLink>
+                                            <StyledDisconnectLink onClick={logout}>Déconnexion</StyledDisconnectLink>
                                             <StyledDeleteLink 
                                                 onClick={() => {
-                                                    if(window.confirm('Voulez-vous supprimer votre compte ?')) setDeleteAction(true);
+                                                    if(window.confirm('Voulez-vous supprimer votre compte ?')) deleteUser();
                                                 }}
                                             >
                                                 Supprimer le compte
