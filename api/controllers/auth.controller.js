@@ -74,7 +74,7 @@ exports.login = async (req, res, next) => {
 // Erase jwt cookie
 exports.logout = (req, res) => {
     req.auth = null;
-    res.cookie('jwt', '', { maxAge: 1 });
+    res.cookie('jwt', '', { maxAge: 1 }).status(200).redirect('/');
     return;
     // res.status(200).redirect('/');
     // `${res.protocol}://${req.get('host')}/`

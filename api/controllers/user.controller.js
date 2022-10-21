@@ -130,10 +130,6 @@ exports.updateUser = (req, res) => {
 
 /* Erase user */
 exports.deleteUser = async (req, res, next) => {
-    // Check if it's an admin
-    let admin = false;
-    let user = await UserModel.findOne({_id: req.auth.userId});
-    if (user.admin_role === true) admin = true;
     
     // // Erase all post posted by user
     // const existPost = true;
@@ -167,7 +163,7 @@ exports.deleteUser = async (req, res, next) => {
     UserModel.deleteOne({ _id: req.auth.userId })
         .then(() => {
             console.log(req.auth.userId + ' deleted');
-            res.status(200).json({ message: 'User successfully deleted' }).redirect('/');            
+            res.status(200).json({ message: 'User successfully deleted' });            
         })
         .catch(error => res.status(400).json({ message: 'User delete error', error }))
     ;

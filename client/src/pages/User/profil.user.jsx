@@ -89,9 +89,8 @@ function Profil() {
 
 
     const removeCookie = (key) => {
-        console.log('coucou');
         if(window !== "underfined") cookie.remove(key, {expire: 1})
-        
+        console.log(window);
     };
 
 
@@ -106,7 +105,7 @@ function Profil() {
 
     const deleteUser = async() => {
         await axios.delete(fetchUrl + 'api/user/', {withCredentials: true})
-            .then((res) => removeCookie('jwt'))
+            .then(() => logout())
             .catch((err) => console.log('Axios delete user failed. ' + err))
         ;
         window.location = '/';
