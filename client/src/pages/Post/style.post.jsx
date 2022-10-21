@@ -152,6 +152,16 @@ export const StyledMessageTextaera = styled.textarea`
     }
 `;
 
+export const StyledRowContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    // justify-content: start;
+`;
+
+export const StyledPostFileInput = styled.input`
+    opacity: 0;
+`;
+
 export const StyledModifyButtonContainer = styled.div`
     display: flex;
     justify-content: space-between;
@@ -231,8 +241,4 @@ export const StyledIconImg = styled.img`
     width: 20px;
     height: 20px;
     transform: translate(50%, 50%);
-`;
-
-export const StyledPostFileInput = styled.input`
-    opacity: 0;
 `;

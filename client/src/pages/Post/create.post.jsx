@@ -9,6 +9,7 @@ import picture from '../../assets/image/picture.svg';
 // Style
 import { 
     StyledEditMessageContainer,
+    StyledRowContainer,
     StyledPostFileInput, 
     StyledIconContainer, 
     StyledIconImg,
@@ -38,8 +39,7 @@ const CreatePost = () => {
     const [message, setMessage] = useState('');
     // const [postPicture, setPostPicture] = useState(null);
     const [file, setFile] = useState();
-    
-    
+
     // Get user by Redux
     const userData = useSelector((state) => state.userReducer);
     const dispatch = useDispatch();
@@ -118,19 +118,22 @@ const CreatePost = () => {
                         </StyledCorpContainer>
                         </PostContainer>
                     ) : null} */}
-                    <StyledSpaceBetweenContainer>
-                        <label htmlFor="file-upload">
-                            <StyledIconContainer>
-                                <StyledIconImg src={picture} alt="Editer le post" />
-                            </StyledIconContainer>
-                        </label>
-                        <StyledPostFileInput
-                            type="file" 
-                            id="file-upload" 
-                            name="file" 
-                            accept=".jpg, .jpeg, .png, .gif, .webp" 
-                            onChange={(e) => handlePicture(e)} 
-                        />
+                    <StyledSpaceBetweenContainer>                        
+                            <label htmlFor="file-upload">
+                                <StyledRowContainer>
+                                    <StyledIconContainer>
+                                        <StyledIconImg src={picture} alt="Editer le post" />
+                                    </StyledIconContainer>
+                                    {file ? (<p>{file.name}</p>) : ('')}
+                                </StyledRowContainer>
+                            </label>
+                            <StyledPostFileInput
+                                type="file" 
+                                id="file-upload" 
+                                name="file" 
+                                accept=".jpg, .jpeg, .png, .gif, .webp" 
+                                onChange={(e) => handlePicture(e)} 
+                            />                           
                         <StyledModifyButtonContainer>
                             {message ? (
                                 <StyledModifyButton onClick={cancelPost} className="cancelButton">Annuler</StyledModifyButton>
