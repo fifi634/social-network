@@ -117,7 +117,8 @@ export const StyledEditMessageContainer = styled.div`
     padding: 10px;
     border-radius: 20px 6px 20px 20px;
     &.createPost {
-        margin: 0px auto;
+        margin: -10px auto;
+        max-width: 1000px;
         box-shadow: 0px 2px 2px ${colors.boxShadow};
     }
     &.editPost {
@@ -155,11 +156,18 @@ export const StyledMessageTextaera = styled.textarea`
 export const StyledRowContainer = styled.div`
     display: flex;
     flex-direction: row;
-    // justify-content: start;
+    @media screen and (max-width: 510px) {
+        flex-direction: column;
+    }
 `;
 
 export const StyledPostFileInput = styled.input`
     opacity: 0;
+    width: 0.1px;
+`;
+
+export const StyledFileP = styled.p`
+    margin: 3px;
 `;
 
 export const StyledModifyButtonContainer = styled.div`

@@ -33,7 +33,7 @@ const LikeButton = ({ post }) => {
     return (
         <StyledCenterContainer>
             {uid && liked === false && (
-                <StyledIconContainer onClick={like}>
+                <StyledIconContainer onClick={like} className="createPost">
                     <StyledIconImg src={heart} alt="J'aime !" post={post}  />
                 </StyledIconContainer>
             )}

@@ -10,7 +10,8 @@ import picture from '../../assets/image/picture.svg';
 import { 
     StyledEditMessageContainer,
     StyledRowContainer,
-    StyledPostFileInput, 
+    StyledPostFileInput,
+    StyledFileP,
     StyledIconContainer, 
     StyledIconImg,
     StyledMessageTextaera,
@@ -29,6 +30,7 @@ import {
     PostImg,
     StyledMessageP    
 } from './style.post';
+import { StyledError } from "../../utils/style/StyledGlobalForm";
 
 
 
@@ -40,9 +42,17 @@ const CreatePost = () => {
     // const [postPicture, setPostPicture] = useState(null);
     const [file, setFile] = useState();
 
+
     // Get user by Redux
     const userData = useSelector((state) => state.userReducer);
+    const error = useSelector((state) => state.errorReducer.userError);
     const dispatch = useDispatch();
+
+   
+    // // Upload picture error
+    // const fileError = document.querySelector('.file.error');
+    // fileError.innerHTML = '';
+
 
     const cancelPost = () => {
         setMessage('');
@@ -124,8 +134,10 @@ const CreatePost = () => {
                                     <StyledIconContainer>
                                         <StyledIconImg src={picture} alt="Editer le post" />
                                     </StyledIconContainer>
-                                    {file ? (<p>{file.name}</p>) : ('')}
+                                    {file ? (<StyledFileP>{file.name}</StyledFileP>) : ('')}
                                 </StyledRowContainer>
+                                {/* <StyledError><p>{error.maxSize}</p></StyledError>
+                                <StyledError><p>{error.format}</p></StyledError> */}
                             </label>
                             <StyledPostFileInput
                                 type="file" 

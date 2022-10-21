@@ -9,6 +9,7 @@ export const UNLIKE_POST = "UNLIKE_POST";
 export const UPDATE_POST = "UPDATE_POST";
 // export const UPLOAD_POST = "UPLOAD_POST";
 export const DELETE_POST = "DELETE_POST";
+export const GET_USER_ERRORS = "GET_USER_ERRORS";
 
 
 
@@ -38,7 +39,11 @@ export const addPost = (data) => {
             // },
             data: data
     })
-        .then(() => {})
+        .then((res) => {
+            if (res.data.errors) {
+                dispatch({ type: GET_USER_ERRORS, payload: res.data.errors })
+            };
+        })
         .catch((err) => {
             console.log('Send addPost failed. ' + err);
         });
