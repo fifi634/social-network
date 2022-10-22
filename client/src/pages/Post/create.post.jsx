@@ -45,11 +45,28 @@ const CreatePost = () => {
 
     // Get user by Redux
     const userData = useSelector((state) => state.userReducer);
-    const error = useSelector((state) => state.errorReducer.userError);
+    const error = useSelector((state) => state.errorReducer.uploadFile);
     const dispatch = useDispatch();
 
+
+    // Upload picture Error
+    // const fileError = JSON.stringify(error);
+    let errorFormat = '';
+    let errorSize = '';
+    console.log('display error: ', error)
+    if(error.includes('500')) {
+        errorFormat = "Format accepté : .jpg .jpeg .gif .webP"
+        errorSize = "Taile maximale : 10mo";
+    }
+
+    // let displayError = document.querySelector('.file.error');
+    // displayError.innerHTML = "Format acceptés: .jpg. jpeg .gif .webP <br/>Max 10mo";
+
+    // if(fileError.includes('500')) 
+    // console.log('error ', fileError);
+
    
-    // // Upload picture error
+    // // // Upload picture error
     // const fileError = document.querySelector('.file.error');
     // fileError.innerHTML = '';
 
@@ -63,6 +80,8 @@ const CreatePost = () => {
 
     const handlePost = async () => {
         if(message) {
+            //
+            // const parseMessage = message.replace(/\n/g, '<br/>');
             const data = new FormData();
             data.append('posterId', userData._id);
             data.append('message', message);
@@ -136,8 +155,8 @@ const CreatePost = () => {
                                     </StyledIconContainer>
                                     {file ? (<StyledFileP>{file.name}</StyledFileP>) : ('')}
                                 </StyledRowContainer>
-                                {/* <StyledError><p>{error.maxSize}</p></StyledError>
-                                <StyledError><p>{error.format}</p></StyledError> */}
+                                <StyledError>{errorFormat}</StyledError>
+                                <StyledError>{errorSize}</StyledError>
                             </label>
                             <StyledPostFileInput
                                 type="file" 

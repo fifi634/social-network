@@ -1,7 +1,7 @@
 // import { UPDATE_USER_ERRORS } from "../action/user.actions";
 import { GET_USER_ERRORS } from "../action/post.action";
 
-const initialState = { updateUserErrors: [], uploadFile: [] };
+const initialState = { updateUserErrors: [], uploadFile: '' };
 
 
 

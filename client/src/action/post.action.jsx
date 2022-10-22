@@ -40,11 +40,12 @@ export const addPost = (data) => {
             data: data
     })
         .then((res) => {
-            if (res.data.errors) {
-                dispatch({ type: GET_USER_ERRORS, payload: res.data.errors })
-            };
+            console.log('res ', res.data)                
+            dispatch({ type: GET_USER_ERRORS, payload: '' });       
         })
         .catch((err) => {
+            console.log('err ', err)
+            dispatch({ type: GET_USER_ERRORS, payload: JSON.stringify(err) })
             console.log('Send addPost failed. ' + err);
         });
         ;

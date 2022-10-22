@@ -27,15 +27,16 @@ exports.loginErrors = (err) => {
     return errors = { login: "La connection a échoué" };
 };
 
+
 // // Upload error message
 // exports.uploadErrors = (err) => {
 //     let errors = { format: "", maxSize: "" };
-
-//     if (err.message.includes('invalid file'))
+//     console.log('errors ', err)
+//     if (err.includes('invalid file'))
 //         errors.format = "Format incompatible"
 //     ;
 
-//     if (err.message.includes('file too large'))
+//     if (err.includes('file too large'))
 //         errors.maxSize = "Le fichier dépasse 10Mo"
 //     ;
 

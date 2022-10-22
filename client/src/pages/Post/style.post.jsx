@@ -99,11 +99,14 @@ export const StyledMessageP = styled.p`
     border-radius: 6px 20px 20px 20px;
     background-color: #ffffff;
     width: 300px;
+    white-space: pre-wrap;
     @media screen and (max-width: 800px) {
         width: auto;
     }
     @media screen and (max-width: 400px) {
         margin: 10px 0;
+        max-height: 200px;
+        overflow-y: scroll;
     }
     &.textAlone {
         width: auto;
@@ -214,6 +217,9 @@ export const StyledBottomCommandContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @media screen and (max-width: 300px) {
+        flex-direction: column;
+    }
 `;
 
 export const StyledLikeContainer = styled.div`
