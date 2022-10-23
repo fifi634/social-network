@@ -11,11 +11,7 @@ Fictif mission for OpenClassRooms studies. This app is an internal social networ
 * Like post system : with anti cheat
 
 * You can personalize colors interface in `client/src/config.js`
-* admin acount : 
-
-Id: admin@groupomania.com
-
-Passorwd: admin
+* admin acount : Id: admin@groupomania.com / Passorwd: admin
 
 ## Requirement
 * Node.js : https://nodejs.org
