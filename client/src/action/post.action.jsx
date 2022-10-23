@@ -20,12 +20,10 @@ export const addPost = (data) => {
             headers: { 'Content-Type':'multipart/form-data' },
             data: data
     })
-        .then((res) => {
-            console.log('res ', res.data)                
+        .then((res) => {               
             dispatch({ type: GET_USER_ERRORS, payload: '' });       
         })
         .catch((err) => {
-            console.log('err ', err)
             dispatch({ type: GET_USER_ERRORS, payload: JSON.stringify(err) })
             console.log('Send addPost failed. ' + err);
         });

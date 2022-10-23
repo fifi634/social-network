@@ -84,7 +84,7 @@ export const PostImageContainer = styled.div`
 `;
 
 export const PostImg = styled.img`
-    max-height: 350px;
+    max-height: 300px;
     width: 100%;
     border-radius: 25px;
 `;
