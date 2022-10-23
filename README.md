@@ -20,6 +20,9 @@ Fictif mission for OpenClassRooms studies. This app is an internal social networ
   `git clone https://github.com/fifi634/Groupomania.git`
 
 ## Back-end configuration (Atlas by MongoDB)
+
+>>> Note for P7 audition (28, october 2022): .env files is complete and it's into my Github. You haven't need create it and complete it.
+
 You must create .env files in api/config/ directory with inside :
 
 `# Server config :`
@@ -36,7 +39,11 @@ You must create .env files in api/config/ directory with inside :
 
 `# URL client domain :`
 
-`DOMAIN_CLIENT_APP = 'http://localhost:3000'` or other slug client app
+`# Authentication token`
+
+`RANDOM_TOKEN_SECRET = 'your token keys'`
+
+`DOMAIN_CLIENT_APP = 'http://localhost:3000'` or other slug client app, defautl client slug
 
 ## Running backend
 * Since the project directory, in cli go to backend directory :
@@ -47,13 +54,13 @@ You must create .env files in api/config/ directory with inside :
   `node server`
 
 ## Front-end configuration
-You must set url of backend server in `client/src/config.js` :
+You can set a personnal url of backend server in `client/src/config.js` :
 
 `// URL API adress of backend setting`
 
 `// !!! BE CAREFUL !! This url must finish by slash ( .../ )`
 
-`export const fetchUrl = 'http://localhost:5000/';` or other server slug
+`export const fetchUrl = 'http://localhost:5000/';` this is a default backend slug
 
 ## Running frontend
 * Since the project directory, in cli go to frontend directory :
