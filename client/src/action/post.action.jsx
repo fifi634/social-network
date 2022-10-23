@@ -30,13 +30,12 @@ export const GET_USER_ERRORS = "GET_USER_ERRORS";
 
 export const addPost = (data) => {
     return (dispatch) => {
+        console.log('2 axios')
         return axios({
             method: 'patch',
             url: fetchUrl + 'api/post/', 
             withCredentials: true,
-            // headers: {
-            //     'enctype':'multipart/form-data'
-            // },
+            headers: { 'Content-Type':'multipart/form-data' },
             data: data
     })
         .then((res) => {

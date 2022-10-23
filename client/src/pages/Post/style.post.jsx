@@ -6,8 +6,13 @@ export const StyledLi = styled.li`
     list-style: none;
 `;
 
-export const PostContainer = styled.div`
+export const StyledThreadContainer = styled.div`
     max-width: 1000px;
+    margin: 40px auto;
+`;
+
+export const PostContainer = styled.div`
+    // max-width: 1000px;
     max-height: 695px;
     border: solid ${colors.tertiary} 1px;
     border-radius: 10px;
@@ -76,9 +81,9 @@ export const StyledCorpContainer = styled.div`
 `;
 
 export const PostImageContainer = styled.div`
-    width: 550px;
+    max-width: 550px;
     max-height: 350px;
-    margin: 10px 0;
+    margin: 10px auto;
     border-radius: 25px;
     @media screen and (max-width: 800px) {
         width: auto;
@@ -88,7 +93,6 @@ export const PostImageContainer = styled.div`
 export const PostImg = styled.img`
     max-height: 350px;
     width: 100%;
-    object-fit: cover;
     border-radius: 25px;
 `;
 
@@ -121,7 +125,6 @@ export const StyledEditMessageContainer = styled.div`
     border-radius: 20px 6px 20px 20px;
     &.createPost {
         margin: -10px auto;
-        max-width: 1000px;
         box-shadow: 0px 2px 2px ${colors.boxShadow};
     }
     &.editPost {
@@ -177,8 +180,8 @@ export const StyledModifyButtonContainer = styled.div`
     display: flex;
     justify-content: space-between;
     margin: 0 0 10px 0;
-    @media screen and (max-width: 300px) {
-        flex-direction: column; 
+    @media screen and (max-width: 550px) {
+        flex-direction: column;
     }
 `;
 
@@ -207,9 +210,9 @@ export const StyledModifyButton = styled.button`
     &.cancelButton {
         background: ${colors.tertiary};
     }
-    @media screen and (max-width: 300px) {
+    @media screen and (max-width: 550px) {
         margin-top: 5px;
-        width: 100px; 
+        width: 90px; 
     }
 `;
 

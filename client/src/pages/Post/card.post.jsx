@@ -114,7 +114,7 @@ const Card = ({ post }) => {
                                 allowFullScreen
                             ></iframe>
                         )} */}
-                        {isUpdated === false && (
+                        {isUpdated === false && post.message && (
                             <StyledMessageP className={post.picture ? '' : 'textAlone'}>
                                 {post.message}
                             </StyledMessageP>

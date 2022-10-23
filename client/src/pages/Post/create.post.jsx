@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../utils/style/Atom";
 import { isEmpty, timestampParser } from "../../utils/utils";
-import { addPost, getPosts } from "../../action/post.action";
-
+import { addPost, getPosts, GET_USER_ERRORS } from "../../action/post.action";
+import axios from 'axios';
 // Import icon
 import picture from '../../assets/image/picture.svg';
 // Style
@@ -31,6 +31,7 @@ import {
     StyledMessageP    
 } from './style.post';
 import { StyledError } from "../../utils/style/StyledGlobalForm";
+import { fetchUrl } from "../../config";
 
 
 
@@ -50,65 +51,45 @@ const CreatePost = () => {
 
 
     // Upload picture Error
-    // const fileError = JSON.stringify(error);
     let errorFormat = '';
     let errorSize = '';
-    console.log('display error: ', error)
-    if(error.includes('500')) {
-        errorFormat = "Format accepté : .jpg .jpeg .gif .webP"
-        errorSize = "Taile maximale : 10mo";
-    }
-
-    // let displayError = document.querySelector('.file.error');
-    // displayError.innerHTML = "Format acceptés: .jpg. jpeg .gif .webP <br/>Max 10mo";
-
-    // if(fileError.includes('500')) 
-    // console.log('error ', fileError);
-
-   
-    // // // Upload picture error
-    // const fileError = document.querySelector('.file.error');
-    // fileError.innerHTML = '';
-
+    let uploadDocuments = document.getElementById('file-upload');
+    if(error) errorFormat = "Format accepté : .jpg .jpeg .gif .webP";
+    if(file && uploadDocuments.files[0].size >= 6291456) errorSize = "Taille maximale : 5mo";
 
     const cancelPost = () => {
         setMessage('');
-        // setPostPicture('');
-        document.getElementById("file-upload").value = "";
         setFile('');
+        // setPostPicture('');
+        document.getElementById("file-upload").value = "";     
+        errorFormat = '';
+        errorSize = '';
     };
 
     const handlePost = async () => {
-        if(message) {
-            //
-            // const parseMessage = message.replace(/\n/g, '<br/>');
+        
+        if(message || (file && uploadDocuments.files[0].size < 6291456)) {
+            console.log('1 create post');
+            
             const data = new FormData();
             data.append('posterId', userData._id);
             data.append('message', message);
             if(file) data.append('file', file);
 
             await dispatch(addPost(data));
-            dispatch(getPosts());
+            await dispatch(getPosts());
             cancelPost();
         } else {
-            alert("Veuillez entrer un message.")
+            alert("Veuillez entrer un message ou charger une image au bon format et de taille inférieur à 5mo.")
         };
     };
-
-
-    const handlePicture = (e) => {
-        // async 
-        // setPostPicture(URL.createObjectURL(e.target.files[0]));
-        // await setFile(e.target.files[0]);
-        setFile(e.target.files[0]);
-    };
-
 
 
     // Stop loading spinner
     useEffect(() => {
         if(!isEmpty(userData)) setIsLoading(false);
     }, [userData]);
+
 
     return (
         <div>
@@ -163,10 +144,10 @@ const CreatePost = () => {
                                 id="file-upload" 
                                 name="file" 
                                 accept=".jpg, .jpeg, .png, .gif, .webp" 
-                                onChange={(e) => handlePicture(e)} 
+                                onChange={(e) => setFile(e.target.files[0])} 
                             />                           
                         <StyledModifyButtonContainer>
-                            {message ? (
+                            {message || file ? (
                                 <StyledModifyButton onClick={cancelPost} className="cancelButton">Annuler</StyledModifyButton>
                             ): null }
                                 <StyledModifyButton onClick={handlePost}>Poster</StyledModifyButton>

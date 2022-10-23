@@ -200,7 +200,9 @@ function Profil() {
         <>
             {uid ? (
                 <>
-                    { (formSubmit && errorHandle === false ) && <StyledSignupSuccessH2>Votre compte a été mis à jour.</StyledSignupSuccessH2> }
+                    { (formSubmit && errorHandle === false ) && 
+                        <StyledSignupSuccessH2>Votre compte a été mis à jour.</StyledSignupSuccessH2> 
+                    }
                     <StyledContainer>
                         <FormContainer action="" onSubmit={handleProfil} enctype="multipart/form-data">
                             <StyledH1>Compte</StyledH1>
@@ -262,64 +264,68 @@ function Profil() {
                                 <StyledError className='pseudo error'></StyledError>
                             </InputContainer>
                             <InputContainer>
-                                <AvatarText>
-                                    <StyledLabel htmlFor="avatar">
-                                        Avatar :
-                                    </StyledLabel>
-                                    <StyledFilesName>{inputAvatar}</StyledFilesName>
-                                </AvatarText>
-                                <AvatarChoiceContainer id="file">
-                                    <AvatarRadioContainer>
-                                        <AvatarInput
-                                            type="radio"
-                                            id="avatar-male"
-                                            name="file"
-                                            defaultChecked={true}
-                                            onClick={() => setInputAvatar('Homme')}
-                                        />
-                                        <label htmlFor="avatar-male">
-                                            <StyledAvatarImage
-                                                src={male_avatar}
-                                                alt="avatar homme"
-                                            />
-                                        </label>
-                                    </AvatarRadioContainer>
-                                    <AvatarRadioContainer>
-                                        <AvatarInput
-                                            type="radio"
-                                            id="avatar-female"
-                                            name="file"
-                                            onClick={() => setInputAvatar('Femme')}
-                                        />
-                                        <label htmlFor="avatar-female">
-                                            <StyledAvatarImage
-                                                src={female_avatar}
-                                                alt="avatar femme"
-                                            />
-                                        </label>
-                                    </AvatarRadioContainer>
-                                    {/* <AvatarRadioContainer>
-                                        <AvatarInput
-                                            type="radio"
-                                            id="download-files"
-                                            name="file"
-                                            value={inputAvatar}
-                                        />
-                                        <label htmlFor="files">
-                                        <StyledInputFile
-                                            type="file"
-                                            name="file"
-                                            accept=".jpg, .jpeg, .png, .webp"
-                                            onChange={(e) => setFile(e.target.files[0])}
-                                            onClick={() => {
-                                                setInputAvatar('Image utilisateur');
-                                                selectRadio();
-                                            }}
-                                        />
-                                        </label>
-                                        <StyledError className='avatar error'></StyledError>
-                                    </AvatarRadioContainer> */}
-                                </AvatarChoiceContainer>
+                                {userData.admin_role === true ? '' : (
+                                    <>
+                                        <AvatarText>
+                                            <StyledLabel htmlFor="avatar">
+                                                Avatar :
+                                            </StyledLabel>
+                                            <StyledFilesName>{inputAvatar}</StyledFilesName>
+                                        </AvatarText>
+                                        <AvatarChoiceContainer id="file">
+                                            <AvatarRadioContainer>
+                                                <AvatarInput
+                                                    type="radio"
+                                                    id="avatar-male"
+                                                    name="file"
+                                                    defaultChecked={true}
+                                                    onClick={() => setInputAvatar('Homme')}
+                                                />
+                                                <label htmlFor="avatar-male">
+                                                    <StyledAvatarImage
+                                                        src={male_avatar}
+                                                        alt="avatar homme"
+                                                    />
+                                                </label>
+                                            </AvatarRadioContainer>
+                                            <AvatarRadioContainer>
+                                                <AvatarInput
+                                                    type="radio"
+                                                    id="avatar-female"
+                                                    name="file"
+                                                    onClick={() => setInputAvatar('Femme')}
+                                                />
+                                                <label htmlFor="avatar-female">
+                                                    <StyledAvatarImage
+                                                        src={female_avatar}
+                                                        alt="avatar femme"
+                                                    />
+                                                </label>
+                                            </AvatarRadioContainer>
+                                            {/* <AvatarRadioContainer>
+                                                <AvatarInput
+                                                    type="radio"
+                                                    id="download-files"
+                                                    name="file"
+                                                    value={inputAvatar}
+                                                />
+                                                <label htmlFor="files">
+                                                <StyledInputFile
+                                                    type="file"
+                                                    name="file"
+                                                    accept=".jpg, .jpeg, .png, .webp"
+                                                    onChange={(e) => setFile(e.target.files[0])}
+                                                    onClick={() => {
+                                                        setInputAvatar('Image utilisateur');
+                                                        selectRadio();
+                                                    }}
+                                                />
+                                                </label>
+                                                <StyledError className='avatar error'></StyledError>
+                                            </AvatarRadioContainer> */}
+                                        </AvatarChoiceContainer>     
+                                    </>                          
+                                )}                                
                                 <CreateButtonContainer>  
                                     <StyledProfilControlContainer>
                                         <StyledProfilLinkContainer>
@@ -337,7 +343,7 @@ function Profil() {
                                         <StyledLittleGreyButton type="submit">Modifier</StyledLittleGreyButton>
                                     </StyledProfilControlContainer>        
                                 </CreateButtonContainer>
-                            </InputContainer>
+                            </InputContainer>                            
                         </FormContainer>
                     </StyledContainer>
                 </>
