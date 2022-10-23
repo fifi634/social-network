@@ -10,7 +10,6 @@ Fictif mission for OpenClassRooms studies. This app is an internal social networ
 * Homepage : display post of all users if authentified
 * Post : with text and picture, update this by only create poster and admin
 * Like post system : with anti cheat
-
 * You can personalize colors interface in `client/src/config.js`
 * Admin acount : Id: admin@groupomania.com / Password: admin
 

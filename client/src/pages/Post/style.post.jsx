@@ -103,14 +103,16 @@ export const StyledMessageP = styled.p`
     border-radius: 6px 20px 20px 20px;
     background-color: #ffffff;
     width: 300px;
+    max-height: 280px;
+    overflow-y: auto;
     white-space: pre-wrap;
     @media screen and (max-width: 800px) {
         width: auto;
+        max-height: 200px;
     }
     @media screen and (max-width: 400px) {
         margin: 10px 0;
         max-height: 200px;
-        overflow-y: scroll;
     }
     &.textAlone {
         width: auto;
