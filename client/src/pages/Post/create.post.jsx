@@ -55,7 +55,7 @@ const CreatePost = () => {
     let errorSize = '';
     let uploadDocuments = document.getElementById('file-upload');
     if(error) errorFormat = "Format accepté : .jpg .jpeg .gif .webP";
-    if(file && uploadDocuments.files[0].size >= 6291456) errorSize = "Taille maximale : 5mo";
+    if(file && uploadDocuments.files[0].size >= 6291456) errorSize = "Taille maximale dépassée : 5 Mo";
 
     const cancelPost = () => {
         setMessage('');

@@ -10,38 +10,58 @@ Fictif mission for OpenClassRooms studies. This app is an internal social networ
 * Post : with text and pictures
 * Like post system : with anti cheat
 
+* You can personalize colors interface in `client/src/config.js`
+* admin acount : 
+
+Id: admin@groupomania.com
+
+Passorwd: admin
+
 ## Requirement
 * Node.js : https://nodejs.org
 * Clone this project in your work directory
   `git clone https://github.com/fifi634/Groupomania.git`
 
-## Running database (Atlas by MongoDB)
+## Back-end configuration (Atlas by MongoDB)
 You must create .env files in api/config/ directory with inside :
 
 `# Server config :`
 
-`PORT = '5000'`
+`PORT = '5000'` or other port that you want
 
 `# Mongo DB config :`
 
-`MONGO_ID = 'fifi634'`
+`MONGO_ID = 'your Mongo ID'`
 
-`MONGO_PASSWORD = 'HQKuUSmQKuJvHTFg'`
+`MONGO_PASSWORD = 'Your Mongo password'`
 
-`MONGO_CLUSTER = 'cluster0.m5rfro8.mongodb.net'`
+`MONGO_CLUSTER = 'Your slug of Mongo cluster'`
+
+`# URL client domain :`
+
+`DOMAIN_CLIENT_APP = 'http://localhost:3000'` or other slug client app
 
 ## Running backend
 * Since the project directory, in cli go to backend directory :
   `cd api`
-* Install all instances
+* Install all instances for the first start
   `npm install`
 * Launch backend server
   `node server`
 
+## Front-end configuration
+You must set url of backend server in `client/src/config.js` :
+
+`// URL API adress of backend setting`
+
+`// !!! BE CAREFUL !! This url must finish by slash ( .../ )`
+
+`export const fetchUrl = 'http://localhost:5000/';` or other server slug
+
 ## Running frontend
 * Since the project directory, in cli go to frontend directory :
   `cd client`
-* Install all instances
+* Install all instances for the first start
   `npm install`
 * Launch frontend server
   `npn run start`
@@ -83,7 +103,7 @@ You must create .env files in api/config/ directory with inside :
 | DELETE | /api/user/ | - | {message: string} | Erase user of database  |
 |  |  | POST |  |  |
 | GET | /api/post | - | Object of all posts | return an object with all posts of database |
-| POST | /api/post | {posterId: string, message: string, picture: string (optional)} | {message: string, post created object} | Create post in database |
+| POST | /api/post | {posterId: string, message: string (optional if picture set), picture: string (optional if message set)} | {message: string, post created object} | Create post in database |
 | PATCH | /api/post/:id | {message: string, post._id: string)} | {message: string, post updated object} | Update post |
 | DELETE | /api/post/ | - | {message: string} | Remove the post |
 |  |  | LIKE |  |  |
