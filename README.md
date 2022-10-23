@@ -21,13 +21,13 @@ Fictif mission for OpenClassRooms studies. This app is an internal social networ
 
 ## Back-end configuration (Atlas by MongoDB)
 
->>> Note for P7 audition (28, october 2022): .env files is complete and it's into my Github. You haven't need create it and complete it.
+>>> Note for P7 audition (28, october 2022): .env file is complete and it's into my Github. You haven't need to create it and complete it.
 
 You must create .env files in api/config/ directory with inside :
 
 `# Server config :`
 
-`PORT = '5000'` or other port that you want
+`PORT = '5000'` or other port that you want, default port
 
 `# Mongo DB config :`
 
@@ -43,7 +43,7 @@ You must create .env files in api/config/ directory with inside :
 
 `RANDOM_TOKEN_SECRET = 'your token keys'`
 
-`DOMAIN_CLIENT_APP = 'http://localhost:3000'` or other slug client app, defautl client slug
+`DOMAIN_CLIENT_APP = 'http://localhost:3000'` or other slug client app, default client slug
 
 ## Running backend
 * Since the project directory, in cli go to backend directory :

@@ -72,7 +72,7 @@ function LoginForm () {
                     </InputContainer>
                     <StyledGreyButton type="submit">Connexion</StyledGreyButton>
                 </FormContainer>
-            )};
+            )}
         </>
     );
 };

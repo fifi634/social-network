@@ -7,11 +7,10 @@ export const StyledLi = styled.li`
 
 export const StyledThreadContainer = styled.div`
     max-width: 1000px;
-    margin: 40px auto;
+    margin: -10px auto 40px auto;
 `;
 
 export const PostContainer = styled.div`
-    // max-width: 1000px;
     max-height: 695px;
     border: solid ${colors.tertiary} 1px;
     border-radius: 10px;
@@ -19,11 +18,6 @@ export const PostContainer = styled.div`
     padding: 20px;
     background: rgba(78, 81, 102, 0.1);
     box-shadow: 4px 4px 8px ${colors.boxShadow};
-    &.createPostOverview {
-        margin: unset;
-        background: #ededef;
-        box-shadow: none;
-    }
 `;
 
 export const StyledCenterContainer = styled.div`
