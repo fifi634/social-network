@@ -3,8 +3,10 @@ const UserModel = require('../models/user.model');
 const ObjectID = require('mongoose').Types.ObjectId;
 
 
-// Like post : add user's id in post's like array into user, and add post's id in user's id like array into post
+// Like post : add user's id in post's like array into user, 
+// and add post's id in user's id like array into post
 exports.likePost = (req, res) => {
+
     // Check if uri is known into database
     if (!ObjectID.isValid(req.params.id)) {
         console.log('ID unknown : ' + req.params.id);
@@ -12,7 +14,6 @@ exports.likePost = (req, res) => {
     };
 
     try {
-        // Add likers in post like array
         PostModel.findByIdAndUpdate(
             req.params.id,
             { $addToSet: { likers: req.body.likerId }},
@@ -26,7 +27,7 @@ exports.likePost = (req, res) => {
                 };
             }
         );
-        // Add post liked in likes user array
+        
         UserModel.findByIdAndUpdate(
             req.body.likerId,
             { $addToSet: { likes: req.params.id }},
@@ -47,8 +48,10 @@ exports.likePost = (req, res) => {
 };
 
 
-// Unlike post : delete user's id in post's like array into user, and delete post's id in user's id like array into post
+// Unlike post : delete user's id in post's like array into user, 
+// and delete post's id in user's id like array into post
 exports.unlikePost = (req, res) => {
+
     // Check if uri is known into database
     if (!ObjectID.isValid(req.params.id))
     return res.status(400).json({ message: 'ID unknown : ' + req.params.id });
@@ -59,23 +62,30 @@ exports.unlikePost = (req, res) => {
             { $pull: { likers: req.body.likerId }},
             { new: true },
             (err, data) => { 
-                if (err) return res.status(400).json({ 
-                    message : "Delete user's like into like post array failed", err 
-                }); 
+                if (err) {
+                    console.log("Delete user's like into like post array failed. ", err);
+                    return res.status(400).json({ 
+                        message : "Delete user's like into like post array failed", err 
+                    }); 
+                };
             }
         );
+
         UserModel.findByIdAndUpdate(
             req.body.likerId,
             { $pull: { likes: req.params.id }},
             { new: true },
             (err, data) => {
                 if (!err) res.json({ message: 'Unliked !', data });
-                else return res.status(400).json({ 
-                    message: "Delete post's like into user like's array failed", err 
-                });
+                else {
+                    console.log("Delete post's like into user like's array failed. ", err);
+                    return res.status(400).json({ 
+                        message: "Delete post's like into user like's array failed", err 
+                    });
+                };
             }
         );
     } catch (err) {
         return res.status(500).json({ message: "Unlike failed", err });
-    }  
+    };
 };

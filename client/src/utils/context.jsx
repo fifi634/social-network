@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { getUser } from '../action/user.actions';
 
+// Set UseContext memory
 export const UidContext = createContext();
 
 // Get userId for give it to all application
@@ -11,6 +12,7 @@ export const UidProvider = ({ children }) => {
   const [uid, setUid] = useState(null);
   const dispatch = useDispatch();
 
+  // Get user id from database
   useEffect(() => {
     const fetchToken = async() => {
       axios({

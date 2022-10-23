@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../utils/style/Atom";
-import { isEmpty, timestampParser } from "../../utils/utils";
-import { addPost, getPosts, GET_USER_ERRORS } from "../../action/post.action";
-import axios from 'axios';
-// Import icon
+import { isEmpty } from "../../utils/utils";
+import { addPost, getPosts } from "../../action/post.action";
 import picture from '../../assets/image/picture.svg';
 // Style
 import { 
@@ -17,34 +15,19 @@ import {
     StyledMessageTextaera,
     StyledModifyButtonContainer,
     StyledSpaceBetweenContainer,
-    StyledModifyButton,
-    AvatarContainer,
-    AvatarImg,
-
-    PostContainer,
-    StyledCenterContainer,
-    StyledUserInfoContainer,
-    StyledH2,
-    StyledCorpContainer,
-    PostImageContainer,
-    PostImg,
-    StyledMessageP    
+    StyledModifyButton   
 } from './style.post';
 import { StyledError } from "../../utils/style/StyledGlobalForm";
-import { fetchUrl } from "../../config";
-
-
 
 
 
 const CreatePost = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [message, setMessage] = useState('');
-    // const [postPicture, setPostPicture] = useState(null);
     const [file, setFile] = useState();
 
 
-    // Get user by Redux
+    // Get user and error by Redux
     const userData = useSelector((state) => state.userReducer);
     const error = useSelector((state) => state.errorReducer.uploadFile);
     const dispatch = useDispatch();
@@ -57,25 +40,28 @@ const CreatePost = () => {
     if(error) errorFormat = "Format accepté : .jpg .jpeg .gif .webP";
     if(file && uploadDocuments.files[0].size >= 6291456) errorSize = "Taille maximale dépassée : 5 Mo";
 
+
+    // Erase entry new post and file, and errors message
     const cancelPost = () => {
         setMessage('');
         setFile('');
-        // setPostPicture('');
         document.getElementById("file-upload").value = "";     
         errorFormat = '';
         errorSize = '';
     };
 
+
+    // When clicking on 'Poster'
     const handlePost = async () => {
-        
-        if(message || (file && uploadDocuments.files[0].size < 6291456)) {
-            console.log('1 create post');
-            
+
+        // If have a new message or new picture whith good size file
+        // Make an new post object 
+        if(message || (file && uploadDocuments.files[0].size < 6291456)) {            
             const data = new FormData();
             data.append('posterId', userData._id);
             data.append('message', message);
             if(file) data.append('file', file);
-
+            // Send new post and get last all posts update
             await dispatch(addPost(data));
             await dispatch(getPosts());
             cancelPost();
@@ -105,47 +91,24 @@ const CreatePost = () => {
                         onChange={(e) => setMessage(e.target.value)}
                         value={message}
                     />
-                    {/* {message || postPicture ? (
-                        <PostContainer className="createPostOverview">
-                            <StyledCenterContainer>
-                                <AvatarContainer>
-                                    <AvatarImg src={userData.avatar_slug} alt="Avatar du créateur du post" />
-                                </AvatarContainer>
-                                <StyledUserInfoContainer>
-                                    <StyledH2>
-                                        {userData.pseudo}
-                                    </StyledH2>
-                                    <span>{timestampParser(Date.now())}</span>
-                                </StyledUserInfoContainer>
-                            </StyledCenterContainer>
-                            <StyledCorpContainer>
-                            {file && 
-                                <PostImageContainer>
-                                    <PostImg src={file} alt="Illustration du post" />
-                                </PostImageContainer>
-                            }
-                            <StyledMessageP>{message}</StyledMessageP>
-                        </StyledCorpContainer>
-                        </PostContainer>
-                    ) : null} */}
                     <StyledSpaceBetweenContainer>                        
-                            <label htmlFor="file-upload">
-                                <StyledRowContainer>
-                                    <StyledIconContainer>
-                                        <StyledIconImg src={picture} alt="Editer le post" />
-                                    </StyledIconContainer>
-                                    {file ? (<StyledFileP>{file.name}</StyledFileP>) : ('')}
-                                </StyledRowContainer>
-                                <StyledError>{errorFormat}</StyledError>
-                                <StyledError>{errorSize}</StyledError>
-                            </label>
-                            <StyledPostFileInput
-                                type="file" 
-                                id="file-upload" 
-                                name="file" 
-                                accept=".jpg, .jpeg, .png, .gif, .webp" 
-                                onChange={(e) => setFile(e.target.files[0])} 
-                            />                           
+                        <label htmlFor="file-upload">
+                            <StyledRowContainer>
+                                <StyledIconContainer>
+                                    <StyledIconImg src={picture} alt="Editer le post" />
+                                </StyledIconContainer>
+                                {file ? (<StyledFileP>{file.name}</StyledFileP>) : ('')}
+                            </StyledRowContainer>
+                            <StyledError>{errorFormat}</StyledError>
+                            <StyledError>{errorSize}</StyledError>
+                        </label>
+                        <StyledPostFileInput
+                            type="file" 
+                            id="file-upload" 
+                            name="file" 
+                            accept=".jpg, .jpeg, .png, .gif, .webp" 
+                            onChange={(e) => setFile(e.target.files[0])} 
+                        />                           
                         <StyledModifyButtonContainer>
                             {message || file ? (
                                 <StyledModifyButton onClick={cancelPost} className="cancelButton">Annuler</StyledModifyButton>

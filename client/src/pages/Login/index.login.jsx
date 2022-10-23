@@ -3,8 +3,7 @@ import axios from 'axios';
 import { fetchUrl } from '../../config';
 import { UidContext } from '../../utils/context';
 import Home from '../Post/index.post';
-
-// Import Style
+// Style
 import { StyledGreyButton } from '../../utils/style/StyledGlobalButton';
 import {
     FormContainer,
@@ -14,11 +13,12 @@ import {
     StyledInput,
 } from '../../utils/style/StyledGlobalForm';
 
+
+
 function LoginForm () {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const uid = useContext(UidContext);
-
 
     // When form is submit
     const handleLogin = async (e) => {
@@ -45,22 +45,34 @@ function LoginForm () {
 
     return (
         <>
-        { uid ? (
-            <Home />
-        ) : (
-            <FormContainer action="" onSubmit={handleLogin}>
-                <StyledH1>Connectez-vous !</StyledH1>
-                <InputContainer>
-                    <StyledLabel htmlFor="email">Entrez votre email :</StyledLabel>
-                    <StyledInput type="text" name="email" id="email" onChange={(e) => setEmail(e.target.value)} value={email} />
-                </InputContainer>
-                <InputContainer>
-                    <StyledLabel htmlFor="password">Entrez votre mot de passe :</StyledLabel>
-                    <StyledInput type="password" name="password" id="password" onChange={(e) => setPassword(e.target.value)} value={password} />
-                </InputContainer>
-                <StyledGreyButton type="submit">Connexion</StyledGreyButton>
-            </FormContainer>
-        )}
+            { uid ? (
+                <Home />
+            ) : (
+                <FormContainer action="" onSubmit={handleLogin}>
+                    <StyledH1>Connectez-vous !</StyledH1>
+                    <InputContainer>
+                        <StyledLabel htmlFor="email">Entrez votre email :</StyledLabel>
+                        <StyledInput 
+                            type="text" 
+                            name="email" 
+                            id="email" 
+                            onChange={(e) => setEmail(e.target.value)} 
+                            value={email} 
+                        />
+                    </InputContainer>
+                    <InputContainer>
+                        <StyledLabel htmlFor="password">Entrez votre mot de passe :</StyledLabel>
+                        <StyledInput 
+                            type="password" 
+                            name="password" 
+                            id="password" 
+                            onChange={(e) => setPassword(e.target.value)} 
+                            value={password} 
+                        />
+                    </InputContainer>
+                    <StyledGreyButton type="submit">Connexion</StyledGreyButton>
+                </FormContainer>
+            )};
         </>
     );
 };

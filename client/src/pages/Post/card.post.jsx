@@ -6,11 +6,8 @@ import { dateParser } from "../../utils/utils";
 import LikeButton from "./like.post";
 import { updatePost } from "../../action/post.action";
 import DeleteCard from "./delete.post";
-// import { uploadPicture } from "../../action/user.actions";
-
-
-/* Style */
-/******* */
+import edit from "../../assets/image/edit.svg";
+// Style
 import { 
     StyledLi,
     PostContainer,
@@ -34,21 +31,15 @@ import {
     StyledIconImg
 } from "./style.post";
 
-// import { StyledLittlePinkButton } from "../../utils/style/StyledGlobalButton";
-// import { StyledInputFile } from '../../utils/style/StyledGlobalForm';
-import edit from "../../assets/image/edit.svg";
-
-
-/******* */
  
 
 const Card = ({ post }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [isUpdated, setIsUpdated] = useState(false);
     const [textUpdate, setTextUpdate] = useState(null);
-    // const [file, setFile] = useState(null);
 
-    // Redux
+
+    // Redux, get users and user informations
     const usersData = useSelector((state) => state.usersReducer);
     const userData = useSelector((state) => state.userReducer);
     const dispatch = useDispatch();
@@ -56,25 +47,20 @@ const Card = ({ post }) => {
 
     // When clicking on 'Modifier'
     const updateItem = async () => {
-        // if(file !== (null || undefined)) {
-        //     const data = new FormData();
-        //     data.append('file', file);
-        //     data.append('message', textUpdate);
-        //     await dispatch(uploadPicture(post._id, data));
-        // }
         if(textUpdate) {
             dispatch(updatePost(post._id, textUpdate))
         };
         setIsUpdated(false);
     };
 
+
+    // Stop loader
     useEffect(() => {
         !isEmpty(usersData[0]) && setIsLoading(false);
-    }, [usersData]);
+    }, [usersData]);  
 
 
     
-
     return (
         <StyledLi key={post._id}>
             {isLoading ? (
@@ -103,17 +89,6 @@ const Card = ({ post }) => {
                         </StyledUserInfoContainer>
                     </StyledCenterContainer>
                     <StyledCorpContainer>
-                        {/* {post.video && (
-                            <iframe
-                                title={post._id}
-                                width="320"
-                                height="350"
-                                src={post.video}
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                            ></iframe>
-                        )} */}
                         {isUpdated === false && post.message && (
                             <StyledMessageP className={post.picture ? '' : 'textAlone'}>
                                 {post.message}
@@ -127,11 +102,6 @@ const Card = ({ post }) => {
                                     onChange={(e) => setTextUpdate(e.target.value)}
                                 />
                                 <StyledModifyButtonContainer>
-                                    {/* <StyledInputFile
-                                        type="file"
-                                        accept=".jpg, .jpeg, .png, .webp .gif"
-                                        onChange={(e) => setFile(e.target.files[0])}
-                                    /> */}
                                     <StyledModifyButton onClick={updateItem}>Modifier</StyledModifyButton>
                                 </StyledModifyButtonContainer>
                             </StyledEditMessageContainer>
@@ -146,13 +116,6 @@ const Card = ({ post }) => {
                         <StyledLikeContainer>
                             <LikeButton post={post}/>                            
                         </StyledLikeContainer>
-
-                        {/* <div>
-                            <StyledLittlePinkButton>
-                                {<span>{post.comments.length} commentaire{post.comments.length > 1 ? 's ' : ' '}</span>}
-                            </StyledLittlePinkButton>  
-                        </div> */}
-
                             {(userData._id === post.posterId || userData.admin_role === true) && (
                                 <StyledIconsContainer>
                                     <StyledIconContainer

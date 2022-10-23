@@ -11,7 +11,6 @@ const MIME_TYPES = {
 };
 
 
-
 // Save files configuration
 const storage = multer.diskStorage({  
     destination: (req, file, callback) => {
@@ -44,7 +43,6 @@ const upload = multer({
 });
 
 
-// module.exports = multer({ storage: storage}).single('file');
 module.exports = upload.single('file');
 
 

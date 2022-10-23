@@ -5,7 +5,6 @@ import completLogo from '../../assets/image/icon-left-font-monochrome-white-900x
 import Logout from './logout.header';
 import logoAlone from '../../assets/image/icon-monochrome-white.png';
 import { useSelector } from 'react-redux';
-
 // Style
 import { 
     StyledPinkButton, 
@@ -13,7 +12,6 @@ import {
     StyledLittlePinkButton, 
     StyledLittleGreyButton 
 } from '../../utils/style/StyledGlobalButton';
-
 import { 
     StyledHeader,
     StyledDisconnectContainer,
@@ -30,13 +28,16 @@ import {
 } from './style.header.jsx';
 
 
+
 function Header() {
+
+    // Get user info
     const uid = useContext(UidContext);
     const userData = useSelector(state => state.userReducer);
 
-
     // Get path of url
     const pathname = useLocation().pathname;
+    
     return (
         <StyledHeader>
             { pathname === '/login' ? (

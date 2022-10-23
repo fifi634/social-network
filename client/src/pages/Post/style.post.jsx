@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { colors } from '../../config';
-// import picture from '../../assets/image/picture.svg';
 
 export const StyledLi = styled.li`
     list-style: none;

@@ -1,36 +1,18 @@
 import axios from 'axios';
 import { fetchUrl } from '../config';
 
-// Posts
+// Reduc router
 export const GET_POSTS = "GET_POSTS";
 export const ADD_POST = "ADD_POST";
 export const LIKE_POST = "LIKE_POST";
 export const UNLIKE_POST = "UNLIKE_POST";
 export const UPDATE_POST = "UPDATE_POST";
-// export const UPLOAD_POST = "UPLOAD_POST";
 export const DELETE_POST = "DELETE_POST";
 export const GET_USER_ERRORS = "GET_USER_ERRORS";
 
 
-
-// // Get posts with infinity scroll
-// export const getPosts = (countDisplay) => {
-//     return (dispatch) => {
-//         return axios 
-//             .get(fetchUrl + 'api/post/', { withCredentials: true })
-//             .then((res) => {
-//                 const displayPost = res.data.slice(0, countDisplay);
-//                 dispatch({ type: GET_POSTS, payload: displayPost });
-//             })
-//             .catch((err) => console.log('Get posts failed. ' + err))
-//         ;
-//     }
-// };
-
-
 export const addPost = (data) => {
     return (dispatch) => {
-        console.log('2 axios')
         return axios({
             method: 'patch',
             url: fetchUrl + 'api/post/', 
@@ -52,7 +34,6 @@ export const addPost = (data) => {
 }
 
 
-// Getposts since inifinity scroll
 export const getPosts = () => {
     return (dispatch) => {
         return axios 

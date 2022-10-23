@@ -21,7 +21,6 @@ const userSchema = mongoose.Schema({
     password: { 
         type: String, 
         required: true,
-        // minlength: 6,
         trim: true
     },
     avatar_slug: { 
@@ -43,6 +42,7 @@ const userSchema = mongoose.Schema({
 
 
 /* Play function before save into display: 'block' */
+/************************************************* */
 // Mongoose unique validator
 userSchema.plugin(uniqueValidator);
 
@@ -64,5 +64,6 @@ userSchema.statics.login = async function(email, password) {
     throw Error('La connection a échoué');
 };
 
+/*************************************************** */
 
 module.exports = mongoose.model('user', userSchema);

@@ -22,18 +22,18 @@ app.use((req, res, next) => {
 // Routes & middleware imports
 const userRoutes = require('./routes/user.routes');
 const postRoutes = require('./routes/post.routes');
-const {checkUser, requireAuth} = require('./middleware/auth.middleware');
+const { requireAuth } = require('./middleware/auth.middleware');
 
 
 // Json Web Token
-// app.get('*', checkUser);
 app.get('/jwtid', requireAuth, (req, res) => {
     res.status(200).json(res.locals.user._id);
 });
 
 
 // Routes
-app.use('/api/post', postRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/post', postRoutes);
+
 
 module.exports = app;

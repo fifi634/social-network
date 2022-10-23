@@ -2,15 +2,10 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { fetchUrl } from '../../config';
 import Login from '../Login/index.login';
-import { check } from '../../utils/utils';
-// import { createProfil } from '../../action/user.actions';
-// import { useDispatch } from 'react-redux';
-
-// Import images
+// Images
 import male_avatar from '../../assets/image/Homme-avatar.svg';
 import female_avatar from '../../assets/image/Femme-avatar.svg';
-
-// Import style
+// Style
 import { StyledGreyButton } from '../../utils/style/StyledGlobalButton';
 import {
     FormContainer,
@@ -21,8 +16,7 @@ import {
     StyledInput,
     StyledError,
     StyledTermsContainer,
-    StyledTermsLabel,
-    // StyledInputFile
+    StyledTermsLabel
 } from '../../utils/style/StyledGlobalForm';
 import {
     AvatarText,
@@ -39,11 +33,6 @@ import {
 
 
 function Signup() {
-    // // Selection a good radio choice when click on "Downloaded Files" button
-    // function selectRadio() {
-    //     document.getElementById('download-files').checked = true;
-    // };
-
 
     // Form data storage
     const [formSubmit, setFormSubmit] = useState(false);
@@ -52,8 +41,6 @@ function Signup() {
     const [controlPassword, setControlPassword] = useState('');
     const [inputPseudo, setInputPseudo] = useState('');
     const [inputAvatar, setInputAvatar] = useState('Homme');
-    // const [file, setFile] = useState(null);
-    // const dispatch = useDispatch();
 
 
     // When form is submit
@@ -65,7 +52,6 @@ function Signup() {
         const passwordError = document.querySelector('.password.error');
         const checkPasswordError = document.querySelector('.check-password.error');
         const pseudoError = document.querySelector('.pseudo.error');
-        // const avatarError = document.querySelector('.avatar.error');
         const termsError = document.querySelector('.terms.error');
 
 
@@ -74,7 +60,6 @@ function Signup() {
         passwordError.innerHTML = '';
         checkPasswordError.innerHTML = '';
         pseudoError.innerHTML = '';
-        // avatarError.innerHTML = '';
         termsError.innerHTML = '';
         
 
@@ -89,110 +74,42 @@ function Signup() {
                 termsError.innerHTML = "Vous avez besoin de lire et de valider<br>les conditions générales pour utiliser ce service.";
             }
         } else {
-
-            // Create user with a personal avatar file
-            // const newUser = {
-            //     email: inputEmail,
-            //     password: inputPassword,
-            //     pseudo: inputPseudo
-            // };
-
-            
-            // if (file !== null) {
-            //     // const form = document.forms.namedItem('signup');
-            //     const avatarFile = new FormData();
-            //     avatarFile.append('file', file);
-            //     avatarFile.append('email', inputEmail);
-            //     avatarFile.append('password', inputPassword);
-            //     avatarFile.append('pseudo', inputPseudo);
-            //     // avatarFile.append('newUser', newUser);
-            //     // console.log('avatarFile ', avatarFile.get('password'));
-
-            //     dispatch(createProfil(avatarFile));
-
-                // // Upload avatar file for new user
-                // axios({
-                //     method: 'post',
-                //     url: fetchUrl + 'api/user/upload-create-user',
-                //     data: avatarFile,
-                //     withCredentials: true
-                // })
-                //     .then (async (res) => {          
-                //         // error upload file
-                //     })
-                //     .catch(err => console.log('Fetch post upload avatar file for new account failed. ', err))
-                // ;
-                
-
-
-    
-                // axios({
-                //     method: 'post',
-                //     url: `${fetchUrl}api/user/signup`,
-                //     withCredentials: true,
-                //     data: avatarFile                
-                // })
-                //     .then ((res) => {
-
-                //         // Sgnup errors 
-                //         if (res.data.errors) {
-                //             if (res.data.message === 'Password not accepted') {                   
-                //                 passwordError.innerHTML = res.data.errors;
-                //                 // avatarError.innerHTML = res.data.error.avatar;
-                //             }
-                //             if (res.data.errors.email) {
-                //                 emailError.innerHTML = res.data.errors.email;
-                //             }
-                //             if (res.data.errors.pseudo) {
-                //                 pseudoError.innerHTML = res.data.errors.pseudo;
-                //             }
-                //         } else {
-                //             setFormSubmit(true);
-                //         }   
-                //     })
-                //     .catch(err => console.log('Create user with upload file avatar failed. ', err))
-                // ;
-            
-            // Create user with default avatar and get errors in return
-            // } else {
-                axios({
-                    method: 'post',
-                    url: `${fetchUrl}api/user/signup`,
-                    withCredentials: true,
-                    data: {
-                        email: inputEmail,
-                        password: inputPassword,
-                        pseudo: inputPseudo,
-                        avatar_slug: `uploads/profil/${inputAvatar}-avatar.svg`,
-                    }
+            axios({
+                method: 'post',
+                url: `${fetchUrl}api/user/signup`,
+                withCredentials: true,
+                data: {
+                    email: inputEmail,
+                    password: inputPassword,
+                    pseudo: inputPseudo,
+                    avatar_slug: `uploads/profil/${inputAvatar}-avatar.svg`,
+                }
+            })
+                .then((res) => {
+                    // Sgnup errors 
+                    if (res.data.errors) {
+                        if (res.data.message === 'Password not accepted') {                   
+                            passwordError.innerHTML = res.data.errors;
+                        }
+                        if (res.data.errors.email) {
+                            emailError.innerHTML = res.data.errors.email;
+                        }
+                        if (res.data.errors.pseudo) {
+                            pseudoError.innerHTML = res.data.errors.pseudo;
+                        }
+                    } else {
+                        setFormSubmit(true);
+                    }              
                 })
-                    .then((res) => {
-                        // Sgnup errors 
-                        if (res.data.errors) {
-                            if (res.data.message === 'Password not accepted') {                   
-                                passwordError.innerHTML = res.data.errors;
-                                // avatarError.innerHTML = res.data.error.avatar;
-                            }
-                            if (res.data.errors.email) {
-                                emailError.innerHTML = res.data.errors.email;
-                            }
-                            if (res.data.errors.pseudo) {
-                                pseudoError.innerHTML = res.data.errors.pseudo;
-                            }
-                        } else {
-                            setFormSubmit(true);
-                        }              
-                    })
-                    .catch(err => {
-                        console.log('Create user failed. ' + err);
-                    })
-                ;
-            // };
+                .catch(err => {
+                    console.log('Create user failed. ' + err);
+                })
+            ;
         }      
     };
 
 
-    // Form generation
+ 
     return (
         <>
             {formSubmit ? (
@@ -295,27 +212,6 @@ function Signup() {
                                         />
                                     </label>
                                 </AvatarRadioContainer>
-                                {/* <AvatarRadioContainer>
-                                    <AvatarInput
-                                        type="radio"
-                                        id="download-files"
-                                        name="file"
-                                        value={inputAvatar}
-                                    />
-                                    <label htmlFor="download-files">
-                                        <StyledInputFile
-                                            type="file"
-                                            name="file"
-                                            accept=".jpg, .jpeg, .png, .webp"
-                                            onChange={(e) => setFile(e.target.files[0])}
-                                            onClick={ () => {
-                                                setInputAvatar('Image utilisateur');
-                                                selectRadio();
-                                            }}
-                                        />
-                                    </label>
-                                    <StyledError className='avatar error'></StyledError>
-                                </AvatarRadioContainer> */}
                             </AvatarChoiceContainer>
                             <CreateButtonContainer> 
                                 <StyledTermsContainer>

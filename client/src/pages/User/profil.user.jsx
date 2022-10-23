@@ -5,14 +5,12 @@ import cookie from 'js-cookie';
 // Components
 import Login from '../Login/index.login';
 import { UidContext } from '../../utils/context';
-// import { deleteUser } from '../../action/users.action';
-import { uploadPicture, uploadDefaultAvatar, updateProfil, GET_USER } from '../../action/user.actions';
-import { DELETE_USER } from '../../action/users.action';
+import { GET_USER } from '../../action/user.actions';
 import { fetchUrl } from '../../config';
-// Import images
+// Images
 import male_avatar from '../../assets/image/Homme-avatar.svg';
 import female_avatar from '../../assets/image/Femme-avatar.svg';
-// Import style
+// Style
 import { StyledLittleGreyButton } from '../../utils/style/StyledGlobalButton';
 import {
     FormContainer,
@@ -21,8 +19,7 @@ import {
     StyledH1,
     StyledSubLabel,
     StyledInput,
-    StyledError,
-    // StyledInputFile
+    StyledError
 } from '../../utils/style/StyledGlobalForm';
 import {
     StyledP,
@@ -43,25 +40,19 @@ import {
 
 
 
-
-
 function Profil() {
-    // // Selection a good radio choice when click on "Downloaded Files" button
-    // function selectRadio() {
-    //     document.getElementById('download-files').checked = true;
-    // };
-
 
     // Get user id(uid) by useContext
     const uid = useContext(UidContext);
-    // Redux upload file
-    // const [file, setFile] = useState(null);
+
+
+    // Redux, get user information
     const dispatch = useDispatch();
     const userData = useSelector(state => state.userReducer);
-    // const error = useSelector((state) => state.errorReducer.updateUserErrors);
+
+
     // Form data storage
     const [formSubmit, setFormSubmit] = useState(false);
-    // const [inputEmail, setInputEmail] = useState(userData.email);
     const [inputPassword, setInputPassword] = useState(null);
     const [controlPassword, setControlPassword] = useState(null);
     const [inputPseudo, setInputPseudo] = useState(userData.pseudo);
@@ -69,30 +60,13 @@ function Profil() {
     const [errorHandle, setErrorHandle] = useState(false);
 
 
-    // // Upload avatar file by Redux
-    // function uploadFile(file) {        
-    //     const data = new FormData();
-    //     data.append('name', userData._id);
-    //     data.append('userId', userData._id);
-    //     data.append('file', file);
-    //     dispatch(uploadPicture(data, userData._id));    // uploadPicture : Redux function in src/action/user.action.js
-    //     console.log(data, userData._id);
-    // };
-
-
-    // // Upload default avatar by Redux
-    // function defaultAvatar(inputAvatar) {
-    //     const avatarSlug = `uploads/profil/${inputAvatar}-avatar.svg`;
-    //     dispatch(uploadDefaultAvatar(avatarSlug));
-    // };
-
-
+    /* Logout link */
+    /************* */
 
     const removeCookie = (key) => {
         if(window !== "underfined") cookie.remove(key, {expire: 1})
         console.log(window);
     };
-
 
     const logout = async() => {
         await axios.get(fetchUrl + 'api/user/logout', {withCredentials: true})
@@ -102,7 +76,10 @@ function Profil() {
         window.location = '/';
     };
 
+    /************ */
 
+
+    // Erase account link
     const deleteUser = async() => {
         await axios.delete(fetchUrl + 'api/user/', {withCredentials: true})
             .then(() => logout())
@@ -117,19 +94,17 @@ function Profil() {
         e.preventDefault();
         setErrorHandle(false);
 
+
         // Link for display errors
-        // const emailError = document.querySelector('.email.error');
         const passwordError = document.querySelector('.password.error');
         const checkPasswordError = document.querySelector('.check-password.error');
         const pseudoError = document.querySelector('.pseudo.error');
-        // const avatarError = document.querySelector('.avatar.error');
+
 
         // Reset display errors
-        // emailError.innerHTML = '';
         passwordError.innerHTML = '';
         checkPasswordError.innerHTML = '';
         pseudoError.innerHTML = '';
-        // avatarError.innerHTML = '';
         
 
         // If no errors, send new user to server        
@@ -140,40 +115,29 @@ function Profil() {
             setErrorHandle(true);
             pseudoError.innerHTML = 'Votre pseudo doit comporter au maximum 15 caractères';
         } else {
-            // // If picture file is in upload, send it to server by Redux
-            // if (file !== null) uploadFile(file);
-
-            // // If no picture file in upload, send default avatar to server by Redux
-            // if (file === null) defaultAvatar(inputAvatar);
-            
-            // Update user info
-            // const avatarSlug = `uploads/profil/${inputAvatar}-avatar.svg`;
-            // dispatch(updateProfil(inputEmail, inputPassword, inputPseudo, avatarSlug, uid));
-
-            // Update user info on database
             axios({
                 method: 'patch',
                 url: `${fetchUrl}api/user/`,
                 withCredentials: true,
                 data: {
-                    // email: inputEmail,
                     password: inputPassword,
                     pseudo: inputPseudo,
                     avatar_slug: `uploads/profil/${inputAvatar}-avatar.svg`
                 }
             })
                 .then((res) => {
+
                     // Update profil errors 
                     if (res.data.errors || res.data.err) {
                         setErrorHandle(true);
                         if (res.data.message === 'Password not accepted') {                   
                             passwordError.innerHTML = res.data.errors;
-                            // avatarError.innerHTML = res.data.error.avatar;
-                        }
+                        };
                         if (res.data.errors.pseudo) {
                             pseudoError.innerHTML = res.data.errors.pseudo;
-                        }
-                    }
+                        };
+                    };
+
                     // Get new user for display modification
                     axios
                         .get(`${fetchUrl}api/user/${uid}`, {withCredentials: true})
@@ -195,7 +159,6 @@ function Profil() {
     
 
 
-    // Form generation
     return (
         <>
             {uid ? (
@@ -209,13 +172,6 @@ function Profil() {
                             <InputContainer>
                                 <StyledLabel htmlFor="email">Votre e-mail :</StyledLabel>
                                 <StyledP id="email">{userData.email}</StyledP>
-                                {/* <StyledInput
-                                    type="email"
-                                    id="email"
-                                    defaultValue={inputEmail}
-                                    onChange={(e) => setInputEmail(e.target.value)}
-                                />
-                                <StyledError className='email error'></StyledError>                               */}
                             </InputContainer>
                             <InputContainer>
                                 <StyledLabel htmlFor="password">
@@ -231,10 +187,7 @@ function Profil() {
                                     defaultValue={inputPassword}
                                     onChange={(e) => setInputPassword(e.target.value)}
                                 /> 
-                                <StyledError className='password error'>
-                                    {/* {!isEmpty(error) && error} */}
-                                </StyledError>
-                                
+                                <StyledError className='password error'></StyledError>                                
                             </InputContainer>
                             <InputContainer>
                                 <StyledLabel htmlFor="confirm-password">
@@ -302,27 +255,6 @@ function Profil() {
                                                     />
                                                 </label>
                                             </AvatarRadioContainer>
-                                            {/* <AvatarRadioContainer>
-                                                <AvatarInput
-                                                    type="radio"
-                                                    id="download-files"
-                                                    name="file"
-                                                    value={inputAvatar}
-                                                />
-                                                <label htmlFor="files">
-                                                <StyledInputFile
-                                                    type="file"
-                                                    name="file"
-                                                    accept=".jpg, .jpeg, .png, .webp"
-                                                    onChange={(e) => setFile(e.target.files[0])}
-                                                    onClick={() => {
-                                                        setInputAvatar('Image utilisateur');
-                                                        selectRadio();
-                                                    }}
-                                                />
-                                                </label>
-                                                <StyledError className='avatar error'></StyledError>
-                                            </AvatarRadioContainer> */}
                                         </AvatarChoiceContainer>     
                                     </>                          
                                 )}                                

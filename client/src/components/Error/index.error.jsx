@@ -13,6 +13,6 @@ function Error() {
             </ErrorSubtitle>
         </ErrorWrapper>
     );
-}
+};
 
 export default Error;

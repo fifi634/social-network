@@ -3,22 +3,25 @@ import { useDispatch } from 'react-redux';
 import { UidContext } from '../../utils/context';
 import { likePost, unlikePost } from "../../action/post.action";
 // Style
-import { StyledLittlePinkButton, StyledLittleGreyButton } from '../../utils/style/StyledGlobalButton';
 import { StyledIconImg, StyledIconContainer, StyledCenterContainer } from './style.post';
 // Icon
 import heart from '../../assets/image/heart.svg';
 import heartFilled from '../../assets/image/heart-filled.svg';
+
+
 
 const LikeButton = ({ post }) => {
     const [liked, setLiked] = useState(false);
     const uid = useContext(UidContext);
     const dispatch = useDispatch();
     
+    // Send like to database
     const like = () => {
         dispatch(likePost(post._id, uid));
         setLiked(true);
     };
     
+    // Send unlike to database
     const unlike = () => {
         dispatch(unlikePost(post._id, uid));
         setLiked(false);
@@ -29,6 +32,7 @@ const LikeButton = ({ post }) => {
         if(post.likers.includes(uid)) setLiked(true);
         else setLiked(false);
     }, [uid, post.likers, liked]);
+
 
     return (
         <StyledCenterContainer>
