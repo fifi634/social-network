@@ -1,5 +1,3 @@
-readme in progress / project in progress
-
 # Groupomania
 Fictif mission for OpenClassRooms studies. This app is an internal social network for Groupomania company.
 
