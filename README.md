@@ -25,9 +25,9 @@ Fictif mission for OpenClassRooms studies. This app is an internal social networ
 
 ## Back-end configuration (Atlas by MongoDB)
 
->>> Note for P7 audition (28, october 2022): '.env' file is complete and it's into this Github. You haven't need to create it and complete it.
+>>> Note for P7 audition (28, october 2022): '.env' file is complete and it's into this Github. You haven't need to create and set it.
 
-You must create '.env' files in 'api/config/' directory with inside :
+You must create '.env' files in `api/config/` directory with inside :
 
 `# Server config :`
 
@@ -41,11 +41,13 @@ You must create '.env' files in 'api/config/' directory with inside :
 
 `MONGO_CLUSTER = 'Your slug of Mongo cluster'`
 
-`# URL client domain :`
+`MONGO_PROJECT = 'Your Mongo project name'`
 
 `# Authentication token`
 
 `RANDOM_TOKEN_SECRET = 'your token keys'`
+
+`# URL client domain :`
 
 `DOMAIN_CLIENT_APP = 'http://localhost:3000'` default client slug, you can set other slug client app, 
 
@@ -72,7 +74,7 @@ You can set a personnal url of backend server in `client/src/config.js` :
 * Install all instances for the first start
   `npm install`
 * Launch frontend server
-  `npn run start`
+  `npm run start`
 
 
 # Database
@@ -102,7 +104,7 @@ You can set a personnal url of backend server in `client/src/config.js` :
 |      | Access Point | Request body | Expected answer | Function |
 | :--: | :----------: | :----------: | :-------------: | :------- |
 |  |  | USER |  |  |
-| POST | /api/user/signup | {email: string, password: string, pseudo: string, avatar_slug: string} | {message: string, userId: string} | password chopped, add user in database |
+| POST | /api/user/signup | {email: string, password: string, pseudo: string, avatar_slug: string (optional)} | {message: string, userId: string} | password chopped, add user in database |
 | POST | /api/user/login | {email: string, password: string} | {message: string, userId: string} | Check user id and password, decrypt password, create authentification token and add it in cookie. |
 | GET | /api/user/logout | - | redirection to login page | Unset 'jwt' cookie (authentification token) |
 | GET | /api/user | - | Object of users | Return an object with all users of database |

@@ -14,7 +14,7 @@ const postSchema = mongoose.Schema({
     },
     likers: {
         type: [String],
-        require: true,
+        required: true,
         default: []
     }
 }, { timestamps: true });

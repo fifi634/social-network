@@ -26,16 +26,16 @@ const userSchema = mongoose.Schema({
     avatar_slug: { 
         type: String, 
         trim: true,
-        default: "uploads/profil/male_avatar.svg"
+        default: "uploads/profil/Homme-avatar.svg"
     },
     likes: {
         type: [String],
-        require: true,
+        required: true,
         default: []
     },
     admin_role: { 
         type: Boolean,
-        require: true,
+        required: true,
         default: false
     }
 }, { timestamps: true });
