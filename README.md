@@ -21,7 +21,7 @@ Fictif mission for OpenClassRooms studies. This app is an internal social networ
 * Node.js : https://nodejs.org
 * An account on MongoDB Atlas server (free version for test and develop): https://www.mongodb.com/fr-fr/pricing 
 * Clone this project in your work directory
-  `git clone https://github.com/fifi634/social-network.git`
+  `git clone https://github.com/fifi634/social-network.git (this command will create 'social-network' directory)`
 
 ## Back-end configuration (Atlas by MongoDB)
 
@@ -52,7 +52,7 @@ You must create '.env' files in `api/config/` directory with inside :
 `DOMAIN_CLIENT_APP = 'http://localhost:3000'` default client slug, you can set other slug client app, 
 
 ## Running backend
-* Since the project directory, in cli go to backend directory :
+* Since the project directory (social-network/), in cli go to backend directory :
   `cd api`
 * Install all instances for the first start
   `npm install`
@@ -69,7 +69,7 @@ You can set a personnal url of backend server in `client/src/config.js` :
 `export const fetchUrl = 'http://localhost:5000/';` this is a default backend slug
 
 ## Running frontend
-* Since the project directory, in cli go to frontend directory :
+* Since the project directory (social-network/), in cli go to frontend directory :
   `cd client`
 * Install all instances for the first start
   `npm install`
