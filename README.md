@@ -12,7 +12,7 @@ Fictif mission for OpenClassRooms studies. This app is an internal social networ
 * Like post system : with anti cheat
 * Authentification persisting during 1 day
 * You can personalize colors interface in `client/src/config.js`
->>> For P7 OpenClassRoomes audition: Admin acount - id: admin@groupomania.com / password: admin
+>>> For P7 OpenClassRooms audition: Admin acount - id: admin@groupomania.com / password: admin
 
 ## Requirement
 
