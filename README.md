@@ -21,7 +21,7 @@ Fictif mission for OpenClassRooms studies. This app is an internal social networ
 * Node.js : https://nodejs.org
 * An account on MongoDB Atlas server (free version for test and develop): https://www.mongodb.com/fr-fr/pricing 
 * Clone this project in your work directory
-  `git clone https://github.com/fifi634/Groupomania.git`
+  `git clone https://github.com/fifi634/social-network.git`
 
 ## Back-end configuration (Atlas by MongoDB)
 
