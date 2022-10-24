@@ -167,7 +167,14 @@ export const StyledPostFileInput = styled.input`
     width: 0.1px;
 `;
 
+export const StyledFileNameContainer = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
 export const StyledFileP = styled.p`
+    overflow-wrap: anywhere;
+    max-width: 400px;
     margin: 3px;
 `;
 

@@ -9,6 +9,7 @@ import {
     StyledEditMessageContainer,
     StyledRowContainer,
     StyledPostFileInput,
+    StyledFileNameContainer,
     StyledFileP,
     StyledIconContainer, 
     StyledIconImg,
@@ -37,8 +38,8 @@ const CreatePost = () => {
     let errorFormat = '';
     let errorSize = '';
     let uploadDocuments = document.getElementById('file-upload');
-    if(error) errorFormat = "Format accepté : .jpg .jpeg .gif .webP";
-    if(file && uploadDocuments.files[0].size >= 6291456) errorSize = "Taille maximale dépassée : 5 Mo";
+    if(error) errorFormat = "Formats acceptés : .jpg / .jpeg / .png / .gif / .webP";
+    if(file && uploadDocuments.files[0].size >= 6291456) errorSize = "Poid maximale dépassée : 5 Mo";
 
 
     // Erase entry new post and file, and errors message
@@ -66,7 +67,7 @@ const CreatePost = () => {
             await dispatch(getPosts());
             cancelPost();
         } else {
-            alert("Veuillez entrer un message ou charger une image au bon format et de taille inférieur à 5mo.")
+            alert("Veuillez entrer un message et/ou charger une image au bon format avec un poid inférieur à 5 Mo.")
         };
     };
 
@@ -97,7 +98,11 @@ const CreatePost = () => {
                                 <StyledIconContainer>
                                     <StyledIconImg src={picture} alt="Editer le post" />
                                 </StyledIconContainer>
-                                {file ? (<StyledFileP>{file.name}</StyledFileP>) : ('')}
+                                {file ? (
+                                    <StyledFileNameContainer>
+                                        <StyledFileP>{file.name}</StyledFileP>
+                                    </StyledFileNameContainer>
+                                ) : ('')}
                             </StyledRowContainer>
                             <StyledError>{errorFormat}</StyledError>
                             <StyledError>{errorSize}</StyledError>

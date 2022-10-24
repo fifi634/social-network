@@ -5,29 +5,33 @@ Fictif mission for OpenClassRooms studies. This app is an internal social networ
 
 ## Global features
 * Login : with secure data
-* Signin : with secure data
+* Sign-up : with secure data
 * Profil: update user information and delete acount exept admin
 * Homepage : display post of all users if authentified
-* Post : with text and picture, update this by only create poster and admin
+* Post : with text and picture, update or del it by only create poster and admin
 * Like post system : with anti cheat
 * Authentification persisting during 1 day
 * You can personalize colors interface in `client/src/config.js`
 * Admin acount - id: admin@groupomania.com / password: admin
 
 ## Requirement
+
+>>> NOTE for P7 OpenClassRooms audition : You don't have need to create a MongoDb Atlas account, my personal Atlas is already set up.
+
 * Node.js : https://nodejs.org
+* An account on MongoDB Atlas server (free version for test and develop): https://www.mongodb.com/fr-fr/pricing 
 * Clone this project in your work directory
   `git clone https://github.com/fifi634/Groupomania.git`
 
 ## Back-end configuration (Atlas by MongoDB)
 
->>> Note for P7 audition (28, october 2022): .env file is complete and it's into my Github. You haven't need to create it and complete it.
+>>> Note for P7 audition (28, october 2022): '.env' file is complete and it's into this Github. You haven't need to create it and complete it.
 
-You must create .env files in api/config/ directory with inside :
+You must create '.env' files in 'api/config/' directory with inside :
 
 `# Server config :`
 
-`PORT = '5000'` or other port that you want, default port
+`PORT = '5000'` 5000 is default port, you can set other port 
 
 `# Mongo DB config :`
 
@@ -43,7 +47,7 @@ You must create .env files in api/config/ directory with inside :
 
 `RANDOM_TOKEN_SECRET = 'your token keys'`
 
-`DOMAIN_CLIENT_APP = 'http://localhost:3000'` or other slug client app, default client slug
+`DOMAIN_CLIENT_APP = 'http://localhost:3000'` default client slug, you can set other slug client app, 
 
 ## Running backend
 * Since the project directory, in cli go to backend directory :
@@ -58,7 +62,7 @@ You can set a personnal url of backend server in `client/src/config.js` :
 
 `// URL API adress of backend setting`
 
-`// !!! BE CAREFUL !! This url must finish by slash ( .../ )`
+`// !!! BE CAREFUL !! This url must finish by a slash ( .../ )`
 
 `export const fetchUrl = 'http://localhost:5000/';` this is a default backend slug
 
