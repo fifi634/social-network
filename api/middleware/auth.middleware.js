@@ -27,7 +27,6 @@ exports.requireAuth = (req, res, next) => {
             }
         );
     } else {
-        console.log('Authentification failed');
         res.status(401).json({ message : 'Unauthorized'})
     };
 };

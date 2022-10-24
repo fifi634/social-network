@@ -144,6 +144,7 @@ export const StyledMessageTextaera = styled.textarea`
     border-radius: 20px 20px 6px 20px;
     border: solid 1px ${colors.primary};
     padding: 20px;
+    min-height: 100px;
     @media screen and (min-width: 800px) {
         &.withPicture {
             height: 100px;
