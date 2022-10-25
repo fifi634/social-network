@@ -1,7 +1,7 @@
 const UserModel = require('../models/user.model');
 const ObjectID = require('mongoose').Types.ObjectId;
 const bcrypt = require('bcrypt');
-const { updateProfilErrors } = require('../utils/errors.utils');
+
 
 /* Find all users and return it sin password */
 exports.getAllUsers = async (req, res) => {
