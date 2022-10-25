@@ -15,6 +15,7 @@ import {
     StyledSubLabel,
     StyledLegend,
     StyledInput,
+    StyledFieldset,
     StyledError,
     StyledTermsContainer,
     StyledTermsLabel
@@ -177,7 +178,7 @@ function Signup() {
                             <StyledError className='pseudo error'></StyledError>
                         </InputContainer>
                         <InputContainer>
-                            <fieldset>
+                            <StyledFieldset>
                                 <AvatarText>
                                     <StyledLegend htmlFor="avatar">
                                         Choisissez votre avatar :
@@ -215,7 +216,7 @@ function Signup() {
                                         </label>
                                     </AvatarRadioContainer>
                                 </AvatarChoiceContainer>
-                            </fieldset>
+                            </StyledFieldset>
                             <CreateButtonContainer> 
                                 <StyledTermsContainer>
                                     <input type="checkbox" id="terms" />

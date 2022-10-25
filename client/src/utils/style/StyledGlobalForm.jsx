@@ -102,6 +102,10 @@ export const StyledTermsContainer = styled.div`
     text-align: center;
 `; 
 
+export const StyledFieldset = styled.fieldset`
+    border: 0;
+`;
+
 export const StyledInputFile = styled.input`
     max-width: 300px;
     @media screen and (max-width: 370px) {

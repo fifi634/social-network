@@ -19,6 +19,7 @@ import {
     StyledH1,
     StyledSubLabel,
     StyledLegend,
+    StyledFieldset,
     StyledInput,
     StyledError
 } from '../../utils/style/StyledGlobalForm';
@@ -222,7 +223,7 @@ function Profil() {
                             </InputContainer>
                             <InputContainer>
                                 {userData.admin_role === true ? '' : (
-                                    <fieldset>
+                                    <StyledFieldset>
                                         <AvatarText>                                        
                                             <StyledLegend htmlFor="avatar">
                                                 Avatar :
@@ -260,7 +261,7 @@ function Profil() {
                                                 </label>
                                             </AvatarRadioContainer>
                                         </AvatarChoiceContainer>  
-                                    </fieldset>                            
+                                    </StyledFieldset>                            
                                 )}                                
                                 <CreateButtonContainer>  
                                     <StyledProfilControlContainer>
