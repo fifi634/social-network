@@ -17,8 +17,8 @@ exports.userInfo = (req, res) => {
     if (!ObjectID.isValid(req.params.id))
     return res.status(401).json({ message: 'ID unknown : ' + req.params.id });
     
-    UserModel.findById(req.params.id, (err, data) => {
-        if (!err) res.status(200).json(data);
+    UserModel.findById(req.params.id, (err, user) => {
+        if (!err) res.status(200).json(user);
         else res.status(404).json({ message: 'User not found :', err });
     }).select('-password');
 };
@@ -39,14 +39,13 @@ exports.updateUser = (req, res) => {
                     pseudo: req.body.pseudo,
                     avatar_slug: req.body.avatar_slug
                 },
-                (err, data) => {
+                (err, user) => {
                     if(err) {
-                        const errors = updateProfilErrors(err);
                         console.log('Update profil user failed. ', err);
                         res.status(500).json({ message: 'Update user profil failed.', err });
                     } else {
                         console.log(req.auth.userId + ' has updated his profil');
-                        res.json({ message: 'Profil user updated. ', data });
+                        res.status(200).json({ message: 'Profil user updated. ', user });
                     };
                 }
             );

@@ -32,8 +32,8 @@ exports.likePost = (req, res) => {
             req.body.likerId,
             { $addToSet: { likes: req.params.id }},
             { new: true },
-            (err, data) => {
-                if (!err) res.status(200).json({ message: 'Liked !', data });
+            (err, user) => {
+                if (!err) res.status(200).json({ message: 'Liked !', user });
                 else {
                     console.log("Add post's like into user like's array failed. ", err);
                     return res.status(400).json({ 

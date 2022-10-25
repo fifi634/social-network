@@ -20,7 +20,7 @@ export const addPost = (data) => {
             headers: { 'Content-Type':'multipart/form-data' },
             data: data
     })
-        .then((res) => {               
+        .then(() => {               
             dispatch({ type: GET_USER_ERRORS, payload: '' });       
         })
         .catch((err) => {
@@ -50,11 +50,11 @@ export const likePost = (postId, userId) => {
         return axios({
             method: 'patch',
             url: `${fetchUrl}api/post/like/${postId}`,            
-            data: { likersId: userId },
+            data: { likerId: userId },
             withCredentials: true           
         })
-            .then((res) => {
-                dispatch({ type: LIKE_POST, payload: {postId, userId} })
+            .then(() => {
+                dispatch({ type: LIKE_POST, payload: {postId, userId} });
             })
             .catch((err) => console.log('Send like failed. ' + err))
         ;
@@ -67,7 +67,7 @@ export const unlikePost = (postId, userId) => {
         return axios ({
             method: 'patch',
             url: fetchUrl + 'api/post/unlike/' + postId,
-            data: { likersId: userId },
+            data: { likerId: userId },
             withCredentials: true
         })
             .then((res) => {
@@ -94,21 +94,6 @@ export const updatePost = (postId, message) => {
         ;
     };
 };
-
-
-// export const uploadPost = (postId, data) => {
-//     return(dispatch) => {
-//         return axios({
-//             method: 'post',
-//             url: fetchUrl + 'api/post/upload' + postId,
-//             data: data,
-//             withCredentials: true
-//         })
-//             .then((res) => {})
-//             .catch((err) => console.log('Send update post with picture failed. ' + err))
-//         ;
-//     }
-// }
 
 
 export const deletePost = (postId) => {
