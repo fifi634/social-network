@@ -13,13 +13,13 @@ function Thread() {
     const dispatch = useDispatch();
     const posts = useSelector((state) => state.postReducer);
 
-    // Display posts
+    // Display posts when it has a modification
     useEffect(() => {
         if (loadPost) {
             dispatch(getPosts());
             setLoadPost(false);
         };
-    }, [loadPost, dispatch]);
+    }, [loadPost, dispatch, posts]);
 
 
     return (

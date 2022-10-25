@@ -84,11 +84,11 @@ const CreatePost = () => {
                 <Loader />
             ) : (
                 <StyledEditMessageContainer className="createPost">
+                    <label htmlFor='message'><h1>Quoi de neuf ?</h1></label>
                     <StyledMessageTextaera
                         className="createPost"
                         name="message"
                         id="message"
-                        placeholder="Quoi de neuf ?"
                         onChange={(e) => setMessage(e.target.value)}
                         value={message}
                     />

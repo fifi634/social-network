@@ -43,6 +43,14 @@ export const StyledAvatarImage = styled.img`
     }
 `;
 
+export const StyledBoldContainer = styled.div`
+    margin: 3px 0 3px 0;
+    font-weight: 600;
+    @media screen and (max-width: 370px) {
+        width: 200px;
+    }
+`;
+
 export const AvatarChoiceContainer = styled.div`
     display: flex;
     @media screen and (max-width: 800px) {
@@ -122,7 +130,7 @@ export const StyledProfilLinkContainer = styled.div`
     }
 `;
 
-export const StyledDisconnectLink = styled.a`
+export const StyledProfilLink = styled.a`
     margin: 0 20px;
     color: ${colors.tertiary};
     &:hover {
@@ -130,17 +138,7 @@ export const StyledDisconnectLink = styled.a`
         letter-spacing: 1px;
         transition: 0.3s
     }
-`;
-
-export const StyledDeleteLink = styled.a`
-    margin: 0 20px;
-    color: ${colors.primary};
-    &:hover {
-        cursor: pointer;
-        letter-spacing: 1px;
-        transition: 0.3s
-    }
-    @media screen and (max-width: 370px) {
-        margin: 40px 0;
+    &.delete {
+        color: #7E1601;
     }
 `;

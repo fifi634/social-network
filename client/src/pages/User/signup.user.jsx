@@ -13,6 +13,7 @@ import {
     StyledLabel,
     StyledH1,
     StyledSubLabel,
+    StyledLegend,
     StyledInput,
     StyledError,
     StyledTermsContainer,
@@ -164,7 +165,7 @@ function Signup() {
                             <StyledLabel htmlFor="pseudo">
                                 Choisissez un pseudo :
                             </StyledLabel>
-                            <StyledSubLabel htmlFor="password">
+                            <StyledSubLabel htmlFor="pseudo">
                                 (maximum 15 caractères)
                             </StyledSubLabel>
                             <StyledInput
@@ -176,43 +177,45 @@ function Signup() {
                             <StyledError className='pseudo error'></StyledError>
                         </InputContainer>
                         <InputContainer>
-                            <AvatarText>
-                                <StyledLabel htmlFor="avatar">
-                                    Choisissez votre avatar :
-                                </StyledLabel>
-                                <StyledFilesName id='avatar'>{inputAvatar}</StyledFilesName>
-                            </AvatarText>
-                            <AvatarChoiceContainer id="file">
-                                <AvatarRadioContainer>
-                                    <AvatarInput
-                                        type="radio"
-                                        id="avatar-male"
-                                        name="file"
-                                        defaultChecked={true}
-                                        onClick={() => setInputAvatar('Homme')}
-                                    />
-                                    <label htmlFor="avatar-male">
-                                        <StyledAvatarImage
-                                            src={male_avatar}
-                                            alt="avatar homme"
+                            <fieldset>
+                                <AvatarText>
+                                    <StyledLegend htmlFor="avatar">
+                                        Choisissez votre avatar :
+                                    </StyledLegend>
+                                    <StyledFilesName id='avatar'>{inputAvatar}</StyledFilesName>
+                                </AvatarText>
+                                <AvatarChoiceContainer id="file">
+                                    <AvatarRadioContainer>
+                                        <AvatarInput
+                                            type="radio"
+                                            id="avatar-male"
+                                            name="file"
+                                            defaultChecked={true}
+                                            onClick={() => setInputAvatar('Homme')}
                                         />
-                                    </label>
-                                </AvatarRadioContainer>
-                                <AvatarRadioContainer>
-                                    <AvatarInput
-                                        type="radio"
-                                        id="avatar-female"
-                                        name="file"
-                                        onClick={() => setInputAvatar('Femme')}
-                                    />
-                                    <label htmlFor="avatar-female">
-                                        <StyledAvatarImage
-                                            src={female_avatar}
-                                            alt="avatar femme"
+                                        <label htmlFor="avatar-male">
+                                            <StyledAvatarImage
+                                                src={male_avatar}
+                                                alt="avatar homme"
+                                            />
+                                        </label>
+                                    </AvatarRadioContainer>
+                                    <AvatarRadioContainer>
+                                        <AvatarInput
+                                            type="radio"
+                                            id="avatar-female"
+                                            name="file"
+                                            onClick={() => setInputAvatar('Femme')}
                                         />
-                                    </label>
-                                </AvatarRadioContainer>
-                            </AvatarChoiceContainer>
+                                        <label htmlFor="avatar-female">
+                                            <StyledAvatarImage
+                                                src={female_avatar}
+                                                alt="avatar femme"
+                                            />
+                                        </label>
+                                    </AvatarRadioContainer>
+                                </AvatarChoiceContainer>
+                            </fieldset>
                             <CreateButtonContainer> 
                                 <StyledTermsContainer>
                                     <input type="checkbox" id="terms" />

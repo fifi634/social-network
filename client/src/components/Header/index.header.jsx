@@ -21,7 +21,7 @@ import {
     HeaderLogo, 
     StyledMenuContainer,
     StyledAvatarMenuContainer,
-    StyledLinkAvatarContainer,
+    StyledAvatarContainer,
     StyledAvatarPicture,
     StyledUserMenuContainer,
     StyledPseudo
@@ -71,12 +71,10 @@ function Header() {
                 ) : uid ? (
                     <StyledConnectContainer>
                         <StyledLogoMenuContainer>
-                            <Link to="/home">
-                                <HeaderLogo
-                                    src={logoAlone}
-                                    alt="Aller à la page d'accueil de Groupomania"
-                                />
-                            </Link>          
+                            <HeaderLogo
+                                src={logoAlone}
+                                alt="Aller à la page d'accueil de Groupomania"
+                            />          
                         </StyledLogoMenuContainer>
                         <StyledMenuContainer to="/">
                             <Link to="/home">
@@ -88,9 +86,9 @@ function Header() {
                             </Link>
                         </StyledMenuContainer> 
                         <StyledAvatarMenuContainer>
-                            <StyledLinkAvatarContainer to="/profil">
+                            <StyledAvatarContainer>
                                 <StyledAvatarPicture src={userData.avatar_slug} alt="avatar utilisateur"/>
-                            </StyledLinkAvatarContainer>
+                            </StyledAvatarContainer>
                             <StyledUserMenuContainer>
                                 <StyledPseudo> {userData.pseudo} </StyledPseudo>                            
                                 <Link to="/profil">

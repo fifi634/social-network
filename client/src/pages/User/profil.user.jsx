@@ -18,6 +18,7 @@ import {
     StyledLabel,
     StyledH1,
     StyledSubLabel,
+    StyledLegend,
     StyledInput,
     StyledError
 } from '../../utils/style/StyledGlobalForm';
@@ -26,6 +27,7 @@ import {
     AvatarText,
     StyledFilesName,
     StyledAvatarImage,
+    StyledBoldContainer,
     AvatarChoiceContainer,
     AvatarRadioContainer,
     AvatarInput,
@@ -34,8 +36,7 @@ import {
     StyledSignupSuccessH2,
     StyledProfilControlContainer,
     StyledProfilLinkContainer,
-    StyledDisconnectLink,
-    StyledDeleteLink 
+    StyledProfilLink 
 } from '../User/style.user';
 
 
@@ -170,17 +171,17 @@ function Profil() {
                         <FormContainer action="" onSubmit={handleProfil} enctype="multipart/form-data">
                             <StyledH1>Compte</StyledH1>
                             <InputContainer>
-                                <StyledLabel htmlFor="email">Votre e-mail :</StyledLabel>
+                                <StyledBoldContainer>Votre e-mail :</StyledBoldContainer>
                                 <StyledP id="email">{userData.email}</StyledP>
                             </InputContainer>
                             <InputContainer>
                                 <StyledLabel htmlFor="password">
                                     Nouveau mot de passe ou mot de passe actuel :
+                                    <StyledSubLabel>
+                                        minimum 8 caractères avec majuscule, minuscule et chiffre 
+                                        <br/> (obligatoire pour tout changements)
+                                    </StyledSubLabel>
                                 </StyledLabel>
-                                <StyledSubLabel htmlFor="password">
-                                    minimum 8 caractères avec majuscule, minuscule et chiffre 
-                                    <br/> (obligatoire pour tout changements)
-                                </StyledSubLabel>
                                 <StyledInput 
                                     type="password" 
                                     id="password" 
@@ -218,13 +219,13 @@ function Profil() {
                             </InputContainer>
                             <InputContainer>
                                 {userData.admin_role === true ? '' : (
-                                    <>
-                                        <AvatarText>
-                                            <StyledLabel htmlFor="avatar">
+                                    <fieldset>
+                                        <AvatarText>                                        
+                                            <StyledLegend htmlFor="avatar">
                                                 Avatar :
-                                            </StyledLabel>
+                                            </StyledLegend>
                                             <StyledFilesName>{inputAvatar}</StyledFilesName>
-                                        </AvatarText>
+                                        </AvatarText>                                        
                                         <AvatarChoiceContainer id="file">
                                             <AvatarRadioContainer>
                                                 <AvatarInput
@@ -255,21 +256,22 @@ function Profil() {
                                                     />
                                                 </label>
                                             </AvatarRadioContainer>
-                                        </AvatarChoiceContainer>     
-                                    </>                          
+                                        </AvatarChoiceContainer>  
+                                    </fieldset>                            
                                 )}                                
                                 <CreateButtonContainer>  
                                     <StyledProfilControlContainer>
                                         <StyledProfilLinkContainer>
-                                            <StyledDisconnectLink onClick={logout}>Déconnexion</StyledDisconnectLink>
+                                            <StyledProfilLink onClick={logout}>Déconnexion</StyledProfilLink>
                                             { userData.admin_role === true ? ('') : (
-                                                <StyledDeleteLink 
+                                                <StyledProfilLink 
+                                                    className="delete"
                                                     onClick={() => {
                                                         if(window.confirm('Voulez-vous supprimer votre compte ?')) deleteUser();
                                                     }}
                                                 >
                                                     Supprimer le compte
-                                                </StyledDeleteLink>
+                                                </StyledProfilLink>
                                             )}
                                         </StyledProfilLinkContainer>
                                         <StyledLittleGreyButton type="submit">Modifier</StyledLittleGreyButton>

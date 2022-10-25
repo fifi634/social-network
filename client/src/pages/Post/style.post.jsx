@@ -190,6 +190,7 @@ export const StyledModifyButtonContainer = styled.div`
 
 export const StyledModifyButton = styled.button`
     background: ${colors.primary};
+    font-size: 22px;
     color: #ffffff;
     width: 160px;
     height: 30px;

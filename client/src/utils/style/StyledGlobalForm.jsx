@@ -41,8 +41,17 @@ export const StyledLabel = styled.label`
     }
 `;
 
-export const StyledSubLabel = styled.label`
+export const StyledSubLabel = styled.div`
     margin-bottom: 3px;
+    font-weight: 500;
+    @media screen and (max-width: 370px) {
+        width: 200px;
+    }
+`;
+
+export const StyledLegend = styled.legend`
+    margin: 3px 0 3px 0;
+    font-weight: 600;
     @media screen and (max-width: 370px) {
         width: 200px;
     }

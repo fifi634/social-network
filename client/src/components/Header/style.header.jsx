@@ -73,7 +73,7 @@ export const StyledAvatarMenuContainer = styled.div`
     }
 `;
 
-export const StyledLinkAvatarContainer = styled(Link)`
+export const StyledAvatarContainer = styled.div`
     margin: 10px;
     width: 120px;
     height: 120px;
