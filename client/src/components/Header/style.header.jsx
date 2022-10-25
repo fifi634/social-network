@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { colors } from '../../config';
 import logoAlone from '../../assets/image/icon-monochrome-white.png';
 import completLogo from '../../assets/image/icon-left-font-monochrome-white-900x220.png';
-import { Link } from 'react-router-dom';
+
 
 export const StyledHeader = styled.header`
     max-width: 1440px;
