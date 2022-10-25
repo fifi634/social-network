@@ -4,7 +4,8 @@ export const colors = {
     secondary: '#FFD7D7',
     tertiary: '#4E5166',
     boxShadow : 'rgba(0, 0 , 0, 0.25)',
-    editPost: '#fce8e8'
+    editPost: '#fce8e8',
+    redLink: '#7E1601'
 };
 
 

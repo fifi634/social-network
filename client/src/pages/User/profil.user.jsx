@@ -95,6 +95,9 @@ function Profil() {
         e.preventDefault();
         setErrorHandle(false);
 
+        // If it's an admin, set avatar admin 
+        if(userData.admin_role === true) setInputAvatar('admin');
+
 
         // Link for display errors
         const passwordError = document.querySelector('.password.error');

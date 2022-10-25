@@ -139,6 +139,6 @@ export const StyledProfilLink = styled.a`
         transition: 0.3s
     }
     &.delete {
-        color: #7E1601;
+        color: ${colors.redLink};
     }
 `;

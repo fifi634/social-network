@@ -83,7 +83,7 @@ export const StyledInput = styled.input`
 `;
 
 export const StyledError = styled.div`
-    color: ${colors.primary};
+    color: ${colors.redLink};
     font-weight: 700;
     max-width: 568px;
     @media screen and (max-width: 800px) {
