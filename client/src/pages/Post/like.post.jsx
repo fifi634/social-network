@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import { UidContext } from '../../utils/context';
-import { likePost, unlikePost, getPosts } from "../../action/post.action";
+import { likePost, unlikePost } from "../../action/post.action";
 // Style
 import { StyledIconImg, StyledIconContainer, StyledCenterContainer } from './style.post';
 // Icon
