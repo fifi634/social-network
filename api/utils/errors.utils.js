@@ -1,6 +1,6 @@
 // Signup errors
 exports.signupErrors = (err) => {
-    let errors = { pseudo: '', email: '', password: '' };
+    let errors = { pseudo: '', email: '' };
     
     if (err.message.includes('pseudo'))
     errors.pseudo = "Un pseudo est obligatoire et doit comporter au maximum 15 caractères.";
