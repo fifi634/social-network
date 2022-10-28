@@ -67,7 +67,6 @@ function Profil() {
 
     const removeCookie = (key) => {
         if(window !== "underfined") cookie.remove(key, {expire: 1})
-        console.log(window);
     };
 
     const logout = async() => {

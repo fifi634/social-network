@@ -15,7 +15,6 @@ exports.signupErrors = (err) => {
 // Login error message
 exports.loginErrors = (err) => {
     let errors = { login: '' };
-
     if (err) return errors = { login: "La connection a échoué" };
 };
 
