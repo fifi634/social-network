@@ -107,18 +107,18 @@ function Profil() {
 
 
         // Reset display errors
-        passwordError.innerHTML = '';
-        checkPasswordError.innerHTML = '';
-        pseudoError.innerHTML = '';
+        passwordError.innerText = '';
+        checkPasswordError.innerText = '';
+        pseudoError.innerText = '';
         
 
         // If no errors, send new user to server        
         if (inputPassword !== controlPassword) {
             setErrorHandle(true);
-            checkPasswordError.innerHTML = "Les mots de passe ne correspondent pas.";
+            checkPasswordError.innerText = "Les mots de passe ne correspondent pas.";
         } else if (inputPseudo.length > 15) {
             setErrorHandle(true);
-            pseudoError.innerHTML = 'Votre pseudo doit comporter au maximum 15 caractères';
+            pseudoError.innerText = 'Votre pseudo doit comporter au maximum 15 caractères';
         } else {
             axios({
                 method: 'patch',
@@ -136,10 +136,10 @@ function Profil() {
                     if (res.data.errors || res.data.err) {
                         setErrorHandle(true);
                         if (res.data.message === 'Password not accepted') {                   
-                            passwordError.innerHTML = res.data.errors;
+                            passwordError.innerText = res.data.errors;
                         };
                         if (res.data.errors.pseudo) {
-                            pseudoError.innerHTML = res.data.errors.pseudo;
+                            pseudoError.innerText = res.data.errors.pseudo;
                         };
                     };
 

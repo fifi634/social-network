@@ -58,11 +58,11 @@ function Signup() {
 
 
         // Reset display errors
-        emailError.innerHTML = '';
-        passwordError.innerHTML = '';
-        checkPasswordError.innerHTML = '';
-        pseudoError.innerHTML = '';
-        termsError.innerHTML = '';
+        emailError.innerText = '';
+        passwordError.innerText = '';
+        checkPasswordError.innerText = '';
+        pseudoError.innerText = '';
+        termsError.innerText = '';
         
 
         // If no errors, send new user to server
@@ -91,13 +91,13 @@ function Signup() {
                     // Sgnup errors 
                     if (res.data.errors) {
                         if (res.data.message === 'Password not accepted') {                   
-                            passwordError.innerHTML = res.data.errors;
+                            passwordError.innerText = res.data.errors;
                         }
                         if (res.data.errors.email) {
-                            emailError.innerHTML = res.data.errors.email;
+                            emailError.innerText = res.data.errors.email;
                         }
                         if (res.data.errors.pseudo) {
-                            pseudoError.innerHTML = res.data.errors.pseudo;
+                            pseudoError.innerText = res.data.errors.pseudo;
                         }
                     } else {
                         setFormSubmit(true);
