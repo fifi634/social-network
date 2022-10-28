@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { UidContext } from '../../utils/context';
 import completLogo from '../../assets/image/icon-left-font-monochrome-white-900x220.png';

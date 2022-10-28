@@ -46,7 +46,7 @@ const Card = ({ post }) => {
 
 
     // When clicking on 'Modifier'
-    const updateItem = async () => {
+    const updateItem = () => {
         if(textUpdate) {
             dispatch(updatePost(post._id, textUpdate))
         };
