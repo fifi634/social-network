@@ -79,7 +79,9 @@ module.exports.deletePost = async (req, res) => {
 
             // If picture in post, erase it    
             } else if(post.picture !==  undefined) {                
-                fs.unlink(`../client/public/${post.picture}`, () => {
+                const filename = post.picture.split('/uploads/post/')[1];           
+                console.log(filename);  
+                fs.unlink(`./uploads/post/${filename}`, () => {
 
                     // Erase post from database
                     PostModel.findByIdAndDelete(req.params.id, (err, data) => {

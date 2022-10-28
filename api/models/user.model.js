@@ -26,7 +26,7 @@ const userSchema = mongoose.Schema({
     avatar_slug: { 
         type: String, 
         trim: true,
-        default: "uploads/profil/Homme-avatar.svg"
+        default: `./uploads/profil/Homme-avatar.svg`
     },
     likes: {
         type: [String],
