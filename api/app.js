@@ -1,6 +1,7 @@
 require('dotenv').config({path:'./config/.env'});
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const path = require('path');
 
 // App config
 const app = express();
@@ -34,6 +35,7 @@ app.get('/jwtid', requireAuth, (req, res) => {
 // Routes
 app.use('/api/user', userRoutes);
 app.use('/api/post', postRoutes);
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
 module.exports = app;

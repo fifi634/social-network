@@ -2,6 +2,7 @@ const PostModel = require('../models/post.model');
 const UserModel = require('../models/user.model');
 const ObjectID = require('mongoose').Types.ObjectId;
 const fs = require('fs');
+const { get } = require('http');
 
 
 // Get all posts and sort in descending order
@@ -18,7 +19,7 @@ module.exports.createPost = async (req, res) => {
     const newPost = new PostModel({
         posterId: req.auth.userId,
         message: req.body.message,
-        picture: req.file !== (null || undefined) ? './uploads/post/' + req.file.filename : ''
+        picture: req.file !== (null || undefined) ? `${req.protocol}://${req.get('host')}/uploads/post/${req.file.filename}` : ''
     }, (err, data) => {
         if(err) return res.status(500).json({message: 'File upload failed.', err});
     });
