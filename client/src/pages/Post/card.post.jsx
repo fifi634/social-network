@@ -109,7 +109,6 @@ const Card = ({ post }) => {
                         {post.picture && 
                             <PostImageContainer>
                                 <PostImg src={post.picture} alt="Illustration du post" />
-                                {console.log(post.picture)}
                             </PostImageContainer>
                         }
                     </StyledCorpContainer>

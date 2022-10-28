@@ -126,7 +126,7 @@ function Profil() {
                 data: {
                     password: inputPassword,
                     pseudo: inputPseudo,
-                    avatar_slug: `uploads/profil/${inputAvatar}-avatar.svg`
+                    avatar_slug: `${fetchUrl}uploads/profil/${inputAvatar}-avatar.svg`
                 }
             })
                 .then((res) => {

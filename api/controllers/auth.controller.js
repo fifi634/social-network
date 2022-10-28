@@ -39,7 +39,7 @@ exports.login = async (req, res, next) => {
         });
     } catch(err) {
         const errors = loginErrors(err);
-        console.log('Login failed. ', err);
+        console.log('Login failed. ' + err);
         res.status(401).json({ errors });
     };
 };
