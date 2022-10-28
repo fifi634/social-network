@@ -40,14 +40,12 @@ function Header() {
     
     return (
         <StyledHeader>
-            { pathname === '/login' ? (
+            { pathname === '/' ? (
                     <StyledDisconnectContainer>
-                        <Link to="/home">
-                            <HeaderLogoDisconnect
-                                src={completLogo}
-                                alt="Aller à la page d'accueil de Groupomania"
-                            />
-                        </Link>
+                        <HeaderLogoDisconnect
+                            src={completLogo}
+                            alt="Logo de Groupomania"
+                        />
                         <Link to="/signup">
                             <StyledPinkButton>
                                 Vous n'avez pas de compte ?
@@ -56,12 +54,10 @@ function Header() {
                     </StyledDisconnectContainer>
                 ) : pathname === '/signup' ? (
                     <StyledDisconnectContainer>
-                        <Link to="/home">
-                            <HeaderLogoDisconnect
-                                src={completLogo}
-                                alt="Aller à la page d'accueil de Groupomania"
-                            />
-                        </Link>
+                        <HeaderLogoDisconnect
+                            src={completLogo}
+                            alt="Aller à la page d'accueil de Groupomania"
+                        />
                         <Link to="/">
                             <StyledPinkButton>
                                 Vous avez un compte ?
