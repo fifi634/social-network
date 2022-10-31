@@ -22,7 +22,7 @@ Fictif mission for OpenClassRooms studies. This app is an internal social networ
 
 ## Back-end configuration (Atlas by MongoDB)
 
->>> Note for P7 audition (28, october 2022): '.env' file is complete and it's into this Github. You haven't need to create and set it.
+>>> Note for OpenClassRooms audition: '.env' file is complete and it's into this Github. You haven't need to create and set it.
 
 You must create '.env' files in `api/config/` directory with inside :
 
